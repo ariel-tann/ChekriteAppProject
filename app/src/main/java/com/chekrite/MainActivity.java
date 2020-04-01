@@ -27,6 +27,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         //check permissions are all allowed
         mPermission.RequestPermissions();
-        
+
     }
 }

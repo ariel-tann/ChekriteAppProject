@@ -1,15 +1,20 @@
-package com.chekrite.permission;
+/*
+ * Date: 2020.4.1
+ * This file is created by Kai.
+ * Summary:
+ * This class to ask the user for permission to camera and recording.
+ */
 
+package com.chekrite.permission;
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 
 import com.chekrite.R;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
 
-// use this class to ask the user for permission to camera recording etc..
+
 public class Permission{
     Activity mActivity;
     private int mRequestCode = 256;
