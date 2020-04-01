@@ -8,28 +8,38 @@
 package com.chekrite.permission;
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 
 import com.chekrite.R;
 
 import pub.devrel.easypermissions.EasyPermissions;
-
+import pub.devrel.easypermissions.PermissionRequest;
 
 
 public class Permission{
     Activity mActivity;
     private int mRequestCode = 256;
-    public Permission(Activity activity) {
+    private Context mContext;
+    public Permission(Activity activity, Context context) {
         mActivity = activity;
+        mContext = context;
         // Will request all permissions from the Manifest automatically.
         RequestPermissions();
     }
     public void RequestPermissions() {
-        String[] perms = {Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
+        String[] perms = {  Manifest.permission.CAMERA,
+                            Manifest.permission.RECORD_AUDIO,
+                            Manifest.permission.ACCESS_FINE_LOCATION};
         if (!EasyPermissions.hasPermissions(mActivity, perms)) {
             //Request Permissions
-            EasyPermissions.requestPermissions(mActivity,
-                    mActivity.getString(R.string.rationale_camera_audio),
-                    mRequestCode, perms);
+
+            EasyPermissions.requestPermissions(
+                    new PermissionRequest.Builder(mActivity, mRequestCode, perms)
+                            .setRationale(R.string.rationale_camera_audio)
+                            .setPositiveButtonText(R.string.rationale_ask_ok)
+                            .setNegativeButtonText(R.string.rationale_ask_cancel)
+                            .build());
+
         } else {
             // Already have permission, do the thing
             // ...

@@ -40,12 +40,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("KAI", this.getComponentName()+"");
-        mPermission = new Permission(this);
+
+        mPermission = new Permission(this, this);
         mBtnSubmit = findViewById(R.id.btn_submit);
         mBtnSubmit.setOnClickListener(submitListener);
         mImageView = findViewById(R.id.ivImage);
 
     }
+
 
     @Override
     protected void onStart() {

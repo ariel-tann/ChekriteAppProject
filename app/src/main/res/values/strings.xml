@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Chekrite</string>
     <string name="rationale_camera_audio">
-        This app needs access to your camera and audio,so you can take pictures and record voice.
+        This app needs access to your camera , location and audio,so you can take pictures and record voice.
     </string>
+    <string name="rationale_ask_ok">OK</string>
+    <string name="rationale_ask_cancel">NO</string>
 
 </resources>
