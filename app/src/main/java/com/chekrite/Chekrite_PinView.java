@@ -1,7 +1,7 @@
 /*
  * Date: 2020.4.3
  * This file is created by Kai.
- * Summary:
+ * Summary: this class create flexible length of pin according to user needs
  */
 
 package com.chekrite;
@@ -11,7 +11,6 @@ import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chekrite_PinView {
-    //TODO save data for device rotation
-    //TODO toolbar Cancel
+    //TODO Kai save data for device rotation
+    //TODO Kai toolbar Cancel
     private Activity mActivity;
     private int mPinWidth;
     private int mTextSize;
@@ -42,6 +41,9 @@ public class Chekrite_PinView {
     private Button mbtn_submit;
     private LinearLayout mLinearLayout;
     private List<TextView> mTextViews   = new ArrayList<>();
+    /*
+    * create button listener for image buttons
+     */
     private View.OnClickListener myDigitListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -80,10 +82,17 @@ public class Chekrite_PinView {
                     BackSpace();
                     break;
                 case R.id.pin_submit:
+                    //TODO Kai submit func
                     break;
             }
         }
     };
+    /*
+    * para activity: given from main activity
+    * para pinWidth: pin length
+    * para textSize: text size of TextView
+    * para pinTxt: description of pin layout
+     */
     public Chekrite_PinView(Activity activity, int pinWidth, int textSize, String pinTxt) {
         mActivity = activity;
         mActivity.setContentView(R.layout.pin_layout);
@@ -119,6 +128,9 @@ public class Chekrite_PinView {
         mLinearLayout = activity.findViewById(R.id.PinView_Linear);
         CreateTxtView();
     }
+    /*
+    * create mPinWidth of TextView
+     */
     private void CreateTxtView() {
         TextView textView;
         for (int i = 0; i < mPinWidth; i++) {
@@ -132,6 +144,10 @@ public class Chekrite_PinView {
             mLinearLayout.addView(textView);
         }
     }
+    /*
+    * Add a string to List of String
+    * and update cursor position
+     */
     private void AddPin(String i){
         if(CurrentPin.size()<mPinWidth) {
             CurrentPin.add(i);
@@ -139,7 +155,10 @@ public class Chekrite_PinView {
         }
         Log.d("KAI ", CurrentPin.toString());
         update();
-}
+    }
+    /*
+    * remove a string from list of String
+     */
     private void BackSpace(){
         if(CurrentCursor>0){
             CurrentCursor-=1;
@@ -147,6 +166,9 @@ public class Chekrite_PinView {
         }
         update();
     }
+    /*
+    * update pin change, when click image button
+    */
     private void update(){
         for (int i = 0; i<mPinWidth;i++){
             if(CurrentPin.size()>i){

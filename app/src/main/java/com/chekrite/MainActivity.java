@@ -2,15 +2,12 @@ package com.chekrite;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.chekrite.http_request.ImageDownloadTask;
 import com.chekrite.permission.Permission;
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         mPermission = new Permission(this, this);
         Chekrite_PinView pinView = new Chekrite_PinView(this,
-                8,42, getResources().getString(R.string.employee_txt));
+                4,42, getResources().getString(R.string.employee_txt));
 
     }
 
