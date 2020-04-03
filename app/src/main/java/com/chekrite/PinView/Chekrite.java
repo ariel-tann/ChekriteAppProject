@@ -4,7 +4,13 @@
  * Summary:
  */
 
-package com.chekrite;
+/*
+ * Date: 2020.4.3
+ * This file is created by Kai.
+ * Summary:
+ */
+
+package com.chekrite.PinView;
 
 import android.app.Application;
 

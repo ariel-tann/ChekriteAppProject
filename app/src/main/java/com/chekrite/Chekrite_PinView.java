@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chekrite_PinView {
+    //TODO save data for device rotation
     private Activity mActivity;
     private int mPinWidth;
     private int mTextSize;
