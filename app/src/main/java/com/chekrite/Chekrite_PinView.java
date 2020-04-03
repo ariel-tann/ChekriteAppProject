@@ -21,6 +21,7 @@ import java.util.List;
 
 public class Chekrite_PinView {
     //TODO save data for device rotation
+    //TODO toolbar Cancel
     private Activity mActivity;
     private int mPinWidth;
     private int mTextSize;
@@ -161,7 +162,7 @@ public class Chekrite_PinView {
             mbtn_submit.setTextColor(mActivity.getColor(R.color.white));
             mbtn_submit.setBackground(mActivity.getDrawable(R.drawable.btn_blue));
         }else{
-            mbtn_submit.setTextColor(mActivity.getColor(R.color.light_gray));
+            mbtn_submit.setTextColor(mActivity.getColor(R.color.dark_gray));
             mbtn_submit.setBackground(mActivity.getDrawable(R.drawable.btn_gray));
         }
     }
