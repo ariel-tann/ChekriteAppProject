@@ -5,5 +5,6 @@
     </string>
     <string name="rationale_ask_ok">OK</string>
     <string name="rationale_ask_cancel">NO</string>
+    <string name="employee_txt">Enter your Employee ID</string>
 
 </resources>

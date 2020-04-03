@@ -1,23 +1,22 @@
 package com.chekrite;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.chekrite.http_request.ImageDownloadTask;
 import com.chekrite.permission.Permission;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-
-import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity {
     private Permission mPermission;
@@ -35,19 +34,17 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("KAI", this.getComponentName()+"");
 
         mPermission = new Permission(this, this);
-        mBtnSubmit = findViewById(R.id.btn_submit);
-        mBtnSubmit.setOnClickListener(submitListener);
-        mImageView = findViewById(R.id.ivImage);
+        Chekrite_PinView pinView = new Chekrite_PinView(this,
+                8,42, getResources().getString(R.string.employee_txt));
 
     }
-
 
     @Override
     protected void onStart() {

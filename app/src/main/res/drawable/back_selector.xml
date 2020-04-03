@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.4.3
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_pressed="true"
+        android:drawable="@drawable/backspace_dark_48px"/>
+    <item android:drawable="@drawable/backspace_light_48px"/>
+</selector>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.4.2
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/PinTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/PinView_Linear"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/PinTxt"
+        android:orientation="horizontal"
+        android:gravity="center"/>
+
+    <ImageButton
+        android:id="@+id/digit_2"
+        android:src="@drawable/two_selector"
+        android:background="@null"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/PinView_Linear"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"/>
+
+    <ImageButton
+        android:id="@+id/digit_1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/one_selector"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/PinView_Linear"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="5dp"
+        android:layout_toStartOf="@+id/digit_2" />
+
+    <ImageButton
+        android:id="@+id/digit_3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/three_selector"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/PinView_Linear"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="40dp"
+        android:layout_toEndOf="@+id/digit_2"/>
+    <ImageButton
+        android:id="@+id/digit_5"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/five_selector"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/digit_2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"/>
+    <ImageButton
+        android:id="@+id/digit_4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/four_selector"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/digit_2"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_toStartOf="@+id/digit_5"/>
+    <ImageButton
+        android:id="@+id/digit_6"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/six_selector"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/digit_2"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/digit_5"/>
+    <ImageButton
+        android:id="@+id/digit_8"
+        android:src="@drawable/eight_selector"
+        android:background="@null"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/digit_6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"/>
+    <ImageButton
+        android:id="@+id/digit_7"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/seven_selector"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/digit_5"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_toStartOf="@+id/digit_8" />
+    <ImageButton
+        android:id="@+id/digit_9"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/nine_selector"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/digit_5"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/digit_8"/>
+    <ImageButton
+        android:id="@+id/digit_0"
+        android:src="@drawable/zero_selector"
+        android:background="@null"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/digit_8"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"/>
+    <ImageButton
+        android:id="@+id/digit_back"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/back_selector"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:layout_below="@+id/digit_8"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/digit_0"/>
+    <Button
+        android:id="@+id/pin_submit"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/digit_0"
+        android:layout_centerHorizontal="true"
+        android:text="Enter"
+        android:textSize="24dp"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:textColor="@color/dark_gray"
+        android:background="@drawable/btn_gray"
+        android:bottomRightRadius="15dp"
+        android:bottomLeftRadius="15dp"
+        android:topLeftRadius="15dp"
+        android:topRightRadius="15dp"
+        android:layout_gravity="center"/>
+
+</RelativeLayout>
