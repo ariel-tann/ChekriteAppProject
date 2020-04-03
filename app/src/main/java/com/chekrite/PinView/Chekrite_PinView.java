@@ -1,10 +1,16 @@
 /*
+ * Date: 2020.4.4
+ * This file is created by Kai.
+ * Summary:
+ */
+
+/*
  * Date: 2020.4.3
  * This file is created by Kai.
  * Summary: this class create flexible length of pin according to user needs
  */
 
-package com.chekrite;
+package com.chekrite.PinView;
 
 import android.app.Activity;
 import android.graphics.Typeface;
@@ -14,6 +20,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.chekrite.R;
 
 import java.util.ArrayList;
 import java.util.List;

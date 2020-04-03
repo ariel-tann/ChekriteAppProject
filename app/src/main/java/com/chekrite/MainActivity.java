@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.chekrite.PinView.Chekrite_PinView;
 import com.chekrite.http_request.ImageDownloadTask;
 import com.chekrite.permission.Permission;
 
