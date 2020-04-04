@@ -2,7 +2,7 @@
 <resources>
 
     <color name="ic_launch_background">#FFFFFF</color>
-    <color name="dark_blue">#00158A</color>
+    <color name="dark_blue">#23369F</color>
     <color name="light_gray">#E8E8EA</color>
     <color name="dark_gray">#6A6A6A</color>
     <color name="white">#FFFFFF</color>

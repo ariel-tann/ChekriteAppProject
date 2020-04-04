@@ -4,32 +4,34 @@
   ~ This file is created by Kai.
   ~ Summary:
   -->
-
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/pin_layout">
+
+    <include
+        android:id="@+id/pin_toolbar"
+        layout="@layout/pin_toolbar"/>
 
     <TextView
-        android:id="@+id/PinTxt"
+        android:id="@+id/PinTxtView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="32dp"
+        android:layout_below="@+id/pin_toolbar"
+        android:layout_marginTop="20dp"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/pair_txt"/>
 
     <LinearLayout
         android:id="@+id/PinView_Linear"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@+id/PinTxt"
+        android:layout_height="70dp"
+        android:layout_below="@+id/PinTxtView"
         android:orientation="horizontal"
         android:gravity="center"/>
 
@@ -42,7 +44,7 @@
         android:scaleType="fitCenter"
         android:layout_below="@+id/PinView_Linear"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="30dp"/>
 
     <ImageButton
         android:id="@+id/digit_1"
@@ -52,7 +54,7 @@
         android:background="@null"
         android:scaleType="fitCenter"
         android:layout_below="@+id/PinView_Linear"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="5dp"
         android:layout_toStartOf="@+id/digit_2" />
 
@@ -65,7 +67,7 @@
         android:scaleType="fitCenter"
         android:layout_below="@+id/PinView_Linear"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_toEndOf="@+id/digit_2"/>
     <ImageButton
         android:id="@+id/digit_5"
@@ -145,7 +147,7 @@
         android:id="@+id/digit_back"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/back_selector"
+        android:src="@drawable/backspace_selector"
         android:background="@null"
         android:scaleType="centerCrop"
         android:layout_below="@+id/digit_8"
@@ -155,20 +157,17 @@
     <Button
         android:id="@+id/pin_submit"
         android:layout_width="240dp"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_marginTop="40dp"
         android:layout_below="@id/digit_0"
         android:layout_centerHorizontal="true"
-        android:text="Enter"
-        android:textSize="24dp"
+        android:text="@string/btn_pin_enter"
+        android:textSize="30dp"
         android:textAllCaps="false"
+        android:textStyle="bold"
         android:gravity="center"
         android:textColor="@color/dark_gray"
         android:background="@drawable/btn_gray"
-        android:bottomRightRadius="15dp"
-        android:bottomLeftRadius="15dp"
-        android:topLeftRadius="15dp"
-        android:topRightRadius="15dp"
         android:layout_gravity="center"/>
 
 </RelativeLayout>
