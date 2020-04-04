@@ -9,14 +9,19 @@ package com.chekrite.permission;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.chekrite.R;
+
+import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 import pub.devrel.easypermissions.PermissionRequest;
 
 
-public class Permission{
+public class Permission {
     Activity mActivity;
     private int mRequestCode = 256;
     private Context mContext;
@@ -46,4 +51,5 @@ public class Permission{
         }
 
     }
+
 }
