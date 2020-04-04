@@ -17,7 +17,7 @@ public class Select_asset_screen extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       view=inflater.inflate(R.layout.select_tab,container,false);
+       view=inflater.inflate(R.layout.layout_select_tab_fragment,container,false);
        return view;
     }
 }

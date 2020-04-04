@@ -3,6 +3,7 @@ package com.chekrite.select_asset_screen;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -26,4 +27,9 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter{
         return PAGE_COUNT;
     }
 
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabTitles[position];
+    }
 }
