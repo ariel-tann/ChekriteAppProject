@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.4.5
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="50dp"
+
+
+    >
+
+    <Button
+        android:id="@+id/syncButton"
+        android:layout_width="80dp"
+        android:layout_height="25dp"
+        android:background="@drawable/btn_sync"
+        android:text="Sync Now"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="12dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <TextView
+            android:id="@+id/lastSynced"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Synced: "
+            />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="time" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
