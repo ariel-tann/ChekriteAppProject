@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".dashBoard.Dashboard"></activity>
+        <activity android:name=".dashBoard.WelcomeSplash"></activity>
+        <activity android:name=".dashBoard.Dashboard" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
