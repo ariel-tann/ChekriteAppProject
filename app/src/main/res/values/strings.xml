@@ -15,4 +15,9 @@
     <string name="pin_title_setup">ChekRite Setup</string>
     <string name="dashboard_title">Dashboard</string>
     <string name="log_out">Log out</string>
+    <string name="welcom">Welcome</string>
+    <string name="sync_btn">Sync Now</string>
+    <string name="btn_profile">Profile</string>
+    <string name="btn_newcheck">New Check</string>
+    <string name="last_synced">Last Synced</string>
 </resources>
