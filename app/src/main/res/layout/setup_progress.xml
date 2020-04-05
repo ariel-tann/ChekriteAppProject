@@ -5,67 +5,72 @@
   ~ Summary:
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_width="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <include
-        android:id="@+id/setup_progress_toolbar"
-        layout="@layout/setup_toolbar"/>
-    <ImageView
-        android:src="@mipmap/ic_logo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:scaleType="fitCenter"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pairing"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_gravity="center" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Step 3 of 3"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_gravity="center" />
+        <include
+            android:id="@+id/setup_progress_toolbar"
+            layout="@layout/setup_toolbar"/>
+        <ImageView
+            android:src="@mipmap/ic_logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pairing"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Step 3 of 3"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center" />
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:id="@+id/setup_progressBar"
-        android:layout_height="wrap_content"
-        android:layout_width="240dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="160dp"
-        android:progress="25"
-        android:progressTint="@color/dark_blue"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Installing data ..."
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_gravity="center" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Downloading data"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:layout_gravity="center" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registering device"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:layout_gravity="center" />
-</LinearLayout>
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:id="@+id/setup_progressBar"
+            android:layout_height="wrap_content"
+            android:layout_width="240dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="160dp"
+            android:progress="25"
+            android:progressTint="@color/dark_blue"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Installing data ..."
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Downloading data"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:layout_gravity="center" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registering device"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:layout_gravity="center" />
+    </LinearLayout>
+</ScrollView>
