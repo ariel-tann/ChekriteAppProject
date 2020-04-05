@@ -15,11 +15,14 @@ package com.chekrite.PinView;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,8 +37,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chekrite_PinView extends DialogFragment {
-    //TODO Kai save data for device rotation
-    private Context mContent;
+    public static final int SETUP = 0;
+    public static final int EMPLOY_ID = 1;
+    public static final int EMPLOY_PIN = 2;
+    private int Type_PinView;
     private int mPinWidth;
     private int mTextSize;
     private List<String> CurrentPin = new ArrayList<>();
@@ -56,8 +61,9 @@ public class Chekrite_PinView extends DialogFragment {
     private String mPinTxt;
     private String mBtnTxt;
     private String mPinTitle;
+    private boolean IsPassWord;
     private LinearLayout mLinearLayout;
-    private List<TextView> mTextViews   = new ArrayList<>();
+    private List<EditText> mEditViews = new ArrayList<>();
     /*
     * create button listener for image buttons
      */
@@ -105,21 +111,15 @@ public class Chekrite_PinView extends DialogFragment {
                     dismiss();
                     break;
             }
+
         }
     };
-    /*
-    * para activity: given from main activity
-    * para pinWidth: pin length
-    * para textSize: text size of TextView
-    * para pinTxt: description of pin layout
-     */
-    public Chekrite_PinView(Context context, int pinWidth, int textSize, String pinTxt, String btn_txt, String pin_title) {
-        mContent = context;
-        mPinWidth = pinWidth;
-        mTextSize = textSize;
-        mPinTxt = pinTxt;
-        mBtnTxt = btn_txt;
-        mPinTitle = pin_title;
+
+    public Chekrite_PinView () {
+    }
+
+    public Chekrite_PinView (int select) {
+        Type_PinView = select;
     }
 
     /*
@@ -131,7 +131,7 @@ public class Chekrite_PinView extends DialogFragment {
             CurrentPin.add(i);
             CurrentCursor+=1;
         }
-        update();
+        update_editviews();
     }
     /*
     * remove a string from list of String
@@ -141,49 +141,104 @@ public class Chekrite_PinView extends DialogFragment {
             CurrentCursor-=1;
             CurrentPin.remove(CurrentCursor);
         }
-        update();
+        update_editviews();
     }
     /*
     * update pin change, when click image button
     */
-    private void update(){
+    private void update_editviews(){
         for (int i = 0; i<mPinWidth;i++){
             if(CurrentPin.size()>i){
                 String pin = CurrentPin.get(i);
-                TextView view = mTextViews.get(i);
+                EditText view = mEditViews.get(i);
                 view.setText(pin);
             }else{
-                TextView view = mTextViews.get(i);
+                TextView view = mEditViews.get(i);
                 view.setText("");
             }
         }
         if(CurrentCursor>0){
-            mbtn_submit.setTextColor(mContent.getColor(R.color.white));
-            mbtn_submit.setBackground(mContent.getDrawable(R.drawable.btn_blue));
+            if(Type_PinView == SETUP){
+                mbtn_submit.setTextColor(getActivity().getColor(R.color.white));
+                mbtn_submit.setBackground(getActivity().getDrawable(R.drawable.btn_lime_green));
+            }else{
+                mbtn_submit.setTextColor(getActivity().getColor(R.color.white));
+                mbtn_submit.setBackground(getActivity().getDrawable(R.drawable.btn_blue));
+            }
+
         }else{
-            mbtn_submit.setTextColor(mContent.getColor(R.color.dark_gray));
-            mbtn_submit.setBackground(mContent.getDrawable(R.drawable.btn_gray));
+            mbtn_submit.setTextColor(getActivity().getColor(R.color.dark_gray));
+            mbtn_submit.setBackground(getActivity().getDrawable(R.drawable.btn_gray));
         }
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
 //        set style for dialog add
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme);
+        switch (Type_PinView) {
+            case EMPLOY_ID:
+                setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme);
+                break;
+            case EMPLOY_PIN:
+                setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme);
+                break;
+            case SETUP:
+                setStyle(DialogFragment.STYLE_NORMAL, R.style.WelcomeTheme);
+                break;
+            default:
+                setStyle(DialogFragment.STYLE_NORMAL, R.style.WelcomeTheme);
+                break;
+        }
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.pin_layout, container, false);
+        switch (Type_PinView){
+            case EMPLOY_ID:
+                return inflater.inflate(R.layout.pin_layout, container, false);
+            case EMPLOY_PIN:
+                return inflater.inflate(R.layout.pin_layout, container, false);
+            case SETUP:
+                return inflater.inflate(R.layout.setup_layout, container, false);
+            default:
+                Log.d("Kai", "Input layout ERROR");
+                return inflater.inflate(R.layout.setup_layout, container, false);
+        }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
+        super.onViewCreated(view, savedInstanceState);
+        switch (Type_PinView){
+            case SETUP:
+                mPinWidth = 6;
+                mTextSize = 42;
+                mPinTxt = getActivity().getString(R.string.pair_txt);
+                mBtnTxt = getActivity().getString(R.string.btn_pin_pair);
+                mPinTitle = getActivity().getString(R.string.pin_title_setup);
+                IsPassWord = false;
+                break;
+            case EMPLOY_ID:
+                mPinWidth = 8;
+                mTextSize = 42;
+                mPinTxt = getActivity().getString(R.string.employeeID_txt);
+                mBtnTxt = getActivity().getString(R.string.btn_pin_enter);
+                mPinTitle = getActivity().getString(R.string.pin_title_singin);
+                IsPassWord = false;
+                break;
+            case EMPLOY_PIN:
+                mPinWidth = 4;
+                mTextSize = 42;
+                mPinTxt = getActivity().getString(R.string.employeePIN_txt);
+                mBtnTxt = getActivity().getString(R.string.btn_pin_enter);
+                mPinTitle = getActivity().getString(R.string.pin_title_singin);
+                IsPassWord = true;
+                break;
+        }
         // initial digit and assign a listener
         mDigit0 = view.findViewById(R.id.digit_0);
         mDigit0.setOnClickListener(myDigitListener);
@@ -212,28 +267,74 @@ public class Chekrite_PinView extends DialogFragment {
         mbtn_submit.setOnClickListener(myDigitListener);
         Button mbtn_pinCancel = view.findViewById(R.id.pin_cancel);
         mbtn_pinCancel.setOnClickListener(myDigitListener);
-
         mPinTxtView = view.findViewById(R.id.PinTxtView);
         mPinTxtView.setText(mPinTxt);
         TextView pintitle = view.findViewById(R.id.pin_title);
         pintitle.setText(mPinTitle);
         mLinearLayout = view.findViewById(R.id.PinView_Linear);
-        CreateTxtView();
+        CreateTxtView(view);
+        // reload pin to screen
+        load(savedInstanceState);
     }
     /*
      * create mPinWidth of TextView
      */
-    private void CreateTxtView() {
-        TextView textView;
+    private void CreateTxtView(View view) {
+        EditText editText;
         for (int i = 0; i < mPinWidth; i++) {
-            textView = new TextView(mLinearLayout.getContext());
-            textView.setTextSize(mTextSize);
-            textView.setTextColor(mContent.getColor(R.color.dark_blue));
-            textView.setTypeface(null, Typeface.BOLD);
-            textView.setGravity(Gravity.CENTER);
-            textView.setBackground(mContent.getDrawable(R.drawable.pin_TxtViewBorder));
-            mTextViews.add(i, textView);
-            mLinearLayout.addView(textView);
+            editText = new EditText(mLinearLayout.getContext());
+            editText.setTextSize(mTextSize);
+            editText.setEnabled(false);
+            if (Type_PinView == SETUP){
+                editText.setTextColor(getActivity().getColor(R.color.lime_green));
+            }else{
+                editText.setTextColor(getActivity().getColor(R.color.dark_blue));
+            }
+            editText.setTypeface(null, Typeface.BOLD);
+            editText.setGravity(Gravity.CENTER);
+            editText.setFocusable(false);
+            editText.setCursorVisible(false);
+            if (IsPassWord){
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER |
+                                        InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+            }
+            editText.setBackground(getActivity().getDrawable(R.drawable.pin_txtviewborder));
+            mEditViews.add(i, editText);
+            mLinearLayout.addView(editText);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(CurrentPin.size()>0) {
+            String pin = "";
+            for (int i = 0; i < CurrentPin.size(); i++) {
+                pin += CurrentPin.get(i);
+            }
+            outState.putString("PIN", pin);
+            outState.putInt("Cursor", CurrentCursor);
+            outState.putInt("Type", Type_PinView);
+            Log.d("KAI", "save PIN: " + pin);
+        }
+    }
+
+    private void load(Bundle bundle){
+        // load CurrentPin, when user rotate device
+        // CurrentPin still keep same pin
+        if(!CurrentPin.isEmpty()){
+            CurrentPin.clear();
+        }
+        if(bundle!=null) {
+            String pin = bundle.getString("PIN", "");
+            Type_PinView = bundle.getInt("Type", 0);
+            CurrentCursor = bundle.getInt("Cursor", 0);
+            if (pin.length() > 0) {
+                for (int i = 0; i < pin.length(); i++) {
+                    CurrentPin.add(pin.charAt(i) + "");
+                }
+            }
+            update_editviews();
         }
     }
 }

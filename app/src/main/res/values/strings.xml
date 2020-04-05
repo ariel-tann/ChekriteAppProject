@@ -5,10 +5,12 @@
     </string>
     <string name="rationale_ask_ok">OK</string>
     <string name="rationale_ask_cancel">NO</string>
-    <string name="employee_txt">Enter your Employee ID</string>
+    <string name="employeeID_txt">Enter your Employee ID</string>
+    <string name="employeePIN_txt">Enter your PIN</string>
     <string name="pair_txt">Enter a pairing code to pair this\n
         device to the ChekRite Server</string>
     <string name="btn_pin_enter">Enter</string>
     <string name="btn_pin_pair">Pair to Server</string>
     <string name="pin_title_singin">Sing In</string>
+    <string name="pin_title_setup">ChekRite Setup</string>
 </resources>

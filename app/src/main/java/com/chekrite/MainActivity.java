@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,16 +28,20 @@ public class MainActivity extends AppCompatActivity
     private Permission mPermission;
     private Button mBtnSubmit;
     private ImageView mImageView;
+    private Context mContent;
     private View.OnClickListener submitListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            URL url = null;
-            try {
-                url = new URL("https://i.imgur.com/tGbaZCY.jpg");
-                new ImageDownloadTask(mImageView).execute(url);
-            } catch (IOException e) {
-                Log.e("Error", "URL error");
-            }
+//            URL url = null;
+//            try {
+//                url = new URL("https://i.imgur.com/tGbaZCY.jpg");
+//                new ImageDownloadTask(mImageView).execute(url);
+//            } catch (IOException e) {
+//                Log.e("Error", "URL error");
+//            }
+            // create a fragment to show PinView
+            Chekrite_PinView pinView = new Chekrite_PinView(Chekrite_PinView.SETUP);
+            pinView.show(getSupportFragmentManager(),"pin");
         }
     };
 
@@ -44,19 +49,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mContent = this.getApplicationContext();
 
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
-        // create a fragment to show PinView
-        Chekrite_PinView pinView = new Chekrite_PinView(this,
-                6,42,
-                getResources().getString(R.string.pair_txt),
-                getResources().getString(R.string.btn_pin_pair),
-                getResources().getString(R.string.pin_title_singin));
-        pinView.show(getSupportFragmentManager(),"pin");
-
-
+        mBtnSubmit = findViewById(R.id.btn_submit);
+        mBtnSubmit.setOnClickListener(submitListener);
     }
 
 
