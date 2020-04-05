@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity
 
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
-
+        // create a fragment to show PinView
         Chekrite_PinView pinView = new Chekrite_PinView(this,
                 6,42,
                 getResources().getString(R.string.pair_txt),

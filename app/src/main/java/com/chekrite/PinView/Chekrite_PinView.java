@@ -12,11 +12,9 @@
 
 package com.chekrite.PinView;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -233,7 +231,7 @@ public class Chekrite_PinView extends DialogFragment {
             textView.setTextColor(mContent.getColor(R.color.dark_blue));
             textView.setTypeface(null, Typeface.BOLD);
             textView.setGravity(Gravity.CENTER);
-            textView.setBackground(mContent.getDrawable(R.drawable.pin_textviewborder));
+            textView.setBackground(mContent.getDrawable(R.drawable.pin_TxtViewBorder));
             mTextViews.add(i, textView);
             mLinearLayout.addView(textView);
         }
