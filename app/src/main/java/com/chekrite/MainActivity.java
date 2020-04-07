@@ -10,14 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.chekrite.PinView.Chekrite_PinView;
-import com.chekrite.http_request.ImageDownloadTask;
 import com.chekrite.permission.Permission;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -54,7 +50,7 @@ public class MainActivity extends AppCompatActivity
 
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
-        mBtnSubmit = findViewById(R.id.btn_submit);
+        mBtnSubmit = findViewById(R.id.setupApp_btn);
         mBtnSubmit.setOnClickListener(submitListener);
     }
 
