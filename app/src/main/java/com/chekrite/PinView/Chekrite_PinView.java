@@ -14,11 +14,15 @@ package com.chekrite.PinView;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -64,6 +68,7 @@ public class Chekrite_PinView extends DialogFragment {
     private boolean IsPassWord;
     private LinearLayout mLinearLayout;
     private List<EditText> mEditViews = new ArrayList<>();
+    private AudioManager audioManager;
     /*
     * create button listener for image buttons
      */
@@ -72,40 +77,52 @@ public class Chekrite_PinView extends DialogFragment {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.digit_0:
+                    audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
                     AddPin("0");
                     break;
                 case R.id.digit_1:
+                    audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
                     AddPin("1");
                     break;
                 case R.id.digit_2:
+                    audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
                     AddPin("2");
                     break;
                 case R.id.digit_3:
+                    audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
                     AddPin("3");
                     break;
                 case R.id.digit_4:
+                    audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
                     AddPin("4");
                     break;
                 case R.id.digit_5:
+                    audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
                     AddPin("5");
                     break;
                 case R.id.digit_6:
+                    audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
                     AddPin("6");
                     break;
                 case R.id.digit_7:
+                    audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
                     AddPin("7");
                     break;
                 case R.id.digit_8:
+                    audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
                     AddPin("8");
                     break;
                 case R.id.digit_9:
+                    audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
                     AddPin("9");
                     break;
                 case R.id.digit_back:
+                    audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
                     BackSpace();
                     break;
                 case R.id.pin_submit:
                     //TODO Kai submit func
+                    mbtn_submit.playSoundEffect(0);
                     break;
                 case R.id.pin_cancel:
                     dismiss();
@@ -275,6 +292,7 @@ public class Chekrite_PinView extends DialogFragment {
         CreateTxtView(view);
         // reload pin to screen
         load(savedInstanceState);
+        audioManager = (AudioManager)view.getContext().getSystemService(Context.AUDIO_SERVICE);
     }
     /*
      * create mPinWidth of TextView

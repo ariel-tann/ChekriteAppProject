@@ -10,14 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
+import com.chekrite.MetaData.meta_data;
 import com.chekrite.PinView.Chekrite_PinView;
-import com.chekrite.http_request.ImageDownloadTask;
+import com.chekrite.http_request.APIsTask;
 import com.chekrite.permission.Permission;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -32,16 +30,11 @@ public class MainActivity extends AppCompatActivity
     private View.OnClickListener submitListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            URL url = null;
-//            try {
-//                url = new URL("https://i.imgur.com/tGbaZCY.jpg");
-//                new ImageDownloadTask(mImageView).execute(url);
-//            } catch (IOException e) {
-//                Log.e("Error", "URL error");
-//            }
-            // create a fragment to show PinView
-            Chekrite_PinView pinView = new Chekrite_PinView(Chekrite_PinView.SETUP);
-            pinView.show(getSupportFragmentManager(),"pin");
+//            new APIsTask().execute();
+//             create a fragment to show PinView
+//            Chekrite_PinView pinView = new Chekrite_PinView(Chekrite_PinView.SETUP);
+//            pinView.show(getSupportFragmentManager(),"pin");
+            new meta_data(getApplicationContext());
         }
     };
 
@@ -53,7 +46,7 @@ public class MainActivity extends AppCompatActivity
 
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
-        mBtnSubmit = findViewById(R.id.btn_submit);
+        mBtnSubmit = findViewById(R.id.setupApp_btn);
         mBtnSubmit.setOnClickListener(submitListener);
     }
 

@@ -20,4 +20,5 @@
     <string name="btn_profile">Profile</string>
     <string name="btn_newcheck">New Check</string>
     <string name="last_synced">Last Synced</string>
+    <string name="setup_app_btn">Setup App</string>
 </resources>
