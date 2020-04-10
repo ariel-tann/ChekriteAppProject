@@ -34,6 +34,7 @@ public class Permission {
     public void RequestPermissions() {
         String[] perms = {  Manifest.permission.CAMERA,
                             Manifest.permission.RECORD_AUDIO,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
                             Manifest.permission.ACCESS_FINE_LOCATION};
         if (!EasyPermissions.hasPermissions(mActivity, perms)) {
             //Request Permissions
