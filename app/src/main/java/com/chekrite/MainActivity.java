@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity
         public void onClick(View v) {
 //            new APIsTask().execute();
 //             create a fragment to show PinView
-            Chekrite_PinView pinView = new Chekrite_PinView(Chekrite_PinView.SETUP);
-            pinView.show(getSupportFragmentManager(),"pin");
-//            new meta_data(getApplicationContext());
+//            Chekrite_PinView pinView = new Chekrite_PinView(Chekrite_PinView.SETUP);
+//            pinView.show(getSupportFragmentManager(),"pin");
+            new meta_data(getApplicationContext());
         }
     };
 

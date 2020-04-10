@@ -16,6 +16,9 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.BatteryManager;
+import android.os.Build;
+import android.os.Environment;
+import android.os.StatFs;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -23,6 +26,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.chekrite.BuildConfig;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 
 import static android.content.Context.BATTERY_SERVICE;
@@ -34,7 +38,7 @@ public class meta_data {
     int device_battery_level;
     double device_lat;
     double device_lng;
-    long device_memory;
+    int device_memory;
     String device_model;
     String internet_capabilities;
 
@@ -67,12 +71,12 @@ public class meta_data {
             device_lng = location.getLongitude();
 
         }
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-        activityManager.getMemoryInfo(memoryInfo);
-        device_memory = (long) (memoryInfo.totalMem);
-        Log.d("KAI", device_memory+"");
-
-
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSizeLong();
+        long totalBlocks = stat.getBlockCountLong();
+        device_memory = (int)(blockSize*totalBlocks/ 1073741824.0);
+        device_model = Build.MODEL;
+        //TODO internet_capabilities
     }
 }
