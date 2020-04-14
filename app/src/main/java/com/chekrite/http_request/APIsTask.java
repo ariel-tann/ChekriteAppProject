@@ -22,15 +22,17 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
 // Defines the background task to download and then load the image within the ImageView
-public class APIsTask extends AsyncTask<Void, Void, Void> {
+public class APIsTask extends AsyncTask<Void, Void, String> {
     URL url = null;
 
     public APIsTask() {
@@ -38,7 +40,7 @@ public class APIsTask extends AsyncTask<Void, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected String doInBackground(Void... voids) {
         URL url = null;
         InputStream in = null;
         try {
@@ -46,25 +48,35 @@ public class APIsTask extends AsyncTask<Void, Void, Void> {
             url = new URL("https://test.mychekrite.com/oauth/authorize");
             URLConnection conn = null;
             conn = (HttpURLConnection) url.openConnection();
+            conn.addRequestProperty("grant_type","authorization_code");
             conn.addRequestProperty("client_id","kaihua.chuang@connect.qut.edu.au");
-            Log.d("KAI","Request: "+conn.getContentEncoding());
-            // 2. Open InputStream to connection
+            conn.addRequestProperty("client_secret","10097147Chuang");
             conn.connect();
-            in = conn.getInputStream();
-            Log.d("KAI","Response: "+in.toString());
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line).append("\n");
+            }
+            bufferedReader.close();
+            return stringBuilder.toString();
+
+
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            return null;
         }catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
+    protected void onPostExecute(String response) {
         //Action after Execute
-        super.onPostExecute(aVoid);
+        Log.d("KAI", "response: "+response);
     }
 
 
