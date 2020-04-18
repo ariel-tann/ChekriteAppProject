@@ -23,7 +23,7 @@ import android.widget.EditText;
 
 import com.chekrite.R;
 
-public class UserLogin extends AppCompatActivity {
+public class IdInput extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
