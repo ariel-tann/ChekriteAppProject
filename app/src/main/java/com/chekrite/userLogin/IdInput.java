@@ -9,36 +9,52 @@ package com.chekrite.userLogin;
 import android.os.Bundle;
 
 import com.chekrite.PinView.NumInputPanel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.EditText;
 
 import com.chekrite.R;
 
-public class IdInput extends AppCompatActivity {
+public class IdInput extends Fragment {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+        return inflater.inflate(R.layout.fragment_id_input, container, false);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_login);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    }
 
-        EditText editText = (EditText) findViewById(R.id.editText_num);
-        NumInputPanel numberinput = (NumInputPanel) findViewById(R.id.digit_panel);
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceStage){
+        super.onViewCreated(view, savedInstanceStage);
+
+        view.findViewById(R.id.go_to_pw).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(IdInput.this)
+                        .navigate(R.id.action_IDFragment_to_PWFragment);
+
+            }
+        });
+
+
+        EditText editText = (EditText) view.findViewById(R.id.editText_id);
+        NumInputPanel numberinput = (NumInputPanel) view.findViewById(R.id.digit_panel);
         editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
         editText.setTextIsSelectable(false);
 
         InputConnection ic = editText.onCreateInputConnection(new EditorInfo());
         numberinput.setInputConnection(ic);
     }
+
+
 
 }

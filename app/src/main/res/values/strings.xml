@@ -41,4 +41,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_sign_in">Sign in</string>
     <string name="title_activity_user_login">UserLogin</string>
+    <string name="title_activity_test">Test</string>
 </resources>

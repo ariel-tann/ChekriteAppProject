@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.chekrite">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,11 +18,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".userLogin.Login"></activity>
+        <activity
+            android:name=".Test"
+            android:label="@string/title_activity_test"
+            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".userLogin.Login" />
         <activity
             android:name=".userLogin.IdInput"
             android:label="@string/title_activity_user_login"
-            android:theme="@style/NoActionBar">
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,7 +49,7 @@
             android:label="@string/title_activity_login"></activity>
         <activity android:name=".Login" />
         -->
-        <activity android:name=".dashBoard.WelcomeSplash" />
+        <activity android:name=".userLogin.WelcomeSplash" />
         <activity android:name=".dashBoard.Dashboard" />
         <activity android:name=".MainActivity" />
     </application>

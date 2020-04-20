@@ -9,26 +9,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/IDFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.chekrite.signIn.FirstFragment"
+        android:id="@+id/IDFragment"
+        android:name="com.chekrite.userLogin.IdInput"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_id_input">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_IDFragment_to_PWFragment"
+            app:destination="@id/PWFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.chekrite.signIn.SecondFragment"
+        android:id="@+id/PWFragment"
+        android:name="com.chekrite.userLogin.PasswordInput"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_pw_input">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/IDFragment" />
     </fragment>
 </navigation>

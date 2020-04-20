@@ -12,17 +12,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/include_toolbar"
-        layout="@layout/pin_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/id_input_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -35,11 +26,12 @@
 
 
     <EditText
-        android:id="@+id/editText_num"
+        android:id="@+id/editText_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:ems="10"
+        android:maxLength="8"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toTopOf="@+id/include_num_panel"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,11 +46,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_num"
+        app:layout_constraintTop_toBottomOf="@+id/editText_id"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/pin_submit"
+        android:id="@+id/go_to_pw"
         android:layout_width="240dp"
         android:layout_height="70dp"
         android:layout_alignParentEnd="true"
@@ -75,6 +67,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include_num_panel" />
+        app:layout_constraintTop_toBottomOf="@+id/digit_panel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

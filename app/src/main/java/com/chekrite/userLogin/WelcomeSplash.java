@@ -1,10 +1,16 @@
 /*
+ * Date: 2020.4.19
+ * This file is created by Kai.
+ * Summary:
+ */
+
+/*
  * Date: 2020.4.5
  * This file is created by Kai.
  * Summary:
  */
 
-package com.chekrite.dashBoard;
+package com.chekrite.userLogin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.chekrite.R;
+import com.chekrite.dashBoard.Dashboard;
 
 public class WelcomeSplash extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
@@ -24,9 +31,11 @@ public class WelcomeSplash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 Intent dashboardIntent = new Intent(WelcomeSplash.this, Dashboard.class);
                 startActivity(dashboardIntent);
                 finish();
+
             }
         }, SPLASH_TIME_OUT);
     }

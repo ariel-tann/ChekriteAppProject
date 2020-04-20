@@ -25,12 +25,13 @@ public class LoginFail extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.login_fail,container, false);
+        View v = inflater.inflate(R.layout.login_fail, container, false);
 
 
+        return v;
     }
 
-    // show page in secs set time
+    //  set display time 3000
 
 
     //go back

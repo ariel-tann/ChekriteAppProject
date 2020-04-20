@@ -14,9 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.chekrite.R;
-import com.chekrite.dashBoard.WelcomeSplash;
 
 public class Login extends AppCompatActivity {
     private EditText EmployeeID;
@@ -26,15 +26,19 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView();
+        setContentView(R.layout.user_login_main);
+       // setContentView();
+        Toolbar toolbar = findViewById(R.id.pin_toolbar);
 
-        EmployeeID = (EditText) findViewById(R.id.editText_employee_id);
-        PassWord = (EditText) findViewById(R.id.editText_password);
-        Enter = (Button) findViewById(R.id.enter);
+
+        EmployeeID = (EditText) findViewById(R.id.editText_id);
+        PassWord = (EditText) findViewById(R.id.editText_pw);
+        Enter = (Button) findViewById(R.id.pin_submit);
 
         Enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //get input value
                 validation(EmployeeID.getText().toString(), PassWord.getText().toString());
             }
         });
@@ -48,5 +52,6 @@ private void validation(String userEmloyeeID, String userPassWord){
            // go to login fail page
         }
 }
+
 
 }
