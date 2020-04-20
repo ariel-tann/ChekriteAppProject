@@ -10,21 +10,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".userLogin.UserLogin">
 
 
     <include
-        android:id="@+id/include"
+        android:id="@+id/sing_in_bar"
         layout="@layout/pin_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+ />
 
     <include
-        layout="@layout/user_login_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="372dp" />
+        layout="@layout/user_login_content" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

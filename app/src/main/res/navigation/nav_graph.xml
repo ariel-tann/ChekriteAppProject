@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_id_input">
 
         <action
-            android:id="@+id/action_IDFragment_to_PWFragment"
+            android:id="@+id/action_id_to_pw"
             app:destination="@id/PWFragment" />
     </fragment>
     <fragment
@@ -28,7 +28,7 @@
         tools:layout="@layout/fragment_pw_input">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_pw_to_id"
             app:destination="@id/IDFragment" />
     </fragment>
 </navigation>

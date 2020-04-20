@@ -25,6 +25,8 @@ import android.widget.EditText;
 import com.chekrite.R;
 
 public class IdInput extends Fragment {
+
+    @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
@@ -36,16 +38,7 @@ public class IdInput extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceStage){
         super.onViewCreated(view, savedInstanceStage);
 
-        view.findViewById(R.id.go_to_pw).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(IdInput.this)
-                        .navigate(R.id.action_IDFragment_to_PWFragment);
-
-            }
-        });
-
-
+/**
         EditText editText = (EditText) view.findViewById(R.id.editText_id);
         NumInputPanel numberinput = (NumInputPanel) view.findViewById(R.id.digit_panel);
         editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
@@ -53,6 +46,15 @@ public class IdInput extends Fragment {
 
         InputConnection ic = editText.onCreateInputConnection(new EditorInfo());
         numberinput.setInputConnection(ic);
+**/
+        view.findViewById(R.id.go_to_pw).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(IdInput.this)
+                        .navigate(R.id.action_id_to_pw);
+
+            }
+        });
     }
 
 

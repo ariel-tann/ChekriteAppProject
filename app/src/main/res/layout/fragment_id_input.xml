@@ -10,33 +10,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".userLogin.IdInput">
 
     <TextView
         android:id="@+id/id_input_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="Enter your employee ID"
         app:layout_constraintBottom_toTopOf="@+id/include_num_panel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include_toolbar"
-        app:layout_constraintVertical_bias="0.343" />
+ />
 
 
     <EditText
         android:id="@+id/editText_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:ems="10"
         android:maxLength="8"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toTopOf="@+id/include_num_panel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/id_input_hint" />
 
     <com.chekrite.PinView.NumInputPanel
         android:id="@+id/digit_panel"
@@ -44,10 +42,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/pin_submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_id"
-        app:layout_constraintVertical_bias="0.0" />
+ />
 
     <Button
         android:id="@+id/go_to_pw"
@@ -65,7 +62,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/digit_panel" />
 

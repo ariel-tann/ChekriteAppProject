@@ -19,21 +19,19 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Test"
+            android:name=".signIn.Test"
             android:label="@string/title_activity_test"
-            android:theme="@style/NoActionBar"></activity>
-        <activity android:name=".userLogin.Login" />
-        <activity
-            android:name=".userLogin.IdInput"
-            android:label="@string/title_activity_user_login"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar"
-            tools:ignore="LockedOrientationActivity">
+            android:theme="@style/NoActionBar"  >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+        <activity android:name=".userLogin.UserLogin">
+
         </activity>
         <!--
         <activity
@@ -50,7 +48,8 @@
         <activity android:name=".Login" />
         -->
         <activity android:name=".userLogin.WelcomeSplash" />
-        <activity android:name=".dashBoard.Dashboard" />
+        <activity android:name=".dashBoard.Dashboard">
+</activity>
         <activity android:name=".MainActivity" />
     </application>
 

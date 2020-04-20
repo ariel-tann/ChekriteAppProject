@@ -123,6 +123,7 @@ public class NumInputPanel extends GridLayout implements View.OnClickListener{
     public void onClick(View v) {
         if (inputConnection == null)
             return;
+        //set delete button
         if(v.getId() == R.id.digit_back) {
             CharSequence selectedText = inputConnection.getSelectedText(0);
             if(TextUtils.isEmpty(selectedText)){

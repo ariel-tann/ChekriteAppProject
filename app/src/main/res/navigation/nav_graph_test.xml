@@ -5,7 +5,8 @@
   ~ Summary:
   -->
 
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_test"
@@ -13,7 +14,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.chekrite.FirstFragment"
+        android:name="com.chekrite.signIn.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -23,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.chekrite.SecondFragment"
+        android:name="com.chekrite.signIn.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

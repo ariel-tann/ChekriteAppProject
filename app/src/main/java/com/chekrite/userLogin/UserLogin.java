@@ -18,21 +18,25 @@ import android.widget.Toolbar;
 
 import com.chekrite.R;
 
-public class Login extends AppCompatActivity {
+public class UserLogin extends AppCompatActivity {
+
+    /**
     private EditText EmployeeID;
     private EditText PassWord;
     private Button Enter;
     private TextView WrongMatching;
+**/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_login_main);
-       // setContentView();
-        Toolbar toolbar = findViewById(R.id.pin_toolbar);
+        Toolbar toolbar = findViewById(R.id.sing_in_bar);
 
+    }
 
-        EmployeeID = (EditText) findViewById(R.id.editText_id);
-        PassWord = (EditText) findViewById(R.id.editText_pw);
+ /**
+  *         EmployeeID = (EditText) findViewById(R.id.editText_id);
+  *         PassWord = (EditText) findViewById(R.id.editText_pw);
         Enter = (Button) findViewById(R.id.pin_submit);
 
         Enter.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +56,8 @@ private void validation(String userEmloyeeID, String userPassWord){
            // go to login fail page
         }
 }
+
+  **/
 
 
 }

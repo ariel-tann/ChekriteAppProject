@@ -1,19 +1,32 @@
 /*
+ * Date: 2020.4.21
+ * This file is created by Kai.
+ * Summary:
+ */
+
+/*
  * Date: 2020.4.19
  * This file is created by Kai.
  * Summary:
  */
 
-package com.chekrite;
+package com.chekrite.signIn;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.chekrite.PinView.NumInputPanel;
+import com.chekrite.R;
 
 public class SecondFragment extends Fragment {
 
@@ -29,7 +42,15 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
+        EditText editText = (EditText) view.findViewById(R.id.editText_id);
+        NumInputPanel numberinput = (NumInputPanel) view.findViewById(R.id.digit_panel);
+        editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+        editText.setTextIsSelectable(false);
+
+        InputConnection ic = editText.onCreateInputConnection(new EditorInfo());
+        numberinput.setInputConnection(ic);
+
+        view.findViewById(R.id.pw_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(SecondFragment.this)

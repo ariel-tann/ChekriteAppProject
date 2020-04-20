@@ -31,6 +31,7 @@ import com.chekrite.R;
 
 
 public class PasswordInput extends Fragment {
+    @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
@@ -42,23 +43,27 @@ public class PasswordInput extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceStage){
         super.onViewCreated(view, savedInstanceStage);
 
-        view.findViewById(R.id//cancel)
+        view.findViewById(R.id.pin_cancel)
                  .setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View view) {
                 // go to welcome  viewgroup
+                NavHostFragment.findNavController(PasswordInput.this)
+                        .navigate(R.id.action_pw_to_id);
+
             }
         });
+/**
 
-
-        EditText editText = (EditText) view.findViewById(R.id.editText_id);
+        EditText editText = (EditText) view.findViewById(R.id.editText_pw);
         NumInputPanel numberinput = (NumInputPanel) view.findViewById(R.id.digit_panel);
         editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
         editText.setTextIsSelectable(false);
 
         InputConnection ic = editText.onCreateInputConnection(new EditorInfo());
         numberinput.setInputConnection(ic);
+
+ **/
     }
 
 
