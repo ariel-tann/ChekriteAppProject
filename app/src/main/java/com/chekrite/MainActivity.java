@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 
 import com.chekrite.MetaData.meta_data;
 import com.chekrite.PinView.Chekrite_PinView;
+import com.chekrite.dashBoard.Dashboard;
+import com.chekrite.dashBoard.WelcomeSplash;
 import com.chekrite.http_request.APIsTask;
 import com.chekrite.permission.Permission;
 
@@ -22,6 +25,8 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
+
+    Button test_btn;
 
     private Permission mPermission;
     private Button mBtnSubmit;
@@ -48,6 +53,33 @@ public class MainActivity extends AppCompatActivity
         mPermission.RequestPermissions();
         mBtnSubmit = findViewById(R.id.setupApp_btn);
         mBtnSubmit.setOnClickListener(submitListener);
+
+        //test
+        test_btn = findViewById(R.id.test_btn);
+        test_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLoginScreen();
+                //openDashboardScreen();
+                //openWelcomeSplash();
+            }
+        });
+        //test_btn.setVisibility((View.GONE));
+    }
+
+    public void openLoginScreen() {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
+
+    public void openDashboardScreen() {
+        Intent intent = new Intent(this, Dashboard.class);
+        startActivity(intent);
+    }
+
+    public void openWelcomeSplash() {
+        Intent intent = new Intent(this, WelcomeSplash.class);
+        startActivity(intent);
     }
 
 
