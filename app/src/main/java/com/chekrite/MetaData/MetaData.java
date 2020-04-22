@@ -23,6 +23,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.chekrite.BuildConfig;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +32,7 @@ import java.text.SimpleDateFormat;
 
 import static android.content.Context.BATTERY_SERVICE;
 
-public class meta_data {
+public class MetaData {
     // date of app build
     String app_build;
     String app_version;
@@ -44,7 +45,7 @@ public class meta_data {
     String os_version;
     JSONObject jObject = new JSONObject();
 
-    public meta_data(Context context) {
+    public MetaData(Context context) {
 
         String pattern = "yyyyMMdd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -53,12 +54,13 @@ public class meta_data {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
         if (info.getType() == ConnectivityManager.TYPE_WIFI)
-            internet_capabilities = "Wi-Fi";
+            internet_capabilities = "wifi";
         else if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
-            internet_capabilities = "Cellular";
+            internet_capabilities = "cellular";
         } else {
             internet_capabilities = "unknown";
         }
+
         BatteryManager bm = (BatteryManager) context.getSystemService(BATTERY_SERVICE);
         device_battery_level = bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
 
@@ -80,15 +82,9 @@ public class meta_data {
         device_model = Build.MODEL;
         os_version = Build.VERSION.RELEASE;
 
-
-
-
         // create json file
-
-
-
         try {
-            jObject.put("device_battery_level", device_battery_level);
+            jObject.put("device_battery_level", device_battery_level/100);
             jObject.put("app_version", app_version);
             jObject.put("app_build", app_build);
             jObject.put("os","Android");
@@ -105,6 +101,7 @@ public class meta_data {
 
     }
     public JSONObject get(){
+
         return jObject;
     }
 }

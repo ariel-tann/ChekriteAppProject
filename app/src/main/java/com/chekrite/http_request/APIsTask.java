@@ -22,38 +22,77 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
 // Defines the background task to download and then load the image within the ImageView
-public class APIsTask extends AsyncTask<Void, Void, String> {
-    URL url = null;
-
-    public APIsTask() {
-
+public class APIsTask extends AsyncTask<String, Void, String> {
+    APIsListener mAPIsListener;
+    public APIsTask(APIsListener apIsListener) {
+        mAPIsListener = apIsListener;
     }
 
     @Override
-    protected String doInBackground(Void... voids) {
+    protected String doInBackground(String... params) {
+        // params[0]: GET/POST
+        // params[1]: api
+        // params[2]: body
+        Log.d("KAI","start doIn...");
         URL url = null;
+        String tmp = "https://apitest.mychekrite.com/api/";
         InputStream in = null;
         try {
-            Log.d("KAI","start doIn...");
-            url = new URL("https://test.mychekrite.com/oauth/authorize");
-            URLConnection conn = null;
-            conn = (HttpURLConnection) url.openConnection();
-            conn.addRequestProperty("grant_type","authorization_code");
-            conn.addRequestProperty("client_id","kaihua.chuang@connect.qut.edu.au");
-            conn.addRequestProperty("client_secret","10097147Chuang");
-            conn.connect();
+            if(params[0].equals("POST")){
+                tmp += params[1] +"?";
+                JSONObject jsonObject= new JSONObject(params[2]);
+                JSONArray jkey = jsonObject.names ();
+                for (int i = 0; i < jkey.length (); ++i) {
+                    try {
+                        String key = jkey.getString (i); // key of json
+                        String value = jsonObject.getString (key); // value of json
+                        if(i < jkey.length ()-1){
+                            tmp += key+"="+value+"&";
+                        }else{
+                            // the last value
+                            tmp += key+"="+value;
+                        }
 
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }else {
+                // TODO "GET" HttpURL
+            }
+            Log.d("KAI", "URL: "+tmp);
+            url = new URL(tmp);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod(params[0]);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            connection.setRequestProperty("Accept", "*/*");
+            connection.setDoOutput(true);
+//            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
+//            writer.write("Write something");
+//            writer.close();
+            connection.connect();
+            // Response: 400
+            Log.d("KAI", "Response: "+connection.getResponseMessage() + "");
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder stringBuilder = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -61,14 +100,8 @@ public class APIsTask extends AsyncTask<Void, Void, String> {
             }
             bufferedReader.close();
             return stringBuilder.toString();
-
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return null;
-        }catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.e(e.toString(), "Something with request");
             return null;
         }
     }
@@ -77,6 +110,11 @@ public class APIsTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String response) {
         //Action after Execute
         Log.d("KAI", "response: "+response);
+        try {
+            mAPIsListener.API_Completed(new JSONObject(response));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
