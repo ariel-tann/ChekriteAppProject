@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
                     String site_name = site.getString("name");
 
                     JSONObject pair_credent = new JSONObject();
-                    pair_credent.put("udif", udif);
+                    pair_credent.put("device_udid", udif);
                     pair_credent.put("auth_code", auth_code);
                     pair_credent.put("company", company_name);
                     pair_credent.put("site", site_name);
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    //TODO go to setup_progress xml and download image
                     openLoginScreen();
                 }else{
                     // TODO pair fail

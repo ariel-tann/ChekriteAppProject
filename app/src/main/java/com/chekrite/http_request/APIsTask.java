@@ -49,7 +49,6 @@ public class APIsTask extends AsyncTask<String, Void, String> {
         // params[0]: GET/POST
         // params[1]: api
         // params[2]: body
-        Log.d("KAI","start doIn...");
         URL url = null;
         String tmp = "https://apitest.mychekrite.com/api/";
         InputStream in = null;

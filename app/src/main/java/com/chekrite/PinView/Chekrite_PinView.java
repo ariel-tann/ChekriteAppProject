@@ -128,7 +128,9 @@ public class Chekrite_PinView extends DialogFragment {
                         PIN += tmp;
                     }
                     mPinListener.onSubmit(PIN);
-                    dismiss();
+                    if(Type_PinView != EMPLOY_ID){
+                        dismiss();
+                    }
                     break;
                 case R.id.pin_cancel:
                     dismiss();
