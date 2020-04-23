@@ -25,6 +25,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -32,15 +35,15 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
 
-    Button test_btn;
 
     private Permission mPermission;
     private Button mBtnSubmit;
-    private ImageView mImageView;
-    private Context mContent;
+    private static final String FILE_NAME = "pair.txt";
+
     private APIsListener apIsListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
+            // execute this when transaction finished
             try {
                 String status = (String) jsonObject.get("status");
                 if(status.equals("success")){
@@ -48,10 +51,25 @@ public class MainActivity extends AppCompatActivity
                     JSONObject device = data.getJSONObject("device");
                     String udif = device.getString("udid");
                     String auth_code = device.getString("auth_code");
-                    JSONObject site = data.getJSONObject("company");
+                    JSONObject company = data.getJSONObject("company");
+                    String company_name = company.getString("name");
+                    JSONObject site = data.getJSONObject("site");
                     String site_name = site.getString("name");
-                    // TODO write info to a file
 
+                    JSONObject pair_credent = new JSONObject();
+                    pair_credent.put("udif", udif);
+                    pair_credent.put("auth_code", auth_code);
+                    pair_credent.put("company", company_name);
+                    pair_credent.put("site", site_name);
+                    FileOutputStream outputStream;
+                    try {
+                        outputStream = openFileOutput(FILE_NAME , Context.MODE_PRIVATE);
+                        outputStream.write(pair_credent.toString().getBytes());
+                        outputStream.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    openLoginScreen();
                 }else{
                     // TODO pair fail
 
@@ -79,10 +97,10 @@ public class MainActivity extends AppCompatActivity
             new APIsTask(apIsListener).execute("POST","pair",jsonObject.toString());
         }
     };
+
     private View.OnClickListener submitListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            new APIsTask().execute();
 //             create a fragment to show PinView
             Chekrite_PinView pinView = new Chekrite_PinView(Chekrite_PinView.SETUP, mPinListen);
             pinView.show(getSupportFragmentManager(),"pin");
@@ -94,40 +112,30 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         // TODO check if auth file exists
         setContentView(R.layout.activity_main);
-        mContent = this.getApplicationContext();
-
+        File file = getBaseContext().getFileStreamPath(FILE_NAME);
+        if(file.exists()){
+            openLoginScreen();
+        }
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
         mBtnSubmit = findViewById(R.id.setupApp_btn);
         mBtnSubmit.setOnClickListener(submitListener);
 
-        //test
-        test_btn = findViewById(R.id.test_btn);
-//        test_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openLoginScreen();
-//                //openDashboardScreen();
-//                //openWelcomeSplash();
-//            }
-//        });
-        test_btn.setVisibility((View.GONE));
     }
 
     public void openLoginScreen() {
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
-
-    public void openDashboardScreen() {
-        Intent intent = new Intent(this, Dashboard.class);
-        startActivity(intent);
-    }
-
-    public void openWelcomeSplash() {
-        Intent intent = new Intent(this, WelcomeSplash.class);
-        startActivity(intent);
-    }
+//
+//    public void openDashboardScreen() {
+//        Intent intent = new Intent(this, Dashboard.class);
+//        startActivity(intent);
+//    }
+//    public void openWelcomeSplash() {
+//        Intent intent = new Intent(this, WelcomeSplash.class);
+//        startActivity(intent);
+//    }
 
 
     @Override

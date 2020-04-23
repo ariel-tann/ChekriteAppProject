@@ -15,7 +15,7 @@
         android:id="@+id/question_toolbar"
         layout="@layout/question_toolbar" />
 
-    <com.chekrite.question_recycle.QuestionRecyclerView
+    <com.chekrite.Question_Recycle.QuestionRecyclerView
         android:id="@+id/question_RecycView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

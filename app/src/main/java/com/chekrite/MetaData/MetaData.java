@@ -37,7 +37,7 @@ public class MetaData {
     String app_build;
     String app_version;
     String internet_capabilities;
-    int device_battery_level;
+    double device_battery_level;
     double device_lat;
     double device_lng;
     int device_memory;
@@ -62,7 +62,7 @@ public class MetaData {
         }
 
         BatteryManager bm = (BatteryManager) context.getSystemService(BATTERY_SERVICE);
-        device_battery_level = bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+        device_battery_level = (double) bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
 
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -84,7 +84,7 @@ public class MetaData {
 
         // create json file
         try {
-            jObject.put("device_battery_level", device_battery_level/100);
+            jObject.put("device_battery_level",  device_battery_level/100);
             jObject.put("app_version", app_version);
             jObject.put("app_build", app_build);
             jObject.put("os","Android");
