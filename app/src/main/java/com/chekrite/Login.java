@@ -9,13 +9,17 @@ package com.chekrite;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.chekrite.PinView.Chekrite_PinView;
 import com.chekrite.PinView.PinListener;
+import com.chekrite.dashBoard.WelcomeSplash;
 import com.chekrite.http_request.APIsListener;
 import com.chekrite.http_request.APIsTask;
 import com.chekrite.permission.Permission;
@@ -54,12 +58,17 @@ public class Login extends AppCompatActivity
                 status = (String) jsonObject.get("status");
                 if(status.equals("success")){
                     JSONObject data = jsonObject.getJSONObject("data");
-                    String user_name = data.getString("first_name");
-                    user_name += data.getString("last_name");
+                    String first_name = data.getString("first_name");
+                    String last_name = data.getString("last_name");
                     JSONObject device = jsonObject.getJSONObject("device");
                     String access_token = data.getString("access_token");
-                    Log.d("KAI", "user name: "+user_name+ "token"+access_token);
-                    
+                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("first_name", first_name);
+                    editor.putString("last_name", last_name);
+                    editor.putString("access_token", access_token);
+                    editor.apply();
+                    openWelcomeSplash();
 
                 }else{
                     // TODO login fail
@@ -110,6 +119,11 @@ public class Login extends AppCompatActivity
             EMPLOY_ID = pin;
         }
     };
+
+    public void openWelcomeSplash() {
+        Intent intent = new Intent(this, WelcomeSplash.class);
+        startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -53,9 +53,11 @@ public class MainActivity extends AppCompatActivity
                     String auth_code = device.getString("auth_code");
                     JSONObject company = data.getJSONObject("company");
                     String company_name = company.getString("name");
+                    String splash = company.getString("splash");
+                    String splash_portrait = company.getString("splash_portrait");
+                    String highlight_colour = company.getString("highlight_colour");
                     JSONObject site = data.getJSONObject("site");
                     String site_name = site.getString("name");
-
                     JSONObject pair_credent = new JSONObject();
                     pair_credent.put("device_udid", udif);
                     pair_credent.put("auth_code", auth_code);
@@ -128,15 +130,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
-//
-//    public void openDashboardScreen() {
-//        Intent intent = new Intent(this, Dashboard.class);
-//        startActivity(intent);
-//    }
-//    public void openWelcomeSplash() {
-//        Intent intent = new Intent(this, WelcomeSplash.class);
-//        startActivity(intent);
-//    }
+
 
 
     @Override
