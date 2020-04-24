@@ -57,11 +57,15 @@ public class Login extends AppCompatActivity
             try {
                 status = (String) jsonObject.get("status");
                 if(status.equals("success")){
+                    Log.d("KAI", "status "+ status);
                     JSONObject data = jsonObject.getJSONObject("data");
-                    String first_name = data.getString("first_name");
-                    String last_name = data.getString("last_name");
-                    JSONObject device = jsonObject.getJSONObject("device");
-                    String access_token = data.getString("access_token");
+                    JSONObject device = data.getJSONObject("device");
+                    String access_token = device.getString("access_token");
+                    JSONObject user = data.getJSONObject("user");
+                    String first_name = user.getString("first_name");
+                    String last_name = user.getString("last_name");
+                    String profile_photo = user.getString("profile_photo");
+                    // TODO download profile_photo
                     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("first_name", first_name);
