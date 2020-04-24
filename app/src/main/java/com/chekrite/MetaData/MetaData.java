@@ -7,11 +7,9 @@
 package com.chekrite.MetaData;
 
 import android.Manifest;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -19,31 +17,35 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
 import com.chekrite.BuildConfig;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 
 import static android.content.Context.BATTERY_SERVICE;
 
-public class meta_data {
+public class MetaData {
+    // date of app build
     String app_build;
     String app_version;
-    String connection;
-    int device_battery_level;
+    String internet_capabilities;
+    double device_battery_level;
     double device_lat;
     double device_lng;
     int device_memory;
     String device_model;
-    String internet_capabilities;
+    String os_version;
+    JSONObject jObject = new JSONObject();
 
-
-    public meta_data(Context context) {
+    public MetaData(Context context) {
 
         String pattern = "yyyyMMdd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -52,14 +54,15 @@ public class meta_data {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
         if (info.getType() == ConnectivityManager.TYPE_WIFI)
-            connection = "Wi-Fi";
+            internet_capabilities = "wifi";
         else if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
-            connection = "Cellular";
+            internet_capabilities = "cellular";
         } else {
-            connection = "unknown";
+            internet_capabilities = "unknown";
         }
+
         BatteryManager bm = (BatteryManager) context.getSystemService(BATTERY_SERVICE);
-        device_battery_level = bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+        device_battery_level = (double) bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
 
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -77,6 +80,28 @@ public class meta_data {
         long totalBlocks = stat.getBlockCountLong();
         device_memory = (int)(blockSize*totalBlocks/ 1073741824.0);
         device_model = Build.MODEL;
-        //TODO internet_capabilities
+        os_version = Build.VERSION.RELEASE;
+
+        // create json file
+        try {
+            jObject.put("device_battery_level",  device_battery_level/100);
+            jObject.put("app_version", app_version);
+            jObject.put("app_build", app_build);
+            jObject.put("os","Android");
+            jObject.put("os_version", os_version);
+            jObject.put("device_model", device_model);
+            jObject.put("device_memory", device_memory);
+            jObject.put("internet_capabilities",internet_capabilities);
+            jObject.put("lat",device_lat);
+            jObject.put("lng",device_lng);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public JSONObject get(){
+
+        return jObject;
     }
 }

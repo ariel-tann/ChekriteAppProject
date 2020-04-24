@@ -36,6 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.chekrite.R;
+import com.chekrite.http_request.APIsTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,7 @@ public class Chekrite_PinView extends DialogFragment {
     private LinearLayout mLinearLayout;
     private List<EditText> mEditViews = new ArrayList<>();
     private AudioManager audioManager;
+    private PinListener mPinListener;
     /*
     * create button listener for image buttons
      */
@@ -121,8 +123,14 @@ public class Chekrite_PinView extends DialogFragment {
                     BackSpace();
                     break;
                 case R.id.pin_submit:
-                    //TODO Kai submit func
-                    mbtn_submit.playSoundEffect(0);
+                    String PIN = "";
+                    for (String tmp:CurrentPin) {
+                        PIN += tmp;
+                    }
+                    mPinListener.onSubmit(PIN);
+                    if(Type_PinView != EMPLOY_ID){
+                        dismiss();
+                    }
                     break;
                 case R.id.pin_cancel:
                     dismiss();
@@ -135,8 +143,9 @@ public class Chekrite_PinView extends DialogFragment {
     public Chekrite_PinView () {
     }
 
-    public Chekrite_PinView (int select) {
+    public Chekrite_PinView (int select, PinListener pinListener) {
         Type_PinView = select;
+        mPinListener = pinListener;
     }
 
     /*
@@ -174,7 +183,7 @@ public class Chekrite_PinView extends DialogFragment {
                 view.setText("");
             }
         }
-        if(CurrentCursor>0){
+        if(CurrentCursor == mPinWidth){
             if(Type_PinView == SETUP){
                 mbtn_submit.setTextColor(getActivity().getColor(R.color.white));
                 mbtn_submit.setBackground(getActivity().getDrawable(R.drawable.btn_lime_green));
@@ -182,10 +191,11 @@ public class Chekrite_PinView extends DialogFragment {
                 mbtn_submit.setTextColor(getActivity().getColor(R.color.white));
                 mbtn_submit.setBackground(getActivity().getDrawable(R.drawable.btn_blue));
             }
-
+            mbtn_submit.setEnabled(true);
         }else{
             mbtn_submit.setTextColor(getActivity().getColor(R.color.dark_gray));
             mbtn_submit.setBackground(getActivity().getDrawable(R.drawable.btn_gray));
+            mbtn_submit.setEnabled(false);
         }
     }
 
@@ -324,6 +334,7 @@ public class Chekrite_PinView extends DialogFragment {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
+        // save info when device is rotated
         super.onSaveInstanceState(outState);
         if(CurrentPin.size()>0) {
             String pin = "";

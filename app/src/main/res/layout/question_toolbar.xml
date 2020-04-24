@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.4.5
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/dark_blue"
+    app:popupTheme="@style/ToolbarStyle">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageButton
+            android:id="@+id/question_menu"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:src="@drawable/question_option"
+            android:scaleType="fitCenter"
+            />
+
+        <TextView
+            android:id="@+id/inspection_name"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@+id/question_menu"
+            android:layout_toStartOf="@+id/question_profile"
+            android:gravity="center"
+            android:text="Inspection Name"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/question_profile"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/avatar"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>
