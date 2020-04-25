@@ -115,14 +115,10 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             e.printStackTrace();
         }
     }
-
-
     private Boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
-
-
 }
