@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.MetaData;
+package com.chekrite.MetaData;
 
 import android.Manifest;
 import android.content.Context;
@@ -17,11 +17,16 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
-import com.chekrite_group44.BuildConfig;
+import com.chekrite.BuildConfig;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -66,11 +71,6 @@ public class MetaData {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // permission denied
-        }else{
-            Location location = locationManager.getLastKnownLocation("gps");
-            device_lat = location.getLatitude();
-            device_lng = location.getLongitude();
-
         }
         File path = Environment.getDataDirectory();
         StatFs stat = new StatFs(path.getPath());
@@ -98,8 +98,17 @@ public class MetaData {
         }
 
     }
+
+    public MetaData(double latitude, double longitude) {
+        device_lat=latitude;
+        device_lng=longitude;
+        System.out.println("Latitude and longityde  : "+device_lng+","+device_lat);
+    }
+
     public JSONObject get(){
 
         return jObject;
     }
+
+
 }
