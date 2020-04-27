@@ -11,7 +11,7 @@
         device to the ChekRite Server</string>
     <string name="btn_pin_enter">Enter</string>
     <string name="btn_pin_pair">Pair to Server</string>
-    <string name="pin_title_singin">Sing In</string>
+    <string name="pin_title_singin">Sign In</string>
     <string name="pin_title_setup">ChekRite Setup</string>
     <string name="dashboard_title">Dashboard</string>
     <string name="log_out">Log out</string>
