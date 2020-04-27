@@ -10,23 +10,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.chekrite.MetaData.MetaData;
 import com.chekrite.PinView.Chekrite_PinView;
 import com.chekrite.PinView.PinListener;
-import com.chekrite.dashBoard.Dashboard;
-import com.chekrite.dashBoard.WelcomeSplash;
 import com.chekrite.http_request.APIsListener;
 import com.chekrite.http_request.APIsTask;
 import com.chekrite.permission.Permission;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
 
@@ -72,6 +67,8 @@ public class MainActivity extends AppCompatActivity
                         e.printStackTrace();
                     }
                     //TODO go to setup_progress xml and download image
+
+
                     openLoginScreen();
                 }else{
                     // TODO pair fail
