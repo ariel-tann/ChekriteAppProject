@@ -23,7 +23,7 @@ public class Setup_Progress extends AsyncTask<String, String, Bitmap> {
     InputStream is = null;
     Bitmap bmImg = null;
     public Setup_Progress(String... urls) {
-        
+
     }
 
     @Override
