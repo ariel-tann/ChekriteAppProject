@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.chekrite">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -18,39 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".signIn.Test"
-            android:label="@string/title_activity_test"
-            android:theme="@style/NoActionBar"  >
+        <activity android:name=".Login"></activity>
+        <activity android:name=".dashBoard.WelcomeSplash" />
+        <activity android:name=".dashBoard.Dashboard" /> <!-- add intent filters -->
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name=".userLogin.UserLogin">
-
-        </activity>
-        <!--
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name=".ui.login.SignIn"
-            android:label="@string/title_activity_sign_in" />
-        -->
-        <!--
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
-        <activity android:name=".Login" />
-        -->
-        <activity android:name=".userLogin.WelcomeSplash" />
-        <activity android:name=".dashBoard.Dashboard">
-</activity>
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
