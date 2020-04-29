@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite.PinView;
+package com.chekrite_group44.PinView;
 
 public interface PinListener {
     public void onSubmit(String pin);

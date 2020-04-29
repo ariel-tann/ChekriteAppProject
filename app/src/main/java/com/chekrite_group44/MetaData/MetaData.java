@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite.MetaData;
+package com.chekrite_group44.MetaData;
 
 import android.Manifest;
 import android.content.Context;
@@ -17,13 +17,11 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
-import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
-import com.chekrite.BuildConfig;
+import com.chekrite_group44.BuildConfig;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

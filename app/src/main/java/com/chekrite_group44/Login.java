@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite;
+package com.chekrite_group44;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,24 +17,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.chekrite.PinView.Chekrite_PinView;
-import com.chekrite.PinView.PinListener;
-import com.chekrite.dashBoard.WelcomeSplash;
-import com.chekrite.http_request.APIsListener;
-import com.chekrite.http_request.APIsTask;
-import com.chekrite.permission.Permission;
+import com.chekrite_group44.PinView.Chekrite_PinView;
+import com.chekrite_group44.PinView.PinListener;
+import com.chekrite_group44.dashBoard.WelcomeSplash;
+import com.chekrite_group44.http_request.APIsListener;
+import com.chekrite_group44.http_request.APIsTask;
+import com.chekrite_group44.permission.Permission;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;

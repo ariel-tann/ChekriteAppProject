@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite.dashBoard;
+package com.chekrite_group44.dashBoard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,8 +13,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.chekrite.R;
-import com.chekrite.select_asset_screen.Select_asset_screen;
+import com.chekrite_group44.R;
+import com.chekrite_group44.select_asset_screen.Select_asset_screen;
 
 public class Dashboard extends AppCompatActivity {
     private Button button;

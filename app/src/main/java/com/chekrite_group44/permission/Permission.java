@@ -5,17 +5,12 @@
  * This class to ask the user for permission to camera and recording.
  */
 
-package com.chekrite.permission;
+package com.chekrite_group44.permission;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.chekrite.R;
-
-import java.util.List;
+import com.chekrite_group44.R;
 
 import pub.devrel.easypermissions.EasyPermissions;
 import pub.devrel.easypermissions.PermissionRequest;

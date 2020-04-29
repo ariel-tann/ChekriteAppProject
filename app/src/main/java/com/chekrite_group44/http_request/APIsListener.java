@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite.http_request;
+package com.chekrite_group44.http_request;
 
 import org.json.JSONObject;
 

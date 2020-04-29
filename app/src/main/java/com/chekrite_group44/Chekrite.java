@@ -16,7 +16,7 @@
  * Summary:
  */
 
-package com.chekrite;
+package com.chekrite_group44;
 
 import android.app.Application;
 

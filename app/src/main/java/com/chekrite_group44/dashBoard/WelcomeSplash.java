@@ -16,7 +16,7 @@
  * Summary:
  */
 
-package com.chekrite.dashBoard;
+package com.chekrite_group44.dashBoard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,7 +24,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.chekrite.R;
+import com.chekrite_group44.R;
 
 public class WelcomeSplash extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;

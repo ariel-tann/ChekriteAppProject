@@ -1,4 +1,4 @@
-package com.chekrite;
+package com.chekrite_group44;
 
 import android.content.Context;
 

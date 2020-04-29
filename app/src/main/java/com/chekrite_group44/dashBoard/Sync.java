@@ -16,7 +16,7 @@
  * Summary:
  */
 
-package com.chekrite.dashBoard;
+package com.chekrite_group44.dashBoard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,7 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.chekrite.R;
+import com.chekrite_group44.R;
 
 public class Sync extends Fragment {
 

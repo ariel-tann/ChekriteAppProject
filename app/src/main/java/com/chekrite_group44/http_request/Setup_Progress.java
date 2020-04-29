@@ -4,19 +4,16 @@
  * Summary:
  */
 
-package com.chekrite.http_request;
+package com.chekrite_group44.http_request;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
-import androidx.fragment.app.DialogFragment;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
 public class Setup_Progress extends AsyncTask<String, String, Bitmap> {
     URL ImageUrl = null;

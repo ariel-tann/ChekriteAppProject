@@ -1,11 +1,11 @@
-package com.chekrite.select_asset_screen;
+package com.chekrite_group44.select_asset_screen;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chekrite.R;
+import com.chekrite_group44.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
