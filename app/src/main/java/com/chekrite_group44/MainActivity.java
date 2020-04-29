@@ -6,47 +6,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.chekrite.MetaData.MetaData;
 import com.chekrite.PinView.Chekrite_PinView;
 import com.chekrite.PinView.PinListener;
-import com.chekrite.dashBoard.Dashboard;
-import com.chekrite.dashBoard.WelcomeSplash;
 import com.chekrite.http_request.APIsListener;
 import com.chekrite.http_request.APIsTask;
 import com.chekrite.permission.Permission;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
-import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
-
-public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
+public class MainActivity extends AppCompatActivity
+        implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
     private Permission mPermission;
     private Button mBtnSubmit;
     private static final String FILE_NAME = "pair.txt";
@@ -64,11 +46,13 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                     String auth_code = device.getString("auth_code");
                     JSONObject company = data.getJSONObject("company");
                     String company_name = company.getString("name");
+                    String splash = company.getString("splash");
+                    String splash_portrait = company.getString("splash_portrait");
+                    String highlight_colour = company.getString("highlight_colour");
                     JSONObject site = data.getJSONObject("site");
                     String site_name = site.getString("name");
-
                     JSONObject pair_credent = new JSONObject();
-                    pair_credent.put("udif", udif);
+                    pair_credent.put("device_udid", udif);
                     pair_credent.put("auth_code", auth_code);
                     pair_credent.put("company", company_name);
                     pair_credent.put("site", site_name);
@@ -80,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    //TODO go to setup_progress xml and download image
+
                     openLoginScreen();
                 }else{
                     // TODO pair fail
@@ -95,19 +81,17 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     private PinListener mPinListen = new PinListener() {
         @Override
         public void onSubmit(String pin) {
-            JSONObject jsonObject;
-            getLocation();
-            try{
-             MetaData metaData = new MetaData(getApplicationContext());
-            // Pair Device
-            jsonObject= metaData.get();
-            jsonObject.put("pairing_code", pin);
 
-//          Log.d("KAI", jsonObject.toString());
-            new APIsTask(apIsListener).execute("POST","pair",jsonObject.toString());
+            MetaData metaData = new MetaData(getApplicationContext());
+            // Pair Device
+            JSONObject jsonObject= metaData.get();
+            try {
+                jsonObject.put("pairing_code", pin);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+//            Log.d("KAI", jsonObject.toString());
+            new APIsTask(apIsListener).execute("POST","pair",jsonObject.toString());
         }
     };
 
@@ -140,15 +124,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
-//
-//    public void openDashboardScreen() {
-//        Intent intent = new Intent(this, Dashboard.class);
-//        startActivity(intent);
-//    }
-//    public void openWelcomeSplash() {
-//        Intent intent = new Intent(this, WelcomeSplash.class);
-//        startActivity(intent);
-//    }
+
 
 
     @Override
@@ -176,66 +152,5 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     @Override
     public void onRationaleDenied(int requestCode) {
 
-    }
-
-    public void getLocation()
-    {
-        long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
-        long FASTEST_INTERVAL = 2000; /* 2 sec */
-        LocationRequest mLocationRequest =new LocationRequest();
-        FusedLocationProviderClient fusedLocationProviderClient= getFusedLocationProviderClient(this);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(UPDATE_INTERVAL);
-        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-        builder.addLocationRequest(mLocationRequest);
-        LocationSettingsRequest locationSettingsRequest = builder.build();
-
-        // Check whether location settings are satisfied
-        // https://developers.google.com/android/reference/com/google/android/gms/location/SettingsClient
-        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
-        settingsClient.checkLocationSettings(locationSettingsRequest);
-
-        // new Google API SDK v11 uses getFusedLocationProviderClient(this)
-       fusedLocationProviderClient.requestLocationUpdates(mLocationRequest, new LocationCallback() {
-                    @Override
-                    public void onLocationResult(LocationResult locationResult) {
-                        // do work here
-                        onLocationChanged(locationResult.getLastLocation());
-                    }
-                },
-                Looper.myLooper());
-
-
-    }
-    public void onLocationChanged(Location location) {
-        double latitude=location.getLatitude();
-        double longitude=location.getLongitude();
-        MetaData metaData=new MetaData(latitude,longitude);
-
-        getLastLocation();
-
-    }
-    public void getLastLocation() {
-        // Get last known recent location using new Google Play Services SDK (v11+)
-        FusedLocationProviderClient locationClient = getFusedLocationProviderClient(this);
-
-        locationClient.getLastLocation()
-                .addOnSuccessListener(new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // GPS location can be null if GPS is switched off
-                        if (location != null) {
-                            onLocationChanged(location);
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("MapDemoActivity", "Error trying to get last GPS location");
-                        e.printStackTrace();
-                    }
-                });
     }
 }
