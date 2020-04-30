@@ -1,4 +1,4 @@
-package com.chekrite.SelectAssetScreen;
+package com.chekrite_group44.SelectAssetScreen;
 
 import android.content.Context;
 

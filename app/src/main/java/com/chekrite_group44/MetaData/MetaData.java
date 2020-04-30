@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite.MetaData;
+package com.chekrite_group44.MetaData;
 
 import android.Manifest;
 import android.content.Context;
@@ -22,9 +22,9 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
-import com.chekrite.BuildConfig;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
+import com.chekrite_group44.BuildConfig;
+//import com.google.android.gms.location.FusedLocationProviderClient;
+//import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONArray;
 import org.json.JSONException;

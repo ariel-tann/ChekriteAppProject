@@ -15,15 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.chekrite_group44.R;
-import com.chekrite_group44.select_asset_screen.Select_asset_screen;
-
-public class Dashboard extends AppCompatActivity {
-    private Button button;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
-import com.chekrite.SelectAssetScreen.SelectAssetScreen;
-import com.chekrite.SelectAssetScreen.SelectAssetScreenFragment;
+import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
+
 
 public class Dashboard extends AppCompatActivity {
     private Button logout_button;
@@ -32,8 +27,6 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-<<<<<<< Updated upstream:app/src/main/java/com/chekrite_group44/dashBoard/Dashboard.java
-=======
         logout_button=findViewById(R.id.logout_button);
         check_button=findViewById(R.id.newCheck);
         check_button.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +41,6 @@ public class Dashboard extends AppCompatActivity {
                 logout();
             }
         });
->>>>>>> Stashed changes:app/src/main/java/com/chekrite/dashBoard/Dashboard.java
 
 
     }
@@ -56,9 +48,10 @@ public class Dashboard extends AppCompatActivity {
         Log.d("startcheck","Inside start check");
         Intent intent = new Intent(this, SelectAssetScreen.class);
         startActivity(intent);
-//        SelectAssetScreenFragment selectAssetScreenFragment =new SelectAssetScreenFragment();
-//        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout_selectassetscreen, selectAssetScreenFragment).commit();
 
-
+    }
+    public void logout(){
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 }

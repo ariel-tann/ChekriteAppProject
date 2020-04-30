@@ -1,4 +1,4 @@
-package com.chekrite.SelectAssetScreen;
+package com.chekrite_group44.SelectAssetScreen;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.chekrite.R;
+import com.chekrite_group44.R;
 
 import org.w3c.dom.Text;
 
