@@ -20,10 +20,14 @@
         <activity android:name="com.chekrite_group44.Login"></activity>
         <activity android:name="com.chekrite_group44.dashBoard.WelcomeSplash" />
         <activity android:name="com.chekrite_group44.dashBoard.Dashboard" /> <!-- add intent filters -->
-        <activity android:name="com.chekrite_group44.MainActivity">
+        <activity android:name="com.chekrite_group44.Ma">
+        <activity android:name=".Login"></activity>
+        <activity android:name=".dashBoard.WelcomeSplash" />
+        <activity android:name=".dashBoard.Dashboard" /> <!-- add intent filters -->
+        <activity android:name=".SelectAssetScreen.SelectAssetScreen"/>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

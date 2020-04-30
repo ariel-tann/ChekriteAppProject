@@ -48,6 +48,7 @@ public class Login extends AppCompatActivity
     private APIsListener apIsListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
+            Log.d("Json object value ","Value : "+jsonObject);
             String status = null;
             try {
                 status = (String) jsonObject.get("status");
@@ -60,14 +61,13 @@ public class Login extends AppCompatActivity
                     String first_name = user.getString("first_name");
                     String last_name = user.getString("last_name");
                     String profile_photo = user.getString("profile_photo");
-                    // TODO download profile_photo
                     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("first_name", first_name);
                     editor.putString("last_name", last_name);
                     editor.putString("access_token", access_token);
                     editor.apply();
-                    openWelcomeSplash();
+                    openWelcomeSplash(profile_photo,first_name,last_name);
 
                 }else{
                     // TODO login fail
@@ -119,8 +119,11 @@ public class Login extends AppCompatActivity
         }
     };
 
-    public void openWelcomeSplash() {
+    public void openWelcomeSplash(String profile_photo,String first_name,String last_name) {
         Intent intent = new Intent(this, WelcomeSplash.class);
+        intent.putExtra("profile_photo",profile_photo);
+        intent.putExtra("first_name",first_name);
+        intent.putExtra("last_name",last_name);
         startActivity(intent);
     }
     @Override
