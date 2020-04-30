@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.4.29
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/menu_toolbar"
+        layout="@layout/menu_toolbar"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="147dp"
+        android:layout_above="@+id/Slider_dots"
+        android:layout_alignParentStart="true"
+
+        >
+        <ImageView
+            android:id="@+id/asset_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avatar"
+            app:srcCompat="@drawable/btn_background" />
+        <TextView
+            android:id="@+id/asset_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/checklist_category"
+
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:text="Checklist Category"
+            android:textSize="18sp" />
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/Slider_dots"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_above="@+id/checklist_title"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:id="@+id/checklist_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/checklist_category"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/darker_gray"
+        android:text="Checklist Category"
+        android:textSize="18sp" />
+    <ListView
+        android:id="@+id/checklist_category"
+        android:layout_width="match_parent"
+        android:layout_height="471dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+
+
+        />
+
+
+
+
+</RelativeLayout>
