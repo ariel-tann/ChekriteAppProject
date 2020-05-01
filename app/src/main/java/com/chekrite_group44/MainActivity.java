@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.chekrite_group44.MetaData.MetaData;
 import com.chekrite_group44.PinView.Chekrite_PinView;
 import com.chekrite_group44.PinView.PinListener;
+import com.chekrite_group44.http_request.APIs;
 import com.chekrite_group44.http_request.APIsListener;
 import com.chekrite_group44.http_request.APIsTask;
 import com.chekrite_group44.permission.Permission;
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
 //            Log.d("KAI", jsonObject.toString());
-            new APIsTask(apIsListener, getApplicationContext()).execute("POST","pair",jsonObject.toString());
+            new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.PAIR,jsonObject.toString());
         }
     };
 

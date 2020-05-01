@@ -27,11 +27,20 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 // Defines the background task to download and then load the image within the ImageView
 public class APIsTask extends AsyncTask<String, Void, String> {
     APIsListener mAPIsListener;
     Context mContext;
+
     public APIsTask(APIsListener apIsListener, Context context) {
+
         mAPIsListener = apIsListener;
         mContext = context;
     }
@@ -42,28 +51,45 @@ public class APIsTask extends AsyncTask<String, Void, String> {
         // params[1]: api
         // params[2]: body
         URL url = null;
-        String chekriteLink = "https://apitest.mychekrite.com/api/" + params[1];
+        String chekriteLink = "https://apitest.mychekrite.com/api/";
+        // Define API link
+        switch (params[1]){
+            case APIs.PAIR:
+                chekriteLink = chekriteLink + "pair";
+                break;
+            case APIs.LOGIN:
+                chekriteLink = chekriteLink + "login";
+                break;
+            case APIs.LOGOUT:
+                chekriteLink = chekriteLink + "logout";
+                break;
+            case APIs.APP_VERSION:
+                chekriteLink = chekriteLink + "app_version";
+                break;
+        }
+
         InputStream in = null;
         try {
-            Log.d("KAI", "URL: "+ chekriteLink);
+            Log.d("KAI", params[0]+" URL: "+ chekriteLink);
             url = new URL(chekriteLink);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod(params[0]);
+
 //          Add token, if it exists in share pref
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
             String token = pref.getString("access_token", "");
 //            Add token in Header
-            if(token.length()>0){
-                Log.d("KAI", "Get token");
+//            LOGIN and PAIR don't require token
+            if(token.length()>0 && params[1]!=APIs.LOGIN && params[1]!=APIs.PAIR){
                 connection.setRequestProperty("Authorization", "Bearer "+token);
+                Log.d("KAI","Token: "+token);
             }
-
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Host", "apitest.mychekrite.com");
-            connection.setRequestProperty("Connection", "application/json");
+            connection.setRequestProperty("Connection", "Keep-Alive");
             connection.setRequestProperty("Accept-Encoding", "gzip");
             connection.setDoOutput(true);
+            connection.setRequestMethod(params[0]);
+
             if (params[2].length() > 0) {
                 // only write body, when params[2] has value
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
@@ -71,6 +97,8 @@ public class APIsTask extends AsyncTask<String, Void, String> {
                 writer.write(JsonToString(params[2]));
                 connection.connect();
                 writer.close();
+            }else{
+                connection.connect();
             }
             // Response from Server
             Log.d("KAI", "Response: "+connection.getResponseMessage() + "");
@@ -92,18 +120,16 @@ public class APIsTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String response) {
         //Action after Execute
-        Log.d("KAI", "response: \n"+response);
-        try {
-            mAPIsListener.API_Completed(new JSONObject(response));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (response!=null) {
+            Log.d("KAI", "response: \n" + response);
+            try {
+                mAPIsListener.API_Completed(new JSONObject(response));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else{
+            Log.d("KAI", "Error: JSONObject null");
         }
-    }
-    private Boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
     private String JsonToString(String json) throws JSONException {

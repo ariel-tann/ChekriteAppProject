@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
+import com.chekrite_group44.http_request.APIs;
 import com.chekrite_group44.http_request.APIsListener;
 import com.chekrite_group44.http_request.APIsTask;
 
@@ -76,7 +77,7 @@ public class Dashboard extends AppCompatActivity {
 
     }
     public void logout(){
-        new APIsTask(apIsListener, getApplicationContext()).execute("POST","logout","");
+        new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.LOGOUT,"");
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
