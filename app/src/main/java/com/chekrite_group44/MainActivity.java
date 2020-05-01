@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
 //            Log.d("KAI", jsonObject.toString());
-            new APIsTask(apIsListener).execute("POST","pair",jsonObject.toString());
+            new APIsTask(apIsListener, getApplicationContext()).execute("POST","pair",jsonObject.toString());
         }
     };
 

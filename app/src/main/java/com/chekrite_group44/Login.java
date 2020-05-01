@@ -99,7 +99,7 @@ public class Login extends AppCompatActivity
                 jsonObject.put("badge_no", EMPLOY_ID);
                 jsonObject.put("pin", EMPLOY_PIN);
 
-                new APIsTask(apIsListener).execute("POST", "login", jsonObject.toString());
+                new APIsTask(apIsListener, getApplicationContext()).execute("POST", "login", jsonObject.toString());
 
             } catch (IOException e) {
                 e.printStackTrace();

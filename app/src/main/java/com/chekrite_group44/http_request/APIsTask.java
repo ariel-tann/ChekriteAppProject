@@ -6,10 +6,13 @@
 
 package com.chekrite_group44.http_request;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -27,8 +30,10 @@ import java.net.URL;
 // Defines the background task to download and then load the image within the ImageView
 public class APIsTask extends AsyncTask<String, Void, String> {
     APIsListener mAPIsListener;
-    public APIsTask(APIsListener apIsListener) {
+    Context mContext;
+    public APIsTask(APIsListener apIsListener, Context context) {
         mAPIsListener = apIsListener;
+        mContext = context;
     }
 
     @Override
@@ -43,17 +48,31 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             Log.d("KAI", "URL: "+ chekriteLink);
             url = new URL(chekriteLink);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
             connection.setRequestMethod(params[0]);
+//          Add token, if it exists in share pref
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+            String token = pref.getString("access_token", "");
+//            Add token in Header
+            if(token.length()>0){
+                Log.d("KAI", "Get token");
+                connection.setRequestProperty("Authorization", "Bearer "+token);
+            }
+
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Accept", "*/*");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Host", "apitest.mychekrite.com");
+            connection.setRequestProperty("Connection", "application/json");
+            connection.setRequestProperty("Accept-Encoding", "gzip");
             connection.setDoOutput(true);
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
-            Log.d("KAI","Body: \n"+ params[2]);
-            writer.write(JsonToString(params[2]));
-            connection.connect();
-            writer.close();
-            // Response: 400
+            if (params[2].length() > 0) {
+                // only write body, when params[2] has value
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
+                Log.d("KAI", "Body: \n" + params[2]);
+                writer.write(JsonToString(params[2]));
+                connection.connect();
+                writer.close();
+            }
+            // Response from Server
             Log.d("KAI", "Response: "+connection.getResponseMessage() + "");
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));

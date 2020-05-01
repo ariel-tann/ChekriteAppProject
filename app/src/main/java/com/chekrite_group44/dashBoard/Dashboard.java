@@ -8,6 +8,7 @@ package com.chekrite_group44.dashBoard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,11 +19,36 @@ import android.widget.ImageView;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
+import com.chekrite_group44.http_request.APIsListener;
+import com.chekrite_group44.http_request.APIsTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileOutputStream;
 
 
 public class Dashboard extends AppCompatActivity {
     private Button logout_button;
     ImageView check_button;
+    APIsListener apIsListener = new APIsListener() {
+        @Override
+        public void API_Completed(JSONObject jsonObject) {
+            try {
+                String status = (String) jsonObject.get("status");
+                if(status.equals("success")){
+                    Log.d("KAI", "Logout success");
+
+                }else{
+                    // TODO logout fail
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +68,6 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-
     }
     public void startNewcheck(View view){
         Log.d("startcheck","Inside start check");
@@ -51,6 +76,7 @@ public class Dashboard extends AppCompatActivity {
 
     }
     public void logout(){
+        new APIsTask(apIsListener, getApplicationContext()).execute("POST","logout","");
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
