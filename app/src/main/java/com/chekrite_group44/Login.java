@@ -20,6 +20,7 @@ import android.widget.Button;
 import com.chekrite_group44.PinView.Chekrite_PinView;
 import com.chekrite_group44.PinView.PinListener;
 import com.chekrite_group44.dashBoard.WelcomeSplash;
+import com.chekrite_group44.http_request.APIs;
 import com.chekrite_group44.http_request.APIsListener;
 import com.chekrite_group44.http_request.APIsTask;
 import com.chekrite_group44.permission.Permission;
@@ -45,10 +46,36 @@ public class Login extends AppCompatActivity
     Chekrite_PinView mEIDPinView;
 
     private static final String FILE_NAME = "pair.txt";
+    private APIsListener APIApp_version = new APIsListener() {
+        @Override
+        public void API_Completed(JSONObject jsonObject) {
+            String status = null;
+            try {
+                if(jsonObject!=null) {
+                    status = (String) jsonObject.get("status");
+                    if (status.equals("success")) {
+                        Log.d("KAI", "status " + status);
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        String app_version = data.getString("app_version");
+                        Log.d("KAI", "app_version: " + app_version);
+
+                    } else {
+                        // TODO get app_version fail
+                    }
+                }
+                else{
+                    Log.d("KAI", "Error: JSONObject null");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+
     private APIsListener apIsListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
-            Log.d("Json object value ","Value : "+jsonObject);
             String status = null;
             try {
                 status = (String) jsonObject.get("status");
@@ -67,6 +94,8 @@ public class Login extends AppCompatActivity
                     editor.putString("last_name", last_name);
                     editor.putString("access_token", access_token);
                     editor.apply();
+//                    get app_version
+                    new APIsTask(APIApp_version, getApplicationContext()).execute("GET", APIs.APP_VERSION, "");
                     openWelcomeSplash(profile_photo,first_name,last_name);
 
                 }else{
@@ -99,7 +128,7 @@ public class Login extends AppCompatActivity
                 jsonObject.put("badge_no", EMPLOY_ID);
                 jsonObject.put("pin", EMPLOY_PIN);
 
-                new APIsTask(apIsListener).execute("POST", "login", jsonObject.toString());
+                new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.LOGIN, jsonObject.toString());
 
             } catch (IOException e) {
                 e.printStackTrace();

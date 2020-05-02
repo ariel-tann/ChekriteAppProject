@@ -8,6 +8,7 @@ package com.chekrite_group44.dashBoard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,27 +16,44 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
+import com.chekrite_group44.http_request.APIs;
+import com.chekrite_group44.http_request.APIsListener;
+import com.chekrite_group44.http_request.APIsTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileOutputStream;
 
 
 public class Dashboard extends AppCompatActivity {
     private Button logout_button;
     ImageView check_button;
-    ImageView profile_button_photo;
-    String photo_url;
+    APIsListener apIsListener = new APIsListener() {
+        @Override
+        public void API_Completed(JSONObject jsonObject) {
+            try {
+                String status = (String) jsonObject.get("status");
+                if(status.equals("success")){
+                    Log.d("KAI", "Logout success");
+
+                }else{
+                    // TODO logout fail
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
-        photo_url=getIntent().getStringExtra("profile_image");
-        profile_button_photo = findViewById(R.id.btn_profile);
-        //btn_profile
-        Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_button_photo);
         logout_button=findViewById(R.id.logout_button);
         check_button=findViewById(R.id.newCheck);
         check_button.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +69,6 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-
     }
     public void startNewcheck(View view){
         Log.d("startcheck","Inside start check");
@@ -60,6 +77,7 @@ public class Dashboard extends AppCompatActivity {
 
     }
     public void logout(){
+        new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.LOGOUT,"");
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }

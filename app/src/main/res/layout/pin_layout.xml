@@ -159,21 +159,20 @@
             android:layout_toEndOf="@+id/digit_0"/>
 
         <Button
-        android:id="@+id/pin_submit"
-        android:layout_width="240dp"
-        android:layout_height="70dp"
-        android:layout_below="@id/digit_0"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="85dp"
-        android:background="@drawable/btn_gray"
-        android:gravity="center"
-        android:text="@string/btn_pin_enter"
-        android:textAllCaps="false"
-        android:textColor="@color/dark_gray"
-        android:textSize="30dp"
-        android:textStyle="bold" />
+            android:id="@+id/pin_submit"
+            android:layout_width="240dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/digit_0"
+            android:layout_gravity="center"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/btn_gray"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/btn_pin_enter"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_gray"
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </ScrollView>
