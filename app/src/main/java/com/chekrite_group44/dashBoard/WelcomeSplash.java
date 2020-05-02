@@ -34,7 +34,7 @@ public class WelcomeSplash extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
     ImageView profile_photo;
     TextView username;
-    String photo_url,first_name,last_name;
+    String photo_url,first_name,last_name, employee_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class WelcomeSplash extends AppCompatActivity {
             public void run() {
 
                 Intent dashboardIntent = new Intent(WelcomeSplash.this, Dashboard.class);
+                dashboardIntent.putExtra("profile_image", photo_url);
                 startActivity(dashboardIntent);
                 finish();
 

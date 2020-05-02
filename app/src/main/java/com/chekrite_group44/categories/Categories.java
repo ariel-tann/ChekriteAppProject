@@ -6,29 +6,19 @@
 
 package com.chekrite_group44.categories;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toolbar;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.chekrite_group44.R;
 
-import java.util.ArrayList;
-
-public class Categories extends Fragment {
+public class Categories extends AppCompatActivity {
     Toolbar toolbar;
     ViewPager viewPager;
     LinearLayout sliderDotview;
@@ -37,18 +27,13 @@ public class Categories extends Fragment {
 
     ListView listView;
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.categories, container, false);
-        return view;
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.categories);
 
-    }
-
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-   //     toolbar = (Toolbar) view.findViewById();
-        viewPager = (ViewPager) view.findViewById(R.id.slider);
-        sliderDotview = (LinearLayout) view.findViewById(R.id.Slider_dots);
+        toolbar = (Toolbar) findViewById(R.id.categories_toolbar);
+        viewPager = (ViewPager) findViewById(R.id.slider);
+        sliderDotview = (LinearLayout) findViewById(R.id.Slider_dots);
   //      ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
    /*
         dots = new ImageView[dotscount];
@@ -57,25 +42,38 @@ public class Categories extends Fragment {
           dots[i].setImageDrawable(ContextCompat.getDrawable(get), R.drawable.noactive_dot);
         }
 */
-        listView = (ListView) view.findViewById(R.id.checklist_category);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView = (ListView) findViewById(R.id.checklist_category);
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(Categories.this, R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.categories_items));  //for UI test
+        // TODO: get the selected Asset's ID
+        //TODO: get array of categories from {assetId}/Checklist
+
+
+
+            //go to
+            /*
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // go to next fragement : checklist
+             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Intent intent = new Intent(Categories.this, Checklist.class);
+                Intent.putExtra("ChecklistCategory", listView.getItemAtPosition(position).toString());
+                startActivity(intent);
                 //test new activity
             }
         });
+            * **/
+
+
+        listView.setAdapter(listAdapter);
 /***
+ * list of categories type
         ArrayList<String> arrayList =new ArrayList<>();
         arrayList.add("checklist 1");
         arrayList.add("checklist 2");
         arrayList.add("checklist 3");
  **/
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(view.getContext(),
-                R.layout.simple_list_item_1,
-                getResources().getStringArray(R.array.categories_items));
-        listView.setAdapter(arrayAdapter);
+
 
     }
 /**
