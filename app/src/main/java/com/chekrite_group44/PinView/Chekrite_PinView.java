@@ -180,7 +180,7 @@ public class Chekrite_PinView extends DialogFragment {
                 view.setText("");
             }
         }
-        if(CurrentCursor == mPinWidth){
+        if(CurrentCursor > 1){
             if(Type_PinView == SETUP){
                 mbtn_submit.setTextColor(getActivity().getColor(R.color.white));
                 mbtn_submit.setBackground(getActivity().getDrawable(R.drawable.btn_lime_green));

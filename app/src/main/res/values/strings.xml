@@ -43,4 +43,13 @@
     <string name="title_activity_user_login">UserLogin</string>
     <string name="title_activity_test">Test</string>
     <string name="title_activity_user_sign_in">UserSignIn</string>
+
+    <!-- Strings for listview-->
+    <string name="list_name"> Checklists Categories </string>
+    <string-array name="categories_items">
+        <item>Test</item>
+        <item>Health and Safety</item>
+        <item>Inspection</item>
+    </string-array>
+
 </resources>

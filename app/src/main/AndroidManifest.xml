@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name="com.chekrite_group44.Chekrite"
+        android:name=".Chekrite"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launch"
         android:label="@string/app_name"
@@ -19,16 +19,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.chekrite_group44.Login"></activity>
-        <activity android:name="com.chekrite_group44.dashBoard.WelcomeSplash" />
-        <activity android:name="com.chekrite_group44.dashBoard.Dashboard" /> <!-- add intent filters -->
-         <!-- add intent filters -->
-        <activity android:name=".SelectAssetScreen.SelectAssetScreen"/>
+        <activity android:name=".Login" />
+        <activity android:name=".dashBoard.WelcomeSplash" />
+        <activity android:name=".dashBoard.Dashboard" />
+        <activity android:name=".SelectAssetScreen.SelectAssetScreen" />
+        <activity android:name=".categories.Categories">
+
+        </activity>
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

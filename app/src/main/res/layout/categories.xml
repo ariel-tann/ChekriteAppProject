@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.4.29
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!-- for later
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="147dp"
+            android:layout_above="@+id/Slider_dots"
+            android:layout_alignParentStart="true"
+
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp">
+
+
+
+    </androidx.viewpager.widget.ViewPager>
+    -->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/categories_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/background_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ToolbarStyle">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp">
+
+            <Button
+                android:id="@+id/pin_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:text="Back"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/screen_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/screen_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Categories"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/logout_img_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/logout_img_btn"
+                style="@android:style/Widget.ImageButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn_background_small"
+                android:scaleType="fitCenter"
+                android:src="@drawable/avatar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="411dp"
+        android:layout_height="134dp"
+        android:layout_below="@+id/categories_toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categories_toolbar">
+
+
+        <ImageView
+
+            android:id="@+id/asset_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avatar"
+            app:srcCompat="@drawable/btn_background" />
+
+        <TextView
+            android:id="@+id/asset_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@id/asset_image"
+
+            android:padding="10dp"
+            android:text="Asset Number"
+            android:textAllCaps="true"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/asset_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/asset_number"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@id/asset_image"
+            android:padding="10dp"
+            android:text="Checklist Information"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/Slider_dots"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_above="@+id/checklist_title"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        tools:layout_editor_absoluteX="3dp" />
+
+    <TextView
+        android:id="@+id/checklist_category_title"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_above="@+id/checklist_category"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/light_gray"
+        android:paddingVertical="5dp"
+        android:paddingLeft="10dp"
+        android:text="Checklist Category"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Slider_dots" />
+
+    <ListView
+        android:id="@+id/checklist_category"
+        android:layout_width="match_parent"
+        android:layout_height="468dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checklist_category_title" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
