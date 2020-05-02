@@ -40,7 +40,8 @@ public class APIsTask extends AsyncTask<String, Void, String> {
     Context mContext;
 
     public APIsTask(APIsListener apIsListener, Context context) {
-
+        // APIsListener: When API gets response from DB, it will notify user
+        // context: used for getting share preference
         mAPIsListener = apIsListener;
         mContext = context;
     }
@@ -68,7 +69,6 @@ public class APIsTask extends AsyncTask<String, Void, String> {
                 break;
         }
 
-        InputStream in = null;
         try {
             Log.d("KAI", params[0]+" URL: "+ chekriteLink);
             url = new URL(chekriteLink);
@@ -87,9 +87,13 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             connection.setRequestProperty("Host", "apitest.mychekrite.com");
             connection.setRequestProperty("Connection", "Keep-Alive");
             connection.setRequestProperty("Accept-Encoding", "gzip");
-            connection.setDoOutput(true);
             connection.setRequestMethod(params[0]);
 
+            //only POST needs
+            if (params[0] == "POST"){
+                connection.setDoOutput(true);
+            }
+            // Write body
             if (params[2].length() > 0) {
                 // only write body, when params[2] has value
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
@@ -101,6 +105,8 @@ public class APIsTask extends AsyncTask<String, Void, String> {
                 connection.connect();
             }
             // Response from Server
+
+
             Log.d("KAI", "Response: "+connection.getResponseMessage() + "");
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
