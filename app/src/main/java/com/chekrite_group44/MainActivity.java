@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity
     private Permission mPermission;
     private Button mBtnSubmit;
     private static final String FILE_NAME = "pair.txt";
+    private static final String SHARED_PREFS = "sharedPrefs";
+
 
     private APIsListener apIsListener = new APIsListener() {
         @Override
@@ -52,11 +56,18 @@ public class MainActivity extends AppCompatActivity
                     String highlight_colour = company.getString("highlight_colour");
                     JSONObject site = data.getJSONObject("site");
                     String site_name = site.getString("name");
+//                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences pref = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("company", company_name);
+                    editor.putString("highlight_colour", highlight_colour);
+                    editor.apply();
                     JSONObject pair_credent = new JSONObject();
                     pair_credent.put("device_udid", udif);
                     pair_credent.put("auth_code", auth_code);
                     pair_credent.put("company", company_name);
                     pair_credent.put("site", site_name);
+                    pair_credent.put("highlight_colour", highlight_colour);
                     FileOutputStream outputStream;
                     try {
                         outputStream = openFileOutput(FILE_NAME , Context.MODE_PRIVATE);

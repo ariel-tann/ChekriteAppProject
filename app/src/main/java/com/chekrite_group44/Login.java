@@ -9,13 +9,18 @@ package com.chekrite_group44;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.chekrite_group44.PinView.Chekrite_PinView;
 import com.chekrite_group44.PinView.PinListener;
@@ -27,10 +32,15 @@ import com.chekrite_group44.permission.Permission;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -40,6 +50,8 @@ public class Login extends AppCompatActivity
 
     Button signIn_Btn;
     Button login_syncNow_btn;
+    TextView company_Name;
+    private static final String SHARED_PREFS = "sharedPrefs";
     private Permission mPermission;
     private String EMPLOY_ID;
     private String EMPLOY_PIN;
@@ -88,7 +100,8 @@ public class Login extends AppCompatActivity
                     String first_name = user.getString("first_name");
                     String last_name = user.getString("last_name");
                     String profile_photo = user.getString("profile_photo");
-                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    //SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences pref = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("first_name", first_name);
                     editor.putString("last_name", last_name);
@@ -163,6 +176,13 @@ public class Login extends AppCompatActivity
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
 
+        // Display company name received from API
+        SharedPreferences pref = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        String settings = pref.getString("company", "nope");
+        company_Name = findViewById(R.id.Company_name);
+        company_Name.setText(settings);
+
+
         signIn_Btn = findViewById(R.id.signIn_btn);
         signIn_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,6 +194,7 @@ public class Login extends AppCompatActivity
         });
 
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

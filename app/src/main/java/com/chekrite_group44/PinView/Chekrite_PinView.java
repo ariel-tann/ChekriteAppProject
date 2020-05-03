@@ -216,6 +216,7 @@ public class Chekrite_PinView extends DialogFragment {
                 break;
         }
 
+
     }
 
     @Nullable
