@@ -16,7 +16,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="#14d175 "
+        android:background="@color/dark_blue"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -177,12 +177,14 @@
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/logoutBtn"
+    <Button
+        android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_out"
+        android:textAllCaps="false"
         android:textColor="#ffffff"
+        android:backgroundTint="@android:color/transparent"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
@@ -200,12 +202,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.67">
 
-        <include
-            layout="@layout/sync"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent" />
+
 
         <include
             layout="@layout/copyright"
