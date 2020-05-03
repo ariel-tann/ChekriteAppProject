@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.net.URL;
 
 public class Asset {
+
     private int id;
     private String unit_number;
     private String make;
@@ -22,10 +23,11 @@ public class Asset {
     public Asset(JSONObject asset) throws JSONException {
 
         this.id = asset.getInt("id");
+        unit_number = asset.getString("unit_number");
         this.make = asset.getString("make");
         this.model = asset.getString("model");
         this.photo = asset.getString("photo");
-        this.document_counts = document_counts;
+        this.document_counts = new Document_Counts(asset.getJSONObject("document_counts"));
     }
 
     public int getId() {

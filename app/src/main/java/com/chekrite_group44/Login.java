@@ -95,7 +95,7 @@ public class Login extends AppCompatActivity
                     editor.putString("access_token", access_token);
                     editor.apply();
 //                    get app_version
-                    new APIsTask(APIApp_version, getApplicationContext()).execute("GET", APIs.APP_VERSION, "");
+                    new APIsTask(APIApp_version, getApplicationContext()).execute("GET", APIs.APP_VERSION, "", "");
                     openWelcomeSplash(profile_photo,first_name,last_name);
 
                 }else{
@@ -128,7 +128,7 @@ public class Login extends AppCompatActivity
                 jsonObject.put("badge_no", EMPLOY_ID);
                 jsonObject.put("pin", EMPLOY_PIN);
 
-                new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.LOGIN, jsonObject.toString());
+                new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.LOGIN, "",jsonObject.toString());
 
             } catch (IOException e) {
                 e.printStackTrace();

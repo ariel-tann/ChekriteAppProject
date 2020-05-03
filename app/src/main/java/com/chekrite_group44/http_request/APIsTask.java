@@ -44,7 +44,8 @@ public class APIsTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         // params[0]: GET/POST
         // params[1]: api
-        // params[2]: body
+        // params[2]: search query or asset_id
+        // params[3]: http body
         URL url = null;
         String chekriteLink = "https://apitest.mychekrite.com/api/";
         // Define API link
@@ -60,6 +61,12 @@ public class APIsTask extends AsyncTask<String, Void, String> {
                 break;
             case APIs.APP_VERSION:
                 chekriteLink = chekriteLink + "app_version";
+                break;
+            case APIs.ASSETS:
+                chekriteLink = chekriteLink + "asset_classes";
+                break;
+            case APIs.SEARCH:
+                chekriteLink = chekriteLink + "search?q="+params[2];
                 break;
         }
 
@@ -88,11 +95,11 @@ public class APIsTask extends AsyncTask<String, Void, String> {
                 connection.setDoOutput(true);
             }
             // Write body
-            if (params[2].length() > 0) {
+            if (params[3].length() > 0) {
                 // only write body, when params[2] has value
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
-                Log.d("KAI", "Body: \n" + params[2]);
-                writer.write(JsonToString(params[2]));
+                Log.d("KAI", "Body: \n" + params[3]);
+                writer.write(JsonToString(params[3]));
                 connection.connect();
                 writer.close();
             }else{

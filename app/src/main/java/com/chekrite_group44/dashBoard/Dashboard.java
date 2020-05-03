@@ -18,6 +18,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.chekrite_group44.Asset_Properties.Asset_Class;
+import com.chekrite_group44.Asset_Properties.Data;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
@@ -29,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 
 public class Dashboard extends AppCompatActivity {
@@ -36,23 +39,39 @@ public class Dashboard extends AppCompatActivity {
     ImageView check_button;
     ImageView profile_button_photo;
     String photo_url;
+    APIsListener AssetsListener = new APIsListener() {
+        @Override
+        public void API_Completed(JSONObject jsonObject) {
+            try {
+                String status = (String) jsonObject.get("status");
+                if(status.equals("success")){
+                    Log.d("KAI", "GET assets success");
+                    ArrayList<Asset_Class> asset_classes = new Data(jsonObject).getAsset_classes();
+                    Log.d("KAI","number of asset classes: "+asset_classes.size());
+                    Log.d("KAI",""+asset_classes.get(0).getAssets().get(0).getUnit_number());
+                }else{
+                    // TODO logout fail
+                }
 
-    APIsListener apIsListener = new APIsListener() {
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    };
+    APIsListener LogoutListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
             try {
                 String status = (String) jsonObject.get("status");
                 if(status.equals("success")){
                     Log.d("KAI", "Logout success");
-
                 }else{
                     // TODO logout fail
-
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
     };
     @Override
@@ -88,7 +107,8 @@ public class Dashboard extends AppCompatActivity {
 
     }
     public void logout(){
-        new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.LOGOUT,"");
+        new APIsTask(AssetsListener, getApplicationContext()).execute("GET", APIs.ASSETS,"","");
+        new APIsTask(LogoutListener, getApplicationContext()).execute("POST", APIs.LOGOUT,"","");
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
