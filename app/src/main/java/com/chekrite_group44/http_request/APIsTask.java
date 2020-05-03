@@ -68,6 +68,9 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             case APIs.SEARCH:
                 chekriteLink = chekriteLink + "search?q="+params[2];
                 break;
+            case APIs.CHECKLIST:
+                chekriteLink = chekriteLink +"assets/"+params[2]+"/checklists";
+                break;
         }
 
         try {
@@ -140,6 +143,7 @@ public class APIsTask extends AsyncTask<String, Void, String> {
     }
 
     private String JsonToString(String json) throws JSONException {
+        // Convert json string to chekrite require http format
         String tmp = "";
         JSONObject jsonObject= new JSONObject(json);
         JSONArray jkey = jsonObject.names ();

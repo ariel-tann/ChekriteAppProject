@@ -13,4 +13,5 @@ public interface APIs {
     String APP_VERSION = "app_version";
     String ASSETS = "assets";
     String SEARCH = "search";
+    String CHECKLIST = "checklist";
 }
