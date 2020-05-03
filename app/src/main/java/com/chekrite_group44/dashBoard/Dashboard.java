@@ -8,7 +8,6 @@ package com.chekrite_group44.dashBoard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,8 +17,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chekrite_group44.Asset_Properties.Asset_Class;
-import com.chekrite_group44.Asset_Properties.Data;
+import com.chekrite_group44.Asset_Properties.Asset_Classes;
+import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
@@ -30,7 +29,6 @@ import com.chekrite_group44.http_request.APIsTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 
@@ -46,7 +44,7 @@ public class Dashboard extends AppCompatActivity {
                 String status = (String) jsonObject.get("status");
                 if(status.equals("success")){
                     Log.d("KAI", "GET assets success");
-                    ArrayList<Asset_Class> asset_classes = new Data(jsonObject).getAsset_classes();
+                    ArrayList<Asset_Classes> asset_classes = new Select_Asset_Classes(jsonObject).getAsset_classes();
                     Log.d("KAI","number of asset classes: "+asset_classes.size());
                     Log.d("KAI",""+asset_classes.get(0).getAssets().get(0).getUnit_number());
                 }else{

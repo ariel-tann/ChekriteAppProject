@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Asset_Class {
+public class Asset_Classes {
 
     private int id;
     private String make;
@@ -23,7 +23,8 @@ public class Asset_Class {
     private int on_the_fly_assets_enabled;
     private ArrayList<Asset> assets = new ArrayList<>();
 
-    public Asset_Class(JSONObject asset_class) throws JSONException {
+    public Asset_Classes(JSONObject asset_class) throws JSONException {
+
         this.id = asset_class.getInt("id");
         this.make = asset_class.getString("make");
         this.model = asset_class.getString("model");

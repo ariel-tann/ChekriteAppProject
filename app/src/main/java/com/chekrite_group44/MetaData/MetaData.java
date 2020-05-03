@@ -99,12 +99,6 @@ public class MetaData {
 
     }
 
-    public MetaData(double latitude, double longitude) {
-        device_lat=latitude;
-        device_lng=longitude;
-        System.out.println("Latitude and longityde  : "+device_lng+","+device_lat);
-    }
-
     public JSONObject get(){
 
         return jObject;
