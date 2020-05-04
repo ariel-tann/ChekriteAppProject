@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity
     Button signIn_Btn;
     Button login_syncNow_btn;
     TextView company_Name;
-    private static final String SHARED_PREFS = "sharedPrefs";
+    public static final String SHARED_PREFS = "sharedPrefs";
     private Permission mPermission;
     private String EMPLOY_ID;
     private String EMPLOY_PIN;
@@ -100,6 +100,7 @@ public class Login extends AppCompatActivity
                     String first_name = user.getString("first_name");
                     String last_name = user.getString("last_name");
                     String profile_photo = user.getString("profile_photo");
+                    Log.d("KAI", "token "+ access_token);
                     //SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences pref = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
