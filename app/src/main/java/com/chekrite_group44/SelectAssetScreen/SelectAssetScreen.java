@@ -43,8 +43,11 @@ public class SelectAssetScreen extends AppCompatActivity {
         });
         Log.d("LOG","Inside select asset screeen ");
     }
+
+
     public void dashboard(View view){
         Intent dashboardintent=new Intent(getApplicationContext(), Dashboard.class);
         startActivity(dashboardintent);
     }
+
 }
