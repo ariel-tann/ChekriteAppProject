@@ -16,6 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Setup_Progress extends AsyncTask<String, String, Bitmap> {
+    // for downloading png
     URL ImageUrl = null;
     InputStream is = null;
     Bitmap bmImg = null;

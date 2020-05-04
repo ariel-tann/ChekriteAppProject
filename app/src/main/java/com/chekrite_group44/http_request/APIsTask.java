@@ -78,7 +78,7 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             url = new URL(chekriteLink);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-//          Add token, if it exists in share pref
+//          Get token, if it exists in share pref
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
             String token = pref.getString("access_token", "");
 //            Add token in Header
@@ -87,6 +87,7 @@ public class APIsTask extends AsyncTask<String, Void, String> {
                 connection.setRequestProperty("Authorization", "Bearer "+token);
                 Log.d("KAI","Token: "+token);
             }
+            // define http property
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Host", "apitest.mychekrite.com");
             connection.setRequestProperty("Connection", "Keep-Alive");
@@ -109,10 +110,8 @@ public class APIsTask extends AsyncTask<String, Void, String> {
                 connection.connect();
             }
             // Response from Server
-
-
             Log.d("KAI", "Response: "+connection.getResponseMessage() + "");
-
+            // use BufferedReader to parse response to String variable
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder stringBuilder = new StringBuilder();
             String line;

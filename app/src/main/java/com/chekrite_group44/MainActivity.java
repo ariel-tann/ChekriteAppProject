@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     private APIsListener apIsListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
-            // execute this when transaction finished
+            // execute this when AsyncTask doing onPostExecute.
             try {
                 String status = (String) jsonObject.get("status");
                 if(status.equals("success")){
