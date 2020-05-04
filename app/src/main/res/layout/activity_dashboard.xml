@@ -16,13 +16,25 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@color/dark_blue"
+        android:background="@color/lime_green"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_out"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:background="@null"
+            android:layout_gravity="end"
+            android:textSize="20dp" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:id="@+id/dashboardTitle"
@@ -177,21 +189,6 @@
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/log_out"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:backgroundTint="@android:color/transparent"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.961"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.571" />
 
     <RelativeLayout
         android:layout_width="406dp"

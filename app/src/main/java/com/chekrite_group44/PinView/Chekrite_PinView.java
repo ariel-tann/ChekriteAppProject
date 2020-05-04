@@ -13,6 +13,8 @@
 package com.chekrite_group44.PinView;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 
 import java.util.ArrayList;
@@ -68,6 +71,7 @@ public class Chekrite_PinView extends DialogFragment {
     private List<EditText> mEditViews = new ArrayList<>();
     private AudioManager audioManager;
     private PinListener mPinListener;
+    String highlight_colour;
     /*
     * create button listener for image buttons
      */
@@ -181,13 +185,10 @@ public class Chekrite_PinView extends DialogFragment {
             }
         }
         if(CurrentCursor > 1){
-            if(Type_PinView == SETUP){
-                mbtn_submit.setTextColor(getActivity().getColor(R.color.white));
-                mbtn_submit.setBackground(getActivity().getDrawable(R.drawable.btn_lime_green));
-            }else{
-                mbtn_submit.setTextColor(getActivity().getColor(R.color.white));
-                mbtn_submit.setBackground(getActivity().getDrawable(R.drawable.btn_blue));
-            }
+
+            mbtn_submit.setBackgroundColor(Color.parseColor(highlight_colour));
+            mbtn_submit.setTextColor(getActivity().getColor(R.color.white));
+
             mbtn_submit.setEnabled(true);
         }else{
             mbtn_submit.setTextColor(getActivity().getColor(R.color.dark_gray));
@@ -222,6 +223,7 @@ public class Chekrite_PinView extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         switch (Type_PinView){
             case EMPLOY_ID:
                 return inflater.inflate(R.layout.pin_layout, container, false);
@@ -230,7 +232,6 @@ public class Chekrite_PinView extends DialogFragment {
             case SETUP:
                 return inflater.inflate(R.layout.setup_layout, container, false);
             default:
-                Log.d("Kai", "Input layout ERROR");
                 return inflater.inflate(R.layout.setup_layout, container, false);
         }
     }
@@ -264,6 +265,11 @@ public class Chekrite_PinView extends DialogFragment {
                 IsPassWord = true;
                 break;
         }
+        // get color and set to btn background
+        SharedPreferences pref = view.getContext().getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
+        highlight_colour = pref.getString("highlight_colour", "#65cb81");
+
+
         // initial digit and assign a listener
         mDigit0 = view.findViewById(R.id.digit_0);
         mDigit0.setOnClickListener(myDigitListener);
@@ -301,6 +307,8 @@ public class Chekrite_PinView extends DialogFragment {
         // reload pin to screen
         load(savedInstanceState);
         audioManager = (AudioManager)view.getContext().getSystemService(Context.AUDIO_SERVICE);
+        androidx.appcompat.widget.Toolbar toolbar = view.findViewById(R.id.pin_toolbar);
+        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
     }
     /*
      * create mPinWidth of TextView
@@ -311,11 +319,7 @@ public class Chekrite_PinView extends DialogFragment {
             editText = new EditText(mLinearLayout.getContext());
             editText.setTextSize(mTextSize);
             editText.setEnabled(false);
-            if (Type_PinView == SETUP){
-                editText.setTextColor(getActivity().getColor(R.color.lime_green));
-            }else{
-                editText.setTextColor(getActivity().getColor(R.color.dark_blue));
-            }
+            editText.setTextColor(Color.parseColor(highlight_colour));
             editText.setTypeface(null, Typeface.BOLD);
             editText.setGravity(Gravity.CENTER);
             editText.setFocusable(false);

@@ -6,6 +6,7 @@
 
 package com.chekrite_group44;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,9 +18,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.chekrite_group44.PinView.Chekrite_PinView;
@@ -33,6 +36,7 @@ import com.chekrite_group44.permission.Permission;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
+import org.xml.sax.Parser;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -72,7 +76,11 @@ public class Login extends AppCompatActivity
                         Log.d("KAI", "app_version: " + app_version);
 
                     } else {
-                        // TODO get app_version fail
+                        String message = jsonObject.getString("message");
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Error: "+message, Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
                     }
                 }
                 else{
@@ -113,7 +121,11 @@ public class Login extends AppCompatActivity
                     openWelcomeSplash(profile_photo,first_name,last_name);
 
                 }else{
-                    // TODO login fail
+                    String message = jsonObject.getString("message");
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Error: "+message, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -183,8 +195,13 @@ public class Login extends AppCompatActivity
         company_Name = findViewById(R.id.Company_name);
         company_Name.setText(settings);
 
-
         signIn_Btn = findViewById(R.id.signIn_btn);
+        // get color and set to btn background
+        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
+        signIn_Btn.setBackgroundColor(Color.parseColor(highlight_colour));
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar4);
+        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
+
         signIn_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,6 +210,7 @@ public class Login extends AppCompatActivity
                 mEIDPinView.show(getSupportFragmentManager(),"employID");
             }
         });
+
 
     }
 

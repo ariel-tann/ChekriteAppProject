@@ -8,7 +8,10 @@ package com.chekrite_group44.dashBoard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -76,6 +79,10 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        SharedPreferences pref = getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
+        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
 
         photo_url=getIntent().getStringExtra("profile_image");
         profile_button_photo = findViewById(R.id.btn_profile);

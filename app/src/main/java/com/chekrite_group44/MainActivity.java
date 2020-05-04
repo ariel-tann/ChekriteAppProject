@@ -10,8 +10,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.chekrite_group44.MetaData.MetaData;
 import com.chekrite_group44.PinView.Chekrite_PinView;
@@ -80,8 +82,12 @@ public class MainActivity extends AppCompatActivity
 
                     openLoginScreen();
                 }else{
-                    // TODO pair fail
-
+                    Log.d("KAI","Pair fail");
+                    String message = jsonObject.getString("message");
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Error: "+message, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
