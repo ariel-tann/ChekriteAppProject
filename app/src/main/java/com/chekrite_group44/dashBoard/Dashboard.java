@@ -14,9 +14,11 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -67,6 +69,11 @@ public class Dashboard extends AppCompatActivity {
                 String status = (String) jsonObject.get("status");
                 if(status.equals("success")){
                     Log.d("KAI", "Logout success");
+                    String message = jsonObject.getString("message");
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            message, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }else{
                     // TODO logout fail
                 }
