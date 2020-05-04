@@ -1,6 +1,7 @@
 package com.chekrite_group44.SelectAssetScreen;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ public class SelectAssetScreenFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       view=inflater.inflate(R.layout.layout_select_tab_fragment,container,false);
+       view=inflater.inflate(R.layout.select_asset_screen_fragment,container,false);
        return view;
     }
 
