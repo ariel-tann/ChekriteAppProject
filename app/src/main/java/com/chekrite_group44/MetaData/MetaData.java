@@ -83,6 +83,13 @@ public class MetaData {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // permission denied
+            device_lat = 0;
+            device_lng = 0;
+        }else{
+            Location location = locationManager.getLastKnownLocation("gps");
+            device_lat = location.getLatitude();
+            device_lng = location.getLongitude();
+
         }
         File path = Environment.getDataDirectory();
         StatFs stat = new StatFs(path.getPath());
