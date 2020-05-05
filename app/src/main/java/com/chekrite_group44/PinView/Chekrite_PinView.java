@@ -268,7 +268,6 @@ public class Chekrite_PinView extends DialogFragment {
         // get color and set to btn background
         SharedPreferences pref = view.getContext().getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
         highlight_colour = pref.getString("highlight_colour", "#65cb81");
-        Log.d("KAI", highlight_colour);
 
         // initial digit and assign a listener
         mDigit0 = view.findViewById(R.id.digit_0);
