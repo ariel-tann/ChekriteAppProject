@@ -44,12 +44,12 @@ public class WelcomeSplash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_splash);
+
+        //Set background color
         SharedPreferences pref = getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
         String highlight_colour = pref.getString("highlight_colour", "#65cb81");
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar2);
         toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
-
-
 
         photo_url=getIntent().getStringExtra("profile_photo");
         first_name=getIntent().getStringExtra("first_name");

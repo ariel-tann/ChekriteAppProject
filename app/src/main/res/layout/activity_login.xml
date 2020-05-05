@@ -32,8 +32,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar4"
-        app:layout_constraintVertical_bias="0.079"
-        app:srcCompat="@drawable/imageplaceholder" />
+        app:layout_constraintVertical_bias="0.079" />
 
     <Button
         android:id="@+id/signIn_btn"
