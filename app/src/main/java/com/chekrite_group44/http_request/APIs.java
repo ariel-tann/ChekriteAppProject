@@ -14,4 +14,5 @@ public interface APIs {
     String ASSETS = "assets";
     String SEARCH = "search";
     String CHECKLIST = "checklist";
+    String START = "start";
 }

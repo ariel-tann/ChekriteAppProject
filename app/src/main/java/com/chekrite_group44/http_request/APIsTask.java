@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -73,6 +74,9 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             case APIs.CHECKLIST:
                 chekriteLink = chekriteLink +"assets/"+params[2]+"/checklists";
                 break;
+            case APIs.START:
+                chekriteLink = chekriteLink + "tests/start";
+                break;
         }
 
         try {
@@ -91,23 +95,24 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             }
             // define http property
             connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-type", "application/json");
             connection.setRequestProperty("Host", "apitest.mychekrite.com");
             connection.setRequestProperty("Connection", "Keep-Alive");
             connection.setRequestProperty("Accept-Encoding", "gzip");
             connection.setRequestMethod(params[0]);
 
             //only POST needs
-            if (params[0] == "POST"){
+            if (params[0].equals("POST")){
                 connection.setDoOutput(true);
             }
             // Write body
             if (params[3].length() > 0) {
-                // only write body, when params[2] has value
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
-                Log.d("KAI", "Body: \n" + params[3]);
-                writer.write(JsonToString(params[3]));
+//                 only write body, when params[2] has value
+                DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+                out.writeBytes(params[3]);
                 connection.connect();
-                writer.close();
+                out.flush();
+                out.close();
             }else{
                 connection.connect();
             }
@@ -141,29 +146,5 @@ public class APIsTask extends AsyncTask<String, Void, String> {
         }else{
             Log.d("KAI", "Error: JSONObject null");
         }
-    }
-
-    private String JsonToString(String json) throws JSONException {
-        // Convert json string to chekrite require http format
-        String tmp = "";
-        JSONObject jsonObject= new JSONObject(json);
-        JSONArray jkey = jsonObject.names ();
-        for (int i = 0; i < jkey.length (); ++i) {
-            try {
-                String key = jkey.getString (i); // key of json
-                String value = jsonObject.getString (key); // value of json
-                if(i < jkey.length ()-1){
-                    tmp += key+"="+value+"&";
-                }else{
-                    // the last value
-                    tmp += key+"="+value;
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-        return tmp;
     }
 }

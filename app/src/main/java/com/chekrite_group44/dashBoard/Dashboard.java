@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,12 +26,14 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Asset_Properties.Asset_Classes;
 import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
 import com.chekrite_group44.Login;
+import com.chekrite_group44.MetaData.MetaData;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
 import com.chekrite_group44.http_request.APIs;
 import com.chekrite_group44.http_request.APIsListener;
 import com.chekrite_group44.http_request.APIsTask;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,6 +45,7 @@ public class Dashboard extends AppCompatActivity {
     ImageView check_button;
     ImageView profile_button_photo;
     String photo_url;
+    private ImageButton test_btns;
     APIsListener AssetsListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -60,6 +64,12 @@ public class Dashboard extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+        }
+    };
+    APIsListener StartListener = new APIsListener() {
+        @Override
+        public void API_Completed(JSONObject jsonObject) {
+            Log.d("KAI","START: \n"+jsonObject.toString());
         }
     };
     APIsListener LogoutListener = new APIsListener() {
@@ -110,6 +120,37 @@ public class Dashboard extends AppCompatActivity {
                 logout();
             }
         });
+        // for testing
+        test_btns = findViewById(R.id.imageButton2);
+        test_btns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get meta data
+                MetaData metaData = new MetaData(getApplicationContext());
+                String checklist_id = "4924";
+                int asset_id = 28445;
+                double lat = metaData.getDevice_lat();
+                double lng = metaData.getDevice_lng();
+                String asset_selection = "search";
+                JSONObject jsonObject= metaData.getjObject();
+                JSONObject payload = new JSONObject();
+                try {
+                    payload.put("checklist_id", checklist_id);
+                    payload.put("asset_id", asset_id);
+                    payload.put("lat",lat);
+                    payload.put("lng",lng);
+                    payload.put("asset_selection", asset_selection);
+                    payload.put("meta", jsonObject);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.d("KAI", payload.toString());
+                new APIsTask(StartListener, getApplicationContext()).execute("POST", APIs.START,"",payload.toString());
+            }
+        });
+
+
 
     }
     public void startNewcheck(View view){

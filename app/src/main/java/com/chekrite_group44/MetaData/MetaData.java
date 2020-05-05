@@ -48,6 +48,18 @@ public class MetaData {
     String os_version;
     JSONObject jObject = new JSONObject();
 
+    public double getDevice_lat() {
+        return device_lat;
+    }
+
+    public double getDevice_lng() {
+        return device_lng;
+    }
+
+    public JSONObject getjObject() {
+        return jObject;
+    }
+
     public MetaData(Context context) {
 
         String pattern = "yyyyMMdd";
@@ -90,19 +102,13 @@ public class MetaData {
             jObject.put("device_model", device_model);
             jObject.put("device_memory", device_memory);
             jObject.put("internet_capabilities",internet_capabilities);
-            jObject.put("lat",device_lat);
-            jObject.put("lng",device_lng);
+            jObject.put("device_lat",device_lat);
+            jObject.put("device_lng",device_lng);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
-
-    public JSONObject get(){
-
-        return jObject;
-    }
-
 
 }

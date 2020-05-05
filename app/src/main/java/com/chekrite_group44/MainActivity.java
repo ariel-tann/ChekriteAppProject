@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity
 
             MetaData metaData = new MetaData(getApplicationContext());
             // Pair Device
-            JSONObject jsonObject= metaData.get();
+            JSONObject jsonObject= metaData.getjObject();
             try {
                 jsonObject.put("pairing_code", pin);
             } catch (JSONException e) {
