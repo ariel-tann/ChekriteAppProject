@@ -12,8 +12,8 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/question_toolbar"
-        layout="@layout/question_toolbar" />
+        android:id="@+id/inspection_toolbar"
+        layout="@layout/inspection_toolbar" />
 
     <com.chekrite_group44.Question_Recycle.QuestionRecyclerView
         android:id="@+id/question_RecycView"
@@ -21,4 +21,4 @@
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-</LinearLayout>
+    </LinearLayout>

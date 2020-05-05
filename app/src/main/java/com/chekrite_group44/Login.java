@@ -27,6 +27,7 @@ import android.widget.Toolbar;
 
 import com.chekrite_group44.PinView.Chekrite_PinView;
 import com.chekrite_group44.PinView.PinListener;
+import com.chekrite_group44.Tests.Inspection;
 import com.chekrite_group44.dashBoard.WelcomeSplash;
 import com.chekrite_group44.http_request.APIs;
 import com.chekrite_group44.http_request.APIsListener;
@@ -114,6 +115,7 @@ public class Login extends AppCompatActivity
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("first_name", first_name);
                     editor.putString("last_name", last_name);
+                    editor.putString("profile_photo", profile_photo);
                     editor.putString("access_token", access_token);
                     editor.apply();
 //                    get app_version
@@ -181,6 +183,7 @@ public class Login extends AppCompatActivity
         intent.putExtra("last_name",last_name);
         startActivity(intent);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

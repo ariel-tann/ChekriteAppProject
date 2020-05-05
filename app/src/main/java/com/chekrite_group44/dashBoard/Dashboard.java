@@ -30,6 +30,7 @@ import com.chekrite_group44.MetaData.MetaData;
 import com.chekrite_group44.MetaData.MetaData_Asset;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
+import com.chekrite_group44.Tests.Inspection;
 import com.chekrite_group44.http_request.APIs;
 import com.chekrite_group44.http_request.APIsListener;
 import com.chekrite_group44.http_request.APIsTask;
@@ -67,12 +68,7 @@ public class Dashboard extends AppCompatActivity {
 
         }
     };
-    APIsListener StartListener = new APIsListener() {
-        @Override
-        public void API_Completed(JSONObject jsonObject) {
-            Log.d("KAI","START: \n"+jsonObject.toString());
-        }
-    };
+
     APIsListener LogoutListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -126,33 +122,19 @@ public class Dashboard extends AppCompatActivity {
         test_btns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get meta data
-                MetaData_Asset metaData = new MetaData_Asset(getApplicationContext());
-                String checklist_id = "4924";
-                int asset_id = 28445;
-                double lat = metaData.getDevice_lat();
-                double lng = metaData.getDevice_lng();
-                String asset_selection = "search";
-                JSONObject jsonObject= metaData.getjObject();
-                JSONObject payload = new JSONObject();
-                try {
-                    payload.put("checklist_id", checklist_id);
-                    payload.put("asset_id", asset_id);
-                    payload.put("lat",lat);
-                    payload.put("lng",lng);
-                    payload.put("asset_selection", asset_selection);
-                    payload.put("meta", jsonObject);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                Log.d("KAI", payload.toString());
-                new APIsTask(StartListener, getApplicationContext()).execute("POST", APIs.START,"",payload.toString());
+                openInspection();
             }
         });
 
 
 
+    }
+    private void openInspection() {
+        Intent intent = new Intent(this, Inspection.class);
+        intent.putExtra("checklist_id", "4924");
+        intent.putExtra("asset_id", 28445);
+        intent.putExtra("asset_selection", "search");
+        startActivity(intent);
     }
     public void startNewcheck(View view){
         Log.d("startcheck","Inside start check");

@@ -23,9 +23,9 @@
         <activity android:name=".dashBoard.WelcomeSplash" />
         <activity android:name=".dashBoard.Dashboard" />
         <activity android:name=".SelectAssetScreen.SelectAssetScreen" />
-        <activity android:name=".categories.Categories">
+        <activity android:name=".categories.Categories"/>
+        <activity android:name=".Tests.Inspection"/>
 
-        </activity>
         <activity android:name=".MainActivity">
 
             <intent-filter>

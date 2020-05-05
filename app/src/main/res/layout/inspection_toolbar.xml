@@ -28,7 +28,7 @@
             android:layout_width="280dp"
             android:layout_height="match_parent"
             android:layout_toEndOf="@+id/question_menu"
-            android:layout_toStartOf="@+id/question_profile"
+            android:layout_toStartOf="@+id/inspection_profile"
             android:gravity="center"
             android:text="Inspection Name"
             android:textAllCaps="false"
@@ -37,7 +37,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/question_profile"
+            android:id="@+id/inspection_profile"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:src="@drawable/avatar"
@@ -49,7 +49,6 @@
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             />
-
     </RelativeLayout>
 
 </androidx.appcompat.widget.Toolbar>

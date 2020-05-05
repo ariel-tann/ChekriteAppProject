@@ -23,6 +23,7 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
@@ -99,7 +100,8 @@ public class MetaData_Asset {
         StatFs stat = new StatFs(path.getPath());
         long blockSize = stat.getBlockSizeLong();
         long totalBlocks = stat.getBlockCountLong();
-        device_memory = (int)(blockSize*totalBlocks/ 1073741824.0);
+        device_memory = (int)(blockSize*totalBlocks/ (1024 * 1024 * 1024.0));
+
         device_model = Build.MODEL;
         os_version = Build.VERSION.RELEASE;
 
