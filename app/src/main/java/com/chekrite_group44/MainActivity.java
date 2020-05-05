@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("company", company_name);
                     editor.putString("highlight_colour", highlight_colour);
+                    editor.putString("splash_portrait", splash_portrait);
                     editor.apply();
                     JSONObject pair_credent = new JSONObject();
                     pair_credent.put("device_udid", udif);

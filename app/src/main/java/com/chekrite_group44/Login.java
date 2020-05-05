@@ -21,9 +21,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 
 import com.chekrite_group44.PinView.Chekrite_PinView;
 import com.chekrite_group44.PinView.PinListener;
@@ -56,6 +60,7 @@ public class Login extends AppCompatActivity
     Button signIn_Btn;
     Button login_syncNow_btn;
     TextView company_Name;
+    ImageView company_splash_portait;
     public static final String SHARED_PREFS = "sharedPrefs";
     private Permission mPermission;
     private String EMPLOY_ID;
@@ -192,11 +197,17 @@ public class Login extends AppCompatActivity
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
 
-        // Display company name received from API
+        // Display company name received from server
         SharedPreferences pref = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        String settings = pref.getString("company", "nope");
+        String companyName = pref.getString("company", "NIL");
         company_Name = findViewById(R.id.Company_name);
-        company_Name.setText(settings);
+        company_Name.setText(companyName);
+
+        //Display company portait with URL saved from server
+        String splash_portrait_URL = pref.getString("splash_portrait", "NUL");
+        company_splash_portait = findViewById(R.id.imageView4);
+        Glide.with(getApplicationContext()).load(splash_portrait_URL).into(company_splash_portait);
+
 
         signIn_Btn = findViewById(R.id.signIn_btn);
         // get color and set to btn background

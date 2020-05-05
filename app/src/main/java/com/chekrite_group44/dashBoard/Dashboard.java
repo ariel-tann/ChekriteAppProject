@@ -93,6 +93,8 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        //Set background color
         SharedPreferences pref = getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
         String highlight_colour = pref.getString("highlight_colour", "#65cb81");
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
