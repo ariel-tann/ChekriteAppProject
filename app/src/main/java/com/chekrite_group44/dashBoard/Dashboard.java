@@ -27,6 +27,7 @@ import com.chekrite_group44.Asset_Properties.Asset_Classes;
 import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.MetaData.MetaData;
+import com.chekrite_group44.MetaData.MetaData_Asset;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
 import com.chekrite_group44.http_request.APIs;
@@ -126,7 +127,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // get meta data
-                MetaData metaData = new MetaData(getApplicationContext());
+                MetaData_Asset metaData = new MetaData_Asset(getApplicationContext());
                 String checklist_id = "4924";
                 int asset_id = 28445;
                 double lat = metaData.getDevice_lat();

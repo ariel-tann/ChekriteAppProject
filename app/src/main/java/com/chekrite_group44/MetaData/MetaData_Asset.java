@@ -1,4 +1,10 @@
 /*
+ * Date: 2020.5.5
+ * This file is created by Kai.
+ * Summary:
+ */
+
+/*
  * Date: 2020.4.10
  * This file is created by Kai.
  * Summary:
@@ -17,16 +23,11 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
 import com.chekrite_group44.BuildConfig;
-//import com.google.android.gms.location.FusedLocationProviderClient;
-//import com.google.android.gms.location.LocationServices;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,7 +36,10 @@ import java.text.SimpleDateFormat;
 
 import static android.content.Context.BATTERY_SERVICE;
 
-public class MetaData {
+//import com.google.android.gms.location.FusedLocationProviderClient;
+//import com.google.android.gms.location.LocationServices;
+
+public class MetaData_Asset {
     // date of app build
     String app_build;
     String app_version;
@@ -60,7 +64,7 @@ public class MetaData {
         return jObject;
     }
 
-    public MetaData(Context context) {
+    public MetaData_Asset(Context context) {
 
         String pattern = "yyyyMMdd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -109,8 +113,8 @@ public class MetaData {
             jObject.put("device_model", device_model);
             jObject.put("device_memory", device_memory);
             jObject.put("internet_capabilities",internet_capabilities);
-            jObject.put("lat",device_lat);
-            jObject.put("lng",device_lng);
+            jObject.put("device_lat",device_lat);
+            jObject.put("device_lng",device_lng);
 
         } catch (JSONException e) {
             e.printStackTrace();
