@@ -30,7 +30,6 @@
             android:layout_toEndOf="@+id/question_menu"
             android:layout_toStartOf="@+id/inspection_profile"
             android:gravity="center"
-            android:text="Inspection Name"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="20sp"

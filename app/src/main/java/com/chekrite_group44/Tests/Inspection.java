@@ -11,7 +11,10 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.chekrite_group44.Asset_Properties.Asset_Classes;
+import com.chekrite_group44.Asset_Properties.Inspection_checklist;
+import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
 import com.chekrite_group44.MetaData.MetaData_Asset;
 import com.chekrite_group44.R;
 import com.chekrite_group44.http_request.APIs;
@@ -26,9 +32,11 @@ import com.chekrite_group44.http_request.APIsListener;
 import com.chekrite_group44.http_request.APIsTask;
 import com.chekrite_group44.permission.Permission;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -38,10 +46,31 @@ public class Inspection extends AppCompatActivity
 
     public static final String SHARED_PREFS = "sharedPrefs";
     private Permission mPermission;
+    TextView txt_inspection;
     APIsListener StartListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
-            Log.d("KAI","START: \n"+jsonObject.toString());
+//            Log.d("KAI","START: \n"+jsonObject.toString());
+            try {
+                String status = (String) jsonObject.get("status");
+                if(status.equals("success")){
+                    JSONObject data = jsonObject.getJSONObject("data");
+                    JSONObject jchecklist = data.getJSONObject("checklist");
+                    Inspection_checklist checklist = new Inspection_checklist(jchecklist);
+                    txt_inspection.setText(checklist.getName());
+                    JSONArray checklist_items = data.getJSONArray("checklist_items");
+
+                }else{
+                    // TODO get inspection fail
+                    String message = jsonObject.getString("message");
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Error: "+message, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     };
     @Override
@@ -50,7 +79,7 @@ public class Inspection extends AppCompatActivity
         setContentView(R.layout.activity_inspection);
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
-
+        txt_inspection = findViewById(R.id.inspection_name);
         // Display company name received from API
         SharedPreferences pref = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         String profile_link = pref.getString("profile_photo", "");
@@ -68,17 +97,19 @@ public class Inspection extends AppCompatActivity
         String checklist_id=getIntent().getStringExtra("checklist_id");
         int asset_id = getIntent().getIntExtra("asset_id", 0);
         String asset_selection = getIntent().getStringExtra("asset_selection");
+        // get payload
         String payload = prepare_payload(checklist_id,asset_id,asset_selection);
+        // send payload to DB
         new APIsTask(StartListener, getApplicationContext()).execute("POST", APIs.START,"",payload);
 
     }
+
+
     private String prepare_payload(String checklist_id, int asset_id, String asset_selection){
 
         MetaData_Asset metaData = new MetaData_Asset(getApplicationContext());
-
         double lat = metaData.getDevice_lat();
         double lng = metaData.getDevice_lng();
-
         JSONObject jsonObject= metaData.getjObject();
         JSONObject payload = new JSONObject();
         try {
