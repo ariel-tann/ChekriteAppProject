@@ -57,7 +57,7 @@ public class Dashboard extends AppCompatActivity {
                     Log.d("KAI","number of asset classes: "+asset_classes.size());
                     Log.d("KAI",""+asset_classes.get(0).getAssets().get(0).getUnit_number());
                 }else{
-                    // TODO logout fail
+
                 }
 
             } catch (JSONException e) {
@@ -80,7 +80,11 @@ public class Dashboard extends AppCompatActivity {
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }else{
-                    // TODO logout fail
+                    String message = jsonObject.getString("message");
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Error: "+message, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

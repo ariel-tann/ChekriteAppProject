@@ -40,7 +40,7 @@ public class Inspection_button extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // TODO wait for button images
+
         View view = inflater.inflate(R.layout.inspection_btn,container, false);
         // set Description
         mDescription = view.findViewById(R.id.item_description);

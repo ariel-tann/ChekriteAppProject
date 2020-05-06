@@ -132,27 +132,21 @@ public class Login extends AppCompatActivity
         public void onSubmit(String pin) {
             mEIDPinView.dismiss();
             EMPLOY_PIN = pin;
-            // TODO login, if success, inflate openWelcomeSplash
             try {
-                // read pair.txt file
-                FileInputStream fis;
-                final StringBuffer storedString = new StringBuffer();
-                fis = openFileInput(FILE_NAME);
-                DataInputStream dataIO = new DataInputStream(fis);
-                String strLine = null;
-                if ((strLine = dataIO.readLine()) != null) {
-                    storedString.append(strLine);
-                }
-                dataIO.close();
-                fis.close();
-                JSONObject jsonObject = new JSONObject(strLine);
+
+                SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("company",pref.getString("company", ""));
+                jsonObject.put("site",pref.getString("site", ""));
+                jsonObject.put("device_udid",pref.getString("device_udid", ""));
+                jsonObject.put("auth_code",pref.getString("auth_code", ""));
                 jsonObject.put("badge_no", EMPLOY_ID);
                 jsonObject.put("pin", EMPLOY_PIN);
-
+                //TODO need to check token_expiry
+                // if exist token is expired, don't need to logout
+                // if it hasn't, we should do logout and then login
                 new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.LOGIN, "",jsonObject.toString());
 
-            } catch (IOException e) {
-                e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

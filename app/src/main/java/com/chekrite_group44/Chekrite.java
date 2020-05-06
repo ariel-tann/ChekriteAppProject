@@ -21,7 +21,6 @@ package com.chekrite_group44;
 import android.app.Application;
 
 public class Chekrite extends Application {
-    public static final String FILE_NAME = "pair.txt";
     public static final String SHARED_PREFS = "sharedPrefs";
     @Override
     public void onCreate() {

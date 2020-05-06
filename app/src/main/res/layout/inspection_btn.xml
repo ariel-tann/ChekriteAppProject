@@ -66,7 +66,7 @@
             android:id="@+id/btn_pass"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/pass"
+            android:src="@drawable/btn_pass_selector"
             android:background="@null"
             android:scaleType="centerCrop"/>
         <Space
@@ -77,7 +77,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@null"
-            android:src="@drawable/fail"
+            android:src="@drawable/btn_fail_selector"
             android:scaleType="centerCrop"/>
     </LinearLayout>
     <Space

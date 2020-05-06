@@ -55,9 +55,13 @@ public class Inspection extends AppCompatActivity
         @Override
         public void Completed() {
             if (mViewPager.getCurrentItem()<mItems.getChecklists().size()-1) {
+                // TODO call API response
+
+                // switch to next page
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
             }else{
                 // TODO setup submit
+
             }
         }
     };
@@ -82,7 +86,7 @@ public class Inspection extends AppCompatActivity
                     setupViewPager(mViewPager, mItems);
 
                 }else{
-                    // TODO Error message should match with iOS
+
                     String message = jsonObject.getString("message");
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Error: "+message, Toast.LENGTH_LONG);
