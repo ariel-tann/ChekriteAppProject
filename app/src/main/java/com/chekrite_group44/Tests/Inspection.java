@@ -25,7 +25,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_items;
 import com.chekrite_group44.Chekrite;
-import com.chekrite_group44.MetaData.MetaData_Asset;
 import com.chekrite_group44.R;
 import com.chekrite_group44.Http_Request.APIs;
 import com.chekrite_group44.Http_Request.APIsListener;
@@ -61,7 +60,7 @@ public class Inspection extends AppCompatActivity
                     // Create Recycle View
 
                 }else{
-                    // TODO get inspection fail
+                    // TODO Error message should match with iOS
                     String message = jsonObject.getString("message");
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Error: "+message, Toast.LENGTH_LONG);
@@ -77,14 +76,16 @@ public class Inspection extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inspection);
+        // permission checking
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
+
         txt_inspection = findViewById(R.id.inspection_name);
         // Display company name received from API
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         String profile_link = pref.getString("profile_photo", "");
 
-        // display profile photo
+        // set profile photo
         ImageView profile = findViewById(R.id.inspection_profile);
         if(profile_link.length() > 0)
             Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(profile);
@@ -97,34 +98,15 @@ public class Inspection extends AppCompatActivity
         String checklist_id=getIntent().getStringExtra("checklist_id");
         int asset_id = getIntent().getIntExtra("asset_id", 0);
         String asset_selection = getIntent().getStringExtra("asset_selection");
+
         // get payload
-        String payload = prepare_payload(checklist_id,asset_id,asset_selection);
+        StartAPI_payload api_payload = new StartAPI_payload();
+        String payload = api_payload.StartAPI_payload(getApplicationContext(), checklist_id,asset_id, asset_selection);
         // send payload to DB
         new APIsTask(StartListener, getApplicationContext()).execute("POST", APIs.START,"",payload);
 
     }
 
-
-    private String prepare_payload(String checklist_id, int asset_id, String asset_selection){
-
-        MetaData_Asset metaData = new MetaData_Asset(getApplicationContext());
-        double lat = metaData.getDevice_lat();
-        double lng = metaData.getDevice_lng();
-        JSONObject jsonObject= metaData.getjObject();
-        JSONObject payload = new JSONObject();
-        try {
-            payload.put("checklist_id", checklist_id);
-            payload.put("asset_id", asset_id);
-            payload.put("lat",lat);
-            payload.put("lng",lng);
-            payload.put("asset_selection", asset_selection);
-            payload.put("meta", jsonObject);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return payload.toString();
-    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

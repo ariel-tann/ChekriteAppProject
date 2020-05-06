@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Login;
 
 import org.json.JSONException;
@@ -77,7 +78,7 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
 //          Get token, if it exists in share pref
-            SharedPreferences pref = mContext.getSharedPreferences(Login.SHARED_PREFS, mContext.MODE_PRIVATE);
+            SharedPreferences pref = mContext.getSharedPreferences(Chekrite.SHARED_PREFS, mContext.MODE_PRIVATE);
             String token = pref.getString("access_token", "");
 //            Add token in Header
 //            LOGIN and PAIR don't require token

@@ -24,7 +24,7 @@
         android:progress="25"
         android:progressTint="@android:color/holo_blue_light"/>
 
-    <com.chekrite_group44.Tests.InspectionItemsRecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/question_RecycView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
