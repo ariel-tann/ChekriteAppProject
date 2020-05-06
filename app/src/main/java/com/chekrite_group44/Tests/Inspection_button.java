@@ -31,10 +31,12 @@ public class Inspection_button extends Fragment {
     ProgressBar mProgressBar;
     int total_items;
     int position;
+    InspectionListener mlistener;
     public Inspection_button(Inspection_checklist_item item, int total_items,int position, InspectionListener listener) {
         mItem = item;
         this.total_items = total_items;
         this.position = position;
+        mlistener = listener;
     }
 
     @Nullable
@@ -56,7 +58,7 @@ public class Inspection_button extends Fragment {
             @Override
             public void onClick(View v) {
                 // TODO　call response api and navigate to next fragment
-
+                mlistener.Completed();
             }
         });
         mbtn_fail = view.findViewById(R.id.btn_fail);
@@ -64,7 +66,7 @@ public class Inspection_button extends Fragment {
             @Override
             public void onClick(View v) {
                 // TODO　call response api and navigate to next fragment
-
+                mlistener.Completed();
             }
         });
         return view;

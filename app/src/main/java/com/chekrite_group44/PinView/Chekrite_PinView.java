@@ -203,22 +203,7 @@ public class Chekrite_PinView extends DialogFragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 //        set style for dialog add
-        switch (Type_PinView) {
-            case EMPLOY_ID:
-                setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme);
-                break;
-            case EMPLOY_PIN:
-                setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme);
-                break;
-            case SETUP:
-                setStyle(DialogFragment.STYLE_NORMAL, R.style.WelcomeTheme);
-                break;
-            default:
-                setStyle(DialogFragment.STYLE_NORMAL, R.style.WelcomeTheme);
-                break;
-        }
-
-
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.PopupOverlay);
     }
 
     @Nullable

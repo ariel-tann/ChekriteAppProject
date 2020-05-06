@@ -46,6 +46,10 @@
 
     <!-- Strings for listview-->
     <string name="list_name"> Checklists Categories </string>
+    <string name="result_comment">This checklist has been complete.
+        To see any issues raised during the checklist tap the View Results button on the top right.
+        This message can be customized in the ChekRite Portal.</string>
+
     <string-array name="categories_items">
         <item>Test</item>
         <item>Health and Safety</item>

@@ -29,6 +29,7 @@ import com.chekrite_group44.Asset_Properties.Inspection_checklist;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_item;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_items;
 import com.chekrite_group44.Chekrite;
+import com.chekrite_group44.PinView.Chekrite_PinView;
 import com.chekrite_group44.R;
 import com.chekrite_group44.Http_Request.APIs;
 import com.chekrite_group44.Http_Request.APIsListener;
@@ -56,12 +57,12 @@ public class Inspection extends AppCompatActivity
         public void Completed() {
             if (mViewPager.getCurrentItem()<mItems.getChecklists().size()-1) {
                 // TODO call API response
-
                 // switch to next page
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
             }else{
                 // TODO setup submit
-
+                Inspection_submit submit = new Inspection_submit();
+                submit.show(getSupportFragmentManager(),"submit");
             }
         }
     };
@@ -118,7 +119,6 @@ public class Inspection extends AppCompatActivity
                     break;
             }
         }
-        // TODO add submit fragment
 
         viewPager.setAdapter(adapter);
     }
