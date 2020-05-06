@@ -16,18 +16,10 @@
         layout="@layout/inspection_toolbar" />
 
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:progress="25"
-        android:progressTint="@android:color/holo_blue_light"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/question_RecycView"
+    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:id="@+id/inspection_container"
+        />
 
     </LinearLayout>

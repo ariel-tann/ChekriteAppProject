@@ -19,10 +19,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist;
+import com.chekrite_group44.Asset_Properties.Inspection_checklist_item;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_items;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.R;
@@ -44,6 +48,19 @@ public class Inspection extends AppCompatActivity
 
     private Permission mPermission;
     TextView txt_inspection;
+    private Inspection_PagerAdapter mPagerAdapter;
+    private ViewPager mViewPager;
+    Inspection_checklist_items mItems;
+    private InspectionListener inspectionListener = new InspectionListener() {
+        @Override
+        public void Completed() {
+            if (mViewPager.getCurrentItem()<mItems.getChecklists().size()-1) {
+                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+            }else{
+                // TODO setup submit
+            }
+        }
+    };
     APIsListener StartListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -56,8 +73,13 @@ public class Inspection extends AppCompatActivity
                     Inspection_checklist checklist = new Inspection_checklist(jchecklist);
                     txt_inspection.setText(checklist.getName());
                     JSONArray jchecklist_items = data.getJSONArray("checklist_items");
-                    Inspection_checklist_items items = new Inspection_checklist_items(jchecklist_items);
+                    mItems = new Inspection_checklist_items(jchecklist_items);
                     // Create Recycle View
+                    mPagerAdapter = new Inspection_PagerAdapter(getSupportFragmentManager(),
+                            FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
+                    mViewPager = findViewById(R.id.inspection_container);
+                    // setup the pager
+                    setupViewPager(mViewPager, mItems);
 
                 }else{
                     // TODO Error message should match with iOS
@@ -72,6 +94,30 @@ public class Inspection extends AppCompatActivity
             }
         }
     };
+
+    private void setupViewPager(ViewPager viewPager, Inspection_checklist_items items){
+        // setup list of Fragments
+        Inspection_PagerAdapter adapter = new Inspection_PagerAdapter(getSupportFragmentManager(),
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
+        for (int i = 0; i< items.getChecklists().size(); i++){
+            // get single item
+            Inspection_checklist_item item = items.getChecklists().get(i);
+            // get control type
+            switch (item.getName()){
+                case "Step":
+                    adapter.addFragment(new Inspection_step(item,items.getChecklists().size(),i, inspectionListener) ,
+                            items.getChecklists().get(i).getId());
+                    break;
+                case "Pass/Fail":
+                    adapter.addFragment(new Inspection_button(item,items.getChecklists().size(), i, inspectionListener),
+                            items.getChecklists().get(i).getId());
+                    break;
+            }
+        }
+        // TODO add submit fragment
+
+        viewPager.setAdapter(adapter);
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
