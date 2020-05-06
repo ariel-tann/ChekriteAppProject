@@ -167,7 +167,7 @@ public class Login extends AppCompatActivity
                 jsonObject.put("auth_code",pref.getString("auth_code", ""));
                 jsonObject.put("badge_no", EMPLOY_ID);
                 jsonObject.put("pin", EMPLOY_PIN);
-                // close login dialog
+                // login dialog
                 dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 dialog.setTitle("Login");
                 dialog.setMessage("Please wait...");

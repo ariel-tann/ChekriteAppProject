@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
     private Permission mPermission;
     private Button mBtnSubmit;
+    ProgressDialog dialog;
 
     private APIsListener apIsListener = new APIsListener() {
         @Override
@@ -65,6 +67,8 @@ public class MainActivity extends AppCompatActivity
                     editor.putString("highlight_colour", highlight_colour);
                     editor.putString("splash_portrait", splash_portrait);
                     editor.apply();
+                    // close login dialog
+                    dialog.dismiss();
                     openLoginScreen();
                 }else{
                     // Fail
@@ -94,7 +98,13 @@ public class MainActivity extends AppCompatActivity
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            // call API
+            // login dialog
+            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dialog.setTitle("Pairing");
+            dialog.setMessage("Please wait...");
+            dialog.setIndeterminate(true);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
             new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.PAIR, "", jsonObject.toString());
         }
     };
@@ -121,6 +131,9 @@ public class MainActivity extends AppCompatActivity
         mPermission.RequestPermissions();
         mBtnSubmit = findViewById(R.id.setupApp_btn);
         mBtnSubmit.setOnClickListener(submitListener);
+
+        dialog = new ProgressDialog(this); // Login log
+
     }
 
     public void openLoginScreen() {
