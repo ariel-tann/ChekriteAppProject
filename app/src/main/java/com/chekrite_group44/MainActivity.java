@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -18,10 +17,10 @@ import android.widget.Toast;
 import com.chekrite_group44.MetaData.MetaData;
 import com.chekrite_group44.PinView.Chekrite_PinView;
 import com.chekrite_group44.PinView.PinListener;
-import com.chekrite_group44.http_request.APIs;
-import com.chekrite_group44.http_request.APIsListener;
-import com.chekrite_group44.http_request.APIsTask;
-import com.chekrite_group44.permission.Permission;
+import com.chekrite_group44.Http_Request.APIs;
+import com.chekrite_group44.Http_Request.APIsListener;
+import com.chekrite_group44.Http_Request.APIsTask;
+import com.chekrite_group44.Permission.Permission;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,9 +35,6 @@ public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
     private Permission mPermission;
     private Button mBtnSubmit;
-    private static final String FILE_NAME = "pair.txt";
-    private static final String SHARED_PREFS = "sharedPrefs";
-
 
     private APIsListener apIsListener = new APIsListener() {
         @Override
@@ -59,7 +55,7 @@ public class MainActivity extends AppCompatActivity
                     JSONObject site = data.getJSONObject("site");
                     String site_name = site.getString("name");
 //                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    SharedPreferences pref = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+                    SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("company", company_name);
                     editor.putString("highlight_colour", highlight_colour);
@@ -73,7 +69,7 @@ public class MainActivity extends AppCompatActivity
                     pair_credent.put("highlight_colour", highlight_colour);
                     FileOutputStream outputStream;
                     try {
-                        outputStream = openFileOutput(FILE_NAME , Context.MODE_PRIVATE);
+                        outputStream = openFileOutput(Chekrite.FILE_NAME , Context.MODE_PRIVATE);
                         outputStream.write(pair_credent.toString().getBytes());
                         outputStream.close();
                     } catch (Exception e) {
@@ -128,7 +124,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         // TODO check if auth file exists
         setContentView(R.layout.activity_main);
-        File file = getBaseContext().getFileStreamPath(FILE_NAME);
+        File file = getBaseContext().getFileStreamPath(Chekrite.FILE_NAME);
         if(file.exists()){
             openLoginScreen();
         }

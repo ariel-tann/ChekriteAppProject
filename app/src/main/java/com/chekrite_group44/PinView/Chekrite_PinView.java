@@ -35,6 +35,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 
@@ -266,7 +267,7 @@ public class Chekrite_PinView extends DialogFragment {
                 break;
         }
         // get color and set to btn background
-        SharedPreferences pref = view.getContext().getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences pref = view.getContext().getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         highlight_colour = pref.getString("highlight_colour", "#65cb81");
 
         // initial digit and assign a listener

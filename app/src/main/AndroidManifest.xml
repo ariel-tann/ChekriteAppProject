@@ -20,10 +20,10 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity android:name=".Login" />
-        <activity android:name=".dashBoard.WelcomeSplash" />
-        <activity android:name=".dashBoard.Dashboard" />
+        <activity android:name=".DashBoard.WelcomeSplash" />
+        <activity android:name=".DashBoard.Dashboard" />
         <activity android:name=".SelectAssetScreen.SelectAssetScreen" />
-        <activity android:name=".categories.Categories"/>
+        <activity android:name=".Categories.Categories"/>
         <activity android:name=".Tests.Inspection"/>
 
         <activity android:name=".MainActivity">

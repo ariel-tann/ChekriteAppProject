@@ -3,7 +3,7 @@
  * This file is created by Kai.
  * Summary:
  */
-package com.chekrite_group44.http_request;
+package com.chekrite_group44.Http_Request;
 
 //    Define API's ID
 public interface APIs {

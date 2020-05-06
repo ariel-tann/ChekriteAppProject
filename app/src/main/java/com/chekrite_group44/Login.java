@@ -6,7 +6,6 @@
 
 package com.chekrite_group44;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,9 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -24,32 +21,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 
 import com.chekrite_group44.PinView.Chekrite_PinView;
 import com.chekrite_group44.PinView.PinListener;
-import com.chekrite_group44.Tests.Inspection;
-import com.chekrite_group44.dashBoard.WelcomeSplash;
-import com.chekrite_group44.http_request.APIs;
-import com.chekrite_group44.http_request.APIsListener;
-import com.chekrite_group44.http_request.APIsTask;
-import com.chekrite_group44.permission.Permission;
+import com.chekrite_group44.DashBoard.WelcomeSplash;
+import com.chekrite_group44.Http_Request.APIs;
+import com.chekrite_group44.Http_Request.APIsListener;
+import com.chekrite_group44.Http_Request.APIsTask;
+import com.chekrite_group44.Permission.Permission;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-import org.xml.sax.Parser;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -61,7 +50,6 @@ public class Login extends AppCompatActivity
     Button login_syncNow_btn;
     TextView company_Name;
     ImageView company_splash_portait;
-    public static final String SHARED_PREFS = "sharedPrefs";
     private Permission mPermission;
     private String EMPLOY_ID;
     private String EMPLOY_PIN;
@@ -116,7 +104,7 @@ public class Login extends AppCompatActivity
                     String profile_photo = user.getString("profile_photo");
                     Log.d("KAI", "token "+ access_token);
                     //SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    SharedPreferences pref = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+                    SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("first_name", first_name);
                     editor.putString("last_name", last_name);
@@ -198,7 +186,7 @@ public class Login extends AppCompatActivity
         mPermission.RequestPermissions();
 
         // Display company name received from server
-        SharedPreferences pref = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         String companyName = pref.getString("company", "NIL");
         company_Name = findViewById(R.id.Company_name);
         company_Name.setText(companyName);

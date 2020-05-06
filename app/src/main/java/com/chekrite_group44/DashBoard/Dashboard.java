@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.dashBoard;
+package com.chekrite_group44.DashBoard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,17 +25,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Asset_Properties.Asset_Classes;
 import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
+import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Login;
-import com.chekrite_group44.MetaData.MetaData;
-import com.chekrite_group44.MetaData.MetaData_Asset;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
 import com.chekrite_group44.Tests.Inspection;
-import com.chekrite_group44.http_request.APIs;
-import com.chekrite_group44.http_request.APIsListener;
-import com.chekrite_group44.http_request.APIsTask;
+import com.chekrite_group44.Http_Request.APIs;
+import com.chekrite_group44.Http_Request.APIsListener;
+import com.chekrite_group44.Http_Request.APIsTask;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -95,7 +93,7 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         //Set background color
-        SharedPreferences pref = getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         String highlight_colour = pref.getString("highlight_colour", "#65cb81");
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
@@ -133,8 +131,8 @@ public class Dashboard extends AppCompatActivity {
     }
     private void openInspection() {
         Intent intent = new Intent(this, Inspection.class);
-        intent.putExtra("checklist_id", "4924");
-        intent.putExtra("asset_id", 28445);
+        intent.putExtra("checklist_id", "5011");
+        intent.putExtra("asset_id", 28436);
         intent.putExtra("asset_selection", "search");
         startActivity(intent);
     }

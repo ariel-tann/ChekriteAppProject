@@ -15,7 +15,16 @@
         android:id="@+id/inspection_toolbar"
         layout="@layout/inspection_toolbar" />
 
-    <com.chekrite_group44.Question_Recycle.QuestionRecyclerView
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progress="25"
+        android:progressTint="@android:color/holo_blue_light"/>
+
+    <com.chekrite_group44.Tests.InspectionItemsRecyclerView
         android:id="@+id/question_RecycView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

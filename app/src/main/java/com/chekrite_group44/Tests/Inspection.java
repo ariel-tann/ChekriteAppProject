@@ -22,21 +22,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chekrite_group44.Asset_Properties.Asset_Classes;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist;
-import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
+import com.chekrite_group44.Asset_Properties.Inspection_checklist_items;
+import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.MetaData.MetaData_Asset;
 import com.chekrite_group44.R;
-import com.chekrite_group44.http_request.APIs;
-import com.chekrite_group44.http_request.APIsListener;
-import com.chekrite_group44.http_request.APIsTask;
-import com.chekrite_group44.permission.Permission;
+import com.chekrite_group44.Http_Request.APIs;
+import com.chekrite_group44.Http_Request.APIsListener;
+import com.chekrite_group44.Http_Request.APIsTask;
+import com.chekrite_group44.Permission.Permission;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -44,13 +43,12 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class Inspection extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
 
-    public static final String SHARED_PREFS = "sharedPrefs";
     private Permission mPermission;
     TextView txt_inspection;
     APIsListener StartListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
-//            Log.d("KAI","START: \n"+jsonObject.toString());
+            // GET Response from DB
             try {
                 String status = (String) jsonObject.get("status");
                 if(status.equals("success")){
@@ -58,7 +56,9 @@ public class Inspection extends AppCompatActivity
                     JSONObject jchecklist = data.getJSONObject("checklist");
                     Inspection_checklist checklist = new Inspection_checklist(jchecklist);
                     txt_inspection.setText(checklist.getName());
-                    JSONArray checklist_items = data.getJSONArray("checklist_items");
+                    JSONArray jchecklist_items = data.getJSONArray("checklist_items");
+                    Inspection_checklist_items items = new Inspection_checklist_items(jchecklist_items);
+                    // Create Recycle View
 
                 }else{
                     // TODO get inspection fail
@@ -81,7 +81,7 @@ public class Inspection extends AppCompatActivity
         mPermission.RequestPermissions();
         txt_inspection = findViewById(R.id.inspection_name);
         // Display company name received from API
-        SharedPreferences pref = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         String profile_link = pref.getString("profile_photo", "");
 
         // display profile photo

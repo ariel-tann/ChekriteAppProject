@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.categories;
+package com.chekrite_group44.Categories;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -13,10 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toolbar;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.chekrite_group44.R;

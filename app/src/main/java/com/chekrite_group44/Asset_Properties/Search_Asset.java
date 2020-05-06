@@ -15,12 +15,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Search_Asset {
-    private int id;
-    private String make;
-    private String model;
-    private String category;
-    private int on_the_fly_assets_enabled;
-    private ArrayList<Asset> assets = new ArrayList<>();
+    int id;
+    String make;
+    String model;
+    String category;
+    int on_the_fly_assets_enabled;
+    ArrayList<Asset> assets = new ArrayList<>();
 
     public Search_Asset(JSONObject input) throws JSONException {
         JSONObject data = input.getJSONObject("data");
