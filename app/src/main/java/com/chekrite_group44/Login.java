@@ -9,6 +9,7 @@ package com.chekrite_group44;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,6 +40,9 @@ import org.json.JSONObject;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -47,15 +51,14 @@ public class Login extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
 
     Button signIn_Btn;
-    Button login_syncNow_btn;
     TextView company_Name;
     ImageView company_splash_portait;
     private Permission mPermission;
     private String EMPLOY_ID;
     private String EMPLOY_PIN;
     Chekrite_PinView mEIDPinView;
-
-    private static final String FILE_NAME = "pair.txt";
+    ProgressDialog dialog;
+    SharedPreferences pref;
     private APIsListener APIApp_version = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -85,6 +88,24 @@ public class Login extends AppCompatActivity
             }
         }
     };
+    APIsListener LogoutListener = new APIsListener() {
+        @Override
+        public void API_Completed(JSONObject jsonObject) {
+            try {
+                String status = (String) jsonObject.get("status");
+                // Fail logout
+                if(!status.equals("success")){
+                    String message = jsonObject.getString("message");
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Error: "+message, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
 
     private APIsListener apIsListener = new APIsListener() {
@@ -98,21 +119,25 @@ public class Login extends AppCompatActivity
                     JSONObject data = jsonObject.getJSONObject("data");
                     JSONObject device = data.getJSONObject("device");
                     String access_token = device.getString("access_token");
+                    String token_expiry = device.getString("token_expiry");
                     JSONObject user = data.getJSONObject("user");
                     String first_name = user.getString("first_name");
                     String last_name = user.getString("last_name");
                     String profile_photo = user.getString("profile_photo");
                     Log.d("KAI", "token "+ access_token);
                     //SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
+                    pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("first_name", first_name);
                     editor.putString("last_name", last_name);
                     editor.putString("profile_photo", profile_photo);
                     editor.putString("access_token", access_token);
+                    editor.putString("token_expiry", token_expiry);
                     editor.apply();
 //                    get app_version
                     new APIsTask(APIApp_version, getApplicationContext()).execute("GET", APIs.APP_VERSION, "", "");
+                    // close login dialog
+                    dialog.dismiss();
                     openWelcomeSplash(profile_photo,first_name,last_name);
 
                 }else{
@@ -142,9 +167,22 @@ public class Login extends AppCompatActivity
                 jsonObject.put("auth_code",pref.getString("auth_code", ""));
                 jsonObject.put("badge_no", EMPLOY_ID);
                 jsonObject.put("pin", EMPLOY_PIN);
-                //TODO need to check token_expiry
-                // if exist token is expired, don't need to logout
-                // if it hasn't, we should do logout and then login
+                // close login dialog
+                dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                dialog.setTitle("Login");
+                dialog.setMessage("Please wait...");
+                dialog.setIndeterminate(true);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+                // Check token_expiry
+                String token_expiry = pref.getString("token_expiry", "");
+                if (token_expiry.length() > 0){
+                    Date expiredDate = stringToDate(token_expiry, "yyyy-MM-dd HH:mm:ss");
+                    // if token is not expired and can used, we need to logout first
+                    if(new Date().before(expiredDate)&&!new Date().after(expiredDate)){
+                        new APIsTask(LogoutListener, getApplicationContext()).execute("POST", APIs.LOGOUT,"","");
+                    }
+                }
                 new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.LOGIN, "",jsonObject.toString());
 
             } catch (JSONException e) {
@@ -162,7 +200,15 @@ public class Login extends AppCompatActivity
             EMPLOY_ID = pin;
         }
     };
+    private Date stringToDate(String aDate,String aFormat) {
 
+        if(aDate==null) return null;
+        ParsePosition pos = new ParsePosition(0);
+        SimpleDateFormat simpledateformat = new SimpleDateFormat(aFormat);
+        Date stringDate = simpledateformat.parse(aDate, pos);
+        return stringDate;
+
+    }
     public void openWelcomeSplash(String profile_photo,String first_name,String last_name) {
         Intent intent = new Intent(this, WelcomeSplash.class);
         intent.putExtra("profile_photo",profile_photo);
@@ -178,6 +224,7 @@ public class Login extends AppCompatActivity
 
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
+        dialog = new ProgressDialog(this); // Login log
 
         // Display company name received from server
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
