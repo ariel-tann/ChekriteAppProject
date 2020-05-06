@@ -7,6 +7,7 @@
 package com.chekrite_group44.Tests;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ import com.chekrite_group44.Asset_Properties.Inspection_checklist;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_item;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_items;
 import com.chekrite_group44.Chekrite;
+import com.chekrite_group44.DashBoard.Dashboard;
+import com.chekrite_group44.DashBoard.WelcomeSplash;
 import com.chekrite_group44.PinView.Chekrite_PinView;
 import com.chekrite_group44.R;
 import com.chekrite_group44.Http_Request.APIs;
@@ -52,6 +55,15 @@ public class Inspection extends AppCompatActivity
     private Inspection_PagerAdapter mPagerAdapter;
     private ViewPager mViewPager;
     Inspection_checklist_items mItems;
+    private InspectionListener submitListener = new InspectionListener() {
+        @Override
+        public void Completed() {
+            // submit inspection
+
+            // go back DashBoard
+            openDashBoard();
+        }
+    };
     private InspectionListener inspectionListener = new InspectionListener() {
         @Override
         public void Completed() {
@@ -61,7 +73,7 @@ public class Inspection extends AppCompatActivity
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
             }else{
                 // TODO setup submit
-                Inspection_submit submit = new Inspection_submit();
+                Inspection_submit submit = new Inspection_submit(submitListener);
                 submit.show(getSupportFragmentManager(),"submit");
             }
         }
@@ -100,6 +112,12 @@ public class Inspection extends AppCompatActivity
         }
     };
 
+    public void openDashBoard() {
+
+        Intent dashboardIntent = new Intent(this, Dashboard.class);
+        startActivity(dashboardIntent);
+        finish();
+    }
     private void setupViewPager(ViewPager viewPager, Inspection_checklist_items items){
         // setup list of Fragments
         Inspection_PagerAdapter adapter = new Inspection_PagerAdapter(getSupportFragmentManager(),

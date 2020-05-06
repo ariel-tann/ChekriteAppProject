@@ -7,6 +7,7 @@
 package com.chekrite_group44.Tests;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,10 +23,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.chekrite_group44.Chekrite;
+import com.chekrite_group44.DashBoard.Dashboard;
+import com.chekrite_group44.DashBoard.WelcomeSplash;
 import com.chekrite_group44.R;
 
 public class Inspection_submit extends DialogFragment {
 
+    InspectionListener mlistener;
+
+    public Inspection_submit(InspectionListener mlistener) {
+        this.mlistener = mlistener;
+    }
 
     @Nullable
     @Override
@@ -44,7 +53,23 @@ public class Inspection_submit extends DialogFragment {
         // convert color to drawable
         ColorDrawable cd = new ColorDrawable(Color.parseColor(highlight_colour));
         txt_complete.setBackground(cd);
-
+        // cancel button
+        Button mbtn_Cancel = view.findViewById(R.id.submit_cancel);
+        mbtn_Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+        // TODO submit function
+        Button mbtn_Submit = view.findViewById(R.id.btn_submit);
+        mbtn_Submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+                mlistener.Completed();
+            }
+        });
     }
 
     @Override
