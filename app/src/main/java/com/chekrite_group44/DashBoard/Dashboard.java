@@ -102,8 +102,7 @@ public class Dashboard extends AppCompatActivity {
         String highlight_colour = pref.getString("highlight_colour", "#65cb81");
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
-
-        photo_url=getIntent().getStringExtra("profile_image");
+        photo_url = pref.getString("profile_photo", "");
         profile_button_photo = findViewById(R.id.btn_profile);
         //get_btn_profile
         Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_button_photo);
