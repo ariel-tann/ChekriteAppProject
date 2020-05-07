@@ -31,7 +31,6 @@ import com.chekrite_group44.Asset_Properties.Inspection_checklist_items;
 import com.chekrite_group44.Asset_Properties.Inspection_test;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.DashBoard.Dashboard;
-import com.chekrite_group44.MetaData.MetaData;
 import com.chekrite_group44.MetaData.MetaData_Asset;
 import com.chekrite_group44.R;
 import com.chekrite_group44.Http_Request.APIs;
@@ -56,7 +55,7 @@ public class Inspection extends AppCompatActivity
     private InspectionViewPager mViewPager;
     Inspection_checklist_items mItems;
     Inspection_test mTest;
-
+    long start_inspection;
     private APIsListener ResponseAPI = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -72,12 +71,44 @@ public class Inspection extends AppCompatActivity
             }
         }
     };
+    private APIsListener SubmitAPI = new APIsListener() {
+        @Override
+        public void API_Completed(JSONObject jsonObject) {
+            String status = null;
+            try {
+                status = (String) jsonObject.get("status");
+                String message = (String) jsonObject.get("message");
+                if (status.equals("success")) {
+                    Log.d(TAG, "success: " + message);
+                    // go back to DashBoard
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Submit Successfully", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    openDashBoard();
+                }
+            } catch (JSONException e) {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        jsonObject.toString(), Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                e.printStackTrace();
+            }
+        }
+    };
     private InspectionListener submitListener = new InspectionListener() {
 
         @Override
         public void Completed(int type, int button_order, double button_value, long start_timestamp, long response_timestamp) {
             //TODO submit
-            openDashBoard();
+            long end = System.currentTimeMillis();
+            try {
+                Submit_payload payload = new Submit_payload(mTest, start_inspection, end,
+                        new MetaData_Asset(getApplicationContext()));
+                new APIsTask(SubmitAPI, getApplicationContext()).execute("POST", APIs.SUBMIT, "", payload.getPayload().toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     };
     private InspectionListener inspectionListener = new InspectionListener() {
@@ -109,7 +140,8 @@ public class Inspection extends AppCompatActivity
                     e.printStackTrace();
                 }
                 // inflate submit dialog
-                Inspection_submit submit = new Inspection_submit(submitListener);
+                start_inspection = System.currentTimeMillis();
+                dialog_submit submit = new dialog_submit(submitListener);
                 submit.show(getSupportFragmentManager(),"submit");
             }
         }
@@ -165,11 +197,11 @@ public class Inspection extends AppCompatActivity
             // get control type
             switch (item.getName()){
                 case "Step":
-                    adapter.addFragment(new Inspection_step(item,items.getChecklists().size(),i, inspectionListener) ,
+                    adapter.addFragment(new fragment_step(item,items.getChecklists().size(),i, inspectionListener) ,
                             items.getChecklists().get(i).getId());
                     break;
                 case "Pass/Fail":
-                    adapter.addFragment(new Inspection_button(item,items.getChecklists().size(), i, inspectionListener),
+                    adapter.addFragment(new fragment_button(item,items.getChecklists().size(), i, inspectionListener),
                             items.getChecklists().get(i).getId());
                     break;
             }
@@ -207,7 +239,7 @@ public class Inspection extends AppCompatActivity
         mViewPager = findViewById(R.id.inspection_container);
         mViewPager.setAllowedSwipeDirection(SwipeDirection.left);
         // get payload
-        StartAPI_payload api_payload = new StartAPI_payload();
+        Start_payload api_payload = new Start_payload();
         String payload = api_payload.StartAPI_payload(getApplicationContext(), checklist_id,asset_id, asset_selection);
         // send payload to DB
         new APIsTask(StartListener, getApplicationContext()).execute("POST", APIs.START,"",payload);

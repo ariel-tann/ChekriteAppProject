@@ -27,11 +27,11 @@ import com.chekrite_group44.DashBoard.Dashboard;
 import com.chekrite_group44.DashBoard.WelcomeSplash;
 import com.chekrite_group44.R;
 
-public class Inspection_submit extends DialogFragment {
+public class dialog_submit extends DialogFragment {
 
     InspectionListener mlistener;
     Long start;
-    public Inspection_submit(InspectionListener mlistener) {
+    public dialog_submit(InspectionListener mlistener) {
         this.mlistener = mlistener;
     }
 

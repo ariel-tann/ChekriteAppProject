@@ -16,4 +16,5 @@ public interface APIs {
     String CHECKLIST = "checklist";
     String START = "start";
     String RESPONSES = "responses";
+    String SUBMIT = "submit";
 }

@@ -74,6 +74,9 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             case APIs.RESPONSES:
                 chekriteLink = chekriteLink + "responses";
                 break;
+            case APIs.SUBMIT:
+                chekriteLink = chekriteLink + "tests/submit";
+                break;
         }
 
         try {

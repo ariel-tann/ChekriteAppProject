@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_item;
 import com.chekrite_group44.R;
 
-public class Inspection_button extends Fragment {
+public class fragment_button extends Fragment {
     private ImageButton mbtn_pass;
     private ImageButton mbtn_fail;
     private Inspection_checklist_item mItem;
@@ -33,7 +33,7 @@ public class Inspection_button extends Fragment {
     int position;
     Long start;
     InspectionListener mlistener;
-    public Inspection_button(Inspection_checklist_item item, int total_items,int position, InspectionListener listener) {
+    public fragment_button(Inspection_checklist_item item, int total_items, int position, InspectionListener listener) {
         mItem = item;
         this.total_items = total_items;
         this.position = position;

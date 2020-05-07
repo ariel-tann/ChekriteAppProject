@@ -23,7 +23,7 @@ import com.chekrite_group44.Asset_Properties.Inspection_checklist_item;
 import com.chekrite_group44.MainActivity;
 import com.chekrite_group44.R;
 
-public class Inspection_step extends Fragment {
+public class fragment_step extends Fragment {
     private Button mStep;
     private Inspection_checklist_item mItem;
     TextView mDescription;
@@ -34,7 +34,7 @@ public class Inspection_step extends Fragment {
     private static final String TAG = "Inspection_step";
     private InspectionListener mlistener;
     Long start;
-    public Inspection_step(Inspection_checklist_item item, int total_items, int position, InspectionListener listener) {
+    public fragment_step(Inspection_checklist_item item, int total_items, int position, InspectionListener listener) {
         mItem = item;
         this.total_items = total_items;
         this.position = position;
