@@ -31,6 +31,7 @@ public class Inspection_button extends Fragment {
     ProgressBar mProgressBar;
     int total_items;
     int position;
+    Long start;
     InspectionListener mlistener;
     public Inspection_button(Inspection_checklist_item item, int total_items,int position, InspectionListener listener) {
         mItem = item;
@@ -51,14 +52,17 @@ public class Inspection_button extends Fragment {
         mTitle.setText(mItem.getName());
         mProgressBar = view.findViewById(R.id.inspection_progress);
         mProgressBar.setProgress((int)(((double)position+1)/(double)total_items*100));
-
+        // get item start timestamp
+        start = System.currentTimeMillis();
 
         mbtn_pass = view.findViewById(R.id.btn_pass);
         mbtn_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO　call response api and navigate to next fragment
-                mlistener.Completed();
+                Long end = System.currentTimeMillis();
+                mlistener.Completed(Control_TYPE.button,0,0,
+                        start, end);
             }
         });
         mbtn_fail = view.findViewById(R.id.btn_fail);
@@ -66,7 +70,9 @@ public class Inspection_button extends Fragment {
             @Override
             public void onClick(View v) {
                 // TODO　call response api and navigate to next fragment
-                mlistener.Completed();
+                Long end = System.currentTimeMillis();
+                mlistener.Completed(Control_TYPE.button,1,0,
+                        start, end);
             }
         });
         return view;

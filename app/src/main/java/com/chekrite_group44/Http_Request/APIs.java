@@ -15,4 +15,5 @@ public interface APIs {
     String SEARCH = "search";
     String CHECKLIST = "checklist";
     String START = "start";
+    String RESPONSES = "responses";
 }

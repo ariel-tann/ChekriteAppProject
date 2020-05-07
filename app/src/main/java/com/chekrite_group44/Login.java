@@ -34,12 +34,10 @@ import com.chekrite_group44.Http_Request.APIsListener;
 import com.chekrite_group44.Http_Request.APIsTask;
 import com.chekrite_group44.Permission.Permission;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,7 +47,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class Login extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
-
+    private static final String TAG = "Login";
     Button signIn_Btn;
     TextView company_Name;
     ImageView company_splash_portait;
@@ -253,7 +251,6 @@ public class Login extends AppCompatActivity
                 mEIDPinView.show(getSupportFragmentManager(),"employID");
             }
         });
-
 
     }
 

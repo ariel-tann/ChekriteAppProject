@@ -30,7 +30,7 @@ import com.chekrite_group44.R;
 public class Inspection_submit extends DialogFragment {
 
     InspectionListener mlistener;
-
+    Long start;
     public Inspection_submit(InspectionListener mlistener) {
         this.mlistener = mlistener;
     }
@@ -53,6 +53,8 @@ public class Inspection_submit extends DialogFragment {
         // convert color to drawable
         ColorDrawable cd = new ColorDrawable(Color.parseColor(highlight_colour));
         txt_complete.setBackground(cd);
+        //
+        start = System.currentTimeMillis();
         // cancel button
         Button mbtn_Cancel = view.findViewById(R.id.submit_cancel);
         mbtn_Cancel.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +69,9 @@ public class Inspection_submit extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
-                mlistener.Completed();
+                Long end = System.currentTimeMillis();
+                mlistener.Completed(Control_TYPE.button,0,0,
+                        start, end);
             }
         });
     }

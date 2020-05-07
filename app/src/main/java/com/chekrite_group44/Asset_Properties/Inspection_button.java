@@ -12,6 +12,7 @@ import org.json.JSONObject;
 public class Inspection_button {
     int id;
     String label;
+    int status;
     String color;
     int display_extra_info;
     String value;
@@ -20,6 +21,7 @@ public class Inspection_button {
     public Inspection_button(JSONObject button) throws JSONException {
         id = button.getInt("id");
         label = button.getString("label");
+        status = button.getInt("status");
         color = button.getString("color");
         display_extra_info = button.getInt("display_extra_info");
         value = button.getString("value");
@@ -48,5 +50,9 @@ public class Inspection_button {
 
     public int getOrder() {
         return order;
+    }
+
+    public int getStatus() {
+        return status;
     }
 }

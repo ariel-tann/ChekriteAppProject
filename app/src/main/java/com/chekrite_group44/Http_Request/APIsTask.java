@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Login;
@@ -28,7 +29,7 @@ import java.net.URL;
 public class APIsTask extends AsyncTask<String, Void, String> {
     APIsListener mAPIsListener;
     Context mContext;
-
+    private static final String TAG = "APIsTask";
     public APIsTask(APIsListener apIsListener, Context context) {
         // APIsListener: When API gets response from DB, it will notify user
         // context: used for getting share preference
@@ -70,10 +71,13 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             case APIs.START:
                 chekriteLink = chekriteLink + "tests/start";
                 break;
+            case APIs.RESPONSES:
+                chekriteLink = chekriteLink + "responses";
+                break;
         }
 
         try {
-            Log.d("KAI", params[0]+" URL: "+ chekriteLink);
+            Log.d(TAG, params[0]+" URL: "+ chekriteLink);
             url = new URL(chekriteLink);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -84,7 +88,7 @@ public class APIsTask extends AsyncTask<String, Void, String> {
 //            LOGIN and PAIR don't require token
             if(token.length()>0 && params[1]!=APIs.LOGIN && params[1]!=APIs.PAIR){
                 connection.setRequestProperty("Authorization", "Bearer "+token);
-                Log.d("KAI","Token: "+token);
+                Log.d(TAG,"Token: "+token);
             }
             // define http property
             connection.setRequestProperty("Accept", "application/json");
@@ -101,6 +105,7 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             // Write body
             if (params[3].length() > 0) {
 //                 only write body, when params[2] has value
+                Log.d(TAG, "info sending to DB\n"+params[3]);
                 DataOutputStream out = new DataOutputStream(connection.getOutputStream());
                 out.writeBytes(params[3]);
                 connection.connect();
@@ -110,7 +115,7 @@ public class APIsTask extends AsyncTask<String, Void, String> {
                 connection.connect();
             }
             // Response from Server
-            Log.d("KAI", "Response: "+connection.getResponseMessage() + "");
+            Log.d(TAG, "Response: "+connection.getResponseMessage() + "");
             // use BufferedReader to parse response to String variable
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder stringBuilder = new StringBuilder();
@@ -130,14 +135,14 @@ public class APIsTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String response) {
         //Action after Execute
         if (response!=null) {
-            Log.d("KAI", "response: \n" + response);
+            Log.d(TAG, "response: \n" + response);
             try {
                 mAPIsListener.API_Completed(new JSONObject(response));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }else{
-            Log.d("KAI", "Error: JSONObject null");
+            Log.d(TAG, "Error: JSONObject null");
         }
     }
 }

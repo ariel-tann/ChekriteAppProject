@@ -33,6 +33,7 @@ public class Inspection_step extends Fragment {
     int position;
     private static final String TAG = "Inspection_step";
     private InspectionListener mlistener;
+    Long start;
     public Inspection_step(Inspection_checklist_item item, int total_items, int position, InspectionListener listener) {
         mItem = item;
         this.total_items = total_items;
@@ -51,13 +52,17 @@ public class Inspection_step extends Fragment {
         mTitle.setText(mItem.getName());
         mProgressBar = view.findViewById(R.id.inspection_progress);
         mProgressBar.setProgress((int)(((double)position+1)/(double)total_items*100));
+        // get item start timestamp
+        start = System.currentTimeMillis();
 
         mStep = view.findViewById(R.id.btn_step);
         mStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO　call response api and navigate to next fragment
-                mlistener.Completed();
+                Long end = System.currentTimeMillis();
+                mlistener.Completed(Control_TYPE.button,0,0,
+                        start, end);
             }
         });
         return view;

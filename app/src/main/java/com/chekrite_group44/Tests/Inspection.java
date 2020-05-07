@@ -20,7 +20,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -29,10 +28,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_item;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_items;
+import com.chekrite_group44.Asset_Properties.Inspection_test;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.DashBoard.Dashboard;
-import com.chekrite_group44.DashBoard.WelcomeSplash;
-import com.chekrite_group44.PinView.Chekrite_PinView;
+import com.chekrite_group44.MetaData.MetaData;
+import com.chekrite_group44.MetaData.MetaData_Asset;
 import com.chekrite_group44.R;
 import com.chekrite_group44.Http_Request.APIs;
 import com.chekrite_group44.Http_Request.APIsListener;
@@ -49,30 +49,65 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class Inspection extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
-
+    private static final String TAG = "Inspection";
     private Permission mPermission;
     TextView txt_inspection;
     private Inspection_PagerAdapter mPagerAdapter;
     private ViewPager mViewPager;
     Inspection_checklist_items mItems;
-    private InspectionListener submitListener = new InspectionListener() {
+    Inspection_test mTest;
+    private APIsListener ResponseAPI = new APIsListener() {
         @Override
-        public void Completed() {
-            // submit inspection
+        public void API_Completed(JSONObject jsonObject) {
+            String status = null;
+            try {
+                status = (String) jsonObject.get("status");
+                String message = (String) jsonObject.get("message");
+                if (status.equals("success")) {
+                    Log.d(TAG, "success: " + message);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+    private InspectionListener submitListener = new InspectionListener() {
 
-            // go back DashBoard
+        @Override
+        public void Completed(int type, int button_order, double button_value, long start_timestamp, long response_timestamp) {
+            //TODO submit
             openDashBoard();
         }
     };
     private InspectionListener inspectionListener = new InspectionListener() {
+
         @Override
-        public void Completed() {
+        public void Completed(int type, int button_order, double button_value, long start_timestamp, long response_timestamp) {
             if (mViewPager.getCurrentItem()<mItems.getChecklists().size()-1) {
-                // TODO call API response
+                // get which item is completed
+                Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
+                // get response payload
+                try {
+                    Response_payload payload = new Response_payload(item, mTest, type, button_order, button_value,
+                            start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
+                    new APIsTask(ResponseAPI, getApplicationContext()).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 // switch to next page
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
             }else{
-                // TODO setup submit
+                // The last item
+                Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
+                // get response payload
+                try {
+                    Response_payload payload = new Response_payload(item, mTest, type, button_order, button_value,
+                            start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
+                    new APIsTask(ResponseAPI, getApplicationContext()).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                // inflate submit dialog
                 Inspection_submit submit = new Inspection_submit(submitListener);
                 submit.show(getSupportFragmentManager(),"submit");
             }
@@ -91,6 +126,7 @@ public class Inspection extends AppCompatActivity
                     txt_inspection.setText(checklist.getName());
                     JSONArray jchecklist_items = data.getJSONArray("checklist_items");
                     mItems = new Inspection_checklist_items(jchecklist_items);
+                    mTest = new Inspection_test(data.getJSONObject("test"));
                     // Create Recycle View
                     mPagerAdapter = new Inspection_PagerAdapter(getSupportFragmentManager(),
                             FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
