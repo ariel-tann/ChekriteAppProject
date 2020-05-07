@@ -16,7 +16,7 @@
         layout="@layout/inspection_toolbar" />
 
 
-    <androidx.viewpager.widget.ViewPager
+    <com.chekrite_group44.Tests.InspectionViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/inspection_container"

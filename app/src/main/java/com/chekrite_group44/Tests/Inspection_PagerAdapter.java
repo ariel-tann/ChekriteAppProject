@@ -6,6 +6,8 @@
 
 package com.chekrite_group44.Tests;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -14,9 +16,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 public class Inspection_PagerAdapter extends FragmentPagerAdapter {
+    private static final String TAG = "Inspection_PagerAdapter";
     ArrayList<Fragment> mFragmentList = new ArrayList<>();
     ArrayList<Integer> mFragmentID = new ArrayList<>();
-
+    int previou_page = 0;
     public Inspection_PagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }

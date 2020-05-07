@@ -53,9 +53,10 @@ public class Inspection extends AppCompatActivity
     private Permission mPermission;
     TextView txt_inspection;
     private Inspection_PagerAdapter mPagerAdapter;
-    private ViewPager mViewPager;
+    private InspectionViewPager mViewPager;
     Inspection_checklist_items mItems;
     Inspection_test mTest;
+
     private APIsListener ResponseAPI = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -130,7 +131,7 @@ public class Inspection extends AppCompatActivity
                     // Create Recycle View
                     mPagerAdapter = new Inspection_PagerAdapter(getSupportFragmentManager(),
                             FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
-                    mViewPager = findViewById(R.id.inspection_container);
+
                     // setup the pager
                     setupViewPager(mViewPager, mItems);
 
@@ -202,7 +203,9 @@ public class Inspection extends AppCompatActivity
         String checklist_id=getIntent().getStringExtra("checklist_id");
         int asset_id = getIntent().getIntExtra("asset_id", 0);
         String asset_selection = getIntent().getStringExtra("asset_selection");
-
+        // disable fragment swipe left
+        mViewPager = findViewById(R.id.inspection_container);
+        mViewPager.setAllowedSwipeDirection(SwipeDirection.left);
         // get payload
         StartAPI_payload api_payload = new StartAPI_payload();
         String payload = api_payload.StartAPI_payload(getApplicationContext(), checklist_id,asset_id, asset_selection);
