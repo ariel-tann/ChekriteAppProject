@@ -6,6 +6,7 @@
 
 package com.chekrite_group44.Tests;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,7 +47,7 @@ import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class Inspection extends AppCompatActivity
+public class Inspection_main extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
     private static final String TAG = "Inspection";
     private Permission mPermission;
@@ -56,6 +57,7 @@ public class Inspection extends AppCompatActivity
     Inspection_checklist_items mItems;
     Inspection_test mTest;
     long start_inspection;
+    ProgressDialog dialog;
     private APIsListener ResponseAPI = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -79,6 +81,7 @@ public class Inspection extends AppCompatActivity
                 status = (String) jsonObject.get("status");
                 String message = (String) jsonObject.get("message");
                 if (status.equals("success")) {
+                    dialog.dismiss();
                     Log.d(TAG, "success: " + message);
                     // go back to DashBoard
                     Toast toast = Toast.makeText(getApplicationContext(),
@@ -88,6 +91,7 @@ public class Inspection extends AppCompatActivity
                     openDashBoard();
                 }
             } catch (JSONException e) {
+                dialog.dismiss();
                 Toast toast = Toast.makeText(getApplicationContext(),
                         jsonObject.toString(), Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
@@ -103,6 +107,12 @@ public class Inspection extends AppCompatActivity
             //TODO submit
             long end = System.currentTimeMillis();
             try {
+                dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                dialog.setTitle("Submit Results");
+                dialog.setMessage("Please wait...");
+                dialog.setIndeterminate(true);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
                 Submit_payload payload = new Submit_payload(mTest, start_inspection, end,
                         new MetaData_Asset(getApplicationContext()));
                 new APIsTask(SubmitAPI, getApplicationContext()).execute("POST", APIs.SUBMIT, "", payload.getPayload().toString());
@@ -243,7 +253,8 @@ public class Inspection extends AppCompatActivity
         String payload = api_payload.StartAPI_payload(getApplicationContext(), checklist_id,asset_id, asset_selection);
         // send payload to DB
         new APIsTask(StartListener, getApplicationContext()).execute("POST", APIs.START,"",payload);
-
+        //
+        dialog = new ProgressDialog(this); // Login log
     }
 
     @Override

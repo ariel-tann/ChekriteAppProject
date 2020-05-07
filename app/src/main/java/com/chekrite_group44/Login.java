@@ -139,6 +139,7 @@ public class Login extends AppCompatActivity
                     openWelcomeSplash(profile_photo,first_name,last_name);
 
                 }else{
+                    dialog.dismiss();
                     String message = jsonObject.getString("message");
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Error: "+message, Toast.LENGTH_LONG);

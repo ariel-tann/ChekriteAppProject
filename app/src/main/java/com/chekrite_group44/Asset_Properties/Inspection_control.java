@@ -6,10 +6,6 @@
 
 package com.chekrite_group44.Asset_Properties;
 
-import android.util.Log;
-
-import com.chekrite_group44.Tests.Inspection;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

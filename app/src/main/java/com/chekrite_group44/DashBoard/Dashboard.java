@@ -29,7 +29,7 @@ import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
-import com.chekrite_group44.Tests.Inspection;
+import com.chekrite_group44.Tests.Inspection_main;
 import com.chekrite_group44.Http_Request.APIs;
 import com.chekrite_group44.Http_Request.APIsListener;
 import com.chekrite_group44.Http_Request.APIsTask;
@@ -134,7 +134,7 @@ public class Dashboard extends AppCompatActivity {
 
     }
     private void openInspection() {
-        Intent intent = new Intent(this, Inspection.class);
+        Intent intent = new Intent(this, Inspection_main.class);
         intent.putExtra("checklist_id", "5011");
         intent.putExtra("asset_id", 28436);
         intent.putExtra("asset_selection", "search");

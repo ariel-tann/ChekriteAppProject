@@ -95,7 +95,7 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             }
             // define http property
             connection.setRequestProperty("Accept", "application/json");
-            connection.setRequestProperty("Content-type", "application/json");
+            connection.setRequestProperty("Content-type", "application/json;charset=utf-8");
             connection.setRequestProperty("Host", "apitest.mychekrite.com");
             connection.setRequestProperty("Connection", "Keep-Alive");
             connection.setRequestProperty("Accept-Encoding", "gzip");

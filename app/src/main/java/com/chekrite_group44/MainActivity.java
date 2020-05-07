@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity
                     openLoginScreen();
                 }else{
                     // Fail
+                    dialog.dismiss();
                     Log.d("KAI","Pair fail");
                     String message = jsonObject.getString("message");
                     Toast toast = Toast.makeText(getApplicationContext(),

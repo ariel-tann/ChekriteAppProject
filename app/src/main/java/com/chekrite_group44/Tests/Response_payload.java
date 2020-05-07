@@ -32,9 +32,9 @@ public class Response_payload {
     int control_button_id = 0;
     int control_gauge_band_id = 0;
     String date_value;
-    long duration;
+    String duration;
     int evaluation_result = 0;
-    JSONArray extra_infos;
+    JSONArray extra_infos = new JSONArray();
     double gauge_value;
     double lat;
     double lng;
@@ -48,7 +48,7 @@ public class Response_payload {
     String score = "0";
     int status;
     int sub_test_id = 0;
-    JSONArray subq_responses;
+    JSONArray subq_responses = new JSONArray();
     int test_heartbeat_id = 0;
     int test_id;
     int text_value = 0;
@@ -70,7 +70,7 @@ public class Response_payload {
                 break;
         }
         date_value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-        duration = TimeUnit.MILLISECONDS.toSeconds(end - start);
+        duration = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(end - start));
         lat = metaData.getDevice_lat();
         lng = metaData.getDevice_lng();
         left = item.getLeft();
@@ -103,13 +103,15 @@ public class Response_payload {
         payload.put("repetitions", repetitions == 0?JSONObject.NULL:repetitions);
         payload.put("response_timestamp", response_timestamp);
         payload.put("score", score);
+        payload.put("status", status);
         payload.put("sub_test_id", sub_test_id == 0?JSONObject.NULL:sub_test_id);
         payload.put("subq_responses", subq_responses);
-        payload.put("test_heartbeat_id", test_heartbeat_id);
+        payload.put("test_heartbeat_id", test_heartbeat_id == 0?JSONObject.NULL:test_heartbeat_id);
         payload.put("test_id", test_id);
         payload.put("text_value", text_value == 0?JSONObject.NULL:text_value);
         payload.put("type", type);
         payload.put("meta",metaData.getjObject());
+        Log.d(TAG, payload.toString());
     }
     public JSONObject getPayload() {
         return payload;
