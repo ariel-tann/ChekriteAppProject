@@ -62,23 +62,19 @@
         android:layout_weight="1"
         android:gravity="center|bottom"
         android:orientation="horizontal">
-        <ImageButton
-            android:id="@+id/btn_pass"
+
+        <Button
+            android:id="@+id/inspection_btn1"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/btn_pass_selector"
-            android:background="@null"
-            android:scaleType="centerCrop"/>
+            android:layout_height="100dp"/>
         <Space
             android:layout_width="50dp"
             android:layout_height="0dp"/>
-        <ImageButton
-            android:id="@+id/btn_fail"
+        <Button
+            android:id="@+id/inspection_btn2"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@null"
-            android:src="@drawable/btn_fail_selector"
-            android:scaleType="centerCrop"/>
+            android:layout_height="100dp"/>
+
     </LinearLayout>
     <Space
         android:layout_width="match_parent"
