@@ -16,7 +16,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.dashBoard;
+package com.chekrite_group44.DashBoard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 
@@ -46,7 +47,7 @@ public class WelcomeSplash extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_splash);
 
         //Set background color
-        SharedPreferences pref = getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         String highlight_colour = pref.getString("highlight_colour", "#65cb81");
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar2);
         toolbar.setBackgroundColor(Color.parseColor(highlight_colour));

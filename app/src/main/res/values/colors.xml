@@ -7,5 +7,7 @@
     <color name="dark_gray">#666666</color>
     <color name="font_gray">#555555</color>
     <color name="white">#FFFFFF</color>
-    <color name="lime_green">#65cb81</color>
+    <color name="lime_green">#14D175</color>
+    <color name="light_blue">#4F8EEC</color>
+    <color name="gold">#E4BB3B</color>
 </resources>

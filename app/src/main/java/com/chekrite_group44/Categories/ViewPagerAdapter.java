@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.categories;
+package com.chekrite_group44.Categories;
 
 public class ViewPagerAdapter {
 

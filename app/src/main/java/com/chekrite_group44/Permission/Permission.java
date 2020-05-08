@@ -5,7 +5,7 @@
  * This class to ask the user for permission to camera and recording.
  */
 
-package com.chekrite_group44.permission;
+package com.chekrite_group44.Permission;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;

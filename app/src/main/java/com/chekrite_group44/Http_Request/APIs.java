@@ -3,7 +3,7 @@
  * This file is created by Kai.
  * Summary:
  */
-package com.chekrite_group44.http_request;
+package com.chekrite_group44.Http_Request;
 
 //    Define API's ID
 public interface APIs {
@@ -15,4 +15,6 @@ public interface APIs {
     String SEARCH = "search";
     String CHECKLIST = "checklist";
     String START = "start";
+    String RESPONSES = "responses";
+    String SUBMIT = "submit";
 }

@@ -4,11 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -18,10 +18,10 @@ import android.widget.Toast;
 import com.chekrite_group44.MetaData.MetaData;
 import com.chekrite_group44.PinView.Chekrite_PinView;
 import com.chekrite_group44.PinView.PinListener;
-import com.chekrite_group44.http_request.APIs;
-import com.chekrite_group44.http_request.APIsListener;
-import com.chekrite_group44.http_request.APIsTask;
-import com.chekrite_group44.permission.Permission;
+import com.chekrite_group44.Http_Request.APIs;
+import com.chekrite_group44.Http_Request.APIsListener;
+import com.chekrite_group44.Http_Request.APIsTask;
+import com.chekrite_group44.Permission.Permission;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,9 +36,7 @@ public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
     private Permission mPermission;
     private Button mBtnSubmit;
-    private static final String FILE_NAME = "pair.txt";
-    private static final String SHARED_PREFS = "sharedPrefs";
-
+    ProgressDialog dialog;
 
     private APIsListener apIsListener = new APIsListener() {
         @Override
@@ -47,6 +45,7 @@ public class MainActivity extends AppCompatActivity
             try {
                 String status = (String) jsonObject.get("status");
                 if(status.equals("success")){
+                    // extract auth_code, company, site, splash_portrait and highlight_colour
                     JSONObject data = jsonObject.getJSONObject("data");
                     JSONObject device = data.getJSONObject("device");
                     String udif = device.getString("udid");
@@ -58,31 +57,22 @@ public class MainActivity extends AppCompatActivity
                     String highlight_colour = company.getString("highlight_colour");
                     JSONObject site = data.getJSONObject("site");
                     String site_name = site.getString("name");
-//                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    SharedPreferences pref = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+                    // put these info in share preference
+                    SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("device_udid",udif);
+                    editor.putString("auth_code", auth_code);
                     editor.putString("company", company_name);
+                    editor.putString("site", site_name);
                     editor.putString("highlight_colour", highlight_colour);
                     editor.putString("splash_portrait", splash_portrait);
                     editor.apply();
-                    JSONObject pair_credent = new JSONObject();
-                    pair_credent.put("device_udid", udif);
-                    pair_credent.put("auth_code", auth_code);
-                    pair_credent.put("company", company_name);
-                    pair_credent.put("site", site_name);
-                    pair_credent.put("highlight_colour", highlight_colour);
-                    FileOutputStream outputStream;
-                    try {
-                        outputStream = openFileOutput(FILE_NAME , Context.MODE_PRIVATE);
-                        outputStream.write(pair_credent.toString().getBytes());
-                        outputStream.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    //TODO go to setup_progress xml and download image
-
+                    // close login dialog
+                    dialog.dismiss();
                     openLoginScreen();
                 }else{
+                    // Fail
+                    dialog.dismiss();
                     Log.d("KAI","Pair fail");
                     String message = jsonObject.getString("message");
                     Toast toast = Toast.makeText(getApplicationContext(),
@@ -109,7 +99,13 @@ public class MainActivity extends AppCompatActivity
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//            Log.d("KAI", jsonObject.toString());
+            // login dialog
+            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dialog.setTitle("Pairing");
+            dialog.setMessage("Please wait...");
+            dialog.setIndeterminate(true);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
             new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.PAIR, "", jsonObject.toString());
         }
     };
@@ -117,7 +113,7 @@ public class MainActivity extends AppCompatActivity
     private View.OnClickListener submitListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//             create a fragment to show PinView
+//             create a dialog fragment to show PinView
             Chekrite_PinView pinView = new Chekrite_PinView(Chekrite_PinView.SETUP, mPinListen);
             pinView.show(getSupportFragmentManager(),"pin");
         }
@@ -126,10 +122,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO check if auth file exists
         setContentView(R.layout.activity_main);
-        File file = getBaseContext().getFileStreamPath(FILE_NAME);
-        if(file.exists()){
+        // if the device has paired, then go to login screen
+        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
+        if(pref.contains("device_udid")){
             openLoginScreen();
         }
         mPermission = new Permission(this, this);
@@ -137,14 +133,14 @@ public class MainActivity extends AppCompatActivity
         mBtnSubmit = findViewById(R.id.setupApp_btn);
         mBtnSubmit.setOnClickListener(submitListener);
 
+        dialog = new ProgressDialog(this); // Login log
+
     }
 
     public void openLoginScreen() {
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

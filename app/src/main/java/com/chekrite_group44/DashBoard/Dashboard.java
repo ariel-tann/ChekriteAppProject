@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.dashBoard;
+package com.chekrite_group44.DashBoard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,17 +25,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Asset_Properties.Asset_Classes;
 import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
+import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Login;
-import com.chekrite_group44.MetaData.MetaData;
-import com.chekrite_group44.MetaData.MetaData_Asset;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
-import com.chekrite_group44.Tests.Inspection;
-import com.chekrite_group44.http_request.APIs;
-import com.chekrite_group44.http_request.APIsListener;
-import com.chekrite_group44.http_request.APIsTask;
+import com.chekrite_group44.Tests.Inspection_main;
+import com.chekrite_group44.Http_Request.APIs;
+import com.chekrite_group44.Http_Request.APIsListener;
+import com.chekrite_group44.Http_Request.APIsTask;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -59,7 +57,7 @@ public class Dashboard extends AppCompatActivity {
                     Log.d("KAI","number of asset classes: "+asset_classes.size());
                     Log.d("KAI",""+asset_classes.get(0).getAssets().get(0).getUnit_number());
                 }else{
-                    // TODO logout fail
+
                 }
 
             } catch (JSONException e) {
@@ -82,25 +80,29 @@ public class Dashboard extends AppCompatActivity {
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }else{
-                    // TODO logout fail
+                    String message = jsonObject.getString("message");
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Error: "+message, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
         //Set background color
-        SharedPreferences pref = getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         String highlight_colour = pref.getString("highlight_colour", "#65cb81");
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
-
-        photo_url=getIntent().getStringExtra("profile_image");
+        photo_url = pref.getString("profile_photo", "");
         profile_button_photo = findViewById(R.id.btn_profile);
         //get_btn_profile
         Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_button_photo);
@@ -132,9 +134,9 @@ public class Dashboard extends AppCompatActivity {
 
     }
     private void openInspection() {
-        Intent intent = new Intent(this, Inspection.class);
-        intent.putExtra("checklist_id", "4924");
-        intent.putExtra("asset_id", 28445);
+        Intent intent = new Intent(this, Inspection_main.class);
+        intent.putExtra("checklist_id", "5011");
+        intent.putExtra("asset_id", 28436);
         intent.putExtra("asset_selection", "search");
         startActivity(intent);
     }

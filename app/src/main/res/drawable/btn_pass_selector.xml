@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.5.6
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/pass_dark" android:state_selected="true"></item>
+    <item android:drawable="@drawable/pass_dark" android:state_pressed="true"></item>
+    <item android:drawable="@drawable/pass"></item>
+</selector>

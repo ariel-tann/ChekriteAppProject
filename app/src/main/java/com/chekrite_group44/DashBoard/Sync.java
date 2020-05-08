@@ -16,7 +16,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.dashBoard;
+package com.chekrite_group44.DashBoard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

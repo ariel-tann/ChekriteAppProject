@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.http_request;
+package com.chekrite_group44.Http_Request;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

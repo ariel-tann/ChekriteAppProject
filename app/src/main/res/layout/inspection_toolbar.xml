@@ -16,7 +16,7 @@
         android:layout_height="match_parent">
         <ImageButton
             android:id="@+id/question_menu"
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:background="@null"
             android:src="@drawable/question_option"

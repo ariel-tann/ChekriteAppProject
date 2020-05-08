@@ -35,6 +35,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 
@@ -202,22 +203,7 @@ public class Chekrite_PinView extends DialogFragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 //        set style for dialog add
-        switch (Type_PinView) {
-            case EMPLOY_ID:
-                setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme);
-                break;
-            case EMPLOY_PIN:
-                setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme);
-                break;
-            case SETUP:
-                setStyle(DialogFragment.STYLE_NORMAL, R.style.WelcomeTheme);
-                break;
-            default:
-                setStyle(DialogFragment.STYLE_NORMAL, R.style.WelcomeTheme);
-                break;
-        }
-
-
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.PopupOverlay);
     }
 
     @Nullable
@@ -266,7 +252,7 @@ public class Chekrite_PinView extends DialogFragment {
                 break;
         }
         // get color and set to btn background
-        SharedPreferences pref = view.getContext().getSharedPreferences(Login.SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences pref = view.getContext().getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         highlight_colour = pref.getString("highlight_colour", "#65cb81");
 
         // initial digit and assign a listener

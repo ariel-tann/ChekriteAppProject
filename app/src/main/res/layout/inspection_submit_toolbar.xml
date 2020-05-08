@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.5.6
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<!--
+  ~ Date: 2020.4.4
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/lime_green"
+    app:popupTheme="@style/ToolbarStyle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/submit_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:text="Cancel"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:orientation="horizontal">
+            <ImageButton
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:src="@drawable/view_result_selector"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                />
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.appcompat.widget.Toolbar>
