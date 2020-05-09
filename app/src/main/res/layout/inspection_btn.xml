@@ -62,18 +62,10 @@
         android:layout_weight="1"
         android:gravity="center|bottom"
         android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/inspection_btn1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
-        <Space
-            android:layout_width="50dp"
-            android:layout_height="0dp"/>
-        <Button
-            android:id="@+id/inspection_btn2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
+        <TableLayout
+            android:id="@+id/insp_t_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
     <Space
