@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.5.11
+  ~ This file is created by Ariel.
+  ~ Summary:
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/zeroTo9_btn"
+        android:layout_width="103dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/keyboard_button"
+        android:text="0-9"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toTopOf="@+id/g_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintStart_toEndOf="@+id/aToZ_btn" />
+
+    <Button
+        android:id="@+id/w_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="W"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/c_btn"
+        app:layout_constraintStart_toEndOf="@+id/a_btn"
+        app:layout_constraintTop_toBottomOf="@+id/p_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/backspace_btn"
+        android:layout_width="104dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="Back"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintStart_toEndOf="@+id/e_btn"
+        app:layout_constraintTop_toBottomOf="@+id/t_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/x_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:background="@drawable/keyboard_button"
+        android:text="X"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/d_btn"
+        app:layout_constraintStart_toEndOf="@+id/b_btn"
+        app:layout_constraintTop_toBottomOf="@+id/q_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/v_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="V"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/b_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/o_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/y_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="Y"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/e_btn"
+        app:layout_constraintStart_toEndOf="@+id/c_btn"
+        app:layout_constraintTop_toBottomOf="@+id/r_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/z_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="Z"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/f_btn"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toEndOf="@+id/d_btn"
+        app:layout_constraintTop_toBottomOf="@+id/s_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/t_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="T"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/g_btn"
+        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintStart_toEndOf="@+id/e_btn"
+        app:layout_constraintTop_toBottomOf="@+id/m_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/u_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="U"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toEndOf="@+id/f_btn"
+        app:layout_constraintTop_toBottomOf="@+id/n_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/p_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="P"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/c_btn"
+        app:layout_constraintStart_toEndOf="@+id/a_btn"
+        app:layout_constraintTop_toBottomOf="@+id/i_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/s_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="S"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/t_btn"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toEndOf="@+id/r_btn"
+        app:layout_constraintTop_toBottomOf="@+id/l_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/q_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:background="@drawable/keyboard_button"
+        android:text="Q"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/d_btn"
+        app:layout_constraintStart_toEndOf="@+id/b_btn"
+        app:layout_constraintTop_toBottomOf="@+id/j_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/r_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="R"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/e_btn"
+        app:layout_constraintStart_toEndOf="@+id/c_btn"
+        app:layout_constraintTop_toBottomOf="@+id/k_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/o_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="O"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/b_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/h_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/k_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="K"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/e_btn"
+        app:layout_constraintStart_toEndOf="@+id/c_btn"
+        app:layout_constraintTop_toBottomOf="@+id/d_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/c_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:background="@drawable/keyboard_button"
+        android:text="C"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/d_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/b_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <Button
+        android:id="@+id/g_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="G"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/f_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <Button
+        android:id="@+id/h_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="H"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/b_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/a_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/l_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="L"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/f_btn"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toEndOf="@+id/d_btn"
+        app:layout_constraintTop_toBottomOf="@+id/e_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/m_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="M"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/g_btn"
+        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintStart_toEndOf="@+id/e_btn"
+        app:layout_constraintTop_toBottomOf="@+id/f_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/d_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="D"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/e_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/c_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <Button
+        android:id="@+id/n_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="N"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toEndOf="@+id/f_btn"
+        app:layout_constraintTop_toBottomOf="@+id/g_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/b_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="B"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/c_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/a_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <Button
+        android:id="@+id/j_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:background="@drawable/keyboard_button"
+        android:text="J"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/d_btn"
+        app:layout_constraintStart_toEndOf="@+id/b_btn"
+        app:layout_constraintTop_toBottomOf="@+id/c_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/f_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="F"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/g_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/e_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <Button
+        android:id="@+id/i_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="I"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/c_btn"
+        app:layout_constraintStart_toEndOf="@+id/a_btn"
+        app:layout_constraintTop_toBottomOf="@+id/b_btn"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <Button
+        android:id="@+id/e_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="E"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/f_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/d_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <Button
+        android:id="@+id/a_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/keyboard_button"
+        android:text="A"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/b_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <Button
+        android:id="@+id/aToZ_btn"
+        android:layout_width="103dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/keyboard_button"
+        android:text="A-Z"
+        android:textColor="@drawable/keyboard_button_text_color"
+        app:layout_constraintBottom_toTopOf="@+id/a_btn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
