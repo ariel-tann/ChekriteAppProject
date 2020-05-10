@@ -78,7 +78,8 @@ public class Response_payload {
         order = item.getOrder();
         parent_id = item.getParent_id();
 
-        response_timestamp = String.valueOf(System.currentTimeMillis()/1000);
+        response_timestamp = String.format("%.3f",System.currentTimeMillis()/1000.0);
+        Log.d(TAG,"response_timestamp: "+ response_timestamp);
         // get button status
         status = item.getControl().getButtons().get(btn_order).getStatus();
         test_id = test.getId();

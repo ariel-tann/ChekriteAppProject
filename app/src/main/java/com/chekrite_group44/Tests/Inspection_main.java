@@ -205,14 +205,15 @@ public class Inspection_main extends AppCompatActivity
             // get single item
             Inspection_checklist_item item = items.getChecklists().get(i);
             // get control type
-            switch (item.getName()){
-                case "Step":
-                    adapter.addFragment(new fragment_step(item,items.getChecklists().size(),i, inspectionListener) ,
-                            items.getChecklists().get(i).getId());
-                    break;
-                case "Pass/Fail":
-                    adapter.addFragment(new fragment_button(item,items.getChecklists().size(), i, inspectionListener),
-                            items.getChecklists().get(i).getId());
+            switch (item.getControl().getType()){
+                case "buttons":
+                    if (item.getControl().getName().equals("Step"))
+                        adapter.addFragment(new fragment_step(item,items.getChecklists().size(),i, inspectionListener) ,
+                                items.getChecklists().get(i).getId());
+                    else
+                        // only works for two buttons
+                        adapter.addFragment(new fragment_button(item,items.getChecklists().size(), i, inspectionListener),
+                                items.getChecklists().get(i).getId());
                     break;
             }
         }

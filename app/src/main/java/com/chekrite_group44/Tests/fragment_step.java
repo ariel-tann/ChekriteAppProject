@@ -6,6 +6,7 @@
 
 package com.chekrite_group44.Tests;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,8 +55,16 @@ public class fragment_step extends Fragment {
         mProgressBar.setProgress((int)(((double)position+1)/(double)total_items*100));
         // get item start timestamp
         start = System.currentTimeMillis();
-
         mStep = view.findViewById(R.id.btn_step);
+        // set button features
+        String btn1_color = mItem.getControl().getButtons().get(0).getColor();
+        String lbl1 = mItem.getControl().getButtons().get(0).getLabel();
+        mStep.setText(lbl1);
+        mStep.setTextSize(20);
+        mStep.setAllCaps(false);
+        mStep.setTextColor(view.getContext().getColor(R.color.white));
+        mStep.setBackgroundColor(Color.parseColor(btn1_color));
+
         mStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

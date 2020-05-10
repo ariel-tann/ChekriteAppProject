@@ -62,23 +62,11 @@
         android:layout_weight="1"
         android:gravity="center|bottom"
         android:orientation="horizontal">
-        <ImageButton
-            android:id="@+id/btn_pass"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/btn_pass_selector"
-            android:background="@null"
-            android:scaleType="centerCrop"/>
-        <Space
-            android:layout_width="50dp"
-            android:layout_height="0dp"/>
-        <ImageButton
-            android:id="@+id/btn_fail"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@null"
-            android:src="@drawable/btn_fail_selector"
-            android:scaleType="centerCrop"/>
+        <TableLayout
+            android:id="@+id/insp_t_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
     <Space
         android:layout_width="match_parent"
