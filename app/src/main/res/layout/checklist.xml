@@ -101,7 +101,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
-        android:id="@+id/asset_view"
+        android:id="@+id/relativeLayout"
         android:layout_width="411dp"
         android:layout_height="134dp"
         android:layout_below="@+id/categories_toolbar"
@@ -118,35 +118,19 @@
         <ImageView
 
             android:id="@+id/asset_image"
-            android:layout_width="112dp"
-            android:layout_height="113dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/avatar"
             app:srcCompat="@drawable/btn_background" />
-
-    <RelativeLayout
-        android:id="@+id/asset_text_detail"
-        android:layout_width="411dp"
-        android:layout_height="134dp"
-        android:layout_toEndOf="@+id/asset_image"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:padding="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
->
 
         <TextView
             android:id="@+id/asset_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@id/asset_image"
 
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
+            android:padding="10dp"
             android:text="Asset Number"
             android:textAllCaps="true"
             android:textSize="20sp"
@@ -154,16 +138,15 @@
 
         <TextView
             android:id="@+id/asset_info"
-            android:layout_width="250dp"
-            android:layout_height="48dp"
-
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/asset_number"
-
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@id/asset_image"
+            android:padding="10dp"
             android:text="Checklist Information"
             android:textSize="18sp" />
-    </RelativeLayout>
 
     </RelativeLayout>
 
@@ -176,7 +159,7 @@
         android:layout_alignParentEnd="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/asset_view"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
         tools:layout_editor_absoluteX="3dp" />
 
     <TextView
@@ -184,6 +167,8 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_above="@+id/checklist_category"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:background="@color/light_gray"
         android:paddingVertical="5dp"
         android:paddingLeft="10dp"
@@ -191,14 +176,15 @@
         android:textAllCaps="true"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/Slider_dots"
-       />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Slider_dots" />
 
     <ListView
         android:id="@+id/checklist_category"
         android:layout_width="match_parent"
         android:layout_height="468dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"

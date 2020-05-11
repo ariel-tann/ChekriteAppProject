@@ -7,10 +7,14 @@
 package com.chekrite_group44.Categories;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +28,12 @@ public class Categories extends AppCompatActivity {
     LinearLayout sliderDotview;
     private int dotscount;
     private ImageView[] dots;
+    ImageButton logout_btn;
+    Button back;
+
+    ImageView asset_image;
+    TextView asset_num;
+    TextView asset_info;
 
     ListView listView;
     @Override
@@ -31,7 +41,16 @@ public class Categories extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories);
 
-        toolbar = (Toolbar) findViewById(R.id.categories_toolbar);
+        //toolbar panel
+        back = (Button) findViewById(R.id.pin_cancel);
+        logout_btn =(ImageButton) findViewById(R.id.logout_img_btn);
+
+        // asset info panel
+        asset_image =(ImageView) findViewById(R.id.asset_image);
+        asset_num = (TextView) findViewById(R.id.asset_number);
+        asset_info = (TextView) findViewById(R.id.asset_info);
+
+
         //for later
     //    viewPager = (ViewPager) findViewById(R.id.slider);
     //    sliderDotview = (LinearLayout) findViewById(R.id.Slider_dots);
