@@ -38,7 +38,7 @@ import com.chekrite_group44.Http_Request.APIs;
 import com.chekrite_group44.Http_Request.APIsListener;
 import com.chekrite_group44.Http_Request.APIsTask;
 import com.chekrite_group44.Permission.Permission;
-
+import com.chekrite_group44.Asset_Properties.Control_Type;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -103,7 +103,7 @@ public class Inspection_main extends AppCompatActivity
     private InspectionListener submitListener = new InspectionListener() {
 
         @Override
-        public void Completed(int type, int button_order, double button_value, long start_timestamp, long response_timestamp) {
+        public void Completed(String type, int button_order, double button_value, long start_timestamp, long response_timestamp) {
             //TODO submit
             long end = System.currentTimeMillis();
             try {
@@ -124,13 +124,13 @@ public class Inspection_main extends AppCompatActivity
     private InspectionListener inspectionListener = new InspectionListener() {
 
         @Override
-        public void Completed(int type, int button_order, double button_value, long start_timestamp, long response_timestamp) {
+        public void Completed(String type, int button_order, double value, long start_timestamp, long response_timestamp) {
             if (mViewPager.getCurrentItem()<mItems.getChecklists().size()-1) {
                 // get which item is completed
                 Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
                 // get response payload
                 try {
-                    Response_payload payload = new Response_payload(item, mTest, type, button_order, button_value,
+                    Response_payload payload = new Response_payload(item, mTest, type, button_order, value,
                             start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
                     new APIsTask(ResponseAPI, getApplicationContext()).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
@@ -143,7 +143,7 @@ public class Inspection_main extends AppCompatActivity
                 Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
                 // get response payload
                 try {
-                    Response_payload payload = new Response_payload(item, mTest, type, button_order, button_value,
+                    Response_payload payload = new Response_payload(item, mTest, type, button_order, value,
                             start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
                     new APIsTask(ResponseAPI, getApplicationContext()).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
@@ -206,14 +206,18 @@ public class Inspection_main extends AppCompatActivity
             Inspection_checklist_item item = items.getChecklists().get(i);
             // get control type
             switch (item.getControl().getType()){
-                case "buttons":
+                case Control_Type.BUTTONS:
                     if (item.getControl().getName().equals("Step"))
                         adapter.addFragment(new fragment_step(item,items.getChecklists().size(),i, inspectionListener) ,
                                 items.getChecklists().get(i).getId());
                     else
-                        // only works for two buttons
                         adapter.addFragment(new fragment_button(item,items.getChecklists().size(), i, inspectionListener),
                                 items.getChecklists().get(i).getId());
+                    break;
+                case Control_Type.GAUGE:
+                    // only works for two side gauge
+                    adapter.addFragment(new fragment_gauge(item,items.getChecklists().size(), i, inspectionListener),
+                            items.getChecklists().get(i).getId());
                     break;
             }
         }

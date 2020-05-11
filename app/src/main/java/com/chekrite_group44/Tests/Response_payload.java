@@ -7,7 +7,10 @@
 package com.chekrite_group44.Tests;
 import android.util.Log;
 
+import com.chekrite_group44.Asset_Properties.Control_Type;
+import com.chekrite_group44.Asset_Properties.Inspection_band;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_item;
+import com.chekrite_group44.Asset_Properties.Inspection_gauge;
 import com.chekrite_group44.Asset_Properties.Inspection_test;
 import com.chekrite_group44.MetaData.MetaData;
 import com.chekrite_group44.MetaData.MetaData_Asset;
@@ -56,17 +59,31 @@ public class Response_payload {
     JSONObject payload;
 
 
-    public Response_payload(Inspection_checklist_item item, Inspection_test test, int btn_type, int btn_order,
-                            double button_value, long start, long end, MetaData_Asset metaData) throws JSONException {
-        this.button_value = button_value;
+    public Response_payload(Inspection_checklist_item item, Inspection_test test, String type, int btn_order,
+                            double gauge_value, long start, long end, MetaData_Asset metaData) throws JSONException {
+        this.gauge_value = gauge_value;
         this.mItem = item;
         checklist_item_id = item.getId();
-        switch (btn_type){
-            case Control_TYPE.button:
+        switch (type){
+            case Control_Type.BUTTONS:
                 control_button_id = item.getControl().getButtons().get(btn_order).getId();
+                status = item.getControl().getButtons().get(btn_order).getStatus();
                 break;
-            case Control_TYPE.gauge:
-                control_gauge_band_id = item.getControl().getButtons().get(btn_order).getId();
+            case Control_Type.GAUGE:
+                // get status using condition of upper bond and lower bond
+                control_gauge_band_id = item.getControl().getGauges().get(btn_order).getId();
+                Inspection_gauge gauge = mItem.getControl().getGauges().get(0);
+                Inspection_band band1 = gauge.getBands().get(0);
+                Inspection_band band2 = gauge.getBands().get(1);
+                int lower_step = band1.getUpper_step();
+                int lower_status = band1.getStatus();
+                int upper_status = band2.getStatus();
+
+                if (gauge_value > lower_step) {
+                    status = upper_status;
+                }else{
+                    status = lower_status;
+                }
                 break;
         }
         date_value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
@@ -79,9 +96,8 @@ public class Response_payload {
         parent_id = item.getParent_id();
 
         response_timestamp = String.format("%.3f",System.currentTimeMillis()/1000.0);
-        Log.d(TAG,"response_timestamp: "+ response_timestamp);
         // get button status
-        status = item.getControl().getButtons().get(btn_order).getStatus();
+
         test_id = test.getId();
         type = item.getType();
 
