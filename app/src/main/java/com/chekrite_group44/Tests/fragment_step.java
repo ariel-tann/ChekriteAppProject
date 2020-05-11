@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.chekrite_group44.Asset_Properties.Control_Type;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_item;
 import com.chekrite_group44.MainActivity;
 import com.chekrite_group44.R;
@@ -68,9 +69,8 @@ public class fragment_step extends Fragment {
         mStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO　call response api and navigate to next fragment
                 Long end = System.currentTimeMillis();
-                mlistener.Completed(Control_TYPE.button,0,0,
+                mlistener.Completed(Control_Type.BUTTONS,0,0,
                         start, end);
             }
         });
