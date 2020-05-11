@@ -25,7 +25,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Asset_Properties.Asset_Classes;
 import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
-import com.chekrite_group44.Categories.Categories;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
@@ -47,7 +46,6 @@ public class Dashboard extends AppCompatActivity {
     ImageView profile_button_photo;
     String photo_url;
     private ImageButton test_btns;
-     ImageButton test_btn_ctgr;
     APIsListener AssetsListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -117,7 +115,6 @@ public class Dashboard extends AppCompatActivity {
                 startNewcheck(view);
             }
         });
-
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,20 +130,6 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        test_btn_ctgr = (ImageButton) findViewById(R.id.imageButton1);
-        test_btn_ctgr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openCategories();
-            }
-        });
-
-    }
-//for testing categories
-    public void openCategories() {
-        Intent intent = new Intent(this, Categories.class);
-   //     intent.putExtra("asset_id", 28436);
-        startActivity(intent);
     }
     private void openInspection() {
         Intent intent = new Intent(this, Inspection_main.class);
@@ -158,6 +141,7 @@ public class Dashboard extends AppCompatActivity {
     public void startNewcheck(View view){
         Log.d("startcheck","Inside start check");
         Intent intent = new Intent(this, SelectAssetScreen.class);
+       // new APIsTask(AssetsListener, getApplicationContext()).execute("GET", APIs.ASSETS,"","");
         startActivity(intent);
 
     }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.5.11
+  ~ This file is created by Ariel.
+  ~ Summary: Handles the keyboard button colors when pressed
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- When button is pressed, color change to grey -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#7D7D7D" />
+            <gradient android:angle="-90" android:startColor="#B2B2B2" android:endColor="#B2B2B2"  />
+            <padding android:left="3dp"/>
+            <padding android:right="3dp"/>
+        </shape>
+    </item>
+
+    <!-- When button is activated, color stays grey -->
+    <item android:state_activated="true">
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#7D7D7D" />
+            <gradient android:angle="-90" android:startColor="#B2B2B2" android:endColor="#B2B2B2"  />
+            <padding android:left="3dp"/>
+            <padding android:right="3dp"/>
+        </shape>
+
+    </item>
+
+    <!-- Default color: white -->
+    <item >
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#E2E2E2" />
+            <gradient android:angle="-90" android:startColor="#FFFFFF" android:endColor="#FFFFFF" />
+            <padding android:left="3dp"/>
+            <padding android:right="3dp"/>
+        </shape>
+    </item>
+
+</selector>

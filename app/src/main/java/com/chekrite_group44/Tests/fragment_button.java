@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.chekrite_group44.Asset_Properties.Control_Type;
 import com.chekrite_group44.Asset_Properties.Inspection_checklist_item;
 import com.chekrite_group44.R;
 
@@ -67,7 +68,6 @@ public class fragment_button extends Fragment implements View.OnClickListener{
         // num of rows
         int num_btn = mItem.getControl().getButtons().size();
         // num of column
-
         int num_rows = (int)Math.ceil(num_btn/(double)col);
 
         for (int i = 0; i< num_rows; i++){
@@ -115,7 +115,7 @@ public class fragment_button extends Fragment implements View.OnClickListener{
         //
         return view;
     }
-    private static GradientDrawable drawCircle(int backgroundColor, int borderColor) {
+    private GradientDrawable drawCircle(int backgroundColor, int borderColor) {
         // plot rounded button
         GradientDrawable shape = new GradientDrawable();
         shape.setShape(GradientDrawable.OVAL);
@@ -134,7 +134,7 @@ public class fragment_button extends Fragment implements View.OnClickListener{
         int btn_order = mItem.getControl().getButtons().get(click_btn_id).getOrder();
         int btn_status = mItem.getControl().getButtons().get(click_btn_id).getStatus();
         Long end = System.currentTimeMillis(); // end time for response
-        mlistener.Completed(Control_TYPE.button,btn_order,btn_status,
+        mlistener.Completed(Control_Type.BUTTONS,btn_order,btn_status,
                 start, end);
     }
 }

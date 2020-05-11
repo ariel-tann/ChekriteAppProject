@@ -231,8 +231,8 @@ public class Login extends AppCompatActivity
         company_Name = findViewById(R.id.Company_name);
         company_Name.setText(companyName);
 
-        //Display company portait with URL saved from server
-        String splash_portrait_URL = pref.getString("splash_portrait", "NUL");
+        //Display company portrait with URL saved from server
+        String splash_portrait_URL = pref.getString("splash_portrait", "NULL");
         company_splash_portait = findViewById(R.id.imageView4);
         Glide.with(getApplicationContext()).load(splash_portrait_URL).into(company_splash_portait);
 
