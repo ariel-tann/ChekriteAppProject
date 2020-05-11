@@ -19,21 +19,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Categories.SignOut"></activity>
         <activity android:name=".Login" />
         <activity android:name=".DashBoard.WelcomeSplash" />
         <activity android:name=".DashBoard.Dashboard" />
         <activity android:name=".SelectAssetScreen.SelectAssetScreen" />
-        <activity android:name=".Categories.Categories"/>
-        <activity android:name=".Tests.Inspection_main"/>
-
+        <activity android:name=".Categories.Categories" />
+        <activity android:name=".Tests.Inspection_main" />
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

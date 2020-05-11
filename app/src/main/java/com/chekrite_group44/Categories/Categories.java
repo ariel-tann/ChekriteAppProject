@@ -7,9 +7,11 @@
 package com.chekrite_group44.Categories;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -58,6 +60,16 @@ public class Categories extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         String profile_link = pref.getString("profile_photo", "");
         Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
+
+
+        logout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSignout();
+            }
+        });
+
+
         //for later
     //    viewPager = (ViewPager) findViewById(R.id.slider);
     //    sliderDotview = (LinearLayout) findViewById(R.id.Slider_dots);
@@ -103,8 +115,12 @@ public class Categories extends AppCompatActivity {
         arrayList.add("checklist 3");
  **/
 
+    }
 
-
+    public void openSignout() {
+        Intent intent = new Intent(this, SignOut.class);
+        //    intent.putExtra("asset_id", 28436);
+        startActivity(intent);
     }
 /**
     private void setSliderViews(){
