@@ -48,6 +48,7 @@ public class Dashboard extends AppCompatActivity {
     String photo_url;
     private ImageButton test_btns;
     private ImageButton test_btns_ctgr;
+    private ImageButton ariel_test_btn;
     APIsListener AssetsListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {

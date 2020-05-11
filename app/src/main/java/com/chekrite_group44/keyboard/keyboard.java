@@ -74,15 +74,7 @@ public class keyboard extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.keyboard_fragment, container, false);
-//        mainActivity = (Button) view.findViewById(R.id.g_btn);
-//
-//        mainActivity.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+
         //alphabet keyboard (A-Z)
         a_btn = (Button) view.findViewById(R.id.a_btn);
         b_btn = (Button) view.findViewById(R.id.b_btn);

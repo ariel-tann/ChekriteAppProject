@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.5.12
+  ~ This file is created by Ariel.
+  ~ Summary: Modifies the shape of the search bar when searching for asset
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <solid android:color="#FFFFFF" />
+    <stroke
+        android:width="2dip"
+        android:color="#F6F6F6" />
+    <corners android:radius="4dip" />
+    <padding
+        android:bottom="7dip"
+        android:left="7dip"
+        android:right="7dip"
+        android:top="7dip" />
+</shape>
