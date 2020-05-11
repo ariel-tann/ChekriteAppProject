@@ -130,8 +130,6 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-
-
     }
     private void openInspection() {
         Intent intent = new Intent(this, Inspection_main.class);
@@ -143,6 +141,7 @@ public class Dashboard extends AppCompatActivity {
     public void startNewcheck(View view){
         Log.d("startcheck","Inside start check");
         Intent intent = new Intent(this, SelectAssetScreen.class);
+       // new APIsTask(AssetsListener, getApplicationContext()).execute("GET", APIs.ASSETS,"","");
         startActivity(intent);
 
     }
