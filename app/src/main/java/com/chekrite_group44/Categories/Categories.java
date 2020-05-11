@@ -6,6 +6,8 @@
 
 package com.chekrite_group44.Categories;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.widget.ArrayAdapter;
@@ -20,6 +22,9 @@ import android.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.R;
 
 public class Categories extends AppCompatActivity {
@@ -50,7 +55,9 @@ public class Categories extends AppCompatActivity {
         asset_num = (TextView) findViewById(R.id.asset_number);
         asset_info = (TextView) findViewById(R.id.asset_info);
 
-
+        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
+        String profile_link = pref.getString("profile_photo", "");
+        Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
         //for later
     //    viewPager = (ViewPager) findViewById(R.id.slider);
     //    sliderDotview = (LinearLayout) findViewById(R.id.Slider_dots);
