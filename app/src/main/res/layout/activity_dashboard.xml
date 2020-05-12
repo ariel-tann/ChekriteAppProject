@@ -50,22 +50,22 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
 
+
+
+
+
     <!-- 2 images in a row -->
-
-
-    <LinearLayout
+     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="472dp"
-        android:layout_height="498dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:baselineAligned="false"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:padding="50dp"
-        android:weightSum="2"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+         app:layout_constraintBottom_toTopOf="@id/copyright_group"
+         app:layout_constraintTop_toBottomOf="@+id/toolbar"
+
+  >
 
 
         <LinearLayout
@@ -80,8 +80,8 @@
             <ImageButton
                 android:id="@+id/imageButton1"
                 style="@android:style/Widget.ImageButton"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/btn_background"
@@ -96,8 +96,8 @@
             <ImageButton
                 android:id="@+id/imageButton2"
                 style="@android:style/Widget.ImageButton"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/btn_background"
@@ -115,8 +115,8 @@
             android:weightSum="2">
 
             <RelativeLayout
-                android:layout_width="120dp"
-                android:layout_height="140dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="bottom">
 
 
@@ -125,10 +125,10 @@
                 style="@android:style/Widget.ImageButton"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+
                 android:background="@drawable/btn_background"
-                android:padding="8dp"
+                android:padding="10dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/avatar"
                 tools:layout_editor_absoluteX="26dp"
@@ -141,7 +141,9 @@
                     android:layout_below="@id/btn_profile"
                     android:layout_centerHorizontal="true"
 
-                    android:text="@string/btn_profile" />
+                    android:text="@string/btn_profile"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
 
             </RelativeLayout>
 
@@ -150,9 +152,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
+
             <RelativeLayout
-                android:layout_width="120dp"
-                android:layout_height="140dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="bottom">
 
                 <ImageButton
@@ -160,17 +163,12 @@
                     style="@android:style/Widget.ImageButton"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="0dp"
+                    android:layout_centerHorizontal="true"
                     android:background="@drawable/btn_background"
                     android:onClick="startNewcheck"
-                    android:padding="8dp"
+                    android:padding="12dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_new_task_round"
-                    tools:layout_editor_absoluteX="26dp"
-                    tools:layout_editor_absoluteY="102dp" />
+                    android:src="@drawable/new_check" />
 
                 <TextView
                     android:id="@+id/newcheck_text"
@@ -178,6 +176,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/newCheck"
                     android:layout_centerHorizontal="true"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
 
                     android:text="@string/btn_newcheck" />
             </RelativeLayout>
@@ -190,35 +190,27 @@
 
 
 
-    <RelativeLayout
-        android:layout_width="406dp"
-        android:layout_height="152dp"
+
+
+    <include
+        android:id="@+id/copyright_group"
+        layout="@layout/copyright"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+
+        android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.67">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.912"
+        tools:ignore="ContentDescription" />
 
 
 
-        <include
-            layout="@layout/copyright"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="-50dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="41dp"
-            android:gravity="bottom"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.912"
-            tools:ignore="ContentDescription"
-            tools:layout_editor_absoluteX="48dp" />
-    </RelativeLayout>
     <!--
 
 -->
