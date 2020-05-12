@@ -9,8 +9,10 @@ package com.chekrite_group44.Categories;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,7 +29,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Chekrite;
+import com.chekrite_group44.Http_Request.APIsListener;
 import com.chekrite_group44.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Categories extends AppCompatActivity {
     Toolbar toolbar;
@@ -43,6 +49,12 @@ public class Categories extends AppCompatActivity {
     TextView asset_info;
 
     ListView listView;
+    private static final String TAG = "Checklist";
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -61,6 +73,9 @@ public class Categories extends AppCompatActivity {
         String profile_link = pref.getString("profile_photo", "");
         Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
 
+        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
+        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
 
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override

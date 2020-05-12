@@ -150,7 +150,7 @@ public class Dashboard extends AppCompatActivity {
     }
     public void openCategories() {
         Intent intent = new Intent(this, Categories.class);
-    //    intent.putExtra("asset_id", 28436);
+        intent.putExtra("asset_id", 28433);
         startActivity(intent);
 
     }
