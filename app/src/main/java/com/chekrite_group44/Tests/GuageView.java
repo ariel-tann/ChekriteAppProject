@@ -182,7 +182,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
         canvas.drawArc(rectF, 0, 180, false, Stroke);
 
 
-        for (int i = 0; i< 4; i++){
+        for (int i = 0; i< lower_step; i++){
             if(i == 0) {
                 // first rectangle only draw half of height
                 RectF r = new RectF(0, 0, width, height/2.0f);
@@ -200,8 +200,8 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
             }
         }
 
-        for (int i = 0; i< 6; i++){
-            if (i == 5) {
+        for (int i = 0; i< upper_step - lower_step; i++){
+            if (i == upper_step - lower_step - 1) {
                 // last rectangle only draw half of height
                 canvas.translate(0, -height/2.0f);
                 RectF r = new RectF(0, 0, width, height/2.0f);

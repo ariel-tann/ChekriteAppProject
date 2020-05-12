@@ -9,6 +9,7 @@ package com.chekrite_group44.MetaData;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -37,12 +38,13 @@ import static android.content.Context.BATTERY_SERVICE;
 
 public class MetaData {
     // date of app build
+    private static final String TAG = "MetaData";
     String app_build;
     String app_version;
     String internet_capabilities;
     double device_battery_level;
-    double device_lat = 0;
-    double device_lng = 0;
+    double device_lat = 0.0d;
+    double device_lng = 0.0d;
     int device_memory;
     String device_model;
     String os_version;
@@ -80,16 +82,20 @@ public class MetaData {
         device_battery_level = (double) bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
 
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
+
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // permission denied
-            device_lat = 0;
-            device_lng = 0;
+            device_lat = 0.0d;
+            device_lng = 0.0d;
         }else{
-            Location location = locationManager.getLastKnownLocation("gps");
-            device_lat = location.getLatitude();
-            device_lng = location.getLongitude();
-
+            Location location = locationManager.getLastKnownLocation(bestProvider);
+            if(location != null) {
+                device_lat = location.getLatitude();
+                device_lng = location.getLongitude();
+            }
         }
         File path = Environment.getDataDirectory();
         StatFs stat = new StatFs(path.getPath());
