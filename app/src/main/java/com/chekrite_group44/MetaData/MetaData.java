@@ -41,8 +41,8 @@ public class MetaData {
     String app_version;
     String internet_capabilities;
     double device_battery_level;
-    double device_lat;
-    double device_lng;
+    double device_lat = 0;
+    double device_lng = 0;
     int device_memory;
     String device_model;
     String os_version;
