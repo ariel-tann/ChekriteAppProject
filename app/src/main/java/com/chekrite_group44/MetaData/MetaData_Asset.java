@@ -120,7 +120,7 @@ public class MetaData_Asset {
             jObject.put("os","Android");
             jObject.put("os_version", os_version);
             jObject.put("device_model", device_model);
-            jObject.put("device_memory", device_memory);
+            jObject.put("device_memory", ""+device_memory);
             jObject.put("internet_capabilities",internet_capabilities);
             jObject.put("device_lat",device_lat);
             jObject.put("device_lng",device_lng);

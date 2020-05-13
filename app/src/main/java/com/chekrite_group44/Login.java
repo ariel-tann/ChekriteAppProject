@@ -149,7 +149,8 @@ public class Login extends AppCompatActivity
                             "Error: "+message, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                    if(!message.equals("User not found.")){
+                    if(!message.equals("User not found.") &&
+                            !message.equals("Validation failed.")){
                         // remove share data and go to pair screen
                         Chekrite.rmPref();
                         openMainActivity();

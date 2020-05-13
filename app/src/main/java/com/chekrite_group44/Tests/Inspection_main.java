@@ -149,7 +149,7 @@ public class Inspection_main extends AppCompatActivity
                     e.printStackTrace();
                 }
                 // inflate submit dialog
-                start_inspection = System.currentTimeMillis();
+
                 dialog_submit submit = new dialog_submit(submitListener);
                 submit.show(getSupportFragmentManager(),"submit");
             }
@@ -162,6 +162,8 @@ public class Inspection_main extends AppCompatActivity
             try {
                 String status = (String) jsonObject.get("status");
                 if(status.equals("success")){
+                    // start inspection
+                    start_inspection = System.currentTimeMillis();
                     JSONObject data = jsonObject.getJSONObject("data");
                     JSONObject jchecklist = data.getJSONObject("checklist");
                     Inspection_checklist checklist = new Inspection_checklist(jchecklist);

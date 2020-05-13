@@ -103,7 +103,7 @@ public class Payload_Response {
         payload.put("checklist_item_id", checklist_item_id);
         payload.put("control_button_id", control_button_id == 0?JSONObject.NULL:control_button_id);
         payload.put("control_gauge_band_id", control_gauge_band_id==0?JSONObject.NULL:control_gauge_band_id);
-        payload.put("date_value", date_value);
+        payload.put("date_value", JSONObject.NULL);
         payload.put("duration", duration);
         payload.put("evaluation_result", evaluation_result== 0?JSONObject.NULL:evaluation_result);
         payload.put("extra_infos", extra_infos);

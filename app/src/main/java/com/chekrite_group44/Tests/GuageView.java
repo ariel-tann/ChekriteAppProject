@@ -32,7 +32,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
     int current_status = 0;
     Bitmap bitmap;
     Bitmap resized;
-    int bitmap_width = 230;
+    int bitmap_width = 220;
     int bitmap_height = 150;
     //
     int marks_count;
@@ -42,6 +42,8 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
     String upper_color;
     int lower_status;
     int upper_status;
+    //
+    int y = 0;
     public GuageView(Context context, int marks_count, int lower_step, int upper_step,
                      String lower_color, String upper_color, int lower_status, int upper_status) {
         super(context);
@@ -88,11 +90,17 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
         DrawGauge(canvas);
         Her_Line.setColor(Color.BLACK);
         Her_Line.setStrokeWidth(5);
-        int y = range.get(current_value);
+        try {
+            y = range.get(current_value);
+        }catch (ArrayIndexOutOfBoundsException e){
+            Log.d(TAG, "range: "+range.toString()+" current val: "+current_value);
+            y = range.get(0);
+        }
+
         // draw line
         canvas.drawLine( -50, y,150,y,Her_Line);
         //draw thumb
-        canvas.drawBitmap(resized, bitmap_width/3f, y - bitmap_height/2.0f - 4, null);
+        canvas.drawBitmap(resized, bitmap_width/2.5f, y - bitmap_height/2.0f - 4, null);
         // draw rectangle
         Retan.setStyle(Paint.Style.STROKE);
         Retan.setColor(Color.BLACK);
@@ -170,22 +178,22 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
         int y_offset = 130;
         int x_offset = (Canvas_width / 2) - (width / 2);  // plot in the center
         int y_height = canvas.getHeight();
-        Log.d(TAG, "height: "+y_height);
+        // full height
+        RectF rectF = new RectF(0, 0, width, height);
+        // half of height
+        RectF r = new RectF(0, 0, width, height/2.0f);
         // plot from bottom and center
         canvas.translate(x_offset, y_height - y_offset);
         // first object coordinate
         updateY(y_height -y_offset);
         // plot first half of oval
-        RectF rectF = new RectF(0, 0, width, height);
         canvas.translate(0, -height/2.0f);
         canvas.drawArc(rectF, 0, 180, true, LowerPaint);
         canvas.drawArc(rectF, 0, 180, false, Stroke);
 
-
         for (int i = 0; i< lower_step; i++){
             if(i == 0) {
                 // first rectangle only draw half of height
-                RectF r = new RectF(0, 0, width, height/2.0f);
                 canvas.drawRect(r, LowerPaint);    // fill
                 canvas.drawLine(0, 0, 0, height/2.0f, Hori_Line);
                 canvas.drawLine(width, 0, width, height/2.0f, Hori_Line);
@@ -199,26 +207,22 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
                 updateY(height); // canvas start
             }
         }
-        // create middle rendering the bands on the “half point”
+        //
         canvas.translate(0, -height/2);
-        RectF rectF_half = new RectF(0, 0, width, height/2);
-        canvas.drawRect(rectF_half, LowerPaint);    // fill
+        canvas.drawRect(r, LowerPaint);
         canvas.drawLine(0, 0, 0, height/2, Her_Line);
         canvas.drawLine(width, 0, width, height/2, Her_Line);
-
-        canvas.drawRect(rectF_half, UpperPaint);    // fill
+        canvas.drawLine(0, height/2, width/2, height/2, Ver_Line);
+        canvas.translate(0, -height/2);
+        canvas.drawRect(r, UpperPaint);
         canvas.drawLine(0, 0, 0, height/2, Her_Line);
         canvas.drawLine(width, 0, width, height/2, Her_Line);
-        canvas.drawLine(0, height, width/2.0f, height, Ver_Line);
-
-        updateY(height); // canvas start
-        canvas.translate(0, -height);
+        updateY(height);
         //
         for (int i = 0; i< upper_step - lower_step -1; i++){
             if (i == upper_step - lower_step - 2) {
                 // last rectangle only draw half of height
                 canvas.translate(0, -height/2.0f);
-                RectF r = new RectF(0, 0, width, height/2.0f);
                 canvas.drawRect(r, UpperPaint);    // fill
                 canvas.drawLine(0, 0, 0, height/2.0f, Her_Line);
                 canvas.drawLine(width, 0, width, height/2.0f, Her_Line);
