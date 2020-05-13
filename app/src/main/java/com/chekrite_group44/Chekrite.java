@@ -53,4 +53,8 @@ public class Chekrite extends Application {
     public static int getParseColor(){
         return android.graphics.Color.parseColor(pref.getString("highlight_colour", Color));
     }
+    public static void rmPref(){
+        editor.clear();
+        editor.commit(); // commit changes
+    }
 }

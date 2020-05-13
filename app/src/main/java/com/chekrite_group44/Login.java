@@ -7,6 +7,7 @@
 package com.chekrite_group44;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -14,18 +15,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.chekrite_group44.PinView.Chekrite_PinView;
 import com.chekrite_group44.PinView.PinListener;
 import com.chekrite_group44.DashBoard.WelcomeSplash;
@@ -141,6 +149,12 @@ public class Login extends AppCompatActivity
                             "Error: "+message, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
+                    if(!message.equals("User not found.")){
+                        // remove share data and go to pair screen
+                        Chekrite.rmPref();
+                        openMainActivity();
+                    }
+                    Log.d(TAG, jsonObject.toString());
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -207,7 +221,10 @@ public class Login extends AppCompatActivity
         intent.putExtra("last_name",last_name);
         startActivity(intent);
     }
-
+    public void openMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -227,11 +244,25 @@ public class Login extends AppCompatActivity
 
         //Display company portrait with URL saved from server
         String splash_portrait_URL = Chekrite.getString("splash_portrait");
+        final ProgressBar loading = findViewById(R.id.progress_loading);
+        loading.getIndeterminateDrawable()
+                .setColorFilter(Chekrite.getParseColor(), PorterDuff.Mode.SRC_IN );
         company_splash_portait = findViewById(R.id.imageView4);
         Glide.with(getApplicationContext())
                 .load(splash_portrait_URL)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        loading.setVisibility(View.GONE);
+                        return false;
+                    }
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        loading.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
                 .into(company_splash_portait);
-
 
         signIn_Btn = findViewById(R.id.signIn_btn);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar4);
