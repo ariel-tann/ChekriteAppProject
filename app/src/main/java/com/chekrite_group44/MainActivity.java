@@ -58,15 +58,12 @@ public class MainActivity extends AppCompatActivity
                     JSONObject site = data.getJSONObject("site");
                     String site_name = site.getString("name");
                     // put these info in share preference
-                    SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("device_udid",udif);
-                    editor.putString("auth_code", auth_code);
-                    editor.putString("company", company_name);
-                    editor.putString("site", site_name);
-                    editor.putString("highlight_colour", highlight_colour);
-                    editor.putString("splash_portrait", splash_portrait);
-                    editor.apply();
+                    Chekrite.putString("device_udid",udif);
+                    Chekrite.putString("auth_code", auth_code);
+                    Chekrite.putString("company", company_name);
+                    Chekrite.putString("site", site_name);
+                    Chekrite.putString("highlight_colour", highlight_colour);
+                    Chekrite.putString("splash_portrait", splash_portrait);
                     // close login dialog
                     dialog.dismiss();
                     openLoginScreen();
@@ -124,8 +121,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // if the device has paired, then go to login screen
-        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
-        if(pref.contains("device_udid")){
+        if(Chekrite.pref.contains("device_udid")){
             openLoginScreen();
         }
         mPermission = new Permission(this, this);

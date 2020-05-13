@@ -47,10 +47,8 @@ public class WelcomeSplash extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_splash);
 
         //Set background color
-        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
-        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar2);
-        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
+        toolbar.setBackgroundColor(Chekrite.getParseColor());
 
         photo_url=getIntent().getStringExtra("profile_photo");
         first_name=getIntent().getStringExtra("first_name");

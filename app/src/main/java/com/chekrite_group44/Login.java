@@ -113,7 +113,7 @@ public class Login extends AppCompatActivity
             try {
                 status = (String) jsonObject.get("status");
                 if(status.equals("success")){
-                    Log.d("KAI", "status "+ status);
+                    Log.d(TAG, "status "+ status);
                     JSONObject data = jsonObject.getJSONObject("data");
                     JSONObject device = data.getJSONObject("device");
                     String access_token = device.getString("access_token");
@@ -122,16 +122,12 @@ public class Login extends AppCompatActivity
                     String first_name = user.getString("first_name");
                     String last_name = user.getString("last_name");
                     String profile_photo = user.getString("profile_photo");
-                    Log.d("KAI", "token "+ access_token);
-                    //SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("first_name", first_name);
-                    editor.putString("last_name", last_name);
-                    editor.putString("profile_photo", profile_photo);
-                    editor.putString("access_token", access_token);
-                    editor.putString("token_expiry", token_expiry);
-                    editor.apply();
+                    //
+                    Chekrite.putString("first_name", first_name);
+                    Chekrite.putString("last_name", last_name);
+                    Chekrite.putString("profile_photo", profile_photo);
+                    Chekrite.putString("access_token", access_token);
+                    Chekrite.putString("token_expiry", token_expiry);
 //                    get app_version
                     new APIsTask(APIApp_version, getApplicationContext()).execute("GET", APIs.APP_VERSION, "", "");
                     // close login dialog
@@ -157,13 +153,11 @@ public class Login extends AppCompatActivity
             mEIDPinView.dismiss();
             EMPLOY_PIN = pin;
             try {
-
-                SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("company",pref.getString("company", ""));
-                jsonObject.put("site",pref.getString("site", ""));
-                jsonObject.put("device_udid",pref.getString("device_udid", ""));
-                jsonObject.put("auth_code",pref.getString("auth_code", ""));
+                jsonObject.put("company",Chekrite.getString("company"));
+                jsonObject.put("site",Chekrite.getString("site"));
+                jsonObject.put("device_udid",Chekrite.getString("device_udid"));
+                jsonObject.put("auth_code",Chekrite.getString("auth_code"));
                 jsonObject.put("badge_no", EMPLOY_ID);
                 jsonObject.put("pin", EMPLOY_PIN);
                 // login dialog
@@ -174,7 +168,7 @@ public class Login extends AppCompatActivity
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
                 // Check token_expiry
-                String token_expiry = pref.getString("token_expiry", "");
+                String token_expiry = Chekrite.getString("token_expiry");
                 if (token_expiry.length() > 0){
                     Date expiredDate = stringToDate(token_expiry, "yyyy-MM-dd HH:mm:ss");
                     // if token is not expired and can used, we need to logout first
@@ -200,13 +194,11 @@ public class Login extends AppCompatActivity
         }
     };
     private Date stringToDate(String aDate,String aFormat) {
-
         if(aDate==null) return null;
         ParsePosition pos = new ParsePosition(0);
         SimpleDateFormat simpledateformat = new SimpleDateFormat(aFormat);
         Date stringDate = simpledateformat.parse(aDate, pos);
         return stringDate;
-
     }
     public void openWelcomeSplash(String profile_photo,String first_name,String last_name) {
         Intent intent = new Intent(this, WelcomeSplash.class);
@@ -226,23 +218,26 @@ public class Login extends AppCompatActivity
         dialog = new ProgressDialog(this); // Login log
 
         // Display company name received from server
-        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
-        String companyName = pref.getString("company", "NIL");
+        String companyName = Chekrite.getString("company");
+        if(companyName.length() == 0){
+            companyName = "NIL";
+        }
         company_Name = findViewById(R.id.Company_name);
         company_Name.setText(companyName);
 
         //Display company portrait with URL saved from server
-        String splash_portrait_URL = pref.getString("splash_portrait", "NULL");
+        String splash_portrait_URL = Chekrite.getString("splash_portrait");
         company_splash_portait = findViewById(R.id.imageView4);
-        Glide.with(getApplicationContext()).load(splash_portrait_URL).into(company_splash_portait);
+        Glide.with(getApplicationContext())
+                .load(splash_portrait_URL)
+                .into(company_splash_portait);
 
 
         signIn_Btn = findViewById(R.id.signIn_btn);
-        // get color and set to btn background
-        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
-        signIn_Btn.setBackgroundColor(Color.parseColor(highlight_colour));
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar4);
-        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
+        // get color and set to btn background
+        signIn_Btn.setBackgroundColor(Chekrite.getParseColor());
+        toolbar.setBackgroundColor(Chekrite.getParseColor());
 
         signIn_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -269,7 +264,7 @@ public class Login extends AppCompatActivity
 
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
-        Log.d("KAI", this.toString()+"Permission Deny: "+perms.toString());
+        Log.d(TAG, this.toString()+"Permission Deny: "+perms.toString());
 
     }
 

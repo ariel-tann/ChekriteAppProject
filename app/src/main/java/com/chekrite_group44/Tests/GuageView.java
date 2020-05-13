@@ -199,9 +199,23 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
                 updateY(height); // canvas start
             }
         }
+        // create middle rendering the bands on the “half point”
+        canvas.translate(0, -height/2);
+        RectF rectF_half = new RectF(0, 0, width, height/2);
+        canvas.drawRect(rectF_half, LowerPaint);    // fill
+        canvas.drawLine(0, 0, 0, height/2, Her_Line);
+        canvas.drawLine(width, 0, width, height/2, Her_Line);
 
-        for (int i = 0; i< upper_step - lower_step; i++){
-            if (i == upper_step - lower_step - 1) {
+        canvas.drawRect(rectF_half, UpperPaint);    // fill
+        canvas.drawLine(0, 0, 0, height/2, Her_Line);
+        canvas.drawLine(width, 0, width, height/2, Her_Line);
+        canvas.drawLine(0, height, width/2.0f, height, Ver_Line);
+
+        updateY(height); // canvas start
+        canvas.translate(0, -height);
+        //
+        for (int i = 0; i< upper_step - lower_step -1; i++){
+            if (i == upper_step - lower_step - 2) {
                 // last rectangle only draw half of height
                 canvas.translate(0, -height/2.0f);
                 RectF r = new RectF(0, 0, width, height/2.0f);

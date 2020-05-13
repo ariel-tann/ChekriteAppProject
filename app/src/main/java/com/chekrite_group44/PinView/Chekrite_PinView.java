@@ -72,7 +72,6 @@ public class Chekrite_PinView extends DialogFragment {
     private List<EditText> mEditViews = new ArrayList<>();
     private AudioManager audioManager;
     private PinListener mPinListener;
-    String highlight_colour;
     /*
     * create button listener for image buttons
      */
@@ -187,7 +186,7 @@ public class Chekrite_PinView extends DialogFragment {
         }
         if(CurrentCursor > 1){
 
-            mbtn_submit.setBackgroundColor(Color.parseColor(highlight_colour));
+            mbtn_submit.setBackgroundColor(Chekrite.getParseColor());
             mbtn_submit.setTextColor(getActivity().getColor(R.color.white));
 
             mbtn_submit.setEnabled(true);
@@ -252,8 +251,6 @@ public class Chekrite_PinView extends DialogFragment {
                 break;
         }
         // get color and set to btn background
-        SharedPreferences pref = view.getContext().getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
-        highlight_colour = pref.getString("highlight_colour", "#65cb81");
 
         // initial digit and assign a listener
         mDigit0 = view.findViewById(R.id.digit_0);
@@ -294,7 +291,7 @@ public class Chekrite_PinView extends DialogFragment {
         audioManager = (AudioManager)view.getContext().getSystemService(Context.AUDIO_SERVICE);
         if(Type_PinView != SETUP) {
             androidx.appcompat.widget.Toolbar toolbar = view.findViewById(R.id.pin_toolbar);
-            toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
+            toolbar.setBackgroundColor(Chekrite.getParseColor());
         }
     }
     /*
@@ -306,7 +303,7 @@ public class Chekrite_PinView extends DialogFragment {
             editText = new EditText(mLinearLayout.getContext());
             editText.setTextSize(mTextSize);
             editText.setEnabled(false);
-            editText.setTextColor(Color.parseColor(highlight_colour));
+            editText.setTextColor(Chekrite.getParseColor());
             editText.setTypeface(null, Typeface.BOLD);
             editText.setGravity(Gravity.CENTER);
             editText.setFocusable(false);

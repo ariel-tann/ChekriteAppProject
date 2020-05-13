@@ -113,7 +113,7 @@ public class Inspection_main extends AppCompatActivity
                 dialog.setIndeterminate(true);
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
-                Submit_payload payload = new Submit_payload(mTest, start_inspection, end,
+                Playload_Submit payload = new Playload_Submit(mTest, start_inspection, end,
                         new MetaData_Asset(getApplicationContext()));
                 new APIsTask(SubmitAPI, getApplicationContext()).execute("POST", APIs.SUBMIT, "", payload.getPayload().toString());
             } catch (JSONException e) {
@@ -130,7 +130,7 @@ public class Inspection_main extends AppCompatActivity
                 Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
                 // get response payload
                 try {
-                    Response_payload payload = new Response_payload(item, mTest, type, button_order, value,
+                    Payload_Response payload = new Payload_Response(item, mTest, type, button_order, value,
                             start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
                     new APIsTask(ResponseAPI, getApplicationContext()).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
@@ -143,7 +143,7 @@ public class Inspection_main extends AppCompatActivity
                 Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
                 // get response payload
                 try {
-                    Response_payload payload = new Response_payload(item, mTest, type, button_order, value,
+                    Payload_Response payload = new Payload_Response(item, mTest, type, button_order, value,
                             start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
                     new APIsTask(ResponseAPI, getApplicationContext()).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
@@ -254,7 +254,7 @@ public class Inspection_main extends AppCompatActivity
         mViewPager = findViewById(R.id.inspection_container);
         mViewPager.setAllowedSwipeDirection(SwipeDirection.left);
         // get payload
-        Start_payload api_payload = new Start_payload();
+        Playload_Start api_payload = new Playload_Start();
         String payload = api_payload.StartAPI_payload(getApplicationContext(), checklist_id,asset_id, asset_selection);
         // send payload to DB
         new APIsTask(StartListener, getApplicationContext()).execute("POST", APIs.START,"",payload);
