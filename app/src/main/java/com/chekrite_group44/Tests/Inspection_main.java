@@ -10,7 +10,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -243,9 +242,8 @@ public class Inspection_main extends AppCompatActivity
             Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(profile);
 
         // get color and set to btn background
-        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.inspection_toolbar);
-        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
+        toolbar.setBackgroundColor(Chekrite.getParseColor());
         // get info from previous class
         String checklist_id=getIntent().getStringExtra("checklist_id");
         int asset_id = getIntent().getIntExtra("asset_id", 0);
