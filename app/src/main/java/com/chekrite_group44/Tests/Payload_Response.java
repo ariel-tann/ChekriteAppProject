@@ -26,9 +26,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class Response_payload {
-    private static final String TAG = "Response_payload";
-    double button_value;    // indicate which button being selected
+public class Payload_Response {
     Inspection_checklist_item mItem;
     // ChekRite response require variables
     int checklist_item_id;
@@ -59,7 +57,7 @@ public class Response_payload {
     JSONObject payload;
 
 
-    public Response_payload(Inspection_checklist_item item, Inspection_test test, String type, int btn_order,
+    public Payload_Response(Inspection_checklist_item item, Inspection_test test, String type, int btn_order,
                             double gauge_value, long start, long end, MetaData_Asset metaData) throws JSONException {
         this.gauge_value = gauge_value;
         this.mItem = item;
@@ -105,7 +103,7 @@ public class Response_payload {
         payload.put("checklist_item_id", checklist_item_id);
         payload.put("control_button_id", control_button_id == 0?JSONObject.NULL:control_button_id);
         payload.put("control_gauge_band_id", control_gauge_band_id==0?JSONObject.NULL:control_gauge_band_id);
-        payload.put("date_value", date_value);
+        payload.put("date_value", JSONObject.NULL);
         payload.put("duration", duration);
         payload.put("evaluation_result", evaluation_result== 0?JSONObject.NULL:evaluation_result);
         payload.put("extra_infos", extra_infos);
@@ -128,7 +126,6 @@ public class Response_payload {
         payload.put("text_value", text_value == 0?JSONObject.NULL:text_value);
         payload.put("type", type);
         payload.put("meta",metaData.getjObject());
-        Log.d(TAG, payload.toString());
     }
     public JSONObject getPayload() {
         return payload;

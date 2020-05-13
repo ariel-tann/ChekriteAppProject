@@ -15,14 +15,14 @@ import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
-public class Submit_payload {
+public class Playload_Submit {
     int id;
     int result = 0;
     long duration;
     int score = 0;
     boolean supervisor_approval = true;
     JSONObject payload;
-    public Submit_payload(Inspection_test test,long start, long end, MetaData_Asset metaData) throws JSONException {
+    public Playload_Submit(Inspection_test test, long start, long end, MetaData_Asset metaData) throws JSONException {
         id = test.getId();
         duration = TimeUnit.MILLISECONDS.toSeconds(end - start);
         payload = new JSONObject();

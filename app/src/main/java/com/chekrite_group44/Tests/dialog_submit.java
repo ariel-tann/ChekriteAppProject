@@ -46,13 +46,11 @@ public class dialog_submit extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // find id
-        SharedPreferences pref = view.getContext().getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
-        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
         androidx.appcompat.widget.Toolbar toolbar = view.findViewById(R.id.submit_toolbar);
-        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
+        toolbar.setBackgroundColor(Chekrite.getParseColor());
         TextView txt_complete = view.findViewById(R.id.txt_checkcomplete);
         // convert color to drawable
-        ColorDrawable cd = new ColorDrawable(Color.parseColor(highlight_colour));
+        ColorDrawable cd = new ColorDrawable(Chekrite.getParseColor());
         txt_complete.setBackground(cd);
         //
         start = System.currentTimeMillis();
