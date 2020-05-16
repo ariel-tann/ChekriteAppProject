@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Categories.Checklist"></activity>
+        <activity android:name=".Categories.ActivityChecklist"></activity>
         <activity android:name=".Categories.SignOut" />
         <activity android:name=".Login" />
         <activity android:name=".DashBoard.WelcomeSplash" />

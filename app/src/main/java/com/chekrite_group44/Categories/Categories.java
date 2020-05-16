@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,10 +28,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chekrite_group44.Asset_Properties.Asset;
-import com.chekrite_group44.Asset_Properties.Asset_Classes;
-import com.chekrite_group44.Asset_Properties.Inspection_checklist_items;
-import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Asset_Properties.Checklist;
 import com.chekrite_group44.Asset_Properties.ChecklistArray;
@@ -78,6 +73,7 @@ public class Categories extends AppCompatActivity {
 
 
 
+
 //get data from api with input params[asset id] :
 // 1. set apitask to /api/{asset_id}/checklist
 // 1.5 set api listener to get result of api tasks
@@ -104,6 +100,7 @@ public class Categories extends AppCompatActivity {
 
                         for(int i=0; i<data.length(); i++) {
                             JSONObject object = data.getJSONObject(i);
+                            Log.d(TAG, "SHOW JSON OBJECT: " + object);
                             String checklist_category = object.getString("category");
 
                         categories_list.add(checklist_category);
@@ -117,7 +114,7 @@ public class Categories extends AppCompatActivity {
                                 filtered_categories.add(element);
                             }
                         }
-                        Log.d(TAG, "get categories successfully " + filtered_categories );
+               //         Log.d(TAG, "get categories successfully " + filtered_categories );
 
 
 
@@ -167,7 +164,6 @@ public class Categories extends AppCompatActivity {
         //toolbar panel
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
 
-
         back = (Button) findViewById(R.id.pin_cancel);
         logout_btn =(ImageButton) findViewById(R.id.logout_img_btn);
         //image url
@@ -207,9 +203,9 @@ public class Categories extends AppCompatActivity {
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-         //       openSignout();
+                openSignout();
                 //for test
-                openChecklist();
+         //       openChecklist();
             }
         });
 
@@ -237,8 +233,9 @@ public class Categories extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
              public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-                Intent intent = new Intent(Categories.this, Checklist.class);
-              //  intent.putExtra("category", listView.getItemAtPosition(i).toString());
+                Intent intent = new Intent(Categories.this, ActivityChecklist.class);
+                intent.putExtra("category", listView.getItemAtPosition(i).toString());
+           //     intent.putExtra("JSON_OBJECT", data.toString());
                 startActivity(intent);
             }
         });
@@ -257,7 +254,7 @@ public class Categories extends AppCompatActivity {
     }
 
     public void openChecklist() {
-        Intent intent = new Intent(this, com.chekrite_group44.Categories.Checklist.class);
+        Intent intent = new Intent(this, ActivityChecklist.class);
         //   intent.putExtra("asset_id", "28433");
         // intent.putExtra("make", "Haulotte");
         // intent.putExtra("unit_number", "AE-001");
