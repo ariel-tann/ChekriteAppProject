@@ -95,12 +95,15 @@ public class Categories extends AppCompatActivity {
                     Log.d(TAG, "success: " + message);
 
                     JSONArray data = jsonObject.getJSONArray("data");
+               //             mItems = new Inspection_checklist_items(jchecklist_items);
                     if(data!=null){
 
 
                         for(int i=0; i<data.length(); i++) {
                             JSONObject object = data.getJSONObject(i);
-                            Log.d(TAG, "SHOW JSON OBJECT: " + object);
+                            Checklist clist = new Checklist(object);
+                       // set a mArray
+                            Log.d(TAG, "SHOW JSON OBJECT: " + clist.getName());
                             String checklist_category = object.getString("category");
 
                         categories_list.add(checklist_category);
@@ -175,18 +178,16 @@ public class Categories extends AppCompatActivity {
         selected_asset_model = getIntent().getStringExtra("model");
         selected_asset_photo =getIntent().getStringExtra("photo");
         asset_image =(ImageView) findViewById(R.id.asset_image);
-
+        Glide.with(getApplicationContext()).load(selected_asset_photo).apply(RequestOptions.circleCropTransform()).into(asset_image);
         asset_unum = (TextView) findViewById(R.id.asset_number);
         asset_unum.setText(selected_asset_unumber);
-
         asset_make = (TextView) findViewById(R.id.asset_make);
         asset_make.setText(selected_asset_make);
-
         asset_model = (TextView) findViewById(R.id.asset_model);
         asset_model.setText(selected_asset_model);
  //       test_json = (TextView) findViewById(R.id.test_json);
 
-        Glide.with(getApplicationContext()).load(selected_asset_photo).apply(RequestOptions.circleCropTransform()).into(asset_image);
+
  //       String asset_photo_url = pref.getString("photo", "");
   //      Glide.with(getApplicationContext()).load(photo).apply(RequestOptions.circleCropTransform()).into(logout_btn);
 
@@ -252,6 +253,9 @@ public class Categories extends AppCompatActivity {
  **/
 
     }
+
+
+
 
     public void openChecklist() {
         Intent intent = new Intent(this, ActivityChecklist.class);
