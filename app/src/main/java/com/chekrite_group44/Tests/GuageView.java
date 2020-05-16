@@ -131,13 +131,18 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
             case MotionEvent.ACTION_UP:
                 current_value = marks_count - (int) (marks_count * event.getY() / getHeight());
                 // set bound for value
-
-                if (current_value > lower_step) {
-                    setProgress(current_value);
-                    current_status = upper_status;
-                }else{
-                    setProgress(current_value);
-                    current_status = lower_status;
+                if (current_value >= 0 && current_value <= upper_step) {
+                    if (current_value > lower_step) {
+                        setProgress(current_value);
+                        current_status = upper_status;
+                    } else {
+                        setProgress(current_value);
+                        current_status = lower_status;
+                    }
+                }else if (current_value > upper_step){
+                    current_value = upper_step;
+                } else{
+                    current_value = 0;
                 }
                 onSizeChanged(getWidth(), getHeight(), 0, 0);
                 break;
