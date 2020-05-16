@@ -43,27 +43,28 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Categories extends AppCompatActivity {
+
+    private static final String TAG = "checklist";
+    private int dotscount;
+    private ImageView[] dots;
+    //UI
+    ImageButton logout_btn;
+    Button back;
     Toolbar toolbar;
     ViewPager viewPager;
     LinearLayout sliderDotview;
-    private int dotscount;
-    private ImageView[] dots;
-    ImageButton logout_btn;
-    Button back;
-    String selected_asset_id;
-    String selected_asset_unumber;
-    String selected_asset_make;
-    String selected_asset_model;
-    String selected_asset_photo;
-
     ImageView asset_image;
     TextView asset_unum;
     TextView asset_make;
     TextView asset_model;
     ListView listView;
-    String selected_asset_image;
-    private static final String TAG = "checklist";
-    TextView test_json;
+
+    //DATA
+    String selected_asset_id;
+    String selected_asset_unumber;
+    String selected_asset_make;
+    String selected_asset_model;
+    String selected_asset_photo;
 
     ChecklistArray mChecklistArray;
     ArrayList<String> categories_list = new ArrayList<>();
@@ -74,14 +75,13 @@ public class Categories extends AppCompatActivity {
 
 
 
-//get data from api with input params[asset id] :
+//get data from api with input params[asset id] steps :
 // 1. set apitask to /api/{asset_id}/checklist
-// 1.5 set api listener to get result of api tasks
-// 2. get json data from fetched url, put to shared preferences
-// 3. to parse json data, here should use Checklist.java class, get categories from json
-// 4. define a array, setText from data to the array
-
-//define a data group to store the data, here is list of categories
+// 2 set api listener to get result of api tasks
+// 3. get json data from fetched url
+// 4. to parse json data, here should use Checklist.java class, get categories from json
+// 5. define a array, setText from data to the array
+//delete above after finish
 
 
     APIsListener ChecklistListener = new APIsListener() {
@@ -93,16 +93,14 @@ public class Categories extends AppCompatActivity {
                 String message = (String) jsonObject.get("message");
                 if (status.equals("success")) {
                     Log.d(TAG, "success: " + message);
-
                     JSONArray data = jsonObject.getJSONArray("data");
-               //             mItems = new Inspection_checklist_items(jchecklist_items);
-                    if(data!=null){
 
+                    if(data!=null){
 
                         for(int i=0; i<data.length(); i++) {
                             JSONObject object = data.getJSONObject(i);
                             Checklist clist = new Checklist(object);
-                       // set a mArray
+
                             Log.d(TAG, "SHOW JSON OBJECT: " + clist.getName());
                             String checklist_category = object.getString("category");
 
@@ -120,32 +118,13 @@ public class Categories extends AppCompatActivity {
                //         Log.d(TAG, "get categories successfully " + filtered_categories );
 
 
-
-
                         listAdapter = new ArrayAdapter<>(Categories.this, R.layout.simple_list_item_1, filtered_categories);  //for test
                         listView.setAdapter(listAdapter);
 
 
-
                     }else{
-                        Log.v("search by hour", "No data available");
+                        Log.d(TAG, "jsonDATA = null");
                     }
-      //              Checklist list = new Checklist(data);
-      //              test_json.setText(data.toString());
-
-     //               JSONArray jCheckList = data.getJSONArray("checklist_items");
-
-
-                //    ChecklistArray categories = new ChecklistArray(data);
-              //      singleParsed = "Name:" + categories.get("name");
-             //       JSONArray categories = new JSONArray()
-                 //   String categories = data.getString("category");
-                    //PRINT EVERYTHING IN DATA
-
-                    /*  JSONObject jchecklist = data.getJSONObject("checklist");
-                    Checklist checklist = new Checklist(jchecklist);**/
-
-
                 }
 
             } catch (JSONException e) {
@@ -155,22 +134,25 @@ public class Categories extends AppCompatActivity {
     };
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories);
 
 
-
-        //toolbar panel
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
+        //set highlight color
+        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
+        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
+        //toolbar panel
+
 
         back = (Button) findViewById(R.id.pin_cancel);
         logout_btn =(ImageButton) findViewById(R.id.logout_img_btn);
+
         //image url
- //       selected_asset_image = Chekrite.getString("");
+
         // asset info panel
         selected_asset_id = getIntent().getStringExtra("asset_id");
         selected_asset_unumber = getIntent().getStringExtra("unit_number");
@@ -185,22 +167,28 @@ public class Categories extends AppCompatActivity {
         asset_make.setText(selected_asset_make);
         asset_model = (TextView) findViewById(R.id.asset_model);
         asset_model.setText(selected_asset_model);
- //       test_json = (TextView) findViewById(R.id.test_json);
 
 
- //       String asset_photo_url = pref.getString("photo", "");
-  //      Glide.with(getApplicationContext()).load(photo).apply(RequestOptions.circleCropTransform()).into(logout_btn);
+        // for latar add : get test info for asset
+        //TODO SHOW TEST INFOMATION
 
 
+
+        listView = (ListView) findViewById(R.id.checklist_category);
+
+        //      String asset_photo_url = pref.getString("photo", "");
+        //      Glide.with(getApplicationContext()).load(photo).apply(RequestOptions.circleCropTransform()).into(logout_btn);
+
+        // call apis task
         new APIsTask(ChecklistListener, getApplicationContext()).execute("GET", APIs.CHECKLIST, selected_asset_id, "");
 
+        //set profile button upper right
         String profile_link = pref.getString("profile_photo", "");
         Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
 
-        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
-        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
 
+
+        //profile button onclick
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,7 +199,7 @@ public class Categories extends AppCompatActivity {
         });
 
 
-        //for later
+        //for later add
     //    viewPager = (ViewPager) findViewById(R.id.slider);
     //    sliderDotview = (LinearLayout) findViewById(R.id.Slider_dots);
    //     ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
@@ -225,16 +213,14 @@ public class Categories extends AppCompatActivity {
         }
 */
 
-            listView = (ListView) findViewById(R.id.checklist_category);
-
-            //LIST ONCLICK
 
 
-
+            //LIST ONCLICK goto checklist activity
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
              public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
                 Intent intent = new Intent(Categories.this, ActivityChecklist.class);
+                //sent seleced info
                 intent.putExtra("category", listView.getItemAtPosition(i).toString());
            //     intent.putExtra("JSON_OBJECT", data.toString());
                 startActivity(intent);
@@ -244,16 +230,7 @@ public class Categories extends AppCompatActivity {
 
 
 
-/***
- * list of categories type
-        ArrayList<String> arrayList =new ArrayList<>();
-        arrayList.add("checklist 1");
-        arrayList.add("checklist 2");
-        arrayList.add("checklist 3");
- **/
-
     }
-
 
 
 
@@ -275,6 +252,7 @@ public class Categories extends AppCompatActivity {
         startActivity(intent);
     }
 /**
+ *for later to add
     private void setSliderViews(){
 
         for(){
