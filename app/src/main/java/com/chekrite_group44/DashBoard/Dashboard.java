@@ -49,6 +49,8 @@ public class Dashboard extends AppCompatActivity {
     private ImageButton test_btns;
     private ImageButton test_btns_ctgr;
     private ImageButton ariel_test_btn;
+
+
     APIsListener AssetsListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -148,7 +150,18 @@ public class Dashboard extends AppCompatActivity {
     }
     public void openCategories() {
         Intent intent = new Intent(this, Categories.class);
-        intent.putExtra("asset_id", 28433);
+     //   intent.putExtra("asset_id", "28433");
+       // intent.putExtra("make", "Haulotte");
+       // intent.putExtra("unit_number", "AE-001");
+        //intent.putExtra("model", "Compact 10 Scissor Lift");
+        //intent.putExtra("photo", "https://chekrite-cdn.s3.ap-southeast-2.amazonaws.com/141/Make/DtYVyRGaCm.jpg");
+        intent.putExtra("asset_id", "28436");
+
+        intent.putExtra("make", "Test");
+        intent.putExtra("unit_number", "UFO-01");
+        intent.putExtra("model", "Test");
+        intent.putExtra("photo", "https://chekrite-cdn.s3.ap-southeast-2.amazonaws.com/141/Make/xuM2F2l9Ye.png");
+
         startActivity(intent);
 
     }

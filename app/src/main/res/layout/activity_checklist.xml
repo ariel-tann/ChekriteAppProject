@@ -11,7 +11,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Categories.Categories">
+   >
 
 
     <!-- for later
@@ -46,45 +46,45 @@
             >
 
 
-        <Button
-            android:id="@+id/pin_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:layout_alignParentStart="true"
-            android:text="Back"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_alignParentLeft="true"
-            />
+            <Button
+                android:id="@+id/pin_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:layout_alignParentStart="true"
+                android:text="Back"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_alignParentLeft="true"
+                />
 
-        <TextView
-            android:id="@+id/screen_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:text="Categories"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/screen_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Categories"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/logout_img_btn"
-            style="@android:style/Widget.ImageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/btn_background_small"
-            android:padding="5dp"
-            android:scaleType="fitCenter"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/avatar"
-            />
+            <ImageButton
+                android:id="@+id/logout_img_btn"
+                style="@android:style/Widget.ImageButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn_background_small"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/avatar"
+                />
 
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -116,56 +116,67 @@
             android:src="@drawable/avatar"
             app:srcCompat="@drawable/btn_background" />
 
-    <RelativeLayout
-        android:id="@+id/asset_text_detail"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/asset_image"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
->
-
-        <TextView
-            android:id="@+id/asset_number"
+        <RelativeLayout
+            android:id="@+id/asset_text_detail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-
-            android:layout_alignParentTop="true"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/asset_image"
             android:layout_alignParentEnd="true"
-            android:text="Asset Unit Number"
-            android:textAllCaps="true"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            >
 
-        <TextView
-            android:id="@+id/asset_make"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/asset_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
 
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/asset_number"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:text="Asset Unit Number"
+                android:textAllCaps="true"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            android:text="Asset Make"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/asset_make"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-        <TextView
-            android:id="@+id/asset_model"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/asset_number"
 
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/asset_make"
-            android:text="Asset Model"
-            android:textSize="18sp" />
-    </RelativeLayout>
+                android:text="Asset Make"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/asset_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/asset_make"
+                android:text="Asset Model"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/selected_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/asset_model"
+                android:text="Selected Category"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -179,7 +190,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/asset_view"
-       />
+        />
 
 
     <TextView
