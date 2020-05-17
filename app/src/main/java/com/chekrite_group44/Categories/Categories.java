@@ -21,10 +21,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -50,7 +53,7 @@ public class Categories extends AppCompatActivity {
     //UI
     ImageButton logout_btn;
     Button back;
-    Toolbar toolbar;
+    //androidx.appcompat.widget.Toolbar toolbar;
     ViewPager viewPager;
     LinearLayout sliderDotview;
     ImageView asset_image;
@@ -59,6 +62,7 @@ public class Categories extends AppCompatActivity {
     TextView asset_model;
     ListView listView;
 
+
     //DATA
     String selected_asset_id;
     String selected_asset_unumber;
@@ -66,6 +70,7 @@ public class Categories extends AppCompatActivity {
     String selected_asset_model;
     String selected_asset_photo;
 
+    Checklist checklist_items;
     ChecklistArray mChecklistArray;
     ArrayList<String> categories_list = new ArrayList<>();
     ArrayList<String> filtered_categories = new ArrayList<>();
@@ -99,9 +104,9 @@ public class Categories extends AppCompatActivity {
 
                         for(int i=0; i<data.length(); i++) {
                             JSONObject object = data.getJSONObject(i);
-                            Checklist clist = new Checklist(object);
+                            checklist_items = new Checklist(object);
 
-                            Log.d(TAG, "SHOW JSON OBJECT: " + clist.getName());
+                            Log.d(TAG, "SHOW JSON OBJECT: " + checklist_items.getName());
                             String checklist_category = object.getString("category");
 
                         categories_list.add(checklist_category);
@@ -138,14 +143,18 @@ public class Categories extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories);
-    //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
+ //       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
+       // getSupportActionBar().hide();
+        //setSupportActionBar(toolbar);
+
+
         //set highlight color
         String highlight_colour = pref.getString("highlight_colour", "#65cb81");
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
+      //  androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
         toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
         //toolbar panel
 
@@ -224,6 +233,25 @@ public class Categories extends AppCompatActivity {
                 Intent intent = new Intent(Categories.this, ActivityChecklist.class);
                 //sent seleced info
                 intent.putExtra("category", listView.getItemAtPosition(i).toString());
+                intent.putExtra("category_array", checklist_items.getName());
+                intent.putExtra("unit_number", selected_asset_unumber);
+                intent.putExtra("asset_id", selected_asset_id);
+                intent.putExtra("model", selected_asset_model);
+                intent.putExtra("make", selected_asset_make);
+                intent.putExtra("photo", selected_asset_photo);
+
+
+                
+                //***************************
+                //for value = position i : do j=0, j  < array size i++; add to new arraylist
+                //how to pass array list?
+                Log.d(TAG, "pass checklist items:"+ checklist_items.getName());
+
+
+
+
+
+
            //     intent.putExtra("JSON_OBJECT", data.toString());
                 startActivity(intent);
             }
