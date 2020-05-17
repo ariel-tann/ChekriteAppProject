@@ -138,6 +138,8 @@ public class Categories extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories);
+    //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
