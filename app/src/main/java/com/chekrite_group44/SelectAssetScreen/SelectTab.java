@@ -65,7 +65,7 @@ public class SelectTab extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_select_tab, container, false);
         selectTab = rootView.findViewById(R.id.select_tab_recyclerview);
        // linearLayoutManager=new LinearLayoutManager(getActivity());
-        new APIsTask(AssetsListener, getContext()).execute("GET", APIs.ASSETS,"","");
+        new APIsTask(AssetsListener).execute("GET", APIs.ASSETS,"","");
         selectTab.setHasFixedSize(true);
         selectTab.setAdapter(new SelectTabAdapter(getActivity().getApplicationContext(),asset_classes));
         selectTab.setLayoutManager(new LinearLayoutManager(getActivity()));

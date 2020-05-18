@@ -114,7 +114,7 @@ public class Inspection_main extends AppCompatActivity
                 dialog.show();
                 Playload_Submit payload = new Playload_Submit(mTest, start_inspection, end,
                         new MetaData_Asset(getApplicationContext()));
-                new APIsTask(SubmitAPI, getApplicationContext()).execute("POST", APIs.SUBMIT, "", payload.getPayload().toString());
+                new APIsTask(SubmitAPI).execute("POST", APIs.SUBMIT, "", payload.getPayload().toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -131,7 +131,7 @@ public class Inspection_main extends AppCompatActivity
                 try {
                     Payload_Response payload = new Payload_Response(item, mTest, type, button_order, value,
                             start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
-                    new APIsTask(ResponseAPI, getApplicationContext()).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
+                    new APIsTask(ResponseAPI).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -144,7 +144,7 @@ public class Inspection_main extends AppCompatActivity
                 try {
                     Payload_Response payload = new Payload_Response(item, mTest, type, button_order, value,
                             start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
-                    new APIsTask(ResponseAPI, getApplicationContext()).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
+                    new APIsTask(ResponseAPI).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -257,7 +257,7 @@ public class Inspection_main extends AppCompatActivity
         Playload_Start api_payload = new Playload_Start();
         String payload = api_payload.StartAPI_payload(getApplicationContext(), checklist_id,asset_id, asset_selection);
         // send payload to DB
-        new APIsTask(StartListener, getApplicationContext()).execute("POST", APIs.START,"",payload);
+        new APIsTask(StartListener).execute("POST", APIs.START,"",payload);
         //
         dialog = new ProgressDialog(this); // Login log
     }

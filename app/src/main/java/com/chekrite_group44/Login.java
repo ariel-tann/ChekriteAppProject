@@ -137,7 +137,7 @@ public class Login extends AppCompatActivity
                     Chekrite.putString("access_token", access_token);
                     Chekrite.putString("token_expiry", token_expiry);
 //                    get app_version
-                    new APIsTask(APIApp_version, getApplicationContext()).execute("GET", APIs.APP_VERSION, "", "");
+                    new APIsTask(APIApp_version).execute("GET", APIs.APP_VERSION, "", "");
                     // close login dialog
                     dialog.dismiss();
                     openWelcomeSplash(profile_photo,first_name,last_name);
@@ -188,10 +188,10 @@ public class Login extends AppCompatActivity
                     Date expiredDate = stringToDate(token_expiry, "yyyy-MM-dd HH:mm:ss");
                     // if token is not expired and can used, we need to logout first
                     if(new Date().before(expiredDate)&&!new Date().after(expiredDate)){
-                        new APIsTask(LogoutListener, getApplicationContext()).execute("POST", APIs.LOGOUT,"","");
+                        new APIsTask(LogoutListener).execute("POST", APIs.LOGOUT,"","");
                     }
                 }
-                new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.LOGIN, "",jsonObject.toString());
+                new APIsTask(apIsListener).execute("POST", APIs.LOGIN, "",jsonObject.toString());
 
             } catch (JSONException e) {
                 e.printStackTrace();

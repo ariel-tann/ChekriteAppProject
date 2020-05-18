@@ -23,4 +23,8 @@ public class ChecklistArray {
         }
 
     }
+
+    public ArrayList<Checklist> getChecklists() {
+        return checklists;
+    }
 }
