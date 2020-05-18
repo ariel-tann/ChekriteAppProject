@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.chekrite_group44.ArielTest;
 import com.chekrite_group44.Asset_Properties.Asset_Classes;
 import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
 import com.chekrite_group44.Categories.Categories;
@@ -48,7 +49,7 @@ public class Dashboard extends AppCompatActivity {
     String photo_url;
     private ImageButton test_btns;
     private ImageButton test_btns_ctgr;
-    private ImageButton ariel_test_btn;
+   // private ImageButton ariel_test_btn;
 
 
     APIsListener AssetsListener = new APIsListener() {
@@ -140,10 +141,19 @@ public class Dashboard extends AppCompatActivity {
                 openCategories();
             }
         });
+
+        //ariel test
+        profile_button_photo.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                open_ariel_test();
+            }
+        });
     }
     private void openInspection() {
         Intent intent = new Intent(this, Inspection_main.class);
-        intent.putExtra("checklist_id", "5020");
+        intent.putExtra("checklist_id", "5011");
         intent.putExtra("asset_id", 28436);
         intent.putExtra("asset_selection", "search");
         startActivity(intent);
@@ -176,6 +186,11 @@ public class Dashboard extends AppCompatActivity {
         new APIsTask(AssetsListener, getApplicationContext()).execute("GET", APIs.ASSETS,"","");
         new APIsTask(LogoutListener, getApplicationContext()).execute("POST", APIs.LOGOUT,"","");
         Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
+
+    public void open_ariel_test() {
+        Intent intent = new Intent(this, ArielTest.class);
         startActivity(intent);
     }
 }

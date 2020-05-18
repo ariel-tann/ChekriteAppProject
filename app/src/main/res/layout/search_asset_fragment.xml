@@ -1,48 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Date: 2020.5.12
-  ~ This file is created by Kai.
-  ~ Summary:
-  -->
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#65cb81"
+    android:id="@+id/parent_layout"
+    >
+
+    <FrameLayout
+        android:id="@+id/keyboardFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText">
+
+    </FrameLayout>
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="376dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_margin="16dp"
         android:background="@drawable/search_asset_bar"
+        android:gravity="center_vertical"
         android:ems="10"
         android:enabled="false"
         android:focusable="false"
         android:inputType="textPersonName"
         android:text="type to search"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment"
+        android:textColor="#dcdcdc"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/deleteAllBtn"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/search_asset_cancel_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+         />
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+        android:id="@+id/searchAssetRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="241dp"
+        android:layout_height="0dp"
+        android:background="#dcdcdc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.chekrite_group44.keyboard.keyboard"
-        android:layout_width="match_parent"
-        android:layout_height="298dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout="@layout/keyboard_fragment" />
+        app:layout_constraintTop_toBottomOf="@id/keyboardFragment" />
+
+    <TextView
+        android:id="@+id/numAssetFoundText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:text=""
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/editText" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

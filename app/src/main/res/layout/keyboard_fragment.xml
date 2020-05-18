@@ -14,9 +14,10 @@
 
     <Button
         android:id="@+id/backspace_btn"
-        android:layout_width="104dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/keyboard_button"
         android:text="Back"
         android:textColor="@drawable/keyboard_button_text_color"
@@ -29,8 +30,9 @@
 
     <Button
         android:id="@+id/one_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="4dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="1"
@@ -45,9 +47,10 @@
 
     <Button
         android:id="@+id/leftBracket_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/keyboard_button"
         android:text="("
         android:textColor="@drawable/keyboard_button_text_color"
@@ -60,8 +63,9 @@
 
     <Button
         android:id="@+id/seven_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="7"
@@ -75,9 +79,9 @@
 
     <Button
         android:id="@+id/space_btn"
-        android:layout_width="190dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="185dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/keyboard_button"
         android:textColor="@drawable/keyboard_button_text_color"
         android:textSize="35sp"
@@ -90,9 +94,9 @@
 
     <Button
         android:id="@+id/rightBracket_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/keyboard_button"
         android:text=")"
         android:textColor="@drawable/keyboard_button_text_color"
@@ -106,8 +110,8 @@
 
     <Button
         android:id="@+id/fullstop_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="."
@@ -121,10 +125,11 @@
 
     <Button
         android:id="@+id/backspace1_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/keyboard_button"
         android:text="B"
         android:textColor="@drawable/keyboard_button_text_color"
@@ -138,8 +143,8 @@
 
     <Button
         android:id="@+id/zero_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="0"
@@ -154,8 +159,8 @@
 
     <Button
         android:id="@+id/five_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="5"
@@ -170,8 +175,8 @@
 
     <Button
         android:id="@+id/four_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="4"
@@ -186,8 +191,9 @@
 
     <Button
         android:id="@+id/dash_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="-"
@@ -202,8 +208,8 @@
 
     <Button
         android:id="@+id/nine_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="9"
@@ -218,8 +224,8 @@
 
     <Button
         android:id="@+id/eight_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="8"
@@ -234,8 +240,8 @@
 
     <Button
         android:id="@+id/two_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="2"
@@ -250,8 +256,9 @@
 
     <Button
         android:id="@+id/six_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="6"
@@ -266,8 +273,8 @@
 
     <Button
         android:id="@+id/three_btn"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="3"
@@ -282,9 +289,9 @@
 
     <Button
         android:id="@+id/w_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/keyboard_button"
         android:text="W"
         android:textColor="@drawable/keyboard_button_text_color"
@@ -298,9 +305,10 @@
 
     <Button
         android:id="@+id/v_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/keyboard_button"
         android:text="V"
         android:textColor="@drawable/keyboard_button_text_color"
@@ -314,10 +322,10 @@
 
     <Button
         android:id="@+id/y_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/keyboard_button"
         android:text="Y"
         android:textColor="@drawable/keyboard_button_text_color"
@@ -330,9 +338,9 @@
 
     <Button
         android:id="@+id/z_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/keyboard_button"
         android:text="Z"
         android:textColor="@drawable/keyboard_button_text_color"
@@ -346,8 +354,8 @@
 
     <Button
         android:id="@+id/t_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="T"
@@ -362,8 +370,9 @@
 
     <Button
         android:id="@+id/a_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="A"
@@ -378,8 +387,9 @@
 
     <Button
         android:id="@+id/u_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="U"
@@ -394,8 +404,8 @@
 
     <Button
         android:id="@+id/p_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="P"
@@ -410,8 +420,8 @@
 
     <Button
         android:id="@+id/s_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="S"
@@ -426,8 +436,8 @@
 
     <Button
         android:id="@+id/q_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="Q"
@@ -442,8 +452,9 @@
 
     <Button
         android:id="@+id/o_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="O"
@@ -458,8 +469,8 @@
 
     <Button
         android:id="@+id/r_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/keyboard_button"
         android:text="R"
@@ -474,9 +485,8 @@
 
     <Button
         android:id="@+id/d_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="@drawable/keyboard_button"
         android:text="D"
         android:textColor="@drawable/keyboard_button_text_color"
@@ -487,12 +497,12 @@
         app:layout_constraintStart_toEndOf="@+id/c_btn"
         app:layout_constraintTop_toBottomOf="@id/space2"
 
-        app:layout_constraintVertical_bias="0.354" />
+        />
 
     <Button
         android:id="@+id/k_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/keyboard_button"
         android:text="K"
@@ -507,8 +517,8 @@
 
     <Button
         android:id="@+id/c_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="C"
@@ -523,8 +533,9 @@
 
     <Button
         android:id="@+id/g_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="G"
@@ -539,8 +550,9 @@
 
     <Button
         android:id="@+id/h_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="H"
@@ -555,8 +567,8 @@
 
     <Button
         android:id="@+id/l_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="L"
@@ -571,8 +583,8 @@
 
     <Button
         android:id="@+id/m_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="M"
@@ -586,11 +598,11 @@
         app:layout_constraintVertical_bias="0.027" />
 
 
-
     <Button
         android:id="@+id/n_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="N"
@@ -605,8 +617,8 @@
 
     <Button
         android:id="@+id/b_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="B"
@@ -621,8 +633,8 @@
 
     <Button
         android:id="@+id/j_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="J"
@@ -637,8 +649,8 @@
 
     <Button
         android:id="@+id/i_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="I"
@@ -653,8 +665,8 @@
 
     <Button
         android:id="@+id/e_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="E"
@@ -669,8 +681,8 @@
 
     <Button
         android:id="@+id/f_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"
         android:text="F"
@@ -685,9 +697,9 @@
 
     <Button
         android:id="@+id/x_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
         android:layout_weight="1"
         android:background="@drawable/keyboard_button"
         android:text="X"
@@ -715,15 +727,14 @@
         android:id="@+id/zeroTo9_btn"
         android:layout_width="103dp"
         android:layout_height="31dp"
+        android:layout_marginEnd="12dp"
         android:background="@drawable/keyboard_button"
         android:text="0-9"
         android:textColor="@drawable/keyboard_button_text_color"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/space2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
-        app:layout_constraintStart_toEndOf="@+id/aToZ_btn"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spacer"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
@@ -737,7 +748,18 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/space2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spacer"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Space
+        android:id="@+id/spacer"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginBottom="40dp"
+        android:background="#f2f2f2"
+        app:layout_constraintBottom_toTopOf="@id/space2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,7 @@
         <activity android:name=".SelectAssetScreen.SelectAssetScreen" />
         <activity android:name=".Categories.Categories" />
         <activity android:name=".Tests.Inspection_main" />
+        <activity android:name=".ArielTest"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
