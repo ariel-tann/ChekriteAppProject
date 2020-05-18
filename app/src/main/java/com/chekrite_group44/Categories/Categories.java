@@ -191,7 +191,7 @@ public class Categories extends AppCompatActivity {
         //      Glide.with(getApplicationContext()).load(photo).apply(RequestOptions.circleCropTransform()).into(logout_btn);
 
         // call apis task
-        new APIsTask(ChecklistListener, getApplicationContext()).execute("GET", APIs.CHECKLIST, selected_asset_id, "");
+        new APIsTask(ChecklistListener).execute("GET", APIs.CHECKLIST, selected_asset_id, "");
 
         //set profile button upper right
         String profile_link = pref.getString("profile_photo", "");

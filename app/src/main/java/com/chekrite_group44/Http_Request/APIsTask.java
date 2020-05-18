@@ -28,13 +28,10 @@ import java.net.URL;
 // Defines the background task to download and then load the image within the ImageView
 public class APIsTask extends AsyncTask<String, Void, String> {
     APIsListener mAPIsListener;
-    Context mContext;
     private static final String TAG = "APIsTask";
-    public APIsTask(APIsListener apIsListener, Context context) {
+    public APIsTask(APIsListener apIsListener) {
         // APIsListener: When API gets response from DB, it will notify user
-        // context: used for getting share preference
         mAPIsListener = apIsListener;
-        mContext = context;
     }
 
     @Override
@@ -85,8 +82,7 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
 //          Get token, if it exists in share pref
-            SharedPreferences pref = mContext.getSharedPreferences(Chekrite.SHARED_PREFS, mContext.MODE_PRIVATE);
-            String token = pref.getString("access_token", "");
+            String token = Chekrite.getString("access_token");
 //            Add token in Header
 //            LOGIN and PAIR don't require token
             if(token.length()>0 && params[1]!=APIs.LOGIN && params[1]!=APIs.PAIR){

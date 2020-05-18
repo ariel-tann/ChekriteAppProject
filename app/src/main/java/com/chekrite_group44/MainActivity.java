@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity
             dialog.setIndeterminate(true);
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-            new APIsTask(apIsListener, getApplicationContext()).execute("POST", APIs.PAIR, "", jsonObject.toString());
+            new APIsTask(apIsListener).execute("POST", APIs.PAIR, "", jsonObject.toString());
         }
     };
 

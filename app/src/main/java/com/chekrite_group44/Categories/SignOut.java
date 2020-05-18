@@ -58,7 +58,7 @@ public class SignOut extends AppCompatActivity {
 
     public void logout(){
 
-        new APIsTask(LogoutListener, getApplicationContext()).execute("POST", APIs.LOGOUT,"","");
+        new APIsTask(LogoutListener).execute("POST", APIs.LOGOUT,"","");
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     };
