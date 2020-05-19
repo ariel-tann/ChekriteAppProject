@@ -92,26 +92,59 @@ public class Categories extends AppCompatActivity {
     APIsListener ChecklistListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
+
             String status = null;
             try {
                 status = (String) jsonObject.get("status");
                 String message = (String) jsonObject.get("message");
+
+
+
                 if (status.equals("success")) {
+
                     Log.d(TAG, "success: " + message);
-                    JSONArray data = jsonObject.getJSONArray("data");
+                    mChecklistArray = new ChecklistArray(jsonObject);
 
-                    if(data!=null){
 
-                        for(int i=0; i<data.length(); i++) {
-                            JSONObject object = data.getJSONObject(i);
-                            checklist_items = new Checklist(object);
 
-                            Log.d(TAG, "SHOW JSON OBJECT: " + checklist_items.getName());
-                            String checklist_category = object.getString("category");
+               //     JSONArray data = jsonObject.getJSONArray("data");
+         //           JSONObject jObject = jsonObject.getJSONObject("data");
+        //            mItems = new Inspection_checklist_items(jchecklist_items);
 
-                        categories_list.add(checklist_category);
+        //            Checklist mChecklist = new Checklist(jObject);
+       //             Log.d(TAG, "SHOW CHECKLIST: " + mChecklist);
+
+
+                    //   mChecklistArray = new ChecklistArray(input);
+                 //   checklist_items = new Checklist(object);
+                 //   mChecklistArray = new ChecklistArray(checklist_category);
+                 //   mChecklistArray.add(checklist_category);
+
+                    if(mChecklistArray!=null){
+                        Log.d(TAG, "mChecklistArray length: " + mChecklistArray.getChecklists().size());
+
+                        for (int i = 0; i< mChecklistArray.getChecklists().size(); i++) {
+                            // get single item
+                            Checklist item = mChecklistArray.getChecklists().get(i);
+                            Log.d(TAG, "mChecklistArray ids: " + mChecklistArray.getChecklists().get(i).getId());
+                            String checklist_category = mChecklistArray.getChecklists().get(i).getCategory();
+                            String checklist_name = mChecklistArray.getChecklists().get(i).getName();
+                            categories_list.add(checklist_category);
+
 
                         }
+                     //   for(int i=0; i<data.length(); i++) {
+                     //       JSONObject object = data.getJSONObject(i);
+                      //      checklist_items = new Checklist(object);
+                       //     mChecklistArray = new ChecklistArray(input);
+
+                      //      Log.d(TAG, "SHOW JSON OBJECT: " + checklist_items.getName());
+                       //     String checklist_category = object.getString("category");
+
+
+                       //     categories_list.add(checklist_category);
+
+                     //   }
                         //filter repeated elements in category list
                         for (String element : categories_list) {
 
@@ -233,7 +266,10 @@ public class Categories extends AppCompatActivity {
                 Intent intent = new Intent(Categories.this, ActivityChecklist.class);
                 //sent seleced info
                 intent.putExtra("category", listView.getItemAtPosition(i).toString());
-                intent.putExtra("category_array", checklist_items.getName());
+           //     intent.putExtra("data_array_list", mChecklistArray.getChecklists());
+            //    intent.putExtra("category_array", checklist_items.getName());
+
+
                 intent.putExtra("unit_number", selected_asset_unumber);
                 intent.putExtra("asset_id", selected_asset_id);
                 intent.putExtra("model", selected_asset_model);
@@ -245,7 +281,7 @@ public class Categories extends AppCompatActivity {
                 //***************************
                 //for value = position i : do j=0, j  < array size i++; add to new arraylist
                 //how to pass array list?
-                Log.d(TAG, "pass checklist items:"+ checklist_items.getName());
+           //     Log.d(TAG, "pass checklist items:"+ checklist_items.getName());
 
 
 
