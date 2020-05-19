@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.chekrite_group44.DashBoard.Dashboard;
+import com.chekrite_group44.Keyboard.KeyboardFragment;
 import com.chekrite_group44.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -21,10 +22,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 
-public class SelectAssetScreen extends AppCompatActivity {
+public class SelectAssetScreen extends AppCompatActivity implements SearchAssetFragment.searchAssetListener, KeyboardFragment.keyboardFragmentListener  {
     Button backbutton;
     ViewPager viewPager;
     TabLayout tabLayout;
+    private SearchAssetFragment SearchAssetFragment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +44,22 @@ public class SelectAssetScreen extends AppCompatActivity {
             }
         });
         Log.d("LOG", "Inside select asset screeen ");
+        SearchAssetFragment = new SearchAssetFragment();
+
 
     }
     public void dashboard(View view){ Intent dashboardintent=new Intent(getApplicationContext(), Dashboard.class);
        startActivity(dashboardintent);
        }
+
+    @Override
+    public void onInputKeyboardSent(CharSequence input) {
+        SearchAssetFragment.updateEditText(input);
+    }
+
+    @Override
+    public void onInputSearchAssetSent(CharSequence input) {
+
+    }
 
 }

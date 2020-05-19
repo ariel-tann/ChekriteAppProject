@@ -50,6 +50,7 @@ public class SignOut extends AppCompatActivity {
                 logout();
             }
         });
+        log_out.setBackgroundColor(Chekrite.getParseColor());
 
 
         cancel = (Button) findViewById(R.id.cancel_btn);

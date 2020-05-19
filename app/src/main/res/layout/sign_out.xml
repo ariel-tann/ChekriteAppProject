@@ -16,41 +16,39 @@
     <TextView
         android:id="@+id/sign_out_header"
         android:layout_width="match_parent"
-        android:layout_height="246dp"
+        android:layout_height="220dp"
         android:background="@color/lime_green"
 
         android:gravity="center"
         android:text="Sign Out"
         android:textColor="@color/white"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/sign_out_info"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="46sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/sign_out_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="379dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="204dp"
         android:paddingHorizontal="50dp"
         android:text='Tap "Sign Out" to sign out of ChekRite'
-        android:textSize="28dp"
 
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/sign_out_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_out_header"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/sign_out_btn"
         android:layout_width="240dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_centerHorizontal="true"
 
         android:layout_gravity="center"
@@ -61,7 +59,6 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="30dp"
-        android:textStyle="bold"
 
         app:layout_constraintBottom_toTopOf="@+id/cancel_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,12 +66,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-
     <Button
         android:id="@+id/cancel_btn"
 
         android:layout_width="240dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginBottom="44dp"
@@ -84,7 +80,6 @@
         android:textAllCaps="false"
         android:textColor="@color/dark_gray"
         android:textSize="30dp"
-        android:textStyle="bold"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
