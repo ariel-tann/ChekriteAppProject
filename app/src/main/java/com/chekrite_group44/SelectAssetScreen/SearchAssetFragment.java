@@ -266,7 +266,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
     public void displayText() {
         String joined = TextUtils.join("", SearchText);
         if(SearchText.size() >= 3){
-            new APIsTask(SearchAssetListener, this.getContext()).execute("GET", APIs.SEARCH, joined, "");
+            new APIsTask(SearchAssetListener).execute("GET", APIs.SEARCH, joined, "");
             mAdapter.notifyDataSetChanged();
 
         }

@@ -177,10 +177,12 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
         Ver_Line.setStrokeWidth(5);
 
         int Canvas_width = canvas.getWidth();
-
-        int width = 90;
-        int height = 120;
-        int y_offset = 130;
+        int Canvas_height = canvas.getHeight();
+//        Log.d(TAG, "Canvas_width:" + Canvas_width);
+//        Log.d(TAG, "Canvas_height:" + Canvas_height);
+        int width = Math.round(Canvas_width*0.15f);
+        int height = Math.round(Canvas_height*0.09105f);
+        int y_offset = Math.round(Canvas_height*0.1f);
         int x_offset = (Canvas_width / 2) - (width / 2);  // plot in the center
         int y_height = canvas.getHeight();
         // full height
