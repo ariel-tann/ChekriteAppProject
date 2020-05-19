@@ -12,8 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.chekrite_group44.R;
 import com.chekrite_group44.DashBoard.Dashboard;
+import com.chekrite_group44.R;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.Nullable;
@@ -28,11 +28,11 @@ public class SelectAssetScreen extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.select_asset_screen_fragment);
-        backbutton=findViewById(R.id.back_button);
-        viewPager=findViewById(R.id.view_pager_select_tab);
-        tabLayout=findViewById(R.id.sliding_tabs);
-        viewPager.setAdapter(new TabFragmentPagerAdapter(getSupportFragmentManager(),this));
+        setContentView(R.layout.select_asset_screen);
+        backbutton = findViewById(R.id.back_button);
+        viewPager = findViewById(R.id.view_pager);
+        tabLayout = findViewById(R.id.sliding_tabs);
+        viewPager.setAdapter(new TabFragmentPagerAdapter(getSupportFragmentManager(), this));
         tabLayout.setupWithViewPager(viewPager);
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,13 +40,11 @@ public class SelectAssetScreen extends AppCompatActivity {
                 dashboard(view);
             }
         });
-        Log.d("LOG","Inside select asset screeen ");
-    }
+        Log.d("LOG", "Inside select asset screeen ");
 
-
-    public void dashboard(View view){
-        Intent dashboardintent=new Intent(getApplicationContext(), Dashboard.class);
-        startActivity(dashboardintent);
     }
+    public void dashboard(View view){ Intent dashboardintent=new Intent(getApplicationContext(), Dashboard.class);
+       startActivity(dashboardintent);
+       }
 
 }

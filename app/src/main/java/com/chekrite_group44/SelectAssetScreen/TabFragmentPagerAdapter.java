@@ -26,7 +26,7 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter{
             return new SelectTab();
         else if (position==2)
             return new SelectTab();
-        return SelectAssetScreenFragment.newInstance(position+1);
+       return null;
     }
 
     @Override
