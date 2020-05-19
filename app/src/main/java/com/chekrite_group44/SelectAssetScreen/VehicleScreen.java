@@ -66,7 +66,7 @@ public class VehicleScreen extends Fragment {
         selectTab = rootView.findViewById(R.id.select_tab_rv);
         // linearLayoutManager=new LinearLayoutManager(getActivity());
 
-        new APIsTask(AssetsListener, getContext()).execute("GET", APIs.ASSETS,"","");
+        new APIsTask(AssetsListener).execute("GET", APIs.ASSETS,"","");
         selectTab.setHasFixedSize(true);
         selectTab.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         selectTab.addItemDecoration(new DividerItemDecoration(getContext(),
