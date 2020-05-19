@@ -60,7 +60,7 @@ public class APIsTask extends AsyncTask<String, Void, String> {
                 chekriteLink = chekriteLink + "asset_classes";
                 break;
             case APIs.SEARCH:
-                chekriteLink = chekriteLink + "search?q="+params[2];
+                chekriteLink = chekriteLink + "assets/search?q="+params[2];
                 break;
             case APIs.CHECKLIST:
                 chekriteLink = chekriteLink +"assets/"+params[2]+"/checklists";

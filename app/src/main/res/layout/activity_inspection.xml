@@ -10,16 +10,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <include
         android:id="@+id/inspection_toolbar"
         layout="@layout/inspection_toolbar" />
-
-
     <com.chekrite_group44.Tests.InspectionViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/inspection_container"
         />
-
     </LinearLayout>

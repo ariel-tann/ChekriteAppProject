@@ -1,11 +1,12 @@
 /*
- * Date: 2020.5.4
+ * Date: 2020.5.16
  * This file is created by Kai.
  * Summary:
  */
 
 package com.chekrite_group44.SelectAssetScreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,11 +32,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SelectTab extends Fragment {
+public class VehicleScreen extends Fragment {
     View rootView;
     RecyclerView selectTab;
     ArrayList<Asset_Classes> asset_classes=new ArrayList<>();
-
+    int position;
+    Intent intent;
     APIsListener AssetsListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -62,16 +64,20 @@ public class SelectTab extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.select_tab_fragment, container ,false);
         selectTab = rootView.findViewById(R.id.select_tab_rv);
-       // linearLayoutManager=new LinearLayoutManager(getActivity());
-        new APIsTask(AssetsListener).execute("GET", APIs.ASSETS,"","");
+        // linearLayoutManager=new LinearLayoutManager(getActivity());
+
+        new APIsTask(AssetsListener, getContext()).execute("GET", APIs.ASSETS,"","");
         selectTab.setHasFixedSize(true);
         selectTab.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         selectTab.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
-        selectTab.setAdapter(new SelectTabAdapter(this.getActivity(),asset_classes));
+        selectTab.setAdapter(new VehicleTabAdapter(this.getActivity(),asset_classes));
         if(asset_classes!=null){
-            selectTab.setAdapter(new SelectTabAdapter(this.getActivity(),asset_classes));
+            selectTab.setAdapter(new VehicleTabAdapter(this.getActivity(),asset_classes));
         }
         return rootView;
     }
+
 }
+
+

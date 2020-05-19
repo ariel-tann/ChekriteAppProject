@@ -4,8 +4,9 @@
  * Summary:
  */
 
-package com.chekrite_group44.keyboard;
+package com.chekrite_group44.Keyboard;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.chekrite_group44.R;
 
-public class keyboard extends Fragment {
+public class KeyboardFragment extends Fragment {
 
 
     //    private static final String TAG = "KeyboardFragment";
@@ -70,6 +71,14 @@ public class keyboard extends Fragment {
     Button num_backspace_btn;
 
 
+    private keyboardFragmentListener listener;
+
+
+    public interface keyboardFragmentListener {
+        void onInputKeyboardSent (CharSequence input);
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -77,52 +86,97 @@ public class keyboard extends Fragment {
 
         //alphabet keyboard (A-Z)
         a_btn = (Button) view.findViewById(R.id.a_btn);
+        a_btn.setOnClickListener(keyboardListener);
         b_btn = (Button) view.findViewById(R.id.b_btn);
+        b_btn.setOnClickListener(keyboardListener);
         c_btn = (Button) view.findViewById(R.id.c_btn);
+        c_btn.setOnClickListener(keyboardListener);
         d_btn = (Button) view.findViewById(R.id.d_btn);
+        d_btn.setOnClickListener(keyboardListener);
         e_btn = (Button) view.findViewById(R.id.e_btn);
+        e_btn.setOnClickListener(keyboardListener);
         f_btn = (Button) view.findViewById(R.id.f_btn);
+        f_btn.setOnClickListener(keyboardListener);
         g_btn = (Button) view.findViewById(R.id.g_btn);
+        g_btn.setOnClickListener(keyboardListener);
         h_btn = (Button) view.findViewById(R.id.h_btn);
+        h_btn.setOnClickListener(keyboardListener);
         i_btn = (Button) view.findViewById(R.id.i_btn);
+        i_btn.setOnClickListener(keyboardListener);
         j_btn = (Button) view.findViewById(R.id.j_btn);
+        j_btn.setOnClickListener(keyboardListener);
         k_btn = (Button) view.findViewById(R.id.k_btn);
+        k_btn.setOnClickListener(keyboardListener);
         l_btn = (Button) view.findViewById(R.id.l_btn);
+        l_btn.setOnClickListener(keyboardListener);
         m_btn = (Button) view.findViewById(R.id.m_btn);
+        m_btn.setOnClickListener(keyboardListener);
         n_btn = (Button) view.findViewById(R.id.n_btn);
+        n_btn.setOnClickListener(keyboardListener);
         o_btn = (Button) view.findViewById(R.id.o_btn);
+        o_btn.setOnClickListener(keyboardListener);
         p_btn = (Button) view.findViewById(R.id.p_btn);
+        p_btn.setOnClickListener(keyboardListener);
         q_btn = (Button) view.findViewById(R.id.q_btn);
+        q_btn.setOnClickListener(keyboardListener);
         r_btn = (Button) view.findViewById(R.id.r_btn);
+        r_btn.setOnClickListener(keyboardListener);
         s_btn = (Button) view.findViewById(R.id.s_btn);
+        s_btn.setOnClickListener(keyboardListener);
         t_btn = (Button) view.findViewById(R.id.t_btn);
+        t_btn.setOnClickListener(keyboardListener);
         u_btn = (Button) view.findViewById(R.id.u_btn);
+        u_btn.setOnClickListener(keyboardListener);
         v_btn = (Button) view.findViewById(R.id.v_btn);
+        v_btn.setOnClickListener(keyboardListener);
         w_btn = (Button) view.findViewById(R.id.w_btn);
+        w_btn.setOnClickListener(keyboardListener);
         x_btn = (Button) view.findViewById(R.id.x_btn);
+        x_btn.setOnClickListener(keyboardListener);
         y_btn = (Button) view.findViewById(R.id.y_btn);
+        y_btn.setOnClickListener(keyboardListener);
         z_btn = (Button) view.findViewById(R.id.z_btn);
+        z_btn.setOnClickListener(keyboardListener);
         backspace_btn = (Button) view.findViewById(R.id.backspace_btn);
+        backspace_btn.setOnClickListener(keyboardListener);
         aToZ_btn = (Button) view.findViewById(R.id.aToZ_btn);
         zeroTo9_btn = (Button) view.findViewById(R.id.zeroTo9_btn);
 
+
         //Numbers keyboard (0-9)
         one_btn = (Button) view.findViewById(R.id.one_btn);
+        one_btn.setOnClickListener(keyboardListener);
         two_btn = (Button) view.findViewById(R.id.two_btn);
+        two_btn.setOnClickListener(keyboardListener);
         three_btn = (Button) view.findViewById(R.id.three_btn);
+        three_btn.setOnClickListener(keyboardListener);
         four_btn = (Button) view.findViewById(R.id.four_btn);
+        four_btn.setOnClickListener(keyboardListener);
         five_btn = (Button) view.findViewById(R.id.five_btn);
+        five_btn.setOnClickListener(keyboardListener);
         six_btn = (Button) view.findViewById(R.id.six_btn);
+        six_btn.setOnClickListener(keyboardListener);
         seven_btn = (Button) view.findViewById(R.id.seven_btn);
+        seven_btn.setOnClickListener(keyboardListener);
         eight_btn = (Button) view.findViewById(R.id.eight_btn);
+        eight_btn.setOnClickListener(keyboardListener);
         nine_btn = (Button) view.findViewById(R.id.nine_btn);
+        nine_btn.setOnClickListener(keyboardListener);
         zero_btn = (Button) view.findViewById(R.id.zero_btn);
+        zero_btn.setOnClickListener(keyboardListener);
         fullstop_btn = (Button) view.findViewById(R.id.fullstop_btn);
+        fullstop_btn.setOnClickListener(keyboardListener);
         dash_btn = (Button) view.findViewById(R.id.dash_btn);
+        dash_btn.setOnClickListener(keyboardListener);
         leftBracket_btn = (Button) view.findViewById(R.id.leftBracket_btn);
+        leftBracket_btn.setOnClickListener(keyboardListener);
         rightBracket_btn = (Button) view.findViewById(R.id.rightBracket_btn);
+        rightBracket_btn.setOnClickListener(keyboardListener);
         space_btn = (Button) view.findViewById(R.id.space_btn);
+        space_btn.setOnClickListener(keyboardListener);
         num_backspace_btn = (Button) view.findViewById(R.id.backspace1_btn);
+        num_backspace_btn.setOnClickListener(keyboardListener);
+
 
         //show letters keyboard first when fragment is used
         hide_numbers_btn();
@@ -147,6 +201,159 @@ public class keyboard extends Fragment {
         return view;
 
     }
+
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if (context instanceof keyboardFragmentListener) {
+            listener = (keyboardFragmentListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + "must implement keyboardFragment listener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
+
+    public View.OnClickListener keyboardListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.a_btn:
+                    listener.onInputKeyboardSent("A");
+                    break;
+                case R.id.b_btn:
+                    listener.onInputKeyboardSent("B");
+                    break;
+                case R.id.c_btn:
+                    listener.onInputKeyboardSent("C");
+                    break;
+                case R.id.d_btn:
+                    listener.onInputKeyboardSent("D");
+                    break;
+                case R.id.e_btn:
+                    listener.onInputKeyboardSent("E");
+                    break;
+                case R.id.f_btn:
+                    listener.onInputKeyboardSent("F");
+                    break;
+                case R.id.g_btn:
+                    listener.onInputKeyboardSent("G");
+                    break;
+                case R.id.h_btn:
+                    listener.onInputKeyboardSent("H");
+                    break;
+                case R.id.i_btn:
+                    listener.onInputKeyboardSent("I");
+                    break;
+                case R.id.j_btn:
+                    listener.onInputKeyboardSent("J");
+                    break;
+                case R.id.k_btn:
+                    listener.onInputKeyboardSent("K");
+                    break;
+                case R.id.l_btn:
+                    listener.onInputKeyboardSent("L");
+                    break;
+                case R.id.m_btn:
+                    listener.onInputKeyboardSent("M");
+                    break;
+                case R.id.n_btn:
+                    listener.onInputKeyboardSent("N");
+                    break;
+                case R.id.o_btn:
+                    listener.onInputKeyboardSent("O");
+                    break;
+                case R.id.p_btn:
+                    listener.onInputKeyboardSent("P");
+                    break;
+                case R.id.q_btn:
+                    listener.onInputKeyboardSent("Q");
+                    break;
+                case R.id.r_btn:
+                    listener.onInputKeyboardSent("R");
+                    break;
+                case R.id.s_btn:
+                    listener.onInputKeyboardSent("S");
+                    break;
+                case R.id.t_btn:
+                    listener.onInputKeyboardSent("T");
+                    break;
+                case R.id.u_btn:
+                    listener.onInputKeyboardSent("U");
+                    break;
+                case R.id.v_btn:
+                    listener.onInputKeyboardSent("V");
+                    break;
+                case R.id.w_btn:
+                    listener.onInputKeyboardSent("W");
+                    break;
+                case R.id.x_btn:
+                    listener.onInputKeyboardSent("X");
+                    break;
+                case R.id.y_btn:
+                    listener.onInputKeyboardSent("Y");
+                    break;
+                case R.id.z_btn:
+                    listener.onInputKeyboardSent("Z");
+                    break;
+                case R.id.backspace_btn:
+                    listener.onInputKeyboardSent("/");
+                    break;
+                case R.id.one_btn:
+                    listener.onInputKeyboardSent("1");
+                    break;
+                case R.id.two_btn:
+                    listener.onInputKeyboardSent("2");
+                    break;
+                case R.id.three_btn:
+                    listener.onInputKeyboardSent("3");
+                    break;
+                case R.id.four_btn:
+                    listener.onInputKeyboardSent("4");
+                    break;
+                case R.id.five_btn:
+                    listener.onInputKeyboardSent("5");
+                    break;
+                case R.id.six_btn:
+                    listener.onInputKeyboardSent("6");
+                    break;
+                case R.id.seven_btn:
+                    listener.onInputKeyboardSent("7");
+                    break;
+                case R.id.eight_btn:
+                    listener.onInputKeyboardSent("8");
+                    break;
+                case R.id.nine_btn:
+                    listener.onInputKeyboardSent("9");
+                    break;
+                case R.id.zero_btn:
+                    listener.onInputKeyboardSent("0");
+                    break;
+                case R.id.fullstop_btn:
+                    listener.onInputKeyboardSent(".");
+                    break;
+                case R.id.dash_btn:
+                    listener.onInputKeyboardSent("-");
+                    break;
+                case R.id.leftBracket_btn:
+                    listener.onInputKeyboardSent("(");
+                    break;
+                case R.id.rightBracket_btn:
+                    listener.onInputKeyboardSent(")");
+                    break;
+                case R.id.space_btn:
+                    listener.onInputKeyboardSent(" ");
+                    break;
+                case R.id.backspace1_btn:
+                    listener.onInputKeyboardSent("/");
+                    break;
+            }
+        }
+    };
+
 
     public void show_letters_keyboard() {
         show_letters_btn();
