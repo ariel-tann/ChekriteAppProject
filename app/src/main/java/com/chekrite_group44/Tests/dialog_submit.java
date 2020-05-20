@@ -69,7 +69,7 @@ public class dialog_submit extends DialogFragment {
             public void onClick(View v) {
                 dismiss();
                 Long end = System.currentTimeMillis();
-                mlistener.Completed(Control_Type.BUTTONS,0,0,
+                mlistener.Completed(Control_Type.BUTTONS,0,0, "",
                         start, end);
             }
         });

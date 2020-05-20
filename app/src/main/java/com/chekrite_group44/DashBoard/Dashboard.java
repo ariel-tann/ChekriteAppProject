@@ -153,7 +153,7 @@ public class Dashboard extends AppCompatActivity {
     }
     private void openInspection() {
         Intent intent = new Intent(this, Inspection_main.class);
-        intent.putExtra("checklist_id", "5020");
+        intent.putExtra("checklist_id", "5050"); //5020
         intent.putExtra("asset_id", 28436);
         intent.putExtra("asset_selection", "search");
         startActivity(intent);

@@ -52,15 +52,16 @@ public class Payload_Response {
     JSONArray subq_responses = new JSONArray();
     int test_heartbeat_id = 0;
     int test_id;
-    int text_value = 0;
+    String text_value = "";
     String type;
     JSONObject payload;
 
 
-    public Payload_Response(Inspection_checklist_item item, Inspection_test test, String type, int btn_order,
+    public Payload_Response(Inspection_checklist_item item, Inspection_test test, String type, int btn_order, String txt_value,
                             double gauge_value, long start, long end, MetaData_Asset metaData) throws JSONException {
         this.gauge_value = gauge_value;
         this.mItem = item;
+        this.text_value = txt_value;
         checklist_item_id = item.getId();
         switch (type){
             case Control_Type.BUTTONS:
@@ -123,7 +124,7 @@ public class Payload_Response {
         payload.put("subq_responses", subq_responses);
         payload.put("test_heartbeat_id", test_heartbeat_id == 0?JSONObject.NULL:test_heartbeat_id);
         payload.put("test_id", test_id);
-        payload.put("text_value", text_value == 0?JSONObject.NULL:text_value);
+        payload.put("text_value", text_value.length() == 0?JSONObject.NULL:text_value);
         payload.put("type", type);
         payload.put("meta",metaData.getjObject());
     }
