@@ -34,6 +34,9 @@ public class SelectTabAdapter extends RecyclerView.Adapter<SelectTabAdapter.View
     TextView listview;
     Button button;
     int page=1;
+
+
+
     public SelectTabAdapter(Context context, ArrayList<Asset_Classes> asset_classes)
     {
         Log.d("SHREY","Isnide selecttabadapter");

@@ -19,14 +19,18 @@ import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 
-public class SelectAssetScreen extends AppCompatActivity implements SearchAssetFragment.searchAssetListener, KeyboardFragment.keyboardFragmentListener  {
+public class SelectAssetScreen extends AppCompatActivity
+        implements SearchAssetFragment.searchAssetListener, KeyboardFragment.keyboardFragmentListener  {
     Button backbutton;
     ViewPager viewPager;
     TabLayout tabLayout;
-    private SearchAssetFragment SearchAssetFragment;
+    TabFragmentPagerAdapter adapter;
+     SearchAssetFragment sb = new SearchAssetFragment();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +48,6 @@ public class SelectAssetScreen extends AppCompatActivity implements SearchAssetF
             }
         });
         Log.d("LOG", "Inside select asset screeen ");
-        SearchAssetFragment = new SearchAssetFragment();
 
 
     }
@@ -54,7 +57,7 @@ public class SelectAssetScreen extends AppCompatActivity implements SearchAssetF
 
     @Override
     public void onInputKeyboardSent(CharSequence input) {
-        SearchAssetFragment.updateEditText(input);
+        sb.updateEditText(input);
     }
 
     @Override

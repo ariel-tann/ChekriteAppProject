@@ -134,6 +134,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
 
         editText = view.findViewById(R.id.editText);
         deleteAllBtn = view.findViewById(R.id.deleteAllBtn);
+        deleteAllBtn.setVisibility(View.GONE);
         found = view.findViewById(R.id.numAssetFoundText);
 
         deleteAllBtn.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +146,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
 
         mRecyclerView = view.findViewById(R.id.searchAssetRecyclerView);
         recyclerBuild();
+
 
         return view;
     }
@@ -210,7 +212,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
 
     //gets input from keyboard and updates the edit text view
     public void updateEditText(CharSequence newText) {
-        mAdapter.notifyDataSetChanged();
+//        mAdapter.notifyDataSetChanged();
 
         if(newText != "/") {
             addNewText(newText.toString());
@@ -221,8 +223,8 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
         }
     }
 
-    //if there is no text, clears the array and set text to default text and color
-    public void checkEditText() {
+    //checks if edit text is empty, clears the array and set text to default text and color
+    public void checkEditTextIsEmpty() {
         if (SearchText.size() == 0) {
             editText.setText("type to search");
             editText.setTextColor(Color.parseColor("#dcdcdc"));
@@ -230,6 +232,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
             editText.setTypeface(null, Typeface.NORMAL);
             searchAssetList.clear();
             found.setText("");
+            deleteAllBtn.setVisibility(View.GONE);
             mAdapter.notifyDataSetChanged();
 
 
@@ -240,7 +243,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
     public void addNewText(String newText) {
         SearchText.add(newText.toString());
         displayText();
-        checkEditText();
+        checkEditTextIsEmpty();
 
     }
 
@@ -248,7 +251,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
     public void deleteOneChar() {
         SearchText.remove(SearchText.size() - 1);
         displayText();
-        checkEditText();
+        checkEditTextIsEmpty();
     }
 
     //handle delete all button press
@@ -256,7 +259,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
         SearchText.clear();
         searchAssetList.clear();
         displayText();
-        checkEditText();
+        checkEditTextIsEmpty();
         mAdapter.notifyDataSetChanged();
     }
 
@@ -264,10 +267,12 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
     //get string from arraylist and displays. Calls to API if text is >= 3
     public void displayText() {
         String joined = TextUtils.join("", SearchText);
-        if(SearchText.size() >= 3){
+            searchAssetList.clear();
+            mAdapter.notifyDataSetChanged();
             new APIsTask(SearchAssetListener).execute("GET", APIs.SEARCH, joined, "");
             mAdapter.notifyDataSetChanged();
-
+        if(SearchText.size() != 0) {
+            deleteAllBtn.setVisibility(View.VISIBLE);
         }
         editText.setText(joined);
         editText.setTextColor(Chekrite.getParseColor());
