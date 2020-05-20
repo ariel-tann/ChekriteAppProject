@@ -34,6 +34,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Keyboard.KeyboardFragment;
 import com.chekrite_group44.SelectAssetScreen.SearchAssetFragment;
+import com.chekrite_group44.SelectAssetScreen.SeeFragment;
 import com.chekrite_group44.SelectAssetScreen.SelectTab;
 import com.chekrite_group44.DashBoard.Dashboard;
 import com.chekrite_group44.Categories.SignOut;
@@ -55,7 +56,7 @@ public class ArielTest extends AppCompatActivity
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     SearchAssetFragment saf = new SearchAssetFragment();
-    //SelectTab st = new SelectTab();
+    SelectTab st = new SelectTab();
 
 
     @Override
@@ -173,10 +174,10 @@ public class ArielTest extends AppCompatActivity
 
                     break;
                 case 1:
-                    fragment = new SelectTab();
+                    fragment = new SeeFragment();
                     break;
                 case 2:
-                    fragment = new SelectTab();
+                    fragment = st;
                     break;
             }
             return fragment;
