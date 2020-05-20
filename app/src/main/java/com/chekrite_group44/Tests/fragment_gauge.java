@@ -130,6 +130,6 @@ public class fragment_gauge extends Fragment implements SeekBar.OnSeekBarChangeL
     public void onClick(View v) {
         // calling inspectionListener in inspection main java
         Long end = System.currentTimeMillis();
-        mlistener.Completed(Control_Type.GAUGE, 0, current_value, start, end);
+        mlistener.Completed(Control_Type.GAUGE, 0, current_value,"", start, end);
     }
 }
