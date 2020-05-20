@@ -88,7 +88,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
                     JSONArray data = jsonObject.getJSONArray("data");
                     if (data != null) {
 
-                        Log.d(TAG, "data received!!!!");
+                        Log.d(TAG, "data not null");
 
                        // JSONObject object = data.getJSONObject(i);
                         //Search_Asset sa_list = new Search_Asset(object);
@@ -97,8 +97,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
                         for (int i = 0; i < data.length(); i++) {
                             JSONObject object = data.getJSONObject(i);
 //                            Search_Asset sa_list = new Search_Asset(object);
-                            Log.d(TAG, "you reached here " );
-                            int id = object.getInt("id");
+                            String id = Integer.toString(object.getInt("id"));
                             String unitNumber = object.getString("unit_number");
                             String make = object.getString("make");
                             String model = object.getString("model");
@@ -186,11 +185,11 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
     public void onAssetClick(int position) {
         Log.d(TAG, "onAssetClick: clicked. Id number: " + searchAssetList.get(position).getUnitNumber());
         Intent intent = new Intent(getActivity(), Categories.class);
-//        intent.putExtra("id", searchAssetList.get(position).getId());
-//        intent.putExtra("unit_number", searchAssetList.get(position).getUnitNumber());
-//        intent.putExtra("make", searchAssetList.get(position).getMake());
-//        intent.putExtra("model", searchAssetList.get(position).getModel());
-//        intent.putExtra("photo", searchAssetList.get(position).getPhoto());
+        intent.putExtra("asset_id", searchAssetList.get(position).getId());
+        intent.putExtra("unit_number", searchAssetList.get(position).getUnitNumber());
+        intent.putExtra("make", searchAssetList.get(position).getMake());
+        intent.putExtra("model", searchAssetList.get(position).getModel());
+        intent.putExtra("photo", searchAssetList.get(position).getPhoto());
         startActivity(intent);
     }
 
