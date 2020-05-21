@@ -100,8 +100,7 @@ public class fragment_gauge extends Fragment implements SeekBar.OnSeekBarChangeL
         int lower_status = band1.getStatus();
         int upper_status = band2.getStatus();
 
-        GuageView seekBar = new GuageView(mView.getContext(), marks_count, lower_step, upper_step,
-                lower_color, upper_color, lower_status,upper_status);
+        GuageView seekBar = new GuageView(mView.getContext(), gauge, l_width, l_height);
 
         seekBar.setLayoutParams(new LinearLayout.LayoutParams(l_width,l_height));
         seekBar.setMax(10);
@@ -130,6 +129,6 @@ public class fragment_gauge extends Fragment implements SeekBar.OnSeekBarChangeL
     public void onClick(View v) {
         // calling inspectionListener in inspection main java
         Long end = System.currentTimeMillis();
-        mlistener.Completed(Control_Type.GAUGE, 0, current_value,"", start, end);
+        //mlistener.Completed(Control_Type.GAUGE, 0, current_value,"", start, end);
     }
 }
