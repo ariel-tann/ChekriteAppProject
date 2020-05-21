@@ -4,35 +4,45 @@
   ~ This file is created by Kai.
   ~ Summary:
   -->
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
+
+    <include
+        android:id="@+id/setup_toolbar"
+        layout="@layout/setup_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setup_toolbar"
         android:id="@+id/pin_layout">
 
-        <include
-            android:id="@+id/setup_toolbar"
-            layout="@layout/setup_toolbar"/>
+
 
         <TextView
             android:id="@+id/PinTxtView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_below="@+id/setup_toolbar"
             android:layout_marginTop="20dp"
             android:textSize="18sp"
             android:text="@string/pair_txt"/>
 
         <LinearLayout
             android:id="@+id/PinView_Linear"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_below="@+id/PinTxtView"
@@ -48,7 +58,7 @@
             android:scaleType="fitCenter"
             android:layout_below="@+id/PinView_Linear"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="20dp"/>
 
         <ImageButton
             android:id="@+id/digit_1"
@@ -58,7 +68,7 @@
             android:background="@null"
             android:scaleType="fitCenter"
             android:layout_below="@+id/PinView_Linear"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="5dp"
             android:layout_toStartOf="@+id/digit_2" />
 
@@ -71,7 +81,7 @@
             android:scaleType="fitCenter"
             android:layout_below="@+id/PinView_Linear"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_toEndOf="@+id/digit_2"/>
         <ImageButton
             android:id="@+id/digit_5"
@@ -82,7 +92,7 @@
             android:scaleType="fitCenter"
             android:layout_below="@+id/digit_2"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="0dp"/>
         <ImageButton
             android:id="@+id/digit_4"
             android:layout_width="80dp"
@@ -91,7 +101,7 @@
             android:background="@null"
             android:scaleType="fitCenter"
             android:layout_below="@+id/digit_2"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="5dp"
             android:layout_toStartOf="@+id/digit_5"/>
         <ImageButton
@@ -103,7 +113,7 @@
             android:scaleType="fitCenter"
             android:layout_below="@+id/digit_2"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:layout_toEndOf="@+id/digit_5"/>
         <ImageButton
             android:id="@+id/digit_8"
@@ -114,7 +124,7 @@
             android:scaleType="fitCenter"
             android:layout_below="@+id/digit_6"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="0dp"/>
         <ImageButton
             android:id="@+id/digit_7"
             android:layout_width="80dp"
@@ -123,7 +133,7 @@
             android:background="@null"
             android:scaleType="fitCenter"
             android:layout_below="@+id/digit_5"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="5dp"
             android:layout_toStartOf="@+id/digit_8" />
         <ImageButton
@@ -135,7 +145,7 @@
             android:scaleType="fitCenter"
             android:layout_below="@+id/digit_5"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:layout_toEndOf="@+id/digit_8"/>
         <ImageButton
             android:id="@+id/digit_0"
@@ -146,7 +156,7 @@
             android:scaleType="fitCenter"
             android:layout_below="@+id/digit_8"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="0dp"/>
         <ImageButton
             android:id="@+id/digit_back"
             android:layout_width="80dp"
@@ -156,23 +166,29 @@
             android:scaleType="centerCrop"
             android:layout_below="@+id/digit_8"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:layout_toEndOf="@+id/digit_0"/>
-        <Button
-            android:id="@+id/pin_submit"
-            android:layout_width="240dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="40dp"
-            android:layout_below="@id/digit_0"
-            android:layout_centerHorizontal="true"
-            android:text="@string/btn_pin_enter"
-            android:textSize="30dp"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="@color/dark_gray"
-            android:background="@drawable/btn_gray"
-            android:layout_gravity="center"/>
+
 
     </RelativeLayout>
-</ScrollView>
+
+    <Button
+        android:id="@+id/pin_submit"
+        android:layout_width="240dp"
+        android:layout_height="63dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_gray"
+        android:gravity="center"
+        android:text="@string/btn_pin_enter"
+        android:textAllCaps="false"
+        android:textColor="@color/dark_gray"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pin_layout"
+        app:layout_constraintVertical_bias="0.65" />
+</androidx.constraintlayout.widget.ConstraintLayout>

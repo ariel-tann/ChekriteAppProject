@@ -56,7 +56,7 @@
         android:id="@+id/searchAssetRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#dcdcdc"
+        android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

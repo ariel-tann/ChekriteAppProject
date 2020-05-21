@@ -102,7 +102,8 @@ public class Inspection_main extends AppCompatActivity
     private InspectionListener submitListener = new InspectionListener() {
 
         @Override
-        public void Completed(String type, int button_order, double button_value, long start_timestamp, long response_timestamp) {
+        public void Completed(String type, int button_order, double button_value, String txt_value,
+                              long start_timestamp, long response_timestamp) {
             //TODO submit
             long end = System.currentTimeMillis();
             try {
@@ -123,13 +124,14 @@ public class Inspection_main extends AppCompatActivity
     private InspectionListener inspectionListener = new InspectionListener() {
 
         @Override
-        public void Completed(String type, int button_order, double value, long start_timestamp, long response_timestamp) {
+        public void Completed(String type, int button_order, double value, String txt_value,
+                              long start_timestamp, long response_timestamp) {
             if (mViewPager.getCurrentItem()<mItems.getChecklists().size()-1) {
                 // get which item is completed
                 Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
                 // get response payload
                 try {
-                    Payload_Response payload = new Payload_Response(item, mTest, type, button_order, value,
+                    Payload_Response payload = new Payload_Response(item, mTest, type, button_order, txt_value, value,
                             start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
                     new APIsTask(ResponseAPI).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
@@ -142,7 +144,7 @@ public class Inspection_main extends AppCompatActivity
                 Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
                 // get response payload
                 try {
-                    Payload_Response payload = new Payload_Response(item, mTest, type, button_order, value,
+                    Payload_Response payload = new Payload_Response(item, mTest, type, button_order, txt_value, value,
                             start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
                     new APIsTask(ResponseAPI).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
@@ -208,12 +210,8 @@ public class Inspection_main extends AppCompatActivity
             // get control type
             switch (item.getControl().getType()){
                 case Control_Type.BUTTONS:
-                    if (item.getControl().getName().equals("Step"))
-                        adapter.addFragment(new fragment_step(item,items.getChecklists().size(),i, inspectionListener) ,
-                                items.getChecklists().get(i).getId());
-                    else
-                        adapter.addFragment(new fragment_button(item,items.getChecklists().size(), i, inspectionListener),
-                                items.getChecklists().get(i).getId());
+                    adapter.addFragment(new fragment_button(item,items.getChecklists().size(), i, inspectionListener),
+                            items.getChecklists().get(i).getId());
                     break;
                 case Control_Type.GAUGE:
                     // only works for two side gauge

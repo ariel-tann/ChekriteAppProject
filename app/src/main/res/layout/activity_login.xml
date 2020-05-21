@@ -5,27 +5,34 @@
   ~ Summary:
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Login">
+
     <RelativeLayout
+        android:id="@+id/toolbar_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center">
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_gravity="center"
             android:background="@color/lime_green"
+            android:gravity="center"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"/>
+            android:theme="?attr/actionBarTheme" />
+
         <TextView
             android:id="@+id/Company_name"
             android:layout_width="wrap_content"
@@ -36,39 +43,48 @@
             android:textSize="20dp"
             android:textStyle="bold" />
     </RelativeLayout>
+
+
     <RelativeLayout
+        android:id="@+id/company_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/signIn_btn"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+        tools:layout_editor_absoluteY="40dp">
+
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="300dp"
-            android:layout_height="500dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"/>
+            android:layout_height="400dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="10dp" />
+
         <ProgressBar
             android:id="@+id/progress_loading"
             android:layout_width="300dp"
-            android:layout_height="500dp"
-            android:visibility="visible"
-            />
+            android:layout_height="400dp"
+            android:visibility="visible" />
     </RelativeLayout>
-
 
     <Button
         android:id="@+id/signIn_btn"
         android:layout_width="270dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/lime_green"
         android:text="Sign in"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/include"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <include
         android:id="@+id/include"
@@ -76,8 +92,9 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="8dp"
         android:gravity="bottom"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

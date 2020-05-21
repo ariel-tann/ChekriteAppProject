@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.chekrite_group44.Keyboard.KeyboardFragment;
 
@@ -14,19 +15,24 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter implements Sea
     int PAGE_COUNT=3;
     String tabTitles[]=new String[]{"Search","See","Select"};
     Context context;
-    private SearchAssetFragment SearchAssetFragment;
+    private SearchAssetFragment sb = new SearchAssetFragment();
+
     public TabFragmentPagerAdapter(@NonNull FragmentManager fm, Context context ) {
         super(fm);
         this.context=context;
 
-        SearchAssetFragment = new SearchAssetFragment();
+
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        if(position==0)
-            return new SearchAssetFragment();
+        if(position==0) {
+
+
+
+            return sb;
+        }
         else if (position==1)
             return new SelectTab();
         else if (position==2)
@@ -47,11 +53,13 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter implements Sea
 
     @Override
     public void onInputKeyboardSent(CharSequence input) {
-        SearchAssetFragment.updateEditText(input);
+        sb.updateEditText(input);
     }
 
     @Override
     public void onInputSearchAssetSent(CharSequence input) {
 
     }
+
+
 }
