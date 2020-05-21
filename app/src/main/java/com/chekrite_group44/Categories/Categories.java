@@ -98,8 +98,6 @@ public class Categories extends AppCompatActivity {
                 status = (String) jsonObject.get("status");
                 String message = (String) jsonObject.get("message");
 
-
-
                 if (status.equals("success")) {
 
                     Log.d(TAG, "success: " + message);
@@ -126,9 +124,10 @@ public class Categories extends AppCompatActivity {
                         for (int i = 0; i< mChecklistArray.getChecklists().size(); i++) {
                             // get single item
                             Checklist item = mChecklistArray.getChecklists().get(i);
-                            Log.d(TAG, "mChecklistArray ids: " + mChecklistArray.getChecklists().get(i).getId());
+                //            Log.d(TAG, "mChecklistArray ids: " + mChecklistArray.getChecklists().get(i).getId());
+                            Integer checklist_id = mChecklistArray.getChecklists().get(i).getId();
                             String checklist_category = mChecklistArray.getChecklists().get(i).getCategory();
-                            String checklist_name = mChecklistArray.getChecklists().get(i).getName();
+               //             String checklist_name = mChecklistArray.getChecklists().get(i).getName();
                             categories_list.add(checklist_category);
 
 
@@ -265,8 +264,13 @@ public class Categories extends AppCompatActivity {
              public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
                 Intent intent = new Intent(Categories.this, ActivityChecklist.class);
                 //sent seleced info
+   //             intent.putExtra("asset_id", searchAssetList.get(i).getId());
                 intent.putExtra("category", listView.getItemAtPosition(i).toString());
-           //     intent.putExtra("data_array_list", mChecklistArray.getChecklists());
+                intent.putExtra("checklist_id", mChecklistArray.getChecklists().get(i).getId());
+                Log.d(TAG, "mChecklistArray ids: " + mChecklistArray.getChecklists().get(i).getId());
+
+                //         intent.putExtra("category", mChecklistArray.getChecklists().get(i).getCategory());
+              //  intent.putExtra("data_array_list", mChecklistArray.getChecklists());
             //    intent.putExtra("category_array", checklist_items.getName());
 
 
@@ -279,11 +283,10 @@ public class Categories extends AppCompatActivity {
 
                 
                 //***************************
-                //for value = position i : do j=0, j  < array size i++; add to new arraylist
-                //how to pass array list?
-           //     Log.d(TAG, "pass checklist items:"+ checklist_items.getName());
-
-
+                //put extra("position", pos);
+                //in nect activity : get extra get int pos
+                // set text ( adapter. name[pos])
+                // set TEXT( adapter. id[pos])
 
 
 

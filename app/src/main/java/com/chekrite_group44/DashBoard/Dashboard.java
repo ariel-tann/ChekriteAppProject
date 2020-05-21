@@ -27,6 +27,7 @@ import com.chekrite_group44.ArielTest;
 import com.chekrite_group44.Asset_Properties.Asset_Classes;
 import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
 import com.chekrite_group44.Categories.Categories;
+import com.chekrite_group44.Categories.StartInspection;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
@@ -138,7 +139,7 @@ public class Dashboard extends AppCompatActivity {
         test_btns_ctgr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCategories();
+                startInspection();
             }
         });
 
@@ -158,15 +159,25 @@ public class Dashboard extends AppCompatActivity {
         intent.putExtra("asset_selection", "search");
         startActivity(intent);
     }
-    public void openCategories() {
-        Intent intent = new Intent(this, Categories.class);
+    public void startInspection() {
+
+        Intent intent = new Intent(this, StartInspection.class);
+        //asset info
         intent.putExtra("asset_id", "28433");
         intent.putExtra("make", "Haulotte");
         intent.putExtra("unit_number", "AE-001");
         intent.putExtra("model", "Compact 10 Scissor Lift");
         intent.putExtra("photo", "https://chekrite-cdn.s3.ap-southeast-2.amazonaws.com/141/Make/DtYVyRGaCm.jpg");
+        //checklist info
+        intent.putExtra("checklist_id", "4919");
+        intent.putExtra("category", "Inspection");
+        intent.putExtra("name", "Daily Scissor Lift Inspection");
 
-    //    intent.putExtra("asset_id", "28436");
+
+
+
+
+        //    intent.putExtra("asset_id", "28436");
      //   intent.putExtra("make", "Test");
      //   intent.putExtra("unit_number", "UFO-01");
      //   intent.putExtra("model", "Test");

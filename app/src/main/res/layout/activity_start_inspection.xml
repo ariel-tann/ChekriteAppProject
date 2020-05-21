@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.5.20
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Categories.StartInspection">
+
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/categories_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintVertical_bias="0"
+
+        >
+
+
+
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/asset_image"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:background="@drawable/btn_background"
+            android:padding="25dp"
+
+
+            android:src="@drawable/avatar"
+            app:srcCompat="@drawable/btn_background"
+            android:layout_margin="30dp"/>
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/unit_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/asset_image"
+            android:text="UNIT-NUMBER"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+
+            android:id="@+id/make"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/unit_number"
+            android:text="Make" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+
+            android:id="@+id/model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/make"
+            android:text="Model" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+
+            android:id="@+id/test_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/model"
+            android:text="Checklist Category" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+
+            android:id="@+id/inspection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/test_category"
+            android:text="Checklist Name" />
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/start_inspection"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+
+
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/btn_shape_round_conner"
+        android:gravity="center"
+        android:text="Start Check"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.9" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
