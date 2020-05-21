@@ -71,7 +71,7 @@ public class ActivityChecklist extends AppCompatActivity {
     ArrayAdapter<String> nameListAdapter;
 
 
-    ArrayList<Checklist> test_checklist;
+    int countposition = 0;
 
     @Override
 
@@ -139,11 +139,22 @@ public class ActivityChecklist extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ActivityChecklist.this, StartInspection.class);
+           //     position = countposition;
 
-          //      intent.putExtra("checklist_id", mChecklistArray.getChecklists().get(position).getID());
+                Intent intent = new Intent(ActivityChecklist.this, StartInspection.class);
+                //pass asset info
+                intent.putExtra("unit_number", selected_asset_unumber);
+                intent.putExtra("asset_id", selected_asset_id);
+                intent.putExtra("model", selected_asset_model);
+                intent.putExtra("make", selected_asset_make);
+                intent.putExtra("photo", selected_asset_photo);
+
+             //   intent.putExtra("checklist_id", parent.getItemAtPosition(position).);
+
+                intent.putExtra("checklist_id", mChecklistArray.getChecklists().get(position).getId());
                 intent.putExtra("category", mChecklistArray.getChecklists().get(position).getCategory());
                 intent.putExtra("name", mChecklistArray.getChecklists().get(position).getName());
+
                 startActivity(intent);
             }
         });
@@ -163,30 +174,24 @@ public class ActivityChecklist extends AppCompatActivity {
 
                     for (int i = 0; i < mChecklistArray.getChecklists().size(); i++) {
 
-                        Checklist item = mChecklistArray.getChecklists().get(i);
-                        String checklist_category = item.getCategory();
-                        String checklist_name = item.getName();
-                        Log.d(TAG, "get checklist_item: " + item);
-                        Log.d(TAG, "get checklist_cate: " + checklist_category);
-                        Log.d(TAG, "get checklist_name: " + checklist_name);
-                        nameList.add(checklist_name);
+                        if (! mChecklistArray.getChecklists().get(i).getCategory().equalsIgnoreCase(selected_category)) {
+                             mChecklistArray.getChecklists().remove(i);
 
-                       // if getcategory dosent match selected category, mchecklistArray.removeJsonobject
+                        }
 
-                        //set filtered array list for list view adapter
-                        // add filted json object.getname to listview
                     }
+
+                    for (int i = 0; i < mChecklistArray.getChecklists().size(); i++) {
+                        Log.d(TAG, "reduced size: " + mChecklistArray.getChecklists().size());
+
+                        nameList.add(mChecklistArray.getChecklists().get(i).getName());
+                    }
+                    Log.d(TAG, "checklist name filted : " + nameList);
                     nameListAdapter = new ArrayAdapter<>(ActivityChecklist.this, R.layout.simple_list_item_1, nameList);
                     listView.setAdapter(nameListAdapter);
                     Log.d(TAG, "get checklist namelist: " + nameList);
-                    //！！！！！！！filter mChecklistArray array to match selected category
 
 
-                    //         Log.d(TAG, "get checklist_name: " + checklist_names);
-
-                    int pos = 0;
-                    String test_name = mChecklistArray.getChecklists().get(pos).getName();
-                    Log.d(TAG, "mChecklistArray name should be : " + test_name);
                 }
 
             } catch (Exception e) {

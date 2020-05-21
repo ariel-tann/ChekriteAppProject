@@ -80,15 +80,6 @@ public class Categories extends AppCompatActivity {
 
 
 
-//get data from api with input params[asset id] steps :
-// 1. set apitask to /api/{asset_id}/checklist
-// 2 set api listener to get result of api tasks
-// 3. get json data from fetched url
-// 4. to parse json data, here should use Checklist.java class, get categories from json
-// 5. define a array, setText from data to the array
-//delete above after finish
-
-
     APIsListener ChecklistListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -105,26 +96,14 @@ public class Categories extends AppCompatActivity {
 
 
 
-               //     JSONArray data = jsonObject.getJSONArray("data");
-         //           JSONObject jObject = jsonObject.getJSONObject("data");
-        //            mItems = new Inspection_checklist_items(jchecklist_items);
-
-        //            Checklist mChecklist = new Checklist(jObject);
-       //             Log.d(TAG, "SHOW CHECKLIST: " + mChecklist);
-
-
-                    //   mChecklistArray = new ChecklistArray(input);
-                 //   checklist_items = new Checklist(object);
-                 //   mChecklistArray = new ChecklistArray(checklist_category);
-                 //   mChecklistArray.add(checklist_category);
 
                     if(mChecklistArray!=null){
                         Log.d(TAG, "mChecklistArray length: " + mChecklistArray.getChecklists().size());
 
                         for (int i = 0; i< mChecklistArray.getChecklists().size(); i++) {
-                            // get single item
+
                             Checklist item = mChecklistArray.getChecklists().get(i);
-                //            Log.d(TAG, "mChecklistArray ids: " + mChecklistArray.getChecklists().get(i).getId());
+
                             Integer checklist_id = mChecklistArray.getChecklists().get(i).getId();
                             String checklist_category = mChecklistArray.getChecklists().get(i).getCategory();
                //             String checklist_name = mChecklistArray.getChecklists().get(i).getName();
@@ -132,19 +111,7 @@ public class Categories extends AppCompatActivity {
 
 
                         }
-                     //   for(int i=0; i<data.length(); i++) {
-                     //       JSONObject object = data.getJSONObject(i);
-                      //      checklist_items = new Checklist(object);
-                       //     mChecklistArray = new ChecklistArray(input);
 
-                      //      Log.d(TAG, "SHOW JSON OBJECT: " + checklist_items.getName());
-                       //     String checklist_category = object.getString("category");
-
-
-                       //     categories_list.add(checklist_category);
-
-                     //   }
-                        //filter repeated elements in category list
                         for (String element : categories_list) {
 
                             if (!filtered_categories.contains(element)) {
@@ -152,7 +119,7 @@ public class Categories extends AppCompatActivity {
                                 filtered_categories.add(element);
                             }
                         }
-               //         Log.d(TAG, "get categories successfully " + filtered_categories );
+
 
 
                         listAdapter = new ArrayAdapter<>(Categories.this, R.layout.simple_list_item_1, filtered_categories);  //for test
@@ -175,7 +142,6 @@ public class Categories extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories);
- //       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
 
@@ -219,8 +185,6 @@ public class Categories extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.checklist_category);
 
-        //      String asset_photo_url = pref.getString("photo", "");
-        //      Glide.with(getApplicationContext()).load(photo).apply(RequestOptions.circleCropTransform()).into(logout_btn);
 
         // call apis task
         new APIsTask(ChecklistListener).execute("GET", APIs.CHECKLIST, selected_asset_id, "");
@@ -268,10 +232,6 @@ public class Categories extends AppCompatActivity {
                 intent.putExtra("category", listView.getItemAtPosition(i).toString());
                 intent.putExtra("checklist_id", mChecklistArray.getChecklists().get(i).getId());
                 Log.d(TAG, "mChecklistArray ids: " + mChecklistArray.getChecklists().get(i).getId());
-
-                //         intent.putExtra("category", mChecklistArray.getChecklists().get(i).getCategory());
-              //  intent.putExtra("data_array_list", mChecklistArray.getChecklists());
-            //    intent.putExtra("category_array", checklist_items.getName());
 
 
                 intent.putExtra("unit_number", selected_asset_unumber);

@@ -39,13 +39,15 @@ public class StartInspection extends AppCompatActivity {
     Button start;
     private static final String TAG = "checklist";
 
-    //data
-   private Integer selected_asset_id;
+    //asset data
+   private String selected_asset_id;
    private String selected_asset_unumber;
    private String selected_asset_make;
    private String selected_asset_model;
    private String selected_asset_photo;
-   private String selected_checklist_id;
+
+   //checklist data
+   private Integer selected_checklist_id;
    private String selected_checklist_category;
    private String selected_checklist_name;
 
@@ -65,17 +67,17 @@ public class StartInspection extends AppCompatActivity {
         start.setBackgroundColor(Color.parseColor(highlight_colour));
 
 
-        selected_asset_id = getIntent().getIntExtra("asset_id", 0);
+        selected_asset_id = getIntent().getStringExtra("asset_id");
         selected_asset_unumber = getIntent().getStringExtra("unit_number");
         selected_asset_make = getIntent().getStringExtra("make");
         selected_asset_model = getIntent().getStringExtra("model");
         selected_asset_photo =getIntent().getStringExtra("photo");
         selected_checklist_category =getIntent().getStringExtra("category");
         selected_checklist_name =getIntent().getStringExtra("name");
-        selected_checklist_id = getIntent().getStringExtra("checklist_id");
+        selected_checklist_id = getIntent().getIntExtra("checklist_id", 0);
 
         //test getExtra
-        Log.d(TAG, "getExtra name: " + selected_checklist_name);
+        Log.d(TAG, "getExtra checklist name and id: " + selected_checklist_name + selected_checklist_id);
 
 
         asset_image =(ImageView) findViewById(R.id.asset_image);
