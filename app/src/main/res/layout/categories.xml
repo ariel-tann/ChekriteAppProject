@@ -43,6 +43,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingRight="10dp"
             >
 
 
@@ -214,7 +215,8 @@
     <ListView
         android:id="@+id/checklist_category"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="458dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
