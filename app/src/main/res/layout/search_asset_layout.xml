@@ -27,6 +27,7 @@
             android:padding="7.5dp"
             android:background="@drawable/search_asset_photo_background"
             android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/search_asset_photo_background" />
 
         <LinearLayout
@@ -42,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="Large text"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#7f7f7f"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -50,7 +52,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Large text"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#7f7f7f" />
         </LinearLayout>
     </LinearLayout>
 
