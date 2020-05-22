@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.5.22
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="22dp">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/last_inspec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Inspected:" />
+
+        <TextView
+            android:id="@+id/daysago"
+            android:layout_below="@+id/last_inspec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X days ago" />
+        <TextView
+            android:id="@+id/inspector"
+            android:layout_below="@+id/daysago"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inspected by:" />
+
+        <TextView
+            android:id="@+id/checklist"
+            android:layout_below="@+id/inspector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Checklist:" />
+    </RelativeLayout>
+
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
