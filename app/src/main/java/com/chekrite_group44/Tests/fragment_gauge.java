@@ -46,6 +46,7 @@ public class fragment_gauge extends Fragment implements SeekBar.OnSeekBarChangeL
     int l_height;
     View mView;
     int current_value = 0;
+    int current_status = 0;
 
     public fragment_gauge(Inspection_checklist_item item, int total_items, int position, InspectionListener listener) {
         mItem = item;
@@ -87,24 +88,10 @@ public class fragment_gauge extends Fragment implements SeekBar.OnSeekBarChangeL
         return mView;
     }
     private void seekbarCreate(){
-        // only work for Two-State Gauge
-        Log.d(TAG, "size: "+ mItem.getControl().getGauges().size());
         Inspection_gauge gauge = mItem.getControl().getGauges().get(0);
-        int marks_count = gauge.getMarks_count();
-        Inspection_band band1 = gauge.getBands().get(0);
-        Inspection_band band2 = gauge.getBands().get(1);
-        int lower_step = band1.getUpper_step();
-        int upper_step = band2.getUpper_step();
-        String lower_color = band1.getColor();
-        String upper_color = band2.getColor();
-        int lower_status = band1.getStatus();
-        int upper_status = band2.getStatus();
-
-        GuageView seekBar = new GuageView(mView.getContext(), marks_count, lower_step, upper_step,
-                lower_color, upper_color, lower_status,upper_status);
+        GuageView seekBar = new GuageView(mView.getContext(), gauge);
 
         seekBar.setLayoutParams(new LinearLayout.LayoutParams(l_width,l_height));
-        seekBar.setMax(10);
         seekBar.setSplitTrack(true);
         seekBar.setOnSeekBarChangeListener(this);
         l_layout.addView(seekBar);
@@ -112,8 +99,10 @@ public class fragment_gauge extends Fragment implements SeekBar.OnSeekBarChangeL
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        current_value = progress;
-        Log.d(TAG, "progress: "+progress);
+        Inspection_gauge gauge = mItem.getControl().getGauges().get(0);
+        long ratio = Math.round(gauge.getUpper()/gauge.getMarks_count());
+        current_value = progress * (int)ratio;
+        Log.d(TAG, "current_value: "+current_value);
     }
 
     @Override
@@ -130,6 +119,7 @@ public class fragment_gauge extends Fragment implements SeekBar.OnSeekBarChangeL
     public void onClick(View v) {
         // calling inspectionListener in inspection main java
         Long end = System.currentTimeMillis();
-        mlistener.Completed(Control_Type.GAUGE, 0, current_value,"", start, end);
+        mlistener.Completed(Control_Type.GAUGE, 0, current_value,
+                "", start, end);
     }
 }
