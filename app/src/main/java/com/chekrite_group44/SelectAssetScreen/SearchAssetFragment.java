@@ -99,7 +99,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
 
                         for (int i = 0; i < data.length(); i++) {
                             JSONObject object = data.getJSONObject(i);
-                            String id = Integer.toString(object.getInt("id"));
+                            int id = object.getInt("id");
                             String unitNumber = object.getString("unit_number");
                             String make = object.getString("make");
                             String model = object.getString("model");

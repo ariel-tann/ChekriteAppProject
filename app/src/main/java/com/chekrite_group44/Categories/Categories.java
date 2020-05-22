@@ -64,7 +64,7 @@ public class Categories extends AppCompatActivity {
 
 
     //DATA
-    String selected_asset_id;
+    int selected_asset_id;
     String selected_asset_unumber;
     String selected_asset_make;
     String selected_asset_model;
@@ -163,7 +163,7 @@ public class Categories extends AppCompatActivity {
         //image url
 
         // asset info panel
-        selected_asset_id = getIntent().getStringExtra("asset_id");
+        selected_asset_id = getIntent().getIntExtra("asset_id", 0);
         selected_asset_unumber = getIntent().getStringExtra("unit_number");
         selected_asset_make = getIntent().getStringExtra("make");
         selected_asset_model = getIntent().getStringExtra("model");
@@ -185,9 +185,9 @@ public class Categories extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.checklist_category);
 
-
+        String fetchingID = Integer.toString(selected_asset_id);
         // call apis task
-        new APIsTask(ChecklistListener).execute("GET", APIs.CHECKLIST, selected_asset_id, "");
+        new APIsTask(ChecklistListener).execute("GET", APIs.CHECKLIST, fetchingID, "");
 
         //set profile button upper right
         String profile_link = pref.getString("profile_photo", "");

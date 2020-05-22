@@ -54,7 +54,7 @@ public class ActivityChecklist extends AppCompatActivity {
 
     //DATA
     ChecklistArray mChecklistArray;
-    String selected_asset_id;
+    Integer selected_asset_id;
     String selected_asset_unumber;
     String selected_asset_make;
     String selected_asset_model;
@@ -65,7 +65,7 @@ public class ActivityChecklist extends AppCompatActivity {
     ArrayList<String> nameList = new ArrayList<>();
     private static final String TAG = "checklist";
     String categorytest;
-    Integer checklist_id;
+    String checklist_id;
     ArrayList<String> checklist_names = new ArrayList<>();
 
     ArrayAdapter<String> nameListAdapter;
@@ -87,9 +87,10 @@ public class ActivityChecklist extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
 
-        selected_asset_id = bundle.getString("asset_id");
+        selected_asset_id = bundle.getInt("asset_id");
         selected_category = bundle.getString("category");
-        new APIsTask(ChecklistListener).execute("GET", APIs.CHECKLIST, selected_asset_id, "");
+        String FetchId = Integer.toString(selected_asset_id);
+        new APIsTask(ChecklistListener).execute("GET", APIs.CHECKLIST, FetchId, "");
         // category_test = getIntent().getStringExtra("model");
         // if bundle != null {...  getstring("category ")}
         if (bundle != null) {
@@ -119,7 +120,7 @@ public class ActivityChecklist extends AppCompatActivity {
         Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
 
 
-        selected_asset_id = getIntent().getStringExtra("asset_id");
+        selected_asset_id = getIntent().getIntExtra("asset_id", 0);
         selected_asset_unumber = getIntent().getStringExtra("unit_number");
         selected_asset_make = getIntent().getStringExtra("make");
         selected_asset_model = getIntent().getStringExtra("model");
@@ -150,8 +151,8 @@ public class ActivityChecklist extends AppCompatActivity {
                 intent.putExtra("photo", selected_asset_photo);
 
              //   intent.putExtra("checklist_id", parent.getItemAtPosition(position).);
-
-                intent.putExtra("checklist_id", mChecklistArray.getChecklists().get(position).getId());
+                String checkistID = Integer.toString(mChecklistArray.getChecklists().get(position).getId());
+                intent.putExtra("checklist_id",checkistID);
                 intent.putExtra("category", mChecklistArray.getChecklists().get(position).getCategory());
                 intent.putExtra("name", mChecklistArray.getChecklists().get(position).getName());
 

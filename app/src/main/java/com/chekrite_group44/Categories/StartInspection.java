@@ -40,14 +40,14 @@ public class StartInspection extends AppCompatActivity {
     private static final String TAG = "checklist";
 
     //asset data
-   private String selected_asset_id;
+   private Integer selected_asset_id;
    private String selected_asset_unumber;
    private String selected_asset_make;
    private String selected_asset_model;
    private String selected_asset_photo;
 
    //checklist data
-   private Integer selected_checklist_id;
+   private String selected_checklist_id;
    private String selected_checklist_category;
    private String selected_checklist_name;
 
@@ -67,17 +67,17 @@ public class StartInspection extends AppCompatActivity {
         start.setBackgroundColor(Color.parseColor(highlight_colour));
 
 
-        selected_asset_id = getIntent().getStringExtra("asset_id");
+        selected_asset_id = getIntent().getIntExtra("asset_id", 0);
         selected_asset_unumber = getIntent().getStringExtra("unit_number");
         selected_asset_make = getIntent().getStringExtra("make");
         selected_asset_model = getIntent().getStringExtra("model");
         selected_asset_photo =getIntent().getStringExtra("photo");
         selected_checklist_category =getIntent().getStringExtra("category");
         selected_checklist_name =getIntent().getStringExtra("name");
-        selected_checklist_id = getIntent().getIntExtra("checklist_id", 0);
+        selected_checklist_id = getIntent().getStringExtra("checklist_id");
 
         //test getExtra
-        Log.d(TAG, "getExtra checklist name and id: " + selected_checklist_name + selected_checklist_id);
+        Log.d(TAG, "getExtra checklist id: " +  selected_checklist_id);
 
 
         asset_image =(ImageView) findViewById(R.id.asset_image);
@@ -107,8 +107,8 @@ public class StartInspection extends AppCompatActivity {
 
     private void openInspection() {
         Intent intent = new Intent(this, Inspection_main.class);
-        intent.putExtra("checklist_id", "5020");
-        intent.putExtra("asset_id", 28436);
+        intent.putExtra("checklist_id", selected_checklist_id);
+        intent.putExtra("asset_id", selected_asset_id);
         intent.putExtra("asset_selection", "search");
         startActivity(intent);
     }

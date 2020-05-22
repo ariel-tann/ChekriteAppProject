@@ -245,7 +245,7 @@ public class Inspection_main extends AppCompatActivity
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.inspection_toolbar);
         toolbar.setBackgroundColor(Chekrite.getParseColor());
         // get info from previous class
-        String checklist_id=getIntent().getStringExtra("checklist_id");
+        String checklist_id =getIntent().getStringExtra("checklist_id");
         int asset_id = getIntent().getIntExtra("asset_id", 0);
         String asset_selection = getIntent().getStringExtra("asset_selection");
         // disable fragment swipe left
