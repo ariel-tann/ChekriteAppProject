@@ -10,9 +10,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
@@ -42,10 +44,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.chekrite_group44.Asset_Properties.Search_Asset;
 import com.chekrite_group44.DashBoard.Dashboard;
+import com.chekrite_group44.SelectAssetScreen.SearchAssetAdapter;
 import com.chekrite_group44.Categories.Categories;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Http_Request.APIs;
@@ -64,15 +68,19 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
 
     private searchAssetListener listener;
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+//    private RecyclerView.Adapter mAdapter;
+    private SearchAssetAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     private EditText editText;
     ImageButton deleteAllBtn;
     TextView found;
 
+    private String joined = "";
+
     private List<String> SearchText = new ArrayList<>(); //hold the text that displays in editText
-    ArrayList<SearchAssetItems> searchAssetList = new ArrayList<>();
+    public ArrayList<SearchAssetItems> searchAssetList = new ArrayList<>();
+
 
     private int searchLength = 10;
 
@@ -87,43 +95,31 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
                     Log.d(TAG, "search asset success: " + message);
                     JSONArray data = jsonObject.getJSONArray("data");
                     if (data != null) {
-
                         Log.d(TAG, "data not null");
-
-                       // JSONObject object = data.getJSONObject(i);
-                        //Search_Asset sa_list = new Search_Asset(object);
-
 
                         for (int i = 0; i < data.length(); i++) {
                             JSONObject object = data.getJSONObject(i);
-//                            Search_Asset sa_list = new Search_Asset(object);
                             String id = Integer.toString(object.getInt("id"));
                             String unitNumber = object.getString("unit_number");
                             String make = object.getString("make");
                             String model = object.getString("model");
                             String photoUrl = object.getString("photo");
                             searchAssetList.add(new SearchAssetItems(id, unitNumber, make, model, photoUrl));
-                            Log.d(TAG, "searchassetlist.size(): " + searchAssetList.size());
-//                            Log.d(TAG, "Part 2: " + searchAssetList.size());
-
                         }
+
                         mAdapter.notifyDataSetChanged();
                         String numAssetFound = Integer.toString(searchAssetList.size()) + " found";
                         found.setText(setFoundTextColor(numAssetFound));
-
+                        Log.d(TAG, "API_Completed: search asset size" + searchAssetList.size());
                     }else
                         {
                             Log.d(TAG, "jsonDATA = null");
                         }
-
                     }
                     }catch(JSONException e){
                          e.printStackTrace();}
             }
         };
-
-
-
 
 
     @Nullable
@@ -147,8 +143,30 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
         mRecyclerView = view.findViewById(R.id.searchAssetRecyclerView);
         recyclerBuild();
 
+        //Listens when edit has changes
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                changeSearchItemColor(s.toString());
+            }
+        });
 
         return view;
+    }
+
+    //Sends search query to adapter for search item color change
+    private void changeSearchItemColor(String text ) {
+        mAdapter.filterList(joined);
     }
 
     @Override
@@ -163,7 +181,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
         if (context instanceof searchAssetListener) {
             listener = (searchAssetListener) context;
         } else {
-            throw new RuntimeException(context.toString() + "must implement searchAsset listener");
+            throw new RuntimeException(context.toString() + "must implement SearchAsset listener");
         }
     }
 
@@ -183,6 +201,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
 
     }
 
+    //handles clicks on list item
     @Override
     public void onAssetClick(int position) {
         Log.d(TAG, "onAssetClick: clicked. Id number: " + searchAssetList.get(position).getUnitNumber());
@@ -212,8 +231,6 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
 
     //gets input from keyboard and updates the edit text view
     public void updateEditText(CharSequence newText) {
-//        mAdapter.notifyDataSetChanged();
-
         if(newText != "/") {
             addNewText(newText.toString());
         } else {
@@ -231,7 +248,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
             editText.setTextSize(16);
             editText.setTypeface(null, Typeface.NORMAL);
             searchAssetList.clear();
-            found.setText("");
+            found.setVisibility(View.GONE);
             deleteAllBtn.setVisibility(View.GONE);
             mAdapter.notifyDataSetChanged();
 
@@ -244,6 +261,8 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
         SearchText.add(newText.toString());
         displayText();
         checkEditTextIsEmpty();
+        for(int i = 0; i<searchAssetList.size(); i++){
+        }
 
     }
 
@@ -266,18 +285,20 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
 
     //get string from arraylist and displays. Calls to API if text is >= 3
     public void displayText() {
-        String joined = TextUtils.join("", SearchText);
+         joined = TextUtils.join("", SearchText);
             searchAssetList.clear();
             mAdapter.notifyDataSetChanged();
             new APIsTask(SearchAssetListener).execute("GET", APIs.SEARCH, joined, "");
             mAdapter.notifyDataSetChanged();
         if(SearchText.size() != 0) {
             deleteAllBtn.setVisibility(View.VISIBLE);
+            found.setVisibility(View.VISIBLE);
         }
         editText.setText(joined);
         editText.setTextColor(Chekrite.getParseColor());
         editText.setTextSize(20);
         editText.setTypeface(null, Typeface.BOLD);
+
 
     }
 

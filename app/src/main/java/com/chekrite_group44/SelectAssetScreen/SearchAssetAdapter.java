@@ -7,6 +7,12 @@
 package com.chekrite_group44.SelectAssetScreen;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,13 +34,16 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.R;
 
 public class SearchAssetAdapter extends RecyclerView.Adapter<SearchAssetAdapter.SearchAssetViewHolder> {
 
     private static final String TAG = "SearchAssetAdapter";
+    private static String editText ;
     private ArrayList<SearchAssetItems> mSearchAssetList;
     private OnAssetListener mOnAssetListener;
+//     String COLOR = "";
 
     Context context;
 
@@ -45,6 +54,7 @@ public class SearchAssetAdapter extends RecyclerView.Adapter<SearchAssetAdapter.
         public TextView makeAndModel;
 //        public ImageView getImage(){ return this.assetPhoto;}
         OnAssetListener onAssetListener;
+//        String COLOR = "";
 
         public SearchAssetViewHolder(@NonNull View itemView, OnAssetListener onAssetListener) {
             super(itemView);
@@ -55,12 +65,14 @@ public class SearchAssetAdapter extends RecyclerView.Adapter<SearchAssetAdapter.
             //to handle clicks in recycle view
             this.onAssetListener = onAssetListener;
             itemView.setOnClickListener(this);
+
         }
 
         @Override
         public void onClick(View v) {
             onAssetListener.onAssetClick(getAdapterPosition());
         }
+
     }
 
     public SearchAssetAdapter(ArrayList<SearchAssetItems> searchAssetList, Context context_, OnAssetListener onAssetListener) {
@@ -80,20 +92,60 @@ public class SearchAssetAdapter extends RecyclerView.Adapter<SearchAssetAdapter.
     @Override
     public void onBindViewHolder(@NonNull SearchAssetViewHolder holder, int position) {
         final SearchAssetItems currentItem = mSearchAssetList.get(position);
-        holder.unitNumber.setText(currentItem.getUnitNumber());
+        String unitNumber = currentItem.getUnitNumber();
         String makeAndModel = currentItem.getMake() + " " + currentItem.getModel();
+
+        holder.unitNumber.setText(unitNumber);
         holder.makeAndModel.setText(makeAndModel);
-        Glide.with(context).load(currentItem.getPhoto()).apply(RequestOptions.circleCropTransform())
-                .diskCacheStrategy(DiskCacheStrategy.ALL).fitCenter().into(holder.assetPhoto);
+        Glide.with(context).load(currentItem.getPhoto()).centerCrop().apply(RequestOptions.circleCropTransform())
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.assetPhoto);
+
+
+        //Check if unit number contains search query. If true, colors the letters
+        if (unitNumber.contains(editText)) {
+            holder.unitNumber.setText(setTextColor(unitNumber));
+
+        } else {
+            holder.unitNumber.setTextColor(Color.parseColor("#7f7f7f"));
+
+        }
+
+        //Check if make and model contains search query. If true, colors the letters
+        if (makeAndModel.toUpperCase().contains(editText)) {
+
+            holder.makeAndModel.setText(setTextColor(makeAndModel));
+        } else {
+
+            holder.makeAndModel.setTextColor(Color.parseColor("#7f7f7f"));
+        }
+
     }
+
 
     @Override
     public int getItemCount() {
         return mSearchAssetList.size();
     }
 
+    //Gets search query from SearchAssetFragment and stores it in global variable
+    public void filterList(String text) {
+        editText = text;
+        notifyDataSetChanged();
+    }
+
     public interface OnAssetListener {
         void onAssetClick(int position);
+    }
+
+    //If text contains search query, colors the letters matching the query
+    public SpannableString setTextColor (String text) {
+        SpannableString ss = new SpannableString(text);
+        String upperCaseText = text.toUpperCase();
+        ForegroundColorSpan companyColor = new ForegroundColorSpan(Chekrite.getParseColor());
+        int textSize = editText.length();
+        ss.setSpan(companyColor, upperCaseText.indexOf(editText),
+                upperCaseText.indexOf(editText)+textSize, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return ss;
     }
 
 }
