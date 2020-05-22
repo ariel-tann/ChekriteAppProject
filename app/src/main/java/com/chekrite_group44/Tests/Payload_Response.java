@@ -27,6 +27,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class Payload_Response {
+    private static final String TAG = "Payload_Response";
     Inspection_checklist_item mItem;
     // ChekRite response require variables
     int checklist_item_id;
@@ -72,16 +73,19 @@ public class Payload_Response {
                 // get status using condition of upper bond and lower bond
                 control_gauge_band_id = item.getControl().getGauges().get(btn_order).getId();
                 Inspection_gauge gauge = mItem.getControl().getGauges().get(0);
-                Inspection_band band1 = gauge.getBands().get(0);
-                Inspection_band band2 = gauge.getBands().get(1);
-                int lower_step = band1.getUpper_step();
-                int lower_status = band1.getStatus();
-                int upper_status = band2.getStatus();
-
-                if (gauge_value > lower_step) {
-                    status = upper_status;
-                }else{
-                    status = lower_status;
+                // search status in band using current value
+                long ratio = Math.round(gauge.getUpper()/gauge.getMarks_count());
+                int val = (int)gauge_value / (int)ratio;
+                for(int i = 0; i < gauge.getBands().size(); i++){
+                    int prev = 0;
+                    if(i != 0)
+                        prev = gauge.getBands().get(i-1).getUpper_step();
+                    if (val >= prev
+                            && val <= gauge.getBands().get(i).getUpper_step()){
+                        // get status
+                        status = gauge.getBands().get(i).getStatus();
+                        Log.d(TAG, "status: "+status);
+                    }
                 }
                 break;
         }

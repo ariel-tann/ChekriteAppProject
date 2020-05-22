@@ -41,17 +41,12 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
     Inspection_gauge mGauge;
     int marks_count;
     int num_bands;
-    int l_width;
-    int l_height;
-    int lower_step;
-    int upper_step;
-    String lower_color;
-    String upper_color;
-    int lower_status;
-    int upper_status;
+    float lower_step;
+    float upper_step;
+    String flag = "";
     //
     int y = 0;
-    public GuageView(Context context, Inspection_gauge gauge, int l_width, int l_height) {
+    public GuageView(Context context, Inspection_gauge gauge) {
         super(context);
         mContext = context;
         Resources res = getResources();
@@ -61,14 +56,29 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
         mGauge = gauge;
         this.marks_count = gauge.getMarks_count();
         num_bands = gauge.getMarks_count();
-        this.l_height = l_height;
-        this.l_width = l_width;
-//        this.lower_step = lower_step;
-//        this.upper_step = upper_step;
-//        this.lower_color = lower_color;
-//        this.upper_color = upper_color;
-//        this.lower_status = lower_status;
-//        this.upper_status = upper_status;
+        lower_step = gauge.getLower().floatValue();
+        upper_step = gauge.getUpper().floatValue();
+        // initial flag value
+        switch (mGauge.getNeedle_labels()){
+            case "label":
+                flag = mGauge.getBands().get(0).getLabel();
+                break;
+            case "value":
+                flag = String.valueOf(current_value);
+                break;
+            default:
+                // status and None
+                if(mGauge.getBands().get(0).getStatus() == 0){
+                    flag = "Fail";
+                }else if(mGauge.getBands().get(0).getStatus() == 1){
+                    flag = "Pass";
+                }else if(mGauge.getBands().get(0).getStatus() == 2){
+                    flag = "Fixed";
+                }else if(mGauge.getBands().get(0).getStatus() == 3){
+                    flag = "Caution";
+                }
+                break;
+        }
 
     }
 
@@ -100,36 +110,34 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
     protected synchronized void onDraw(Canvas canvas) {
         DrawGauge(canvas);
 
-//        Her_Line.setColor(Color.BLACK);
-//        Her_Line.setStrokeWidth(5);
-//        try {
-//            y = range.get(current_value);
-//        }catch (ArrayIndexOutOfBoundsException e){
-//            Log.d(TAG, "range: "+range.toString()+" current val: "+current_value);
-//            y = range.get(0);
-//        }
-//
-//        // draw line
-//        canvas.drawLine( -50, y,150,y,Her_Line);
-//        //draw thumb
-//        canvas.drawBitmap(resized, bitmap_width/2.5f, y - bitmap_height/2.0f - 4, null);
-//        // draw rectangle
-//        Retan.setStyle(Paint.Style.STROKE);
-//        Retan.setColor(Color.BLACK);
-//        Retan.setStrokeWidth(10);
-//        canvas.drawRect(-150,-25 + y, -50, 25 + y, Retan);
-//        Retan.setStyle(Paint.Style.FILL);
-//        Retan.setColor(getResources().getColor(R.color.gold));
-//        Retan.setStrokeWidth(5);
-//        canvas.drawRect(-150,-25 + y, -50, 25 + y, Retan);
-//        Retan.setColor(Color.WHITE);
-//        Retan.setStyle(Paint.Style.FILL);
-//        Retan.setTextSize(40);
-//        if (current_status == 0){
-//            canvas.drawText("Fail", -140, 15+y, Retan);
-//        }else {
-//            canvas.drawText("Pass", -145, 15+y, Retan);
-//        }
+        Her_Line.setColor(Color.BLACK);
+        Her_Line.setStrokeWidth(10);
+        try {
+            Log.d(TAG, "Current Val: "+current_value);
+            y = range.get(current_value);
+        }catch (ArrayIndexOutOfBoundsException e){
+            y = range.get(0);
+        }
+
+        // draw line
+        canvas.drawLine( -50, y,150,y,Her_Line);
+        //draw thumb
+        canvas.drawBitmap(resized, bitmap_width/2.5f, y - bitmap_height/2.0f - 4, null);
+        // draw rectangle
+        Retan.setStyle(Paint.Style.STROKE);
+        Retan.setColor(Color.BLACK);
+        Retan.setStrokeWidth(15);
+        canvas.drawRect(-200,-30 + y, -50, 30 + y, Retan);
+        Retan.setStyle(Paint.Style.FILL);
+        Retan.setColor(getResources().getColor(R.color.gold));
+        canvas.drawRect(-200,-30 + y, -50, 30 + y, Retan);
+        Retan.setColor(Color.WHITE);
+        Retan.setStyle(Paint.Style.FILL);
+        Retan.setTextSize(40);
+        if (flag.length() <= 5)
+            canvas.drawText(flag, -170, 15+y, Retan);
+        else
+            canvas.drawText(flag, -195, 15+y, Retan);
     }
 
     @Override
@@ -141,22 +149,52 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
             case MotionEvent.ACTION_UP:
-//                current_value = marks_count - (int) (marks_count * event.getY() / getHeight());
-//                // set bound for value
-//                if (current_value >= 0 && current_value <= upper_step) {
-//                    if (current_value > lower_step) {
-//                        setProgress(current_value);
-//                        current_status = upper_status;
-//                    } else {
-//                        setProgress(current_value);
-//                        current_status = lower_status;
-//                    }
-//                }else if (current_value > upper_step){
-//                    current_value = upper_step;
-//                } else{
-//                    current_value = 0;
-//                }
-//                onSizeChanged(getWidth(), getHeight(), 0, 0);
+                current_value = marks_count - (int) (marks_count * event.getY() / getHeight());
+                // set bound for value
+                if (current_value >= lower_step && current_value <= upper_step) {
+                    setProgress(current_value);
+                }else if (current_value > num_bands){
+                    current_value = num_bands;
+                } else{
+                    current_value = (int)lower_step;
+                }
+                switch (mGauge.getNeedle_labels()){
+                    case "label":
+                        for(int i = 0; i < mGauge.getBands().size(); i++){
+                            int prev = 0;
+                            if(i != 0)
+                                prev = mGauge.getBands().get(i-1).getUpper_step();
+                            if (current_value >= prev
+                                    && current_value <= mGauge.getBands().get(i).getUpper_step()){
+                                flag = mGauge.getBands().get(i).getLabel();
+                            }
+                        }
+                        break;
+                    case "value":
+                        flag = String.valueOf(current_value);
+                        break;
+                    default:
+                        // status and None
+                        for(int i = 0; i < mGauge.getBands().size(); i++){
+                            int prev = 0;
+                            if(i != 0)
+                                prev = mGauge.getBands().get(i-1).getUpper_step();
+                            if (current_value >= prev
+                                    && current_value < mGauge.getBands().get(i).getUpper_step()){
+                                if(mGauge.getBands().get(i).getStatus() == 0){
+                                    flag = "Fail";
+                                }else if(mGauge.getBands().get(i).getStatus() == 1){
+                                    flag = "Pass";
+                                }else if(mGauge.getBands().get(i).getStatus() == 2){
+                                    flag = "Fixed";
+                                }else if(mGauge.getBands().get(i).getStatus() == 3){
+                                    flag = "Caution";
+                                }
+                            }
+                        }
+                        break;
+                }
+                onSizeChanged(getWidth(), getHeight(), 0, 0);
                 break;
             case MotionEvent.ACTION_CANCEL:
                 break;
@@ -182,24 +220,24 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
 
         int Canvas_width = canvas.getWidth();
         int Canvas_height = canvas.getHeight();
-        int y_offset = 100;
-        int width = Math.round(Canvas_width*0.15f);
-        int height = Math.round(Canvas_height/num_bands);
+        int width = (int)(Canvas_width*0.15);
+        int height = Canvas_height/(num_bands+2);
         int x_offset = (Canvas_width / 2) - (width / 2);  // plot in the center
+        int y_offset = 0;
         int y_height = canvas.getHeight();
         // full height
         RectF rectF = new RectF(0, 0, width, height);
         // half of height
-        RectF r = new RectF(0, 0, width, height/2.0f);
+        RectF r = new RectF(0, 0, width, Math.round(height/2.f));
         // plot from bottom and center
-        canvas.translate(x_offset, y_height - y_offset);
+        canvas.translate(x_offset, y_height-(height*2)-y_offset);
         // first object coordinate
-        updateY(y_height - y_offset);
-        Log.d(TAG, height +" "+ y_offset +" "+ y_height);
+        updateY(y_height-(height*2)-y_offset);
+
         // start to plot
         int ibands = 0;
+        int prev = 0;
         for (int i = 0; i< mGauge.getBands().size(); i++){
-            int prev = 0;
             if(i != 0)
                  prev = mGauge.getBands().get(i-1).getUpper_step();
             for (int j = 0; j < mGauge.getBands().get(i).getUpper_step() - prev; j ++){
@@ -212,44 +250,46 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
                     // half circle
                     canvas.drawArc(rectF, 0, 180, true, FullPaint);
                     canvas.drawArc(rectF, 0, 180, false, Stroke);
-//                    canvas.translate(0, -height/2.0f);
                     // half triangle
+                    canvas.drawRect(r, FullPaint);    // fill
+                    canvas.drawLine(0, 0, 0, height/2.f, Line);
+                    canvas.drawLine(width, 0, width, height/2.f, Line);
+                    canvas.translate(0, -height);
+                    updateY(height);
+                }else if (ibands == num_bands - 1){
+                    // the last item
+                    Inspection_band band = mGauge.getBands().get(i);
+                    // set up color
+                    FullPaint.setColor(Color.parseColor(band.getColor()));
+                    // half triangle
+                    Line.setStrokeWidth(10);
+                    canvas.drawLine(0, height, width / 2.0f, height, Line);
+                    Line.setStrokeWidth(5);
+                    canvas.translate(0, height/2.0f);
                     canvas.drawRect(r, FullPaint);    // fill
                     canvas.drawLine(0, 0, 0, height/2.0f, Line);
                     canvas.drawLine(width, 0, width, height/2.0f, Line);
-                    canvas.translate(0, -height);
+                    // half circle
+                    canvas.translate(0, -height/2.0f);
+                    canvas.drawArc(rectF, -180, 180, true, FullPaint);
+                    canvas.drawArc(rectF, -180, 180, false, Stroke);
                     updateY(height);
-                }else if (ibands == num_bands){
-//                    // the last item
-//                    Inspection_band band = mGauge.getBands().get(i);
-//                    // set up color
-//                    FullPaint.setColor(Color.parseColor(band.getColor()));
-//                    // half triangle
-//                    canvas.drawRect(r, FullPaint);    // fill
-//                    canvas.drawLine(0, 0, 0, height/2.0f, Line);
-//                    canvas.drawLine(width, 0, width, height/2.0f, Line);
-//                    canvas.translate(0, -height/2.0f);
-//                    // half circle
-//                    canvas.drawArc(rectF, 0, 180, true, FullPaint);
-//                    canvas.drawArc(rectF, 0, 180, false, Stroke);
-//                    canvas.translate(0, -height/2.0f);
-//                    updateY(height);
                 }else {
-//                    Inspection_band band = mGauge.getBands().get(i);
-//                    FullPaint.setColor(Color.parseColor(band.getColor()));
-//                    canvas.drawRect(rectF, FullPaint);
-//                    canvas.drawLine(0, 0, 0, height, Line);
-//                    canvas.drawLine(width, 0, width, height, Line);
-//                    canvas.drawLine(0, height, width / 2.0f, height, Line);
-//                    canvas.translate(0, -height);
-//                    updateY(height); // canvas start
+                    Inspection_band band = mGauge.getBands().get(i);
+                    FullPaint.setColor(Color.parseColor(band.getColor()));
+                    canvas.drawRect(rectF, FullPaint);
+                    canvas.drawLine(0, 0, 0, height, Line);
+                    canvas.drawLine(width, 0, width, height, Line);
+                    canvas.drawLine(0, height, width / 2.0f, height, Line);
+                    canvas.translate(0, -height);
+                    updateY(height); // canvas start
                 }
                 ibands+=1;
             }
         }
         //reset y to (layout center , 0)
         // get the last item's coordinate
-        //canvas.translate(0, -range.get(range.size()-1));
+        canvas.translate(0, -range.get(range.size()-1));
     }
     private void updateY(int y){
         if(range.size() == 0){
