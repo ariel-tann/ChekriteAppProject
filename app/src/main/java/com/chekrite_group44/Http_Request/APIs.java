@@ -17,4 +17,5 @@ public interface APIs {
     String START = "start";
     String RESPONSES = "responses";
     String SUBMIT = "submit";
+    String DISCARD = "discard";
 }
