@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Date: 2020.5.11
+  ~ This file is created by Ariel.
+  ~ Summary: Handles the keyboard button colors when pressed
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- When button is pressed, color change to grey -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="0dip" android:color="#444444" />
+            <gradient android:angle="-90" android:startColor="#444444" android:endColor="#444444"  />
+            <padding android:left="3dp"/>
+            <padding android:right="3dp"/>
+        </shape>
+    </item>
+
+    <!-- When button is activated, color stays grey -->
+    <item android:state_activated="true">
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="0dip" android:color="#444444" />
+            <gradient android:angle="-90" android:startColor="#444444" android:endColor="#444444"  />
+            <padding android:left="3dp"/>
+            <padding android:right="3dp"/>
+        </shape>
+
+    </item>
+
+    <!-- Default color: white -->
+    <item >
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="0dip" android:color="@color/discard_dialog_btn_grey" />
+            <gradient android:angle="-90" android:startColor="@color/discard_dialog_btn_grey" android:endColor="@color/discard_dialog_btn_grey" />
+            <padding android:left="3dp"/>
+            <padding android:right="3dp"/>
+        </shape>
+    </item>
+
+</selector>

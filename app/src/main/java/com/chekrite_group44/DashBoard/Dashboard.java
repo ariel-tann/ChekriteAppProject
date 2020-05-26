@@ -132,7 +132,8 @@ public class Dashboard extends AppCompatActivity {
         check_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startNewcheck(view);
+//                startNewcheck(view);
+                open_ariel_test();
             }
         });
         logout_button.setOnClickListener(new View.OnClickListener() {
@@ -142,29 +143,29 @@ public class Dashboard extends AppCompatActivity {
             }
         });
         // for testing
-        test_btns = findViewById(R.id.imageButton2);
-        test_btns.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openInspection();
-            }
-        });
-        test_btns_ctgr =findViewById(R.id.imageButton1);
-        test_btns_ctgr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startInspection();
-            }
-        });
+//        test_btns = findViewById(R.id.imageButton2);
+//        test_btns.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openInspection();
+//            }
+//        });
+//        test_btns_ctgr =findViewById(R.id.imageButton1);
+//        test_btns_ctgr.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startInspection();
+//            }
+//        });
 
         //ariel test
-        profile_button_photo.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                open_ariel_test();
-            }
-        });
+//        profile_button_photo.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                open_ariel_test();
+//            }
+//        });
     }
     private void openInspection() {
         Intent intent = new Intent(this, Inspection_main.class);

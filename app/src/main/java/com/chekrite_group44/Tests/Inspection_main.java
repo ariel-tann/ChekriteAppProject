@@ -6,6 +6,7 @@
 
 package com.chekrite_group44.Tests;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,6 +71,10 @@ public class Inspection_main extends AppCompatActivity
     long start_inspection;
     ProgressDialog dialog;
     DrawerLayout drawer;
+    Button nav_discard_btn;
+    Button close_discard_dialog_btn;
+    Dialog discard_dialog;
+    ImageView discard_tick;
 
 
     private APIsListener ResponseAPI = new APIsListener() {
@@ -288,6 +294,9 @@ public class Inspection_main extends AppCompatActivity
         setNavBarProfile(navigationView, pref, profile_link);
         toggle.syncState();
 
+        //Discard dialog
+        discard_dialog = new Dialog(this);
+
         // get info from previous class
         String checklist_id =getIntent().getStringExtra("checklist_id");
         int asset_id = getIntent().getIntExtra("asset_id", 0);
@@ -320,12 +329,11 @@ public class Inspection_main extends AppCompatActivity
                 Toast.makeText(this, "Review", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_suspend:
-                Toast.makeText(this, "Suspend", Toast.LENGTH_SHORT).show();
+                ShowDiscardDialog();
                 break;
             case R.id.nav_discard:
 //                Toast.makeText(this, "Discard", Toast.LENGTH_SHORT).show();
-                new APIsTask(DiscardAPI).execute("DELETE", APIs.DISCARD, Integer.toString(mTest.getId()),"");
-                openDashBoard();
+                ShowDiscardDialog();
                 break;
 
         }
@@ -367,7 +375,27 @@ public class Inspection_main extends AppCompatActivity
         tools.setTitle(s);
 
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
+    }
 
+    public void ShowDiscardDialog() {
+        discard_dialog.setContentView(R.layout.discard_dialog);
+        close_discard_dialog_btn = (Button) discard_dialog.findViewById(R.id.return_checklist_btn);
+        discard_tick = (ImageView) discard_dialog.findViewById(R.id.discard_tick);
+        discard_tick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new APIsTask(DiscardAPI).execute("DELETE", APIs.DISCARD, Integer.toString(mTest.getId()),"");
+                openDashBoard();
+
+            }
+        });
+        close_discard_dialog_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                discard_dialog.dismiss();
+            }
+        });
+        discard_dialog.show();
     }
 
 

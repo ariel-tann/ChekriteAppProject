@@ -53,6 +53,7 @@
     <!-- Strings for side navigation bar-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="discard_text">Please confirm you want to discard the work you\'ve done by dragging the button along the dotted line.</string>
 
 
     <string-array name="categories_items">

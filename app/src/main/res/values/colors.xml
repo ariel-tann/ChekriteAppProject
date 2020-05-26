@@ -14,5 +14,7 @@
     <color name="lime_green">#2CCE7A</color>
     <color name="light_blue">#4F8EEC</color>
     <color name="gold">#E4BB3B</color>
+    <color name="discard_dialog_btn_grey">#808080</color>
+    <color name="discard_dialog_text_grey">#7f7f7f</color>
 
 </resources>
