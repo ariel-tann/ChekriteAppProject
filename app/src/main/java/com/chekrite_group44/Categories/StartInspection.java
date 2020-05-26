@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,7 +34,7 @@ public class StartInspection extends AppCompatActivity {
     TextView asset_unum;
     TextView asset_make;
     TextView asset_model;
-
+    ImageButton logout_btn;
     TextView checklist_category;
     TextView checklist_name;
     Button start;
@@ -59,6 +60,9 @@ public class StartInspection extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         String highlight_colour = pref.getString("highlight_colour", "#65cb81");
 
+
+
+        logout_btn =(ImageButton) findViewById(R.id.logout_img_btn);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
         toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
         TextView title = (TextView) findViewById(R.id.screen_title);
@@ -79,6 +83,17 @@ public class StartInspection extends AppCompatActivity {
         //test getExtra
         Log.d(TAG, "getExtra checklist id: " +  selected_checklist_id);
 
+        String profile_link = pref.getString("profile_photo", "");
+        Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
+
+        logout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSignout();
+                //for test
+                //       openChecklist();
+            }
+        });
 
         asset_image =(ImageView) findViewById(R.id.asset_image);
         Glide.with(getApplicationContext()).load(selected_asset_photo).apply(RequestOptions.circleCropTransform()).into(asset_image);
@@ -102,7 +117,11 @@ public class StartInspection extends AppCompatActivity {
         });
     }
 
-        
+    public void openSignout() {
+        Intent intent = new Intent(this, SignOut.class);
+        //    intent.putExtra("asset_id", 28436);
+        startActivity(intent);
+    }
 
 
     private void openInspection() {
