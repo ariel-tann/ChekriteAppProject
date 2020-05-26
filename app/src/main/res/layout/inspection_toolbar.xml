@@ -29,10 +29,12 @@
 
         <ImageView
             android:id="@+id/inspection_profile"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/avatar"
+            android:background="@drawable/btn_background_small"
             android:scaleType="fitCenter"
+            android:padding="4dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"

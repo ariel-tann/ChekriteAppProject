@@ -99,7 +99,6 @@ public class ArielTest extends AppCompatActivity
             Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
             Log.d("ArielTest", "onCreate: " + profile_link);
         }
-//        Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

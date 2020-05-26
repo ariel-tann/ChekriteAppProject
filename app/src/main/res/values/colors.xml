@@ -2,6 +2,7 @@
 <resources>
 
     <color name="ic_launch_background">#FFFFFF</color>
+    <color name="categories_checklist_grey">#e5e5e5</color>
     <color name="dark_blue">#163b6c</color>
     <color name="light_gray">#ededed</color>
     <color name="navigation_grey">#797979</color>

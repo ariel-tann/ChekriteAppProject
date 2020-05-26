@@ -13,24 +13,83 @@
     tools:context=".Categories.StartInspection">
 
 
-    <include
-        android:id="@+id/include2"
-        layout="@layout/categories_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/start_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/background_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ToolbarStyle"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            >
+
+            <ImageButton
+                android:id="@+id/back_arrow"
+                android:layout_width="32dp"
+                android:layout_height="33dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="-6dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/back_arrow" />
+            <TextView
+                android:id="@+id/back_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
+                android:layout_toEndOf="@+id/back_arrow"
+                android:gravity="center"
+                android:text="Back"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/screen_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Categories"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/logout_img_btn"
+                style="@android:style/Widget.ImageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn_background_small"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/avatar"
+                />
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintTop_toBottomOf="@+id/start_toolbar"
         app:layout_constraintVertical_bias="0"
 
         >
@@ -40,60 +99,64 @@
         <ImageView
             android:layout_centerHorizontal="true"
             android:id="@+id/asset_image"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:background="@drawable/btn_background"
-            android:padding="25dp"
-
-
-            android:src="@drawable/avatar"
-            app:srcCompat="@drawable/btn_background"
-            android:layout_margin="30dp"/>
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:background="@drawable/big_btn_background"
+            android:padding="24dp"
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:id="@+id/unit_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/asset_image"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
             android:text="UNIT-NUMBER"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_centerHorizontal="true"
-
+            android:layout_centerVertical="true"
             android:id="@+id/make"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/unit_number"
-            android:text="Make" />
+            android:text="Make"
+            android:textSize="22sp"/>
 
         <TextView
             android:layout_centerHorizontal="true"
-
+            android:layout_centerVertical="true"
             android:id="@+id/model"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/make"
-            android:text="Model" />
+            android:text="Model"
+            android:textSize="22sp"/>
 
         <TextView
             android:layout_centerHorizontal="true"
-
+            android:layout_centerVertical="true"
             android:id="@+id/test_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/model"
-            android:text="Checklist Category" />
+            android:text="Checklist Category"
+            android:textSize="22sp"/>
 
         <TextView
             android:layout_centerHorizontal="true"
-
+            android:layout_centerVertical="true"
             android:id="@+id/inspection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/test_category"
-            android:text="Checklist Name" />
+            android:text="Checklist Name"
+            android:textSize="22sp"/>
 
 
     </RelativeLayout>

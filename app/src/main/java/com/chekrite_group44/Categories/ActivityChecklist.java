@@ -112,12 +112,14 @@ public class ActivityChecklist extends AppCompatActivity {
         toolbar_title = (TextView) findViewById(R.id.screen_title);
         toolbar_title.setText("Checklist");
         logout_btn = (ImageButton) findViewById(R.id.logout_img_btn);
-        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
+//        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
-        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
-        category_test.setTextColor(Color.parseColor(highlight_colour));
+        toolbar.setBackgroundColor(Chekrite.getParseColor());
+        category_test.setTextColor(Chekrite.getParseColor());
         String profile_link = pref.getString("profile_photo", "");
-        Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
+        if(!profile_link.equals("null")) {
+            Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
+        }
 
 
         selected_asset_id = getIntent().getIntExtra("asset_id", 0);

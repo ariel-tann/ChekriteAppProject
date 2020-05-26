@@ -33,7 +33,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/categories_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:background="@drawable/background_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,17 +70,17 @@
                 android:text="Categories"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/logout_img_btn"
                 style="@android:style/Widget.ImageButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_centerVertical="true"
                 android:background="@drawable/btn_background_small"
-                android:padding="5dp"
+                android:padding="4dp"
                 android:scaleType="fitCenter"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/avatar"
@@ -174,7 +174,7 @@
     <LinearLayout
         android:id="@+id/Slider_dots"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="8dp"
         android:layout_above="@+id/checklist_category_title"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
@@ -188,7 +188,7 @@
         android:id="@+id/checklist_category_title"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:background="@color/light_gray"
+        android:background="@color/categories_checklist_grey"
         android:gravity="center_vertical"
         android:paddingVertical="5dp"
         android:paddingLeft="10dp"

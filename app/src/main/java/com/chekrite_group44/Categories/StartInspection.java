@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
+
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -63,12 +65,12 @@ public class StartInspection extends AppCompatActivity {
 
 
         logout_btn =(ImageButton) findViewById(R.id.logout_img_btn);
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
-        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
+        Toolbar toolbar = findViewById(R.id.start_toolbar);
+        toolbar.setBackgroundColor(Chekrite.getParseColor());
         TextView title = (TextView) findViewById(R.id.screen_title);
         title.setText("Start");
         start = (Button) findViewById(R.id.start_inspection);
-        start.setBackgroundColor(Color.parseColor(highlight_colour));
+        start.setBackgroundColor(Chekrite.getParseColor());
 
 
         selected_asset_id = getIntent().getIntExtra("asset_id", 0);
@@ -84,7 +86,9 @@ public class StartInspection extends AppCompatActivity {
         Log.d(TAG, "getExtra checklist id: " +  selected_checklist_id);
 
         String profile_link = pref.getString("profile_photo", "");
-        Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
+        if(!profile_link.equals("null")) {
+            Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
+        }
 
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,8 +110,10 @@ public class StartInspection extends AppCompatActivity {
 
         checklist_category = (TextView) findViewById(R.id.test_category);
         checklist_category.setText(selected_checklist_category);
+        checklist_category.setTextColor(Chekrite.getParseColor());
         checklist_name = (TextView) findViewById(R.id.inspection);
         checklist_name.setText(selected_checklist_name);
+        checklist_name.setTextColor(Chekrite.getParseColor());
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override

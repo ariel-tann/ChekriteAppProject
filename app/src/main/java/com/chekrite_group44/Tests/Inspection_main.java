@@ -268,7 +268,7 @@ public class Inspection_main extends AppCompatActivity
 
         // set profile photo
         ImageView profile = findViewById(R.id.inspection_profile);
-        if(profile_link.length() > 0)
+        if(!profile_link.equals("null"))
             Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(profile);
 
         // get color and set to btn background
@@ -338,9 +338,7 @@ public class Inspection_main extends AppCompatActivity
         View hView = navigationView.getHeaderView(0);
         TextView nav_user = (TextView)hView.findViewById(R.id.nav_profile_name);
         ImageView nav_profile_image = (ImageView)hView.findViewById(R.id.nav_profile_image);
-        if(profile_link == null) {
-            nav_profile_image.setImageResource(R.drawable.avatar);
-        } else {
+        if(!profile_link.equals("null")) {
             Glide.with(getApplicationContext()).load(profile_link).centerCrop().apply(RequestOptions.circleCropTransform()).into(nav_profile_image);
         }
         nav_user.setText(name);

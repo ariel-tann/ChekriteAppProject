@@ -151,9 +151,9 @@ public class Categories extends AppCompatActivity {
 
 
         //set highlight color
-        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
+//        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
       //  androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
-        toolbar.setBackgroundColor(Color.parseColor(highlight_colour));
+        toolbar.setBackgroundColor(Chekrite.getParseColor());
         //toolbar panel
 
 
@@ -191,7 +191,9 @@ public class Categories extends AppCompatActivity {
 
         //set profile button upper right
         String profile_link = pref.getString("profile_photo", "");
-        Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
+        if(!profile_link.equals("null")) {
+            Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
+        }
 
 
 
