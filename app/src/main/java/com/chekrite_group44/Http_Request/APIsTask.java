@@ -74,6 +74,9 @@ public class APIsTask extends AsyncTask<String, Void, String> {
             case APIs.SUBMIT:
                 chekriteLink = chekriteLink + "tests/submit";
                 break;
+            case APIs.DISCARD:
+                chekriteLink = chekriteLink + "tests/" + params[2];
+                break;
         }
 
         try {

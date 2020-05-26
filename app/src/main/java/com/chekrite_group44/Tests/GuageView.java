@@ -35,8 +35,8 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
     int current_status = 0;
     Bitmap bitmap;
     Bitmap resized;
-    int bitmap_width = 220;
-    int bitmap_height = 150;
+    int bitmap_width = 150;
+    int bitmap_height = 120;
     //
     Inspection_gauge mGauge;
     int marks_count;
@@ -50,7 +50,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
         super(context);
         mContext = context;
         Resources res = getResources();
-        bitmap = BitmapFactory.decodeResource(res, R.drawable.thumb_v1);
+        bitmap = BitmapFactory.decodeResource(res, R.drawable.thumb_gauge);
         resized = Bitmap.createScaledBitmap(bitmap, bitmap_width, bitmap_height, true);
         // initial vars
         mGauge = gauge;
@@ -111,7 +111,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
         DrawGauge(canvas);
 
         Her_Line.setColor(Color.BLACK);
-        Her_Line.setStrokeWidth(10);
+        Her_Line.setStrokeWidth(8);
         try {
             Log.d(TAG, "Current Val: "+current_value);
             y = range.get(current_value);
@@ -122,7 +122,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
         // draw line
         canvas.drawLine( -50, y,150,y,Her_Line);
         //draw thumb
-        canvas.drawBitmap(resized, bitmap_width/2.5f, y - bitmap_height/2.0f - 4, null);
+        canvas.drawBitmap(resized, bitmap_width/1.1f, y - bitmap_height/2.0f, null);
         // draw rectangle
         Retan.setStyle(Paint.Style.STROKE);
         Retan.setColor(Color.BLACK);
