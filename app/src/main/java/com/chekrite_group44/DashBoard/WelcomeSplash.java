@@ -36,7 +36,7 @@ import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 
 public class WelcomeSplash extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 2200;
+    private static int SPLASH_TIME_OUT = 2400;
     ImageView profile_photo;
     TextView username;
     String photo_url,first_name,last_name, employee_id;
@@ -56,7 +56,9 @@ public class WelcomeSplash extends AppCompatActivity {
         profile_photo=findViewById(R.id.profile_photo);
         username=findViewById(R.id.user_name);
         username.setText(first_name+" "+last_name);
-        Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_photo);
+        if(!photo_url.equals("null")) {
+            Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_photo);
+        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -69,4 +71,6 @@ public class WelcomeSplash extends AppCompatActivity {
             }
         }, SPLASH_TIME_OUT);
     }
+
+
 }

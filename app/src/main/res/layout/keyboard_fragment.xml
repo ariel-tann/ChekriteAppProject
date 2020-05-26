@@ -132,6 +132,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/keyboard_button"
         android:text="B"
+
         android:textColor="@drawable/keyboard_button_text_color"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -201,10 +202,10 @@
         android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@id/backspace1_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/five_btn"
         app:layout_constraintTop_toBottomOf="@+id/six_btn"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <Button
         android:id="@+id/nine_btn"
@@ -387,8 +388,8 @@
 
     <Button
         android:id="@+id/u_btn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="50dp"
+        android:layout_height="47dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/keyboard_button"

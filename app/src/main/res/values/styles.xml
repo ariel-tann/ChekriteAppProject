@@ -1,12 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/dark_blue</item>
         <item name="colorPrimaryDark">@color/dark_blue</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+
 
     <style name="ToolbarStyle" parent="Theme.AppCompat.Light">
         <item name="android:colorBackground">@color/dark_blue</item>
@@ -31,5 +33,31 @@
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="navigationView" >
+        <item name="android:listDivider">@color/navigation_lighter_grey</item>
+    </style>
+
+    <style name="Suspend">
+        <item name="android:textColor">#f1c268</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:minHeight">100dp</item>
+    </style>
+
+    <style name="Discard">
+        <item name="android:textColor">#ec6355</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="Review">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="Checklist" parent="Widget.MaterialComponents.NavigationView">
+        <item name="android:textColor">#fefefe</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 
 </resources>

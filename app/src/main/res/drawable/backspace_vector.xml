@@ -1,0 +1,28 @@
+<!--
+  ~ Date: 2020.5.26
+  ~ This file is created by Kai.
+  ~ Summary:
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="49.333dp"
+    android:height="42.883dp"
+    android:viewportWidth="49.333"
+    android:viewportHeight="42.883">
+  <path
+      android:pathData="M19.833,7.227V6.512c0,-0.589 0.467,-1.066 1.043,-1.066h22.164c0.576,0 1.043,0.478 1.043,1.066V36.63c0,0.588 -0.467,1.065 -1.043,1.065H20.876c-0.576,0 -1.043,-0.478 -1.043,-1.065v-0.371"
+      android:strokeWidth="4"
+      android:fillColor="#00000000"
+      android:strokeColor="#FFFFFF"/>
+  <path
+      android:pathData="M20.589,37.302c-0.304,0.053 -0.618,-0.031 -0.843,-0.255L5.024,22.448c-0.383,-0.38 -0.365,-1.019 0.038,-1.425L20.08,5.879"
+      android:strokeWidth="4"
+      android:fillColor="#00000000"
+      android:strokeColor="#ffffff"/>
+  <path
+      android:pathData="M35.529,29.085c-0.625,0.595 -1.614,0.57 -2.209,-0.055L21.167,16.266c-0.595,-0.625 -0.571,-1.614 0.054,-2.21l0,0c0.625,-0.595 1.614,-0.57 2.209,0.055l12.153,12.766C36.178,27.501 36.154,28.49 35.529,29.085L35.529,29.085z"
+      android:fillColor="#FFFFFF"/>
+  <path
+      android:pathData="M21.18,29.079c-0.622,-0.599 -0.641,-1.588 -0.042,-2.21l12.223,-12.697c0.599,-0.621 1.588,-0.641 2.21,-0.042l0,0c0.622,0.599 0.641,1.588 0.042,2.209L23.389,29.037C22.791,29.658 21.801,29.677 21.18,29.079L21.18,29.079z"
+      android:fillColor="#FFFFFF"/>
+</vector>

@@ -14,20 +14,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageButton
-            android:id="@+id/question_menu"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:src="@drawable/question_option"
-            android:scaleType="fitCenter"
-            />
+
 
         <TextView
             android:id="@+id/inspection_name"
             android:layout_width="280dp"
             android:layout_height="match_parent"
-            android:layout_toEndOf="@+id/question_menu"
             android:layout_toStartOf="@+id/inspection_profile"
             android:gravity="center"
             android:textAllCaps="false"

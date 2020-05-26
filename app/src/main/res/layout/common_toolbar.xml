@@ -46,7 +46,7 @@
 
             <ImageButton
                 android:id="@+id/logout_img_btn"
-                style="@android:style/Widget.ImageButton"
+
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"

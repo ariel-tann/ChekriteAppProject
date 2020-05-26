@@ -11,15 +11,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -38,6 +47,8 @@ import com.chekrite_group44.Http_Request.APIsListener;
 import com.chekrite_group44.Http_Request.APIsTask;
 import com.chekrite_group44.Permission.Permission;
 import com.chekrite_group44.Asset_Properties.Control_Type;
+import com.google.android.material.navigation.NavigationView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +58,7 @@ import java.util.List;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class Inspection_main extends AppCompatActivity
-        implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
+        implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks, NavigationView.OnNavigationItemSelectedListener{
     private static final String TAG = "Inspection";
     private Permission mPermission;
     TextView txt_inspection;
@@ -57,6 +68,9 @@ public class Inspection_main extends AppCompatActivity
     Inspection_test mTest;
     long start_inspection;
     ProgressDialog dialog;
+    DrawerLayout drawer;
+
+
     private APIsListener ResponseAPI = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -72,6 +86,23 @@ public class Inspection_main extends AppCompatActivity
             }
         }
     };
+
+    private APIsListener DiscardAPI = new APIsListener() {
+        @Override
+        public void API_Completed(JSONObject jsonObject) {
+            String status = null;
+            try {
+                status = (String) jsonObject.get("status");
+                String message = (String) jsonObject.get("message");
+                if (status.equals("success")) {
+                    Log.d(TAG, "success: " + message);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
     private APIsListener SubmitAPI = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -230,10 +261,9 @@ public class Inspection_main extends AppCompatActivity
         // permission checking
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
-
+        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         txt_inspection = findViewById(R.id.inspection_name);
         // Display company name received from API
-        SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         String profile_link = pref.getString("profile_photo", "");
 
         // set profile photo
@@ -242,8 +272,22 @@ public class Inspection_main extends AppCompatActivity
             Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(profile);
 
         // get color and set to btn background
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.inspection_toolbar);
+        Toolbar toolbar = findViewById(R.id.inspection_toolbar);
         toolbar.setBackgroundColor(Chekrite.getParseColor());
+        setSupportActionBar(toolbar);
+
+        //Set up side navigation bar
+        drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        navigationView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        changeMenuTextColor(menu, toggle);
+        setNavBarProfile(navigationView, pref, profile_link);
+        toggle.syncState();
+
         // get info from previous class
         String checklist_id =getIntent().getStringExtra("checklist_id");
         int asset_id = getIntent().getIntExtra("asset_id", 0);
@@ -259,6 +303,75 @@ public class Inspection_main extends AppCompatActivity
         //
         dialog = new ProgressDialog(this); // Login log
     }
+
+    @Override
+    public void onBackPressed(){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_review:
+                Toast.makeText(this, "Review", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_suspend:
+                Toast.makeText(this, "Suspend", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_discard:
+//                Toast.makeText(this, "Discard", Toast.LENGTH_SHORT).show();
+                new APIsTask(DiscardAPI).execute("DELETE", APIs.DISCARD, Integer.toString(mTest.getId()),"");
+                openDashBoard();
+                break;
+
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    public void setNavBarProfile (NavigationView navigationView, SharedPreferences pref, String profile_link) {
+        String name = pref.getString("first_name", "") + " " + pref.getString("last_name", "");
+        View hView = navigationView.getHeaderView(0);
+        TextView nav_user = (TextView)hView.findViewById(R.id.nav_profile_name);
+        ImageView nav_profile_image = (ImageView)hView.findViewById(R.id.nav_profile_image);
+        if(profile_link == null) {
+            nav_profile_image.setImageResource(R.drawable.avatar);
+        } else {
+            Glide.with(getApplicationContext()).load(profile_link).centerCrop().apply(RequestOptions.circleCropTransform()).into(nav_profile_image);
+        }
+        nav_user.setText(name);
+
+    }
+
+    public void changeMenuTextColor(Menu menu, ActionBarDrawerToggle toggle) {
+        MenuItem tools= menu.findItem(R.id.nav_suspend);
+        SpannableString s = new SpannableString(tools.getTitle());
+        s.setSpan(new TextAppearanceSpan(this, R.style.Suspend), 0, s.length(), 0);
+        tools.setTitle(s);
+
+        tools= menu.findItem(R.id.nav_discard);
+        s = new SpannableString(tools.getTitle());
+        s.setSpan(new TextAppearanceSpan(this, R.style.Discard), 0, s.length(), 0);
+        tools.setTitle(s);
+
+        tools= menu.findItem(R.id.nav_review);
+        s = new SpannableString(tools.getTitle());
+        s.setSpan(new TextAppearanceSpan(this, R.style.Review), 0, s.length(), 0);
+        tools.setTitle(s);
+
+        tools= menu.findItem(R.id.checklist_title);
+        s = new SpannableString(tools.getTitle());
+        s.setSpan(new TextAppearanceSpan(this, R.style.Checklist), 0, s.length(), 0);
+        tools.setTitle(s);
+
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
+
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

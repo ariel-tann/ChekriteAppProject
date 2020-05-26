@@ -50,6 +50,11 @@
         To see any issues raised during the checklist tap the View Results button on the top right.
         This message can be customized in the ChekRite Portal.</string>
 
+    <!-- Strings for side navigation bar-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
     <string-array name="categories_items">
         <item>Test</item>
         <item>Health and Safety</item>

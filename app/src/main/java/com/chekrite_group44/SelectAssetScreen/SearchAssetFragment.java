@@ -146,14 +146,10 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
         //Listens when edit has changes
         editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -296,7 +292,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
         }
         editText.setText(joined);
         editText.setTextColor(Chekrite.getParseColor());
-        editText.setTextSize(20);
+        editText.setTextSize(24);
         editText.setTypeface(null, Typeface.BOLD);
 
 

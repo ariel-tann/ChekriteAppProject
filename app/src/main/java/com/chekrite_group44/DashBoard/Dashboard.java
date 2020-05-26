@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -50,6 +51,7 @@ public class Dashboard extends AppCompatActivity {
     String photo_url;
     private ImageButton test_btns;
     private ImageButton test_btns_ctgr;
+//    Drawable myDrawable = getResources().getDrawable(R.drawable.avatar);
    // private ImageButton ariel_test_btn;
 
 
@@ -108,9 +110,21 @@ public class Dashboard extends AppCompatActivity {
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(Chekrite.getParseColor());
         photo_url = Chekrite.getString("profile_photo");
+        Log.d("ariel", "onCreate: " + photo_url);
         profile_button_photo = findViewById(R.id.btn_profile);
+
         //get_btn_profile
-        Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_button_photo);
+        if(!photo_url.equals("null")) {
+//            profile_button_photo.setImageResource(R.drawable.avatar);
+            Log.d("ariel", "onCreate: in ==null");
+            Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_button_photo);
+        }
+//        } else {
+//            profile_button_photo.setImageResource(R.drawable.avatar);
+//            Log.d("ariel", "onCreate: in else ");
+//
+////            Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_button_photo);
+//        }
 
         logout_button=findViewById(R.id.logout_button);
         check_button=findViewById(R.id.newCheck);
