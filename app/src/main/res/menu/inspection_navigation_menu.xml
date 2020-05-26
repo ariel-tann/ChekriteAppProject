@@ -9,8 +9,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="Checklist"
-        android:id="@+id/checklist_title"/>
 
     <group android:id="@+id/menuItems">
 

@@ -87,7 +87,8 @@ public class ArielTest extends AppCompatActivity
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDashboardScreen();
+//                openDashboardScreen();
+                ArielTest.super.onBackPressed();
             }
         });
 

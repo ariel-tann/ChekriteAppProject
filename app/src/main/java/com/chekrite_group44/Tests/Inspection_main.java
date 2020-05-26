@@ -329,7 +329,7 @@ public class Inspection_main extends AppCompatActivity
                 Toast.makeText(this, "Review", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_suspend:
-                ShowDiscardDialog();
+                Toast.makeText(this, "Suspend", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_discard:
 //                Toast.makeText(this, "Discard", Toast.LENGTH_SHORT).show();
@@ -369,10 +369,10 @@ public class Inspection_main extends AppCompatActivity
         s.setSpan(new TextAppearanceSpan(this, R.style.Review), 0, s.length(), 0);
         tools.setTitle(s);
 
-        tools= menu.findItem(R.id.checklist_title);
-        s = new SpannableString(tools.getTitle());
-        s.setSpan(new TextAppearanceSpan(this, R.style.Checklist), 0, s.length(), 0);
-        tools.setTitle(s);
+//        tools= menu.findItem(R.id.checklist_title);
+//        s = new SpannableString(tools.getTitle());
+//        s.setSpan(new TextAppearanceSpan(this, R.style.Checklist), 0, s.length(), 0);
+//        tools.setTitle(s);
 
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
     }
@@ -380,6 +380,8 @@ public class Inspection_main extends AppCompatActivity
     public void ShowDiscardDialog() {
         discard_dialog.setContentView(R.layout.discard_dialog);
         close_discard_dialog_btn = (Button) discard_dialog.findViewById(R.id.return_checklist_btn);
+        close_discard_dialog_btn.setAllCaps(false);
+        close_discard_dialog_btn.setText("Return to Checklist");
         discard_tick = (ImageView) discard_dialog.findViewById(R.id.discard_tick);
         discard_tick.setOnClickListener(new View.OnClickListener() {
             @Override
