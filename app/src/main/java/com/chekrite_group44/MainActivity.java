@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -127,6 +128,12 @@ public class MainActivity extends AppCompatActivity
         mPermission = new Permission(this, this);
         mPermission.RequestPermissions();
         mBtnSubmit = findViewById(R.id.setupApp_btn);
+        // create button radius
+        GradientDrawable shape =  new GradientDrawable();
+        shape.setCornerRadius(10);
+        shape.setColor(Chekrite.getParseColor());
+        mBtnSubmit.setBackground(shape);
+        //
         mBtnSubmit.setOnClickListener(submitListener);
 
         dialog = new ProgressDialog(this); // Login log

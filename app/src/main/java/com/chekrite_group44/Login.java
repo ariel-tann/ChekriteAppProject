@@ -17,6 +17,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -269,6 +270,12 @@ public class Login extends AppCompatActivity
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar4);
         // get color and set to btn background
         signIn_Btn.setBackgroundColor(Chekrite.getParseColor());
+        // create button radius
+        GradientDrawable shape =  new GradientDrawable();
+        shape.setCornerRadius(10);
+        shape.setColor(Chekrite.getParseColor());
+        signIn_Btn.setBackground(shape);
+        //
         toolbar.setBackgroundColor(Chekrite.getParseColor());
 
         signIn_Btn.setOnClickListener(new View.OnClickListener() {

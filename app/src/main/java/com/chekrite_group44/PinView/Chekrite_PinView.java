@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.InputType;
@@ -186,9 +187,12 @@ public class Chekrite_PinView extends DialogFragment {
         }
         if(CurrentCursor > 1){
 
-            mbtn_submit.setBackgroundColor(Chekrite.getParseColor());
+//            mbtn_submit.setBackgroundColor(Chekrite.getParseColor());
             mbtn_submit.setTextColor(getActivity().getColor(R.color.white));
-
+            GradientDrawable shape =  new GradientDrawable();
+            shape.setCornerRadius(10);
+            shape.setColor(Chekrite.getParseColor());
+            mbtn_submit.setBackground(shape);
             mbtn_submit.setEnabled(true);
         }else{
             mbtn_submit.setTextColor(getActivity().getColor(R.color.dark_gray));

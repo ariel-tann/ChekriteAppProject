@@ -38,7 +38,7 @@ public class APIsTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         // params[0]: GET/POST
         // params[1]: api
-        // params[2]: search query or asset_id
+        // params[2]: search query or asset_id or test_id
         // params[3]: http body
         URL url = null;
         String chekriteLink = "https://apitest.mychekrite.com/api/";
