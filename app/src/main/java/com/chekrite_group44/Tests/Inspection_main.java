@@ -11,6 +11,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
@@ -18,9 +19,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,9 +79,8 @@ public class Inspection_main extends AppCompatActivity
     Button nav_discard_btn;
     Button close_discard_dialog_btn;
     Dialog discard_dialog;
-    ImageView discard_tick;
-
-
+    TickView tick;
+    LinearLayout l_layout;
     private APIsListener ResponseAPI = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -102,6 +106,10 @@ public class Inspection_main extends AppCompatActivity
                 String message = (String) jsonObject.get("message");
                 if (status.equals("success")) {
                     Log.d(TAG, "success: " + message);
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            message, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -379,18 +387,34 @@ public class Inspection_main extends AppCompatActivity
 
     public void ShowDiscardDialog() {
         discard_dialog.setContentView(R.layout.discard_dialog);
-        close_discard_dialog_btn = (Button) discard_dialog.findViewById(R.id.return_checklist_btn);
+        Window window = discard_dialog.getWindow();
+        window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        close_discard_dialog_btn = discard_dialog.findViewById(R.id.return_checklist_btn);
         close_discard_dialog_btn.setAllCaps(false);
-        close_discard_dialog_btn.setText("Return to Checklist");
-        discard_tick = (ImageView) discard_dialog.findViewById(R.id.discard_tick);
-        discard_tick.setOnClickListener(new View.OnClickListener() {
+        close_discard_dialog_btn.setText(R.string.rtn_checklist);
+
+        l_layout = discard_dialog.findViewById(R.id.l_layout);
+        tick = new TickView(this, new TickListener() {
             @Override
-            public void onClick(View v) {
+            public void Completed() {
                 new APIsTask(DiscardAPI).execute("DELETE", APIs.DISCARD, Integer.toString(mTest.getId()),"");
                 openDashBoard();
-
             }
         });
+        // set a Listener to monitor when layout finished creating
+        ViewTreeObserver vto = l_layout.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                l_layout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                int l_width  = l_layout.getMeasuredWidth();
+                int l_height = l_layout.getMeasuredHeight();
+                tick.setLayoutParams(new LinearLayout.LayoutParams(l_width,l_height));
+                l_layout.addView(tick);
+            }
+        });
+        // dismiss dialog
         close_discard_dialog_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -399,8 +423,6 @@ public class Inspection_main extends AppCompatActivity
         });
         discard_dialog.show();
     }
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

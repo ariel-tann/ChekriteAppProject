@@ -150,9 +150,6 @@ public class Categories extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
 
-        //set highlight color
-//        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
-      //  androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
         toolbar.setBackgroundColor(Chekrite.getParseColor());
         //toolbar panel
 
@@ -194,8 +191,6 @@ public class Categories extends AppCompatActivity {
         if(!profile_link.equals("null")) {
             Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
         }
-
-
 
         //profile button onclick
         logout_btn.setOnClickListener(new View.OnClickListener() {

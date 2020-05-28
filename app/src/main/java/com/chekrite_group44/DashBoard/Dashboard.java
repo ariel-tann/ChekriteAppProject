@@ -209,7 +209,7 @@ public class Dashboard extends AppCompatActivity {
 
     }
     public void logout(){
-        new APIsTask(AssetsListener).execute("GET", APIs.ASSETS,"","");
+//        new APIsTask(AssetsListener).execute("GET", APIs.ASSETS,"","");
         new APIsTask(LogoutListener).execute("POST", APIs.LOGOUT,"","");
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);

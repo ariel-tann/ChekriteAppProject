@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -70,8 +71,11 @@ public class StartInspection extends AppCompatActivity {
         TextView title = (TextView) findViewById(R.id.screen_title);
         title.setText("Start");
         start = (Button) findViewById(R.id.start_inspection);
-        start.setBackgroundColor(Chekrite.getParseColor());
-
+        // Button Radius
+        GradientDrawable shape =  new GradientDrawable();
+        shape.setCornerRadius(10);
+        shape.setColor(Chekrite.getParseColor());
+        start.setBackground(shape);
 
         selected_asset_id = getIntent().getIntExtra("asset_id", 0);
         selected_asset_unumber = getIntent().getStringExtra("unit_number");
