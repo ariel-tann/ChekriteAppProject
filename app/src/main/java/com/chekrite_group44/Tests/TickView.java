@@ -66,7 +66,7 @@ public class TickView extends View {
         float centreX = (Width  - bitmap_width) /2f;
         float centreY = (Height - bitmap_height) /2f;
         canvas.drawBitmap(resized, centreX, centreY, null);
-        //
+        // define path
         sPath.moveTo(Width*0.15f, Height*0.523f);
         sPath.lineTo(Width*0.359f, Height*0.65f);
         sPath.lineTo(Width*0.868f, Height*0.333f);
@@ -121,7 +121,6 @@ public class TickView extends View {
                             if(i == points.size()-1){
                                 last_item = true;
                                 // trigger last item
-                                Log.d(TAG, "last item");
                             }else{
                                 last_item = false;
                             }

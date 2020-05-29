@@ -6,6 +6,8 @@
 
 package com.chekrite_group44.Tests;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -84,6 +86,10 @@ public class fragment_gauge extends Fragment implements SeekBar.OnSeekBarChangeL
 
         //
         Button btn_done = mView.findViewById(R.id.btn_done);
+        GradientDrawable shape =  new GradientDrawable();
+        shape.setCornerRadius(10);
+        shape.setColor(getResources().getColor(R.color.light_blue));
+        btn_done.setBackground(shape);
         btn_done.setOnClickListener(this);
         return mView;
     }
