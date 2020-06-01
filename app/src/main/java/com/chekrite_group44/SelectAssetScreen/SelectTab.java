@@ -12,11 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chekrite_group44.Asset_Properties.Asset_Classes;
-import com.chekrite_group44.Asset_Properties.Select_Asset_Classes;
-import com.chekrite_group44.Http_Request.APIs;
-import com.chekrite_group44.Http_Request.APIsListener;
-import com.chekrite_group44.Http_Request.APIsTask;
+import com.chekrite_group44.AssetProperties.Asset_Classes;
+import com.chekrite_group44.AssetProperties.Select_Asset_Classes;
+import com.chekrite_group44.HttpRequest.APIs;
+import com.chekrite_group44.HttpRequest.APIsListener;
+import com.chekrite_group44.HttpRequest.APIsTask;
 import com.chekrite_group44.R;
 
 import org.json.JSONException;

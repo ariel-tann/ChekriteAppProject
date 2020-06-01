@@ -7,25 +7,19 @@
 package com.chekrite_group44.SelectAssetScreen;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.chekrite_group44.Asset_Properties.Asset_Classes;
+import com.chekrite_group44.AssetProperties.Asset_Classes;
 import com.chekrite_group44.R;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SelectTabAdapter extends RecyclerView.Adapter<SelectTabAdapter.ViewHolder>{

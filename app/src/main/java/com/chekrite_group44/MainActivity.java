@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,18 +15,16 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.chekrite_group44.MetaData.MetaData;
-import com.chekrite_group44.PinView.Chekrite_PinView;
+import com.chekrite_group44.PinView.PinViewDialog;
 import com.chekrite_group44.PinView.PinListener;
-import com.chekrite_group44.Http_Request.APIs;
-import com.chekrite_group44.Http_Request.APIsListener;
-import com.chekrite_group44.Http_Request.APIsTask;
+import com.chekrite_group44.HttpRequest.APIs;
+import com.chekrite_group44.HttpRequest.APIsListener;
+import com.chekrite_group44.HttpRequest.APIsTask;
 import com.chekrite_group44.Permission.Permission;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -112,8 +108,8 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void onClick(View v) {
 //             create a dialog fragment to show PinView
-            Chekrite_PinView pinView = new Chekrite_PinView(Chekrite_PinView.SETUP, mPinListen);
-            pinView.show(getSupportFragmentManager(),"pin");
+            PinViewDialog pinViewDialog = new PinViewDialog(PinViewDialog.SETUP, mPinListen);
+            pinViewDialog.show(getSupportFragmentManager(),"pin");
         }
     };
 

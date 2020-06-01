@@ -11,10 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -35,15 +33,14 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.chekrite_group44.PinView.Chekrite_PinView;
+import com.chekrite_group44.PinView.PinViewDialog;
 import com.chekrite_group44.PinView.PinListener;
 import com.chekrite_group44.DashBoard.WelcomeSplash;
-import com.chekrite_group44.Http_Request.APIs;
-import com.chekrite_group44.Http_Request.APIsListener;
-import com.chekrite_group44.Http_Request.APIsTask;
+import com.chekrite_group44.HttpRequest.APIs;
+import com.chekrite_group44.HttpRequest.APIsListener;
+import com.chekrite_group44.HttpRequest.APIsTask;
 import com.chekrite_group44.Permission.Permission;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,7 +60,7 @@ public class Login extends AppCompatActivity
     private Permission mPermission;
     private String EMPLOY_ID;
     private String EMPLOY_PIN;
-    Chekrite_PinView mEIDPinView;
+    PinViewDialog mEIDPinViewDialog;
     ProgressDialog dialog;
     SharedPreferences pref;
     private APIsListener APIApp_version = new APIsListener() {
@@ -166,7 +163,7 @@ public class Login extends AppCompatActivity
     private PinListener mEPListener = new PinListener() {
         @Override
         public void onSubmit(String pin) {
-            mEIDPinView.dismiss();
+            mEIDPinViewDialog.dismiss();
             EMPLOY_PIN = pin;
             try {
                 JSONObject jsonObject = new JSONObject();
@@ -204,8 +201,8 @@ public class Login extends AppCompatActivity
         @Override
         public void onSubmit(String pin) {
             //create a fragment to show Employ PIN enter
-            Chekrite_PinView pinView = new Chekrite_PinView(Chekrite_PinView.EMPLOY_PIN, mEPListener);
-            pinView.show(getSupportFragmentManager(),"employPin");
+            PinViewDialog pinViewDialog = new PinViewDialog(PinViewDialog.EMPLOY_PIN, mEPListener);
+            pinViewDialog.show(getSupportFragmentManager(),"employPin");
             EMPLOY_ID = pin;
         }
     };
@@ -282,8 +279,8 @@ public class Login extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //create a fragment to show PinView
-                mEIDPinView = new Chekrite_PinView(Chekrite_PinView.EMPLOY_ID, mEIDPinListen);
-                mEIDPinView.show(getSupportFragmentManager(),"employID");
+                mEIDPinViewDialog = new PinViewDialog(PinViewDialog.EMPLOY_ID, mEIDPinListen);
+                mEIDPinViewDialog.show(getSupportFragmentManager(),"employID");
             }
         });
 

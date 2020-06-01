@@ -14,11 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.chekrite_group44.Asset_Properties.Asset_Classes;
+import com.chekrite_group44.AssetProperties.Asset_Classes;
 import com.chekrite_group44.R;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;

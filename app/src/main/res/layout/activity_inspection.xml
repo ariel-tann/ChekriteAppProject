@@ -20,7 +20,7 @@
     <include
         android:id="@+id/inspection_toolbar"
         layout="@layout/inspection_toolbar" />
-    <com.chekrite_group44.Tests.InspectionViewPager
+    <com.chekrite_group44.Inspection.InspectionViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/inspection_container"

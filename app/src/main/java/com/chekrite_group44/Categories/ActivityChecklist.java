@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,17 +23,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chekrite_group44.Asset_Properties.Checklist;
-import com.chekrite_group44.Asset_Properties.ChecklistArray;
+import com.chekrite_group44.AssetProperties.ChecklistArray;
 import com.chekrite_group44.Chekrite;
-import com.chekrite_group44.Http_Request.APIs;
-import com.chekrite_group44.Http_Request.APIsListener;
-import com.chekrite_group44.Http_Request.APIsTask;
+import com.chekrite_group44.HttpRequest.APIs;
+import com.chekrite_group44.HttpRequest.APIsListener;
+import com.chekrite_group44.HttpRequest.APIsTask;
 import com.chekrite_group44.R;
 
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ActivityChecklist extends AppCompatActivity {

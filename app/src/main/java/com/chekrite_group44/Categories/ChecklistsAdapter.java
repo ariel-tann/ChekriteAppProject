@@ -6,13 +6,6 @@
 
 package com.chekrite_group44.Categories;
 
-import android.content.Context;
-import android.widget.ArrayAdapter;
-
-import androidx.annotation.NonNull;
-
-import com.chekrite_group44.Asset_Properties.Checklist;
-
 public class ChecklistsAdapter {
 
 

@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,9 +26,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.R;
-import com.chekrite_group44.Tests.Inspection_main;
-
-import org.w3c.dom.Text;
+import com.chekrite_group44.Inspection.Inspection_main;
 
 
 public class StartInspection extends AppCompatActivity {

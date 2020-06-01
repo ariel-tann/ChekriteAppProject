@@ -19,9 +19,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chekrite_group44.Chekrite;
-import com.chekrite_group44.Http_Request.APIs;
-import com.chekrite_group44.Http_Request.APIsListener;
-import com.chekrite_group44.Http_Request.APIsTask;
+import com.chekrite_group44.HttpRequest.APIs;
+import com.chekrite_group44.HttpRequest.APIsListener;
+import com.chekrite_group44.HttpRequest.APIsTask;
 import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 
