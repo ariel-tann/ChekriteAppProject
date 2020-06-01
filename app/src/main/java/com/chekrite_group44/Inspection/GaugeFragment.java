@@ -23,7 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.chekrite_group44.AssetProperties.Control_Type;
+import com.chekrite_group44.AssetProperties.ControlType;
 import com.chekrite_group44.AssetProperties.Inspection_checklist_item;
 import com.chekrite_group44.AssetProperties.Inspection_gauge;
 import com.chekrite_group44.R;
@@ -44,7 +44,6 @@ public class GaugeFragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     int l_height;
     View mView;
     int current_value = 0;
-    int current_status = 0;
 
     public GaugeFragment(Inspection_checklist_item item, int total_items, int position, InspectionListener listener) {
         mItem = item;
@@ -121,7 +120,7 @@ public class GaugeFragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     public void onClick(View v) {
         // calling inspectionListener in inspection main java
         Long end = System.currentTimeMillis();
-        mlistener.Completed(Control_Type.GAUGE, 0, current_value,
+        mlistener.Completed(ControlType.GAUGE, 0, current_value,
                 "", start, end);
     }
 }

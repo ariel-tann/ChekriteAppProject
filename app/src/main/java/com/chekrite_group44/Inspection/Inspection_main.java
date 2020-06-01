@@ -39,7 +39,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chekrite_group44.AssetProperties.Inspection_checklist;
+import com.chekrite_group44.AssetProperties.InspectionChecklist;
 import com.chekrite_group44.AssetProperties.Inspection_checklist_item;
 import com.chekrite_group44.AssetProperties.Inspection_checklist_items;
 import com.chekrite_group44.AssetProperties.Inspection_test;
@@ -51,7 +51,7 @@ import com.chekrite_group44.HttpRequest.APIs;
 import com.chekrite_group44.HttpRequest.APIsListener;
 import com.chekrite_group44.HttpRequest.APIsTask;
 import com.chekrite_group44.Permission.Permission;
-import com.chekrite_group44.AssetProperties.Control_Type;
+import com.chekrite_group44.AssetProperties.ControlType;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -211,7 +211,7 @@ public class Inspection_main extends AppCompatActivity
                     start_inspection = System.currentTimeMillis();
                     JSONObject data = jsonObject.getJSONObject("data");
                     JSONObject jchecklist = data.getJSONObject("checklist");
-                    Inspection_checklist checklist = new Inspection_checklist(jchecklist);
+                    InspectionChecklist checklist = new InspectionChecklist(jchecklist);
                     txt_inspection.setText(checklist.getName());
                     JSONArray jchecklist_items = data.getJSONArray("checklist_items");
                     mItems = new Inspection_checklist_items(jchecklist_items);
@@ -252,11 +252,11 @@ public class Inspection_main extends AppCompatActivity
             Inspection_checklist_item item = items.getChecklists().get(i);
             // get control type
             switch (item.getControl().getType()){
-                case Control_Type.BUTTONS:
+                case ControlType.BUTTONS:
                     adapter.addFragment(new ButtonFragment(item,items.getChecklists().size(), i, inspectionListener),
                             items.getChecklists().get(i).getId());
                     break;
-                case Control_Type.GAUGE:
+                case ControlType.GAUGE:
                     // only works for two side gauge
                     adapter.addFragment(new GaugeFragment(item,items.getChecklists().size(), i, inspectionListener),
                             items.getChecklists().get(i).getId());

@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.chekrite_group44.AssetProperties.Control_Type;
+import com.chekrite_group44.AssetProperties.ControlType;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.R;
 
@@ -63,7 +63,7 @@ public class DialogSubmit extends DialogFragment {
             public void onClick(View v) {
                 dismiss();
                 Long end = System.currentTimeMillis();
-                mlistener.Completed(Control_Type.BUTTONS,0,0, "",
+                mlistener.Completed(ControlType.BUTTONS,0,0, "",
                         start, end);
             }
         });

@@ -37,6 +37,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chekrite_group44.AssetProperties.SearchAssetItems;
 import com.chekrite_group44.Categories.Categories;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.HttpRequest.APIs;

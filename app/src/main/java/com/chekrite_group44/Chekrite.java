@@ -21,19 +21,16 @@ package com.chekrite_group44;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.preference.PreferenceManager;
 
 public class Chekrite extends Application {
     public static final String SHARED_PREFS = "sharedPrefs";
     public static SharedPreferences pref;
     public static SharedPreferences.Editor editor;
-    // default color
-    public static String Color  = "#65cb81";
+    public static String color = "#65cb81"; // default color
+    
     public Chekrite() {
         // initial vars
     }
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -41,19 +38,24 @@ public class Chekrite extends Application {
         editor = pref.edit();
     }
     public static void putString(String name, String data){
+        // put string in share preference
         editor.putString(name, data);
         editor.apply();
     }
     public static String getString(String name){
+        // get string in share preference
         return pref.getString(name, "");
     }
     public static String getColor(){
-        return pref.getString("highlight_colour", Color);
+        // get default color code
+        return pref.getString("highlight_colour", color);
     }
     public static int getParseColor(){
-        return android.graphics.Color.parseColor(pref.getString("highlight_colour", Color));
+        // convert string color to int
+        return android.graphics.Color.parseColor(pref.getString("highlight_colour", color));
     }
     public static void rmPref(){
+        // clear and remove share preference
         editor.clear();
         editor.commit(); // commit changes
     }

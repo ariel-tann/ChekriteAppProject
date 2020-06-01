@@ -31,8 +31,8 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
-    private Permission mPermission;
-    private Button mBtnSubmit;
+    private Permission permission;
+    private Button btnSubmit;
     ProgressDialog dialog;
 
     private APIsListener apIsListener = new APIsListener() {
@@ -121,16 +121,16 @@ public class MainActivity extends AppCompatActivity
         if(Chekrite.pref.contains("device_udid")){
             openLoginScreen();
         }
-        mPermission = new Permission(this, this);
-        mPermission.RequestPermissions();
-        mBtnSubmit = findViewById(R.id.setupApp_btn);
+        permission = new Permission(this, this);
+        permission.RequestPermissions();
+        btnSubmit = findViewById(R.id.setupApp_btn);
         // create button radius
         GradientDrawable shape =  new GradientDrawable();
         shape.setCornerRadius(10);
         shape.setColor(Chekrite.getParseColor());
-        mBtnSubmit.setBackground(shape);
-        //
-        mBtnSubmit.setOnClickListener(submitListener);
+        btnSubmit.setBackground(shape);
+        // set up listener
+        btnSubmit.setOnClickListener(submitListener);
 
         dialog = new ProgressDialog(this); // Login log
 

@@ -20,7 +20,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
-import com.chekrite_group44.AssetProperties.Inspection_band;
+import com.chekrite_group44.AssetProperties.InspectionBand;
 import com.chekrite_group44.AssetProperties.Inspection_gauge;
 import com.chekrite_group44.R;
 
@@ -243,7 +243,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
                 if(ibands == 0){
                     // first item
                     // plot first half of oval
-                    Inspection_band band = mGauge.getBands().get(i);
+                    InspectionBand band = mGauge.getBands().get(i);
                     // set up color
                     FullPaint.setColor(Color.parseColor(band.getColor()));
                     // half circle
@@ -257,7 +257,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
                     updateY(height);
                 }else if (ibands == num_bands - 1){
                     // the last item
-                    Inspection_band band = mGauge.getBands().get(i);
+                    InspectionBand band = mGauge.getBands().get(i);
                     // set up color
                     FullPaint.setColor(Color.parseColor(band.getColor()));
                     // half triangle
@@ -274,7 +274,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
                     canvas.drawArc(rectF, -180, 180, false, Stroke);
                     updateY(height);
                 }else {
-                    Inspection_band band = mGauge.getBands().get(i);
+                    InspectionBand band = mGauge.getBands().get(i);
                     FullPaint.setColor(Color.parseColor(band.getColor()));
                     canvas.drawRect(rectF, FullPaint);
                     canvas.drawLine(0, 0, 0, height, Line);

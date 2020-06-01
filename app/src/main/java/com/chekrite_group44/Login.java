@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -54,15 +53,14 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class Login extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
     private static final String TAG = "Login";
-    Button signIn_Btn;
+    Button btbSignIn;
     TextView company_Name;
     ImageView company_splash_portait;
-    private Permission mPermission;
+    private Permission permission;
     private String EMPLOY_ID;
     private String EMPLOY_PIN;
-    PinViewDialog mEIDPinViewDialog;
+    PinViewDialog mEmployIDPinViewDialog;
     ProgressDialog dialog;
-    SharedPreferences pref;
     private APIsListener APIApp_version = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
@@ -112,7 +110,7 @@ public class Login extends AppCompatActivity
     };
 
 
-    private APIsListener apIsListener = new APIsListener() {
+    private APIsListener PairAPIsListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
             String status = null;
@@ -160,10 +158,10 @@ public class Login extends AppCompatActivity
             }
         }
     };
-    private PinListener mEPListener = new PinListener() {
+    private PinListener employIDListener = new PinListener() {
         @Override
         public void onSubmit(String pin) {
-            mEIDPinViewDialog.dismiss();
+            mEmployIDPinViewDialog.dismiss();
             EMPLOY_PIN = pin;
             try {
                 JSONObject jsonObject = new JSONObject();
@@ -189,7 +187,7 @@ public class Login extends AppCompatActivity
                         new APIsTask(LogoutListener).execute("POST", APIs.LOGOUT,"","");
                     }
                 }
-                new APIsTask(apIsListener).execute("POST", APIs.LOGIN, "",jsonObject.toString());
+                new APIsTask(PairAPIsListener).execute("POST", APIs.LOGIN, "",jsonObject.toString());
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -197,11 +195,11 @@ public class Login extends AppCompatActivity
         }
     };
 
-    private PinListener mEIDPinListen = new PinListener() {
+    private PinListener employPinListen = new PinListener() {
         @Override
         public void onSubmit(String pin) {
             //create a fragment to show Employ PIN enter
-            PinViewDialog pinViewDialog = new PinViewDialog(PinViewDialog.EMPLOY_PIN, mEPListener);
+            PinViewDialog pinViewDialog = new PinViewDialog(PinViewDialog.EMPLOY_PIN, employIDListener);
             pinViewDialog.show(getSupportFragmentManager(),"employPin");
             EMPLOY_ID = pin;
         }
@@ -229,8 +227,8 @@ public class Login extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mPermission = new Permission(this, this);
-        mPermission.RequestPermissions();
+        permission = new Permission(this, this);
+        permission.RequestPermissions();
         dialog = new ProgressDialog(this); // Login log
 
         // Display company name received from server
@@ -263,24 +261,24 @@ public class Login extends AppCompatActivity
                 })
                 .into(company_splash_portait);
 
-        signIn_Btn = findViewById(R.id.signIn_btn);
+        btbSignIn = findViewById(R.id.signIn_btn);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar4);
         // get color and set to btn background
-        signIn_Btn.setBackgroundColor(Chekrite.getParseColor());
+        btbSignIn.setBackgroundColor(Chekrite.getParseColor());
         // create button radius
         GradientDrawable shape =  new GradientDrawable();
         shape.setCornerRadius(10);
         shape.setColor(Chekrite.getParseColor());
-        signIn_Btn.setBackground(shape);
+        btbSignIn.setBackground(shape);
         //
         toolbar.setBackgroundColor(Chekrite.getParseColor());
 
-        signIn_Btn.setOnClickListener(new View.OnClickListener() {
+        btbSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //create a fragment to show PinView
-                mEIDPinViewDialog = new PinViewDialog(PinViewDialog.EMPLOY_ID, mEIDPinListen);
-                mEIDPinViewDialog.show(getSupportFragmentManager(),"employID");
+                mEmployIDPinViewDialog = new PinViewDialog(PinViewDialog.EMPLOY_ID, employPinListen);
+                mEmployIDPinViewDialog.show(getSupportFragmentManager(),"employID");
             }
         });
 

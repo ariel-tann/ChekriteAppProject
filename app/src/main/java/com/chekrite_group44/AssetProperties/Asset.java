@@ -16,7 +16,7 @@ public class Asset {
     private String make;
     private String model;
     private String photo;
-    private Document_Counts document_counts;
+    private DocumentCounts document_counts;
 
     public Asset(JSONObject asset) throws JSONException {
 
@@ -25,7 +25,7 @@ public class Asset {
         this.make = asset.getString("make");
         this.model = asset.getString("model");
         this.photo = asset.getString("photo");
-        this.document_counts = new Document_Counts(asset.getJSONObject("document_counts"));
+        this.document_counts = new DocumentCounts(asset.getJSONObject("document_counts"));
     }
 
     public int getId() {
@@ -68,11 +68,11 @@ public class Asset {
         this.photo = photo;
     }
 
-    public Document_Counts getDocument_counts() {
+    public DocumentCounts getDocument_counts() {
         return document_counts;
     }
 
-    public void setDocument_counts(Document_Counts document_counts) {
+    public void setDocument_counts(DocumentCounts document_counts) {
         this.document_counts = document_counts;
     }
 }

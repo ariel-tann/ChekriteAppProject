@@ -1,10 +1,16 @@
 /*
+ * Date: 2020.6.1
+ * This file is created by Kai.
+ * Summary:
+ */
+
+/*
  * Date: 2020.5.18
  * This file is created by Kai.
  * Summary:
  */
 
-package com.chekrite_group44.SelectAssetScreen;
+package com.chekrite_group44.AssetProperties;
 
 public class SearchAssetItems {
 

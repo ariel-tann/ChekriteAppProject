@@ -7,7 +7,7 @@
 package com.chekrite_group44.Inspection;
 import android.util.Log;
 
-import com.chekrite_group44.AssetProperties.Control_Type;
+import com.chekrite_group44.AssetProperties.ControlType;
 import com.chekrite_group44.AssetProperties.Inspection_checklist_item;
 import com.chekrite_group44.AssetProperties.Inspection_gauge;
 import com.chekrite_group44.AssetProperties.Inspection_test;
@@ -61,11 +61,11 @@ public class PayloadResponse {
         this.text_value = txt_value;
         checklist_item_id = item.getId();
         switch (type){
-            case Control_Type.BUTTONS:
+            case ControlType.BUTTONS:
                 control_button_id = item.getControl().getButtons().get(btn_order).getId();
                 status = item.getControl().getButtons().get(btn_order).getStatus();
                 break;
-            case Control_Type.GAUGE:
+            case ControlType.GAUGE:
                 // get status using condition of upper bond and lower bond
                 control_gauge_band_id = item.getControl().getGauges().get(btn_order).getId();
                 Inspection_gauge gauge = mItem.getControl().getGauges().get(0);

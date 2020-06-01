@@ -19,7 +19,7 @@ public class Inspection_gauge {
     String lower;
     String upper;
     String needle_labels;
-    ArrayList<Inspection_band> bands = new ArrayList<>();
+    ArrayList<InspectionBand> bands = new ArrayList<>();
 
     public Inspection_gauge(JSONObject jgauage) throws JSONException {
         id = jgauage.getInt("id");
@@ -30,7 +30,7 @@ public class Inspection_gauge {
         needle_labels = jgauage.getString("needle_labels");
         JSONArray jbands = jgauage.getJSONArray("bands");
         for(int i = 0; i<jbands.length();i++) {
-            Inspection_band band = new Inspection_band(jbands.getJSONObject(i));
+            InspectionBand band = new InspectionBand(jbands.getJSONObject(i));
             bands.add(i, band);
         }
 
@@ -61,7 +61,7 @@ public class Inspection_gauge {
         return needle_labels;
     }
 
-    public ArrayList<Inspection_band> getBands() {
+    public ArrayList<InspectionBand> getBands() {
         return bands;
     }
 }

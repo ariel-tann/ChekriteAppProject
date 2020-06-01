@@ -9,12 +9,12 @@ package com.chekrite_group44.AssetProperties;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Document_Counts {
+public class DocumentCounts {
     private int asset;
     private int asset_class;
     private int site;
 
-    public Document_Counts(JSONObject doc_counts) throws JSONException {
+    public DocumentCounts(JSONObject doc_counts) throws JSONException {
         this.asset = doc_counts.getInt("asset");
         this.asset_class = doc_counts.getInt("asset_class");
         this.site = doc_counts.getInt("site");

@@ -21,10 +21,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-// Defines the background task to download and then load the image within the ImageView
+// Defines the background task to acquire data using APIs
 public class APIsTask extends AsyncTask<String, Void, String> {
     APIsListener mAPIsListener;
     private static final String TAG = "APIsTask";
+    String chekriteLink = "https://apitest.mychekrite.com/api/";
+
     public APIsTask(APIsListener apIsListener) {
         // APIsListener: When API gets response from DB, it will notify user
         mAPIsListener = apIsListener;
@@ -32,12 +34,11 @@ public class APIsTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        // params[0]: GET/POST
-        // params[1]: api
-        // params[2]: search query or asset_id or test_id
-        // params[3]: http body
+        // params[0]: GET/POST/ DELETE
+        // params[1]: api type; look at APIs.java
+        // params[2]: search query or asset_id or test_id; this var should be string
+        // params[3]: http body; this var should be json format of string
         URL url = null;
-        String chekriteLink = "https://apitest.mychekrite.com/api/";
         // Define API link
         switch (params[1]){
             case APIs.PAIR:

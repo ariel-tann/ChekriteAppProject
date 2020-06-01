@@ -9,14 +9,14 @@ package com.chekrite_group44.AssetProperties;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Inspection_band {
+public class InspectionBand {
     int id;
     int upper_step;
     int status;
     String label = "";
     String color;
     int display_extra_info;
-    public Inspection_band(JSONObject jbans) throws JSONException {
+    public InspectionBand(JSONObject jbans) throws JSONException {
         id = jbans.getInt("id");
         upper_step = jbans.getInt("upper_step");
         status = jbans.getInt("status");

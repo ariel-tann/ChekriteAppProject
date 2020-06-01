@@ -9,7 +9,7 @@ package com.chekrite_group44.AssetProperties;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Inspection_button {
+public class InspectionButton {
     int id;
     String label;
     int status;
@@ -18,7 +18,7 @@ public class Inspection_button {
     String value;
     int order;
 
-    public Inspection_button(JSONObject button) throws JSONException {
+    public InspectionButton(JSONObject button) throws JSONException {
         id = button.getInt("id");
         label = button.getString("label");
         status = button.getInt("status");

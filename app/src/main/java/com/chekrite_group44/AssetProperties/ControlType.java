@@ -6,7 +6,7 @@
 
 package com.chekrite_group44.AssetProperties;
 
-public interface Control_Type {
+public interface ControlType {
     String BUTTONS = "buttons";
     String GAUGE = "gauge";
 }

@@ -23,7 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.chekrite_group44.AssetProperties.Control_Type;
+import com.chekrite_group44.AssetProperties.ControlType;
 import com.chekrite_group44.AssetProperties.Inspection_checklist_item;
 import com.chekrite_group44.R;
 
@@ -182,7 +182,7 @@ public class ButtonFragment extends Fragment implements View.OnClickListener{
         String txt_value = mItem.getControl().getButtons().get(click_btn_id).getValue();
         Long end = System.currentTimeMillis(); // end time for response
 
-        mlistener.Completed(Control_Type.BUTTONS,btn_order,btn_status,txt_value,
+        mlistener.Completed(ControlType.BUTTONS,btn_order,btn_status,txt_value,
                 start, end);
     }
 }
