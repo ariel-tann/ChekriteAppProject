@@ -22,7 +22,7 @@
         <activity android:name=".Categories.StartInspection"></activity>
         <activity android:name=".Categories.ActivityChecklist" />
         <activity android:name=".Categories.SignOut" />
-        <activity android:name=".Login" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".DashBoard.WelcomeSplash" />
         <activity android:name=".DashBoard.Dashboard" />
         <activity android:name=".SelectAssetScreen.SelectAssetScreen" />
@@ -30,7 +30,7 @@
             android:name=".Categories.Categories"
             android:parentActivityName=".DashBoard.Dashboard" />
         <activity android:name=".Inspection.Inspection_main" />
-        <activity android:name=".ArielTest" />
+        <activity android:name=".NewCheck.NewCheckActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

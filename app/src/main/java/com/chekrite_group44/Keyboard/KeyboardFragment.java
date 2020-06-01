@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -72,10 +71,10 @@ public class KeyboardFragment extends Fragment {
     Button num_backspace_btn;
 
 
-    private keyboardFragmentListener listener;
+    private KeyboardFragmentListener listener;
 
 
-    public interface keyboardFragmentListener {
+    public interface KeyboardFragmentListener {
         void onInputKeyboardSent (CharSequence input);
     }
 
@@ -180,14 +179,14 @@ public class KeyboardFragment extends Fragment {
 
 
         //show letters keyboard first when fragment is used
-        hide_numbers_btn();
+        hideNumbersButton();
         aToZ_btn.setActivated(true);
 
         //Shows numbers keyboard when (0-9) button pressed
         zeroTo9_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                show_numbers_keyboard();
+                showNumbersKeyboard();
             }
         });
 
@@ -195,7 +194,7 @@ public class KeyboardFragment extends Fragment {
         aToZ_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                show_letters_keyboard();
+                showLettersKeyboard();
             }
         });
 
@@ -205,8 +204,8 @@ public class KeyboardFragment extends Fragment {
 
     public void onAttach(Context context){
         super.onAttach(context);
-        if (context instanceof keyboardFragmentListener) {
-            listener = (keyboardFragmentListener) context;
+        if (context instanceof KeyboardFragmentListener) {
+            listener = (KeyboardFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString() + "must implement keyboardFragment listener");
         }
@@ -356,22 +355,22 @@ public class KeyboardFragment extends Fragment {
     };
 
 
-    public void show_letters_keyboard() {
-        show_letters_btn();
-        hide_numbers_btn();
+    public void showLettersKeyboard() {
+        showLettersButton();
+        hideNumbersButton();
         aToZ_btn.setActivated(true);
         zeroTo9_btn.setActivated(false);
     }
 
-    public void show_numbers_keyboard() {
-        show_numbers_btn();
-        hide_letters_btn();
+    public void showNumbersKeyboard() {
+        showNumbersButton();
+        hideLettersButton();
         aToZ_btn.setActivated(false);
         zeroTo9_btn.setActivated(true);
     }
 
 
-    public void show_letters_btn() {
+    public void showLettersButton() {
         a_btn.setVisibility(View.VISIBLE);
         b_btn.setVisibility(View.VISIBLE);
         c_btn.setVisibility(View.VISIBLE);
@@ -401,7 +400,7 @@ public class KeyboardFragment extends Fragment {
         backspace_btn.setVisibility(View.VISIBLE);
     }
 
-    public void hide_letters_btn() {
+    public void hideLettersButton() {
         a_btn.setVisibility(View.GONE);
         b_btn.setVisibility(View.GONE);
         c_btn.setVisibility(View.GONE);
@@ -432,7 +431,7 @@ public class KeyboardFragment extends Fragment {
     }
 
 
-    public void hide_numbers_btn(){
+    public void hideNumbersButton(){
         one_btn.setVisibility(View.GONE);
         two_btn.setVisibility(View.GONE);
         three_btn.setVisibility(View.GONE);
@@ -451,7 +450,7 @@ public class KeyboardFragment extends Fragment {
         num_backspace_btn.setVisibility(View.GONE);
     }
 
-    public void show_numbers_btn(){
+    public void showNumbersButton(){
         one_btn.setVisibility(View.VISIBLE);
         two_btn.setVisibility(View.VISIBLE);
         three_btn.setVisibility(View.VISIBLE);

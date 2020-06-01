@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/SelectScreenToolbar"
-        layout="@layout/common_toolbar"
+        layout="@layout/toolbar_common"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         app:layout_constraintEnd_toEndOf="parent"

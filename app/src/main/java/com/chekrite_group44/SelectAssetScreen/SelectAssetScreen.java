@@ -15,17 +15,16 @@ import android.widget.Button;
 import com.chekrite_group44.DashBoard.Dashboard;
 import com.chekrite_group44.Keyboard.KeyboardFragment;
 import com.chekrite_group44.R;
+import com.chekrite_group44.NewCheck.SearchAssetFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 
 public class SelectAssetScreen extends AppCompatActivity
-        implements SearchAssetFragment.searchAssetListener, KeyboardFragment.keyboardFragmentListener  {
+        implements SearchAssetFragment.SearchAssetListener, KeyboardFragment.KeyboardFragmentListener {
     Button backbutton;
     ViewPager viewPager;
     TabLayout tabLayout;

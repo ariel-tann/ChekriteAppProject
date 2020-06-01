@@ -40,6 +40,8 @@ public class ActivityChecklist extends AppCompatActivity {
     TextView toolbar_title;
     TextView list_title;
     ImageButton logout_btn;
+    ImageButton back_btn;
+    TextView back_text;
 
     //asset panel
     ImageView asset_image;
@@ -117,6 +119,22 @@ public class ActivityChecklist extends AppCompatActivity {
         if(!profile_link.equals("null")) {
             Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
         }
+
+        //if toolbar back button pressed, goes back to previous activity
+        back_btn = findViewById(R.id.back_arrow);
+        back_text = findViewById(R.id.back_text);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityChecklist.super.onBackPressed();
+            }
+        });
+        back_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityChecklist.super.onBackPressed();
+            }
+        });
 
 
         selected_asset_id = getIntent().getIntExtra("asset_id", 0);

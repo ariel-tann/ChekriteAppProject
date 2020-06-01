@@ -1,10 +1,16 @@
 /*
+ * Date: 2020.6.2
+ * This file is created by Kai.
+ * Summary:
+ */
+
+/*
  * Date: 2020.5.18
  * This file is created by Kai.
  * Summary:
  */
 
-package com.chekrite_group44.SelectAssetScreen;
+package com.chekrite_group44.NewCheck;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -42,18 +48,18 @@ public class SearchAssetAdapter extends RecyclerView.Adapter<SearchAssetAdapter.
 
     public static class SearchAssetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView assetPhoto;
-        public TextView unitNumber;
-        public TextView makeAndModel;
-//        public ImageView getImage(){ return this.assetPhoto;}
+        public ImageView asset_photo;
+        public TextView unit_number;
+        public TextView make_and_model;
+//        public ImageView getImage(){ return this.asset_photo;}
         OnAssetListener onAssetListener;
 //        String COLOR = "";
 
         public SearchAssetViewHolder(@NonNull View itemView, OnAssetListener onAssetListener) {
             super(itemView);
-            assetPhoto = (ImageView) itemView.findViewById(R.id.assetPhoto);
-            unitNumber = itemView.findViewById(R.id.unitNumber);
-            makeAndModel = itemView.findViewById(R.id.makeAndModel);
+            asset_photo = (ImageView) itemView.findViewById(R.id.assetPhoto);
+            unit_number = itemView.findViewById(R.id.unitNumber);
+            make_and_model = itemView.findViewById(R.id.makeAndModel);
 
             //to handle clicks in recycle view
             this.onAssetListener = onAssetListener;
@@ -77,7 +83,7 @@ public class SearchAssetAdapter extends RecyclerView.Adapter<SearchAssetAdapter.
     @NonNull
     @Override
     public SearchAssetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_asset_layout, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_search_asset, parent, false);
         SearchAssetViewHolder searchAssetVH = new SearchAssetViewHolder(v, mOnAssetListener);
         return searchAssetVH;
     }
@@ -88,28 +94,28 @@ public class SearchAssetAdapter extends RecyclerView.Adapter<SearchAssetAdapter.
         String unitNumber = currentItem.getUnitNumber();
         String makeAndModel = currentItem.getMake() + " " + currentItem.getModel();
 
-        holder.unitNumber.setText(unitNumber);
-        holder.makeAndModel.setText(makeAndModel);
+        holder.unit_number.setText(unitNumber);
+        holder.make_and_model.setText(makeAndModel);
         Glide.with(context).load(currentItem.getPhoto()).centerCrop().apply(RequestOptions.circleCropTransform())
-                .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.assetPhoto);
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.asset_photo);
 
 
         //Check if unit number contains search query. If true, colors the letters
         if (unitNumber.contains(editText)) {
-            holder.unitNumber.setText(setTextColor(unitNumber));
+            holder.unit_number.setText(setTextColor(unitNumber));
 
         } else {
-            holder.unitNumber.setTextColor(Color.parseColor("#7f7f7f"));
+            holder.unit_number.setTextColor(Color.parseColor("#7f7f7f"));
 
         }
 
         //Check if make and model contains search query. If true, colors the letters
         if (makeAndModel.toUpperCase().contains(editText)) {
 
-            holder.makeAndModel.setText(setTextColor(makeAndModel));
+            holder.make_and_model.setText(setTextColor(makeAndModel));
         } else {
 
-            holder.makeAndModel.setTextColor(Color.parseColor("#7f7f7f"));
+            holder.make_and_model.setTextColor(Color.parseColor("#7f7f7f"));
         }
 
     }

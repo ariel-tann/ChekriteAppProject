@@ -384,7 +384,7 @@ public class Inspection_main extends AppCompatActivity
     }
 
     public void ShowDiscardDialog() {
-        discard_dialog.setContentView(R.layout.discard_dialog);
+        discard_dialog.setContentView(R.layout.dialog_discard);
         Window window = discard_dialog.getWindow();
         window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 

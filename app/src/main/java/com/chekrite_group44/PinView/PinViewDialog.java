@@ -13,8 +13,6 @@
 package com.chekrite_group44.PinView;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.media.AudioManager;
@@ -37,7 +35,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.chekrite_group44.Chekrite;
-import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 
 import java.util.ArrayList;

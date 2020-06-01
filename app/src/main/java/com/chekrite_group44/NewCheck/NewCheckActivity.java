@@ -1,19 +1,22 @@
 /*
+ * Date: 2020.6.2
+ * This file is created by Kai.
+ * Summary:
+ */
+
+/*
  * Date: 2020.5.18
  * This file is created by Kai.
  * Summary:
  */
 
-package com.chekrite_group44;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+package com.chekrite_group44.NewCheck;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
@@ -25,25 +28,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Checkable;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Keyboard.KeyboardFragment;
-import com.chekrite_group44.SelectAssetScreen.SearchAssetFragment;
-import com.chekrite_group44.SelectAssetScreen.SeeFragment;
+import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectTab;
 import com.chekrite_group44.DashBoard.Dashboard;
 import com.chekrite_group44.Categories.SignOut;
 import com.google.android.material.tabs.TabLayout;
 
 
-public class ArielTest extends AppCompatActivity
-        implements SearchAssetFragment.searchAssetListener, KeyboardFragment.keyboardFragmentListener {
+public class NewCheckActivity extends AppCompatActivity
+        implements SearchAssetFragment.SearchAssetListener, KeyboardFragment.KeyboardFragmentListener {
 
     ImageButton back_btn;
     ImageButton logout_btn;
@@ -63,7 +64,7 @@ public class ArielTest extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ariel_test);
+        setContentView(R.layout.activity_new_check);
 
         //Set screen color to company's color
         selectAssetLayout = findViewById(R.id.selectAssetScreenLayout);
@@ -87,8 +88,7 @@ public class ArielTest extends AppCompatActivity
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                openDashboardScreen();
-                ArielTest.super.onBackPressed();
+                NewCheckActivity.super.onBackPressed();
             }
         });
 
@@ -125,7 +125,6 @@ public class ArielTest extends AppCompatActivity
 
     public void openSignoutScreen() {
         Intent intent = new Intent(this, SignOut.class);
-        //    intent.putExtra("asset_id", 28436);
         startActivity(intent);
     }
 
@@ -159,7 +158,7 @@ public class ArielTest extends AppCompatActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.search_asset_fragment, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_search_asset, container, false);
             return rootView;
         }
     }

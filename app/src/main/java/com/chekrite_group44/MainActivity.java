@@ -32,7 +32,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
     private Permission permission;
-    private Button btnSubmit;
+    private Button submit_btn;
     ProgressDialog dialog;
 
     private APIsListener apIsListener = new APIsListener() {
@@ -123,21 +123,21 @@ public class MainActivity extends AppCompatActivity
         }
         permission = new Permission(this, this);
         permission.RequestPermissions();
-        btnSubmit = findViewById(R.id.setupApp_btn);
+        submit_btn = findViewById(R.id.setupApp_btn);
         // create button radius
         GradientDrawable shape =  new GradientDrawable();
         shape.setCornerRadius(10);
         shape.setColor(Chekrite.getParseColor());
-        btnSubmit.setBackground(shape);
+        submit_btn.setBackground(shape);
         // set up listener
-        btnSubmit.setOnClickListener(submitListener);
+        submit_btn.setOnClickListener(submitListener);
 
         dialog = new ProgressDialog(this); // Login log
 
     }
 
     public void openLoginScreen() {
-        Intent intent = new Intent(this, Login.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 

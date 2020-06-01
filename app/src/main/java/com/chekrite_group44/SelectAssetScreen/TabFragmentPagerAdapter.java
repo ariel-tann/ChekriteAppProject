@@ -7,11 +7,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.chekrite_group44.Keyboard.KeyboardFragment;
+import com.chekrite_group44.NewCheck.SearchAssetFragment;
 
-public class TabFragmentPagerAdapter extends FragmentPagerAdapter implements SearchAssetFragment.searchAssetListener, KeyboardFragment.keyboardFragmentListener{
+public class TabFragmentPagerAdapter extends FragmentPagerAdapter implements SearchAssetFragment.SearchAssetListener, KeyboardFragment.KeyboardFragmentListener {
     int PAGE_COUNT=3;
     String tabTitles[]=new String[]{"Search","See","Select"};
     Context context;

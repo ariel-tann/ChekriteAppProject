@@ -50,15 +50,15 @@ import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class Login extends AppCompatActivity
+public class LoginActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
     private static final String TAG = "Login";
-    Button btbSignIn;
-    TextView company_Name;
-    ImageView company_splash_portait;
+    Button sign_in_btn;
+    TextView company_name;
+    ImageView company_splash_portrait;
     private Permission permission;
-    private String EMPLOY_ID;
-    private String EMPLOY_PIN;
+    private String employeeId;
+    private String employeePin;
     PinViewDialog mEmployIDPinViewDialog;
     ProgressDialog dialog;
     private APIsListener APIApp_version = new APIsListener() {
@@ -162,15 +162,15 @@ public class Login extends AppCompatActivity
         @Override
         public void onSubmit(String pin) {
             mEmployIDPinViewDialog.dismiss();
-            EMPLOY_PIN = pin;
+            employeePin = pin;
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("company",Chekrite.getString("company"));
                 jsonObject.put("site",Chekrite.getString("site"));
                 jsonObject.put("device_udid",Chekrite.getString("device_udid"));
                 jsonObject.put("auth_code",Chekrite.getString("auth_code"));
-                jsonObject.put("badge_no", EMPLOY_ID);
-                jsonObject.put("pin", EMPLOY_PIN);
+                jsonObject.put("badge_no", employeeId);
+                jsonObject.put("pin", employeePin);
                 // login dialog
                 dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 dialog.setTitle("Login");
@@ -201,7 +201,7 @@ public class Login extends AppCompatActivity
             //create a fragment to show Employ PIN enter
             PinViewDialog pinViewDialog = new PinViewDialog(PinViewDialog.EMPLOY_PIN, employIDListener);
             pinViewDialog.show(getSupportFragmentManager(),"employPin");
-            EMPLOY_ID = pin;
+            employeeId = pin;
         }
     };
     private Date stringToDate(String aDate,String aFormat) {
@@ -236,15 +236,15 @@ public class Login extends AppCompatActivity
         if(companyName.length() == 0){
             companyName = "NIL";
         }
-        company_Name = findViewById(R.id.Company_name);
-        company_Name.setText(companyName);
+        company_name = findViewById(R.id.Company_name);
+        company_name.setText(companyName);
 
         //Display company portrait with URL saved from server
         String splash_portrait_URL = Chekrite.getString("splash_portrait");
         final ProgressBar loading = findViewById(R.id.progress_loading);
         loading.getIndeterminateDrawable()
                 .setColorFilter(Chekrite.getParseColor(), PorterDuff.Mode.SRC_IN );
-        company_splash_portait = findViewById(R.id.imageView4);
+        company_splash_portrait = findViewById(R.id.imageView4);
         Glide.with(getApplicationContext())
                 .load(splash_portrait_URL)
                 .listener(new RequestListener<Drawable>() {
@@ -259,21 +259,21 @@ public class Login extends AppCompatActivity
                         return false;
                     }
                 })
-                .into(company_splash_portait);
+                .into(company_splash_portrait);
 
-        btbSignIn = findViewById(R.id.signIn_btn);
+        sign_in_btn = findViewById(R.id.signIn_btn);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar4);
         // get color and set to btn background
-        btbSignIn.setBackgroundColor(Chekrite.getParseColor());
+        sign_in_btn.setBackgroundColor(Chekrite.getParseColor());
         // create button radius
         GradientDrawable shape =  new GradientDrawable();
         shape.setCornerRadius(10);
         shape.setColor(Chekrite.getParseColor());
-        btbSignIn.setBackground(shape);
+        sign_in_btn.setBackground(shape);
         //
         toolbar.setBackgroundColor(Chekrite.getParseColor());
 
-        btbSignIn.setOnClickListener(new View.OnClickListener() {
+        sign_in_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //create a fragment to show PinView

@@ -48,6 +48,8 @@ public class Categories extends AppCompatActivity {
     //UI
     ImageButton logout_btn;
     Button back;
+    ImageButton back_btn;
+    TextView back_text;
     //androidx.appcompat.widget.Toolbar toolbar;
     ViewPager viewPager;
     LinearLayout sliderDotview;
@@ -151,6 +153,23 @@ public class Categories extends AppCompatActivity {
 
         back = (Button) findViewById(R.id.pin_cancel);
         logout_btn =(ImageButton) findViewById(R.id.logout_img_btn);
+
+        //if toolbar back button pressed, goes back to previous activity
+
+        back_btn = findViewById(R.id.back_arrow);
+        back_text = findViewById(R.id.back_text);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Categories.super.onBackPressed();
+            }
+        });
+        back_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Categories.super.onBackPressed();
+            }
+        });
 
         //image url
 

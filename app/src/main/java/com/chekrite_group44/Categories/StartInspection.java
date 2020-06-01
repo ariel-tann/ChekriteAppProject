@@ -38,6 +38,8 @@ public class StartInspection extends AppCompatActivity {
     TextView checklist_category;
     TextView checklist_name;
     Button start;
+    ImageButton back_btn;
+    TextView back_text;
     private static final String TAG = "checklist";
 
     //asset data
@@ -115,6 +117,23 @@ public class StartInspection extends AppCompatActivity {
         checklist_name = (TextView) findViewById(R.id.inspection);
         checklist_name.setText(selected_checklist_name);
         checklist_name.setTextColor(Chekrite.getParseColor());
+
+
+        //if toolbar back button pressed, goes back to previous activity
+        back_btn = findViewById(R.id.back_arrow);
+        back_text = findViewById(R.id.back_text);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartInspection.super.onBackPressed();
+            }
+        });
+        back_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartInspection.super.onBackPressed();
+            }
+        });
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
