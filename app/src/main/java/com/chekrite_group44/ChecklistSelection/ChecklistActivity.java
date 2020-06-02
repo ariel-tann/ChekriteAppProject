@@ -35,29 +35,29 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ChecklistActivity extends AppCompatActivity {
-    String selected_category;
-    TextView category_test;
-    TextView toolbar_title;
-    TextView list_title;
-    ImageButton logout_btn;
-    ImageButton back_btn;
-    TextView back_text;
+    String selectedCategory;
+    TextView categoryTest;
+    TextView toolbarTitle;
+    TextView listTitle;
+    ImageButton logoutBtn;
+    ImageButton backBtn;
+    TextView backText;
 
     //asset panel
-    ImageView asset_image;
-    TextView asset_unum;
-    TextView asset_make;
-    TextView asset_model;
+    ImageView assetImage;
+    TextView assetUnum;
+    TextView assetMake;
+    TextView assetModel;
     ListView listView;
 
 
     //DATA
     ChecklistArray mChecklistArray;
-    Integer selected_asset_id;
-    String selected_asset_unumber;
-    String selected_asset_make;
-    String selected_asset_model;
-    String selected_asset_photo;
+    Integer selectedAssetId;
+    String selectedAssetUnumber;
+    String selectedAssetMake;
+    String selectedAssetModel;
+    String selectedAssetPhoto;
 
 
     ArrayList<String> nameList = new ArrayList<>();
@@ -78,35 +78,35 @@ public class ChecklistActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
 
-        selected_asset_id = bundle.getInt("asset_id");
-        selected_category = bundle.getString("category");
-        String FetchId = Integer.toString(selected_asset_id);
+        selectedAssetId = bundle.getInt("asset_id");
+        selectedCategory = bundle.getString("category");
+        String FetchId = Integer.toString(selectedAssetId);
         new APIsTask(ChecklistListener).execute("GET", APIs.CHECKLIST, FetchId, "");
         if (bundle != null) {
             Log.d(TAG, "get bundle extra  " + bundle);
-            Log.d(TAG, "set category " + selected_category);
-            category_test = (TextView) findViewById(R.id.selected_category);
-            category_test.setText(selected_category);
+            Log.d(TAG, "set category " + selectedCategory);
+            categoryTest = (TextView) findViewById(R.id.selected_category);
+            categoryTest.setText(selectedCategory);
 
 
         } else {
             Log.d(TAG, " bundel = null ");
         }
-        list_title = (TextView) findViewById(R.id.checklist_category_title);
-        list_title.setText("Checklist Name");
-        toolbar_title = (TextView) findViewById(R.id.screen_title);
-        toolbar_title.setText("Checklist");
-        logout_btn = (ImageButton) findViewById(R.id.logout_img_btn);
+        listTitle = (TextView) findViewById(R.id.checklist_category_title);
+        listTitle.setText("Checklist Name");
+        toolbarTitle = (TextView) findViewById(R.id.screen_title);
+        toolbarTitle.setText("Checklist");
+        logoutBtn = (ImageButton) findViewById(R.id.logout_img_btn);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
         toolbar.setBackgroundColor(Chekrite.getParseColor());
-        category_test.setTextColor(Chekrite.getParseColor());
+        categoryTest.setTextColor(Chekrite.getParseColor());
         String profile_link = pref.getString("profile_photo", "");
         if(!profile_link.equals("null")) {
-            Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
+            Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logoutBtn);
         }
 
 
-        logout_btn.setOnClickListener(new View.OnClickListener() {
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openSignout();
@@ -115,15 +115,15 @@ public class ChecklistActivity extends AppCompatActivity {
         });
 
         //toolbar goback button
-        back_btn = findViewById(R.id.back_arrow);
-        back_text = findViewById(R.id.back_text);
-        back_btn.setOnClickListener(new View.OnClickListener() {
+        backBtn = findViewById(R.id.back_arrow);
+        backText = findViewById(R.id.back_text);
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ChecklistActivity.super.onBackPressed();
             }
         });
-        back_text.setOnClickListener(new View.OnClickListener() {
+        backText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ChecklistActivity.super.onBackPressed();
@@ -131,19 +131,19 @@ public class ChecklistActivity extends AppCompatActivity {
         });
 
 
-        selected_asset_id = getIntent().getIntExtra("asset_id", 0);
-        selected_asset_unumber = getIntent().getStringExtra("unit_number");
-        selected_asset_make = getIntent().getStringExtra("make");
-        selected_asset_model = getIntent().getStringExtra("model");
-        selected_asset_photo = getIntent().getStringExtra("photo");
-        asset_image = (ImageView) findViewById(R.id.asset_image);
-        Glide.with(getApplicationContext()).load(selected_asset_photo).apply(RequestOptions.circleCropTransform()).into(asset_image);
-        asset_unum = (TextView) findViewById(R.id.asset_number);
-        asset_unum.setText(selected_asset_unumber);
-        asset_make = (TextView) findViewById(R.id.asset_make);
-        asset_make.setText(selected_asset_make);
-        asset_model = (TextView) findViewById(R.id.asset_model);
-        asset_model.setText(selected_asset_model);
+        selectedAssetId = getIntent().getIntExtra("asset_id", 0);
+        selectedAssetUnumber = getIntent().getStringExtra("unit_number");
+        selectedAssetMake = getIntent().getStringExtra("make");
+        selectedAssetModel = getIntent().getStringExtra("model");
+        selectedAssetPhoto = getIntent().getStringExtra("photo");
+        assetImage = (ImageView) findViewById(R.id.asset_image);
+        Glide.with(getApplicationContext()).load(selectedAssetPhoto).apply(RequestOptions.circleCropTransform()).into(assetImage);
+        assetUnum = (TextView) findViewById(R.id.asset_number);
+        assetUnum.setText(selectedAssetUnumber);
+        assetMake = (TextView) findViewById(R.id.asset_make);
+        assetMake.setText(selectedAssetMake);
+        assetModel = (TextView) findViewById(R.id.asset_model);
+        assetModel.setText(selectedAssetModel);
 
 
         listView = (ListView) findViewById(R.id.checklist_category);
@@ -153,11 +153,11 @@ public class ChecklistActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(ChecklistActivity.this, StartInspectionActivity.class);
                 //pass asset info
-                intent.putExtra("unit_number", selected_asset_unumber);
-                intent.putExtra("asset_id", selected_asset_id);
-                intent.putExtra("model", selected_asset_model);
-                intent.putExtra("make", selected_asset_make);
-                intent.putExtra("photo", selected_asset_photo);
+                intent.putExtra("unit_number", selectedAssetUnumber);
+                intent.putExtra("asset_id", selectedAssetId);
+                intent.putExtra("model", selectedAssetModel);
+                intent.putExtra("make", selectedAssetMake);
+                intent.putExtra("photo", selectedAssetPhoto);
 
                 String checkistID = Integer.toString(mChecklistArray.getChecklists().get(position).getId());
                 intent.putExtra("checklist_id",checkistID);
@@ -183,7 +183,7 @@ public class ChecklistActivity extends AppCompatActivity {
 
                     for (int i = 0; i < mChecklistArray.getChecklists().size(); i++) {
 
-                        if (! mChecklistArray.getChecklists().get(i).getCategory().equalsIgnoreCase(selected_category)) {
+                        if (! mChecklistArray.getChecklists().get(i).getCategory().equalsIgnoreCase(selectedCategory)) {
                              mChecklistArray.getChecklists().remove(i);
 
                         }
