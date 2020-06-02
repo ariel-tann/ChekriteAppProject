@@ -194,7 +194,7 @@ public class InspectionActivity extends AppCompatActivity
                 }
                 // inflate submit dialog
 
-                SubmitDialog submit = new SubmitDialog(submitListener);
+                SubmitInspectionDialog submit = new SubmitInspectionDialog(submitListener);
                 submit.show(getSupportFragmentManager(),"submit");
             }
         }

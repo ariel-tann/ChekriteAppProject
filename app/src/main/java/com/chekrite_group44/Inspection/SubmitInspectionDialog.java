@@ -6,7 +6,9 @@
 
 package com.chekrite_group44.Inspection;
 
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +24,11 @@ import com.chekrite_group44.AssetProperties.ControlType;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.R;
 
-public class SubmitDialog extends DialogFragment {
+public class SubmitInspectionDialog extends DialogFragment {
 
     InspectionListener mlistener;
     Long start;
-    public SubmitDialog(InspectionListener mlistener) {
+    public SubmitInspectionDialog(InspectionListener mlistener) {
         this.mlistener = mlistener;
     }
 
@@ -58,6 +60,10 @@ public class SubmitDialog extends DialogFragment {
         });
         // TODO submit function
         Button mbtn_Submit = view.findViewById(R.id.btn_submit);
+        GradientDrawable shape =  new GradientDrawable();
+        shape.setCornerRadius(10);
+        shape.setColor(getResources().getColor(R.color.light_blue));
+        mbtn_Submit.setBackground(shape);
         mbtn_Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

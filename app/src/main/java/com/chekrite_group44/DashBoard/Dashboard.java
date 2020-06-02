@@ -104,12 +104,6 @@ public class Dashboard extends AppCompatActivity {
         });
     }
 
-    public void startNewcheck(View view){
-        Log.d("startcheck","Inside start check");
-        Intent intent = new Intent(this, SelectAssetScreen.class);
-        startActivity(intent);
-
-    }
     public void logout(){
         new APIsTask(LogoutListener).execute("POST", APIs.LOGOUT,"","");
         Intent intent = new Intent(this, LoginActivity.class);
