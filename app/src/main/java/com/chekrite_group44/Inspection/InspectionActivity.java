@@ -44,7 +44,7 @@ import com.chekrite_group44.AssetProperties.Inspection_checklist_item;
 import com.chekrite_group44.AssetProperties.Inspection_checklist_items;
 import com.chekrite_group44.AssetProperties.Inspection_test;
 import com.chekrite_group44.Chekrite;
-import com.chekrite_group44.DashBoard.Dashboard;
+import com.chekrite_group44.DashBoard.DashboardActivity;
 import com.chekrite_group44.MetaData.MetaData_Asset;
 import com.chekrite_group44.R;
 import com.chekrite_group44.HttpRequest.APIs;
@@ -238,7 +238,7 @@ public class InspectionActivity extends AppCompatActivity
 
     public void openDashBoard() {
 
-        Intent dashboardIntent = new Intent(this, Dashboard.class);
+        Intent dashboardIntent = new Intent(this, DashboardActivity.class);
         startActivity(dashboardIntent);
         finish();
     }

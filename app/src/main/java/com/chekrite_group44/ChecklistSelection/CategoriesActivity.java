@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.Categories;
+package com.chekrite_group44.ChecklistSelection;
 
 import android.content.Context;
 import android.content.Intent;
@@ -40,7 +40,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Categories extends AppCompatActivity {
+public class CategoriesActivity extends AppCompatActivity {
 
     private static final String TAG = "checklist";
     private int dotscount;
@@ -119,7 +119,7 @@ public class Categories extends AppCompatActivity {
 
 
 
-                        listAdapter = new ArrayAdapter<>(Categories.this, R.layout.simple_list_item_1, filtered_categories);  //for test
+                        listAdapter = new ArrayAdapter<>(CategoriesActivity.this, R.layout.simple_list_item_1, filtered_categories);  //for test
                         listView.setAdapter(listAdapter);
 
 
@@ -138,7 +138,7 @@ public class Categories extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.categories);
+        setContentView(R.layout.activity_categories);
 
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
 
@@ -161,13 +161,13 @@ public class Categories extends AppCompatActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Categories.super.onBackPressed();
+                CategoriesActivity.super.onBackPressed();
             }
         });
         back_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Categories.super.onBackPressed();
+                CategoriesActivity.super.onBackPressed();
             }
         });
 
@@ -237,7 +237,7 @@ public class Categories extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
              public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-                Intent intent = new Intent(Categories.this, ActivityChecklist.class);
+                Intent intent = new Intent(CategoriesActivity.this, ChecklistActivity.class);
                 //sent seleced info
    //             intent.putExtra("asset_id", searchAssetList.get(i).getId());
                 intent.putExtra("category", listView.getItemAtPosition(i).toString());
@@ -275,7 +275,7 @@ public class Categories extends AppCompatActivity {
 
 
     public void openChecklist() {
-        Intent intent = new Intent(this, ActivityChecklist.class);
+        Intent intent = new Intent(this, ChecklistActivity.class);
         //   intent.putExtra("asset_id", "28433");
         // intent.putExtra("make", "Haulotte");
         // intent.putExtra("unit_number", "AE-001");
@@ -287,7 +287,7 @@ public class Categories extends AppCompatActivity {
     }
 
     public void openSignout() {
-        Intent intent = new Intent(this, SignOut.class);
+        Intent intent = new Intent(this, SignoutActivity.class);
         //    intent.putExtra("asset_id", 28436);
         startActivity(intent);
     }

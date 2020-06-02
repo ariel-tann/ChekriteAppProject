@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.Categories;
+package com.chekrite_group44.ChecklistSelection;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class SignOut extends AppCompatActivity {
+public class SignoutActivity extends AppCompatActivity {
     //UI
     Button log_out;
     Button cancel;
@@ -57,7 +57,7 @@ public class SignOut extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignOut.super.onBackPressed();
+                SignoutActivity.super.onBackPressed();
             }
         });
     }

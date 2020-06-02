@@ -88,7 +88,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/copyright"
+        layout="@layout/layout_copyright"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"

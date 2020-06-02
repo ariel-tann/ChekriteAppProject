@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.chekrite_group44.DashBoard.Dashboard;
+import com.chekrite_group44.DashBoard.DashboardActivity;
 import com.chekrite_group44.Keyboard.KeyboardFragment;
 import com.chekrite_group44.R;
 import com.chekrite_group44.NewCheck.SearchAssetFragment;
@@ -50,7 +50,7 @@ public class SelectAssetScreen extends AppCompatActivity
 
 
     }
-    public void dashboard(View view){ Intent dashboardintent=new Intent(getApplicationContext(), Dashboard.class);
+    public void dashboard(View view){ Intent dashboardintent=new Intent(getApplicationContext(), DashboardActivity.class);
        startActivity(dashboardintent);
        }
 

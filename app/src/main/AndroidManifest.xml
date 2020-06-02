@@ -19,16 +19,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Categories.StartInspection"></activity>
-        <activity android:name=".Categories.ActivityChecklist" />
-        <activity android:name=".Categories.SignOut" />
+        <activity android:name=".ChecklistSelection.StartInspectionActivity"></activity>
+        <activity android:name=".ChecklistSelection.ChecklistActivity" />
+        <activity android:name=".ChecklistSelection.SignoutActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".DashBoard.WelcomeSplash" />
-        <activity android:name=".DashBoard.Dashboard" />
+        <activity android:name=".DashBoard.WelcomeActivity" />
+        <activity android:name=".DashBoard.DashboardActivity" />
         <activity android:name=".SelectAssetScreen.SelectAssetScreen" />
         <activity
-            android:name=".Categories.Categories"
-            android:parentActivityName=".DashBoard.Dashboard" />
+            android:name=".ChecklistSelection.CategoriesActivity"
+            android:parentActivityName=".DashBoard.DashboardActivity" />
         <activity android:name=".Inspection.InspectionActivity" />
         <activity android:name=".NewCheck.NewCheckActivity" />
         <activity android:name=".MainActivity">

@@ -19,13 +19,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chekrite_group44.Categories.StartInspection;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.LoginActivity;
 import com.chekrite_group44.NewCheck.NewCheckActivity;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
-import com.chekrite_group44.Inspection.InspectionActivity;
 import com.chekrite_group44.HttpRequest.APIs;
 import com.chekrite_group44.HttpRequest.APIsListener;
 import com.chekrite_group44.HttpRequest.APIsTask;
@@ -33,10 +31,8 @@ import com.chekrite_group44.HttpRequest.APIsTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 
-
-public class Dashboard extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity {
     private Button logout_button;
     ImageView check_button;
     ImageView profile_button_photo;

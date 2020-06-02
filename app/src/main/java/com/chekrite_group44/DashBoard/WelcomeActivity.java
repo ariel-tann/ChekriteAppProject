@@ -31,7 +31,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.R;
 
-public class WelcomeSplash extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 2400;
     ImageView profile_photo;
     TextView username;
@@ -59,7 +59,7 @@ public class WelcomeSplash extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent dashboardIntent = new Intent(WelcomeSplash.this, Dashboard.class);
+                Intent dashboardIntent = new Intent(WelcomeActivity.this, DashboardActivity.class);
                 dashboardIntent.putExtra("profile_image", photo_url);
                 startActivity(dashboardIntent);
                 finish();

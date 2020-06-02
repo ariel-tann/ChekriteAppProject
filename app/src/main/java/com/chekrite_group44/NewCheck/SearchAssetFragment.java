@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.chekrite_group44.AssetProperties.SearchAssetItems;
-import com.chekrite_group44.Categories.Categories;
+import com.chekrite_group44.ChecklistSelection.CategoriesActivity;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.HttpRequest.APIs;
 import com.chekrite_group44.HttpRequest.APIsListener;
@@ -195,7 +195,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
     @Override
     public void onAssetClick(int position) {
         Log.d(TAG, "onAssetClick: clicked. Id number: " + searchAssetList.get(position).getUnitNumber());
-        Intent intent = new Intent(getActivity(), Categories.class);
+        Intent intent = new Intent(getActivity(), CategoriesActivity.class);
         intent.putExtra("asset_id", searchAssetList.get(position).getId());
         intent.putExtra("unit_number", searchAssetList.get(position).getUnitNumber());
         intent.putExtra("make", searchAssetList.get(position).getMake());

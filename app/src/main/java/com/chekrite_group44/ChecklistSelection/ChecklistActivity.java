@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.Categories;
+package com.chekrite_group44.ChecklistSelection;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,7 +34,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ActivityChecklist extends AppCompatActivity {
+public class ChecklistActivity extends AppCompatActivity {
     String selected_category;
     TextView category_test;
     TextView toolbar_title;
@@ -77,7 +77,7 @@ public class ActivityChecklist extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.categories);
+        setContentView(R.layout.activity_categories);
 
 //get sharedpreferences
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
@@ -135,13 +135,13 @@ public class ActivityChecklist extends AppCompatActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityChecklist.super.onBackPressed();
+                ChecklistActivity.super.onBackPressed();
             }
         });
         back_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityChecklist.super.onBackPressed();
+                ChecklistActivity.super.onBackPressed();
             }
         });
 
@@ -168,7 +168,7 @@ public class ActivityChecklist extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
            //     position = countposition;
 
-                Intent intent = new Intent(ActivityChecklist.this, StartInspection.class);
+                Intent intent = new Intent(ChecklistActivity.this, StartInspectionActivity.class);
                 //pass asset info
                 intent.putExtra("unit_number", selected_asset_unumber);
                 intent.putExtra("asset_id", selected_asset_id);
@@ -214,7 +214,7 @@ public class ActivityChecklist extends AppCompatActivity {
                         nameList.add(mChecklistArray.getChecklists().get(i).getName());
                     }
                     Log.d(TAG, "checklist name filted : " + nameList);
-                    nameListAdapter = new ArrayAdapter<>(ActivityChecklist.this, R.layout.simple_list_item_1, nameList);
+                    nameListAdapter = new ArrayAdapter<>(ChecklistActivity.this, R.layout.simple_list_item_1, nameList);
                     listView.setAdapter(nameListAdapter);
                     Log.d(TAG, "get checklist namelist: " + nameList);
 
@@ -228,7 +228,7 @@ public class ActivityChecklist extends AppCompatActivity {
         }
     };
     public void openSignout() {
-        Intent intent = new Intent(this, SignOut.class);
+        Intent intent = new Intent(this, SignoutActivity.class);
         //    intent.putExtra("asset_id", 28436);
         startActivity(intent);
     }

@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.Categories;
+package com.chekrite_group44.ChecklistSelection;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +29,7 @@ import com.chekrite_group44.R;
 import com.chekrite_group44.Inspection.InspectionActivity;
 
 
-public class StartInspection extends AppCompatActivity {
+public class StartInspectionActivity extends AppCompatActivity {
     ImageView asset_image;
     TextView asset_unum;
     TextView asset_make;
@@ -125,13 +125,13 @@ public class StartInspection extends AppCompatActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StartInspection.super.onBackPressed();
+                StartInspectionActivity.super.onBackPressed();
             }
         });
         back_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StartInspection.super.onBackPressed();
+                StartInspectionActivity.super.onBackPressed();
             }
         });
 
@@ -144,7 +144,7 @@ public class StartInspection extends AppCompatActivity {
     }
 
     public void openSignout() {
-        Intent intent = new Intent(this, SignOut.class);
+        Intent intent = new Intent(this, SignoutActivity.class);
         //    intent.putExtra("asset_id", 28436);
         startActivity(intent);
     }
