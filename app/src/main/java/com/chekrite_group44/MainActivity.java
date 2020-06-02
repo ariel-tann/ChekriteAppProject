@@ -31,11 +31,12 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks{
+    private static final String TAG = "MainActivity";
     private Permission permission;
-    private Button submit_btn;
+    private Button pair_btn;
     ProgressDialog dialog;
 
-    private APIsListener apIsListener = new APIsListener() {
+    private APIsListener pairAPIListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
             // execute this when AsyncTask doing onPostExecute.
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity
                 }else{
                     // Fail
                     dialog.dismiss();
-                    Log.d("KAI","Pair fail");
+                    Log.d(TAG,"Pair fail");
                     String message = jsonObject.getString("message");
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Error: "+message, Toast.LENGTH_LONG);
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity
     private PinListener mPinListen = new PinListener() {
         @Override
         public void onSubmit(String pin) {
-
+            // get meta data
             MetaData metaData = new MetaData(getApplicationContext());
             // Pair Device
             JSONObject jsonObject= metaData.getjObject();
@@ -100,15 +101,15 @@ public class MainActivity extends AppCompatActivity
             dialog.setIndeterminate(true);
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-            new APIsTask(apIsListener).execute("POST", APIs.PAIR, "", jsonObject.toString());
+            new APIsTask(pairAPIListener).execute("POST", APIs.PAIR, "", jsonObject.toString());
         }
     };
 
-    private View.OnClickListener submitListener = new View.OnClickListener() {
+    private View.OnClickListener pairBtnListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 //             create a dialog fragment to show PinView
-            PinViewDialog pinViewDialog = new PinViewDialog(PinViewDialog.SETUP, mPinListen);
+            PinViewDialog pinViewDialog = new PinViewDialog(PinViewDialog.PAIR, mPinListen);
             pinViewDialog.show(getSupportFragmentManager(),"pin");
         }
     };
@@ -117,21 +118,20 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // if the device has paired, then go to login screen
+        // if the device has paired, then go to login activity
         if(Chekrite.pref.contains("device_udid")){
             openLoginScreen();
         }
         permission = new Permission(this, this);
         permission.RequestPermissions();
-        submit_btn = findViewById(R.id.setupApp_btn);
+        pair_btn = findViewById(R.id.setupApp_btn);
         // create button radius
         GradientDrawable shape =  new GradientDrawable();
         shape.setCornerRadius(10);
         shape.setColor(Chekrite.getParseColor());
-        submit_btn.setBackground(shape);
+        pair_btn.setBackground(shape);
         // set up listener
-        submit_btn.setOnClickListener(submitListener);
-
+        pair_btn.setOnClickListener(pairBtnListener);
         dialog = new ProgressDialog(this); // Login log
 
     }
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
-        Log.d("KAI", this.toString()+"Permission Deny: "+perms.toString());
+        Log.d(TAG, this.toString()+"Permission Deny: "+perms.toString());
 
     }
 

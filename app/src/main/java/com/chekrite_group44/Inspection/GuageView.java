@@ -107,7 +107,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
     }
 
     protected synchronized void onDraw(Canvas canvas) {
-        DrawGauge(canvas);
+        drawGauge(canvas);
 
         Her_Line.setColor(Color.BLACK);
         Her_Line.setStrokeWidth(8);
@@ -200,7 +200,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
         }
         return true;
     }
-    private void DrawGauge(Canvas canvas){
+    private void drawGauge(Canvas canvas){
         // Draw Background Gauge
         // fill
         range.clear();

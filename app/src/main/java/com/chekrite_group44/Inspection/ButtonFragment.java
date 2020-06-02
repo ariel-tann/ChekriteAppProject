@@ -182,7 +182,7 @@ public class ButtonFragment extends Fragment implements View.OnClickListener{
         String txt_value = mItem.getControl().getButtons().get(click_btn_id).getValue();
         Long end = System.currentTimeMillis(); // end time for response
 
-        mlistener.Completed(ControlType.BUTTONS,btn_order,btn_status,txt_value,
+        mlistener.onCompleted(ControlType.BUTTONS,btn_order,btn_status,txt_value,
                 start, end);
     }
 }

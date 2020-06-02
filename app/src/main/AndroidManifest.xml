@@ -29,7 +29,7 @@
         <activity
             android:name=".Categories.Categories"
             android:parentActivityName=".DashBoard.Dashboard" />
-        <activity android:name=".Inspection.Inspection_main" />
+        <activity android:name=".Inspection.InspectionActivity" />
         <activity android:name=".NewCheck.NewCheckActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class PayloadResponse {
+public class ResponsePayload {
     private static final String TAG = "Payload_Response";
     Inspection_checklist_item mItem;
     // ChekRite response require variables
@@ -54,7 +54,7 @@ public class PayloadResponse {
     JSONObject payload;
 
 
-    public PayloadResponse(Inspection_checklist_item item, Inspection_test test, String type, int btn_order, String txt_value,
+    public ResponsePayload(Inspection_checklist_item item, Inspection_test test, String type, int btn_order, String txt_value,
                            double gauge_value, long start, long end, MetaData_Asset metaData) throws JSONException {
         this.gauge_value = gauge_value;
         this.mItem = item;

@@ -20,10 +20,7 @@ package com.chekrite_group44.DashBoard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
@@ -32,7 +29,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Chekrite;
-import com.chekrite_group44.Login;
 import com.chekrite_group44.R;
 
 public class WelcomeSplash extends AppCompatActivity {

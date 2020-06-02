@@ -26,7 +26,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.R;
-import com.chekrite_group44.Inspection.Inspection_main;
+import com.chekrite_group44.Inspection.InspectionActivity;
 
 
 public class StartInspection extends AppCompatActivity {
@@ -151,7 +151,7 @@ public class StartInspection extends AppCompatActivity {
 
 
     private void openInspection() {
-        Intent intent = new Intent(this, Inspection_main.class);
+        Intent intent = new Intent(this, InspectionActivity.class);
         intent.putExtra("checklist_id", selected_checklist_id);
         intent.putExtra("asset_id", selected_asset_id);
         intent.putExtra("asset_selection", "search");

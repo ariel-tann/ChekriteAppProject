@@ -41,9 +41,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PinViewDialog extends DialogFragment {
-    public static final int SETUP = 0;
+    // Digit Type
+    public static final int PAIR = 0;
     public static final int EMPLOY_ID = 1;
     public static final int EMPLOY_PIN = 2;
+    //
     private int Type_PinView;
     private int mPinWidth;
     private int mTextSize;
@@ -73,65 +75,69 @@ public class PinViewDialog extends DialogFragment {
     /*
     * create button listener for image buttons
      */
-    private View.OnClickListener myDigitListener = new View.OnClickListener() {
+    private View.OnClickListener DigitUpdateListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.digit_0:
                     audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
-                    AddPin("0");
+                    addPin("0");
                     break;
                 case R.id.digit_1:
                     audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
-                    AddPin("1");
+                    addPin("1");
                     break;
                 case R.id.digit_2:
                     audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
-                    AddPin("2");
+                    addPin("2");
                     break;
                 case R.id.digit_3:
                     audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
-                    AddPin("3");
+                    addPin("3");
                     break;
                 case R.id.digit_4:
                     audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
-                    AddPin("4");
+                    addPin("4");
                     break;
                 case R.id.digit_5:
                     audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
-                    AddPin("5");
+                    addPin("5");
                     break;
                 case R.id.digit_6:
                     audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
-                    AddPin("6");
+                    addPin("6");
                     break;
                 case R.id.digit_7:
                     audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
-                    AddPin("7");
+                    addPin("7");
                     break;
                 case R.id.digit_8:
                     audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
-                    AddPin("8");
+                    addPin("8");
                     break;
                 case R.id.digit_9:
                     audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
-                    AddPin("9");
+                    addPin("9");
                     break;
                 case R.id.digit_back:
                     audioManager.playSoundEffect(SoundEffectConstants.CLICK,0.8f);
-                    BackSpace();
+                    backSpace();
                     break;
                 case R.id.pin_submit:
+                    // convert ArrayList of PIN to String
                     String PIN = "";
                     for (String tmp:CurrentPin) {
                         PIN += tmp;
                     }
+                    // Tell main activity, user click finish btn
                     mPinListener.onSubmit(PIN);
+                    // close dialog, except employ ID should not close
                     if(Type_PinView != EMPLOY_ID){
                         dismiss();
                     }
                     break;
                 case R.id.pin_cancel:
+                    // close dialog
                     dismiss();
                     break;
             }
@@ -151,27 +157,27 @@ public class PinViewDialog extends DialogFragment {
     * Add a string to List of String
     * and update cursor position
      */
-    private void AddPin(String i){
+    private void addPin(String aDigit){
         if(CurrentPin.size()<mPinWidth) {
-            CurrentPin.add(i);
+            CurrentPin.add(aDigit);
             CurrentCursor+=1;
         }
-        update_editviews();
+        updateEditviews();
     }
     /*
     * remove a string from list of String
      */
-    private void BackSpace(){
+    private void backSpace(){
         if(CurrentCursor>0){
             CurrentCursor-=1;
             CurrentPin.remove(CurrentCursor);
         }
-        update_editviews();
+        updateEditviews();
     }
     /*
     * update pin change, when click image button
     */
-    private void update_editviews(){
+    private void updateEditviews(){
         for (int i = 0; i<mPinWidth;i++){
             if(CurrentPin.size()>i){
                 String pin = CurrentPin.get(i);
@@ -215,7 +221,7 @@ public class PinViewDialog extends DialogFragment {
                 return inflater.inflate(R.layout.pin_layout, container, false);
             case EMPLOY_PIN:
                 return inflater.inflate(R.layout.pin_layout, container, false);
-            case SETUP:
+            case PAIR:
                 return inflater.inflate(R.layout.setup_layout, container, false);
             default:
                 return inflater.inflate(R.layout.setup_layout, container, false);
@@ -226,7 +232,7 @@ public class PinViewDialog extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         switch (Type_PinView){
-            case SETUP:
+            case PAIR:
                 mPinWidth = 6;
                 mTextSize = 42;
                 mPinTxt = getActivity().getString(R.string.pair_txt);
@@ -255,42 +261,42 @@ public class PinViewDialog extends DialogFragment {
 
         // initial digit and assign a listener
         mDigit0 = view.findViewById(R.id.digit_0);
-        mDigit0.setOnClickListener(myDigitListener);
+        mDigit0.setOnClickListener(DigitUpdateListener);
         mDigit1 = view.findViewById(R.id.digit_1);
-        mDigit1.setOnClickListener(myDigitListener);
+        mDigit1.setOnClickListener(DigitUpdateListener);
         mDigit2 = view.findViewById(R.id.digit_2);
-        mDigit2.setOnClickListener(myDigitListener);
+        mDigit2.setOnClickListener(DigitUpdateListener);
         mDigit3 = view.findViewById(R.id.digit_3);
-        mDigit3.setOnClickListener(myDigitListener);
+        mDigit3.setOnClickListener(DigitUpdateListener);
         mDigit4 = view.findViewById(R.id.digit_4);
-        mDigit4.setOnClickListener(myDigitListener);
+        mDigit4.setOnClickListener(DigitUpdateListener);
         mDigit5 = view.findViewById(R.id.digit_5);
-        mDigit5.setOnClickListener(myDigitListener);
+        mDigit5.setOnClickListener(DigitUpdateListener);
         mDigit6 = view.findViewById(R.id.digit_6);
-        mDigit6.setOnClickListener(myDigitListener);
+        mDigit6.setOnClickListener(DigitUpdateListener);
         mDigit7 = view.findViewById(R.id.digit_7);
-        mDigit7.setOnClickListener(myDigitListener);
+        mDigit7.setOnClickListener(DigitUpdateListener);
         mDigit8 = view.findViewById(R.id.digit_8);
-        mDigit8.setOnClickListener(myDigitListener);
+        mDigit8.setOnClickListener(DigitUpdateListener);
         mDigit9 = view.findViewById(R.id.digit_9);
-        mDigit9.setOnClickListener(myDigitListener);
+        mDigit9.setOnClickListener(DigitUpdateListener);
         mBackSpace = view.findViewById(R.id.digit_back);
-        mBackSpace.setOnClickListener(myDigitListener);
+        mBackSpace.setOnClickListener(DigitUpdateListener);
         mbtn_submit = view.findViewById(R.id.pin_submit);
         mbtn_submit.setText(mBtnTxt);
-        mbtn_submit.setOnClickListener(myDigitListener);
+        mbtn_submit.setOnClickListener(DigitUpdateListener);
         Button mbtn_pinCancel = view.findViewById(R.id.pin_cancel);
-        mbtn_pinCancel.setOnClickListener(myDigitListener);
+        mbtn_pinCancel.setOnClickListener(DigitUpdateListener);
         mPinTxtView = view.findViewById(R.id.PinTxtView);
         mPinTxtView.setText(mPinTxt);
         TextView pintitle = view.findViewById(R.id.pin_title);
         pintitle.setText(mPinTitle);
         mLinearLayout = view.findViewById(R.id.PinView_Linear);
-        CreateTxtView(view);
+        CreateTxtView();
         // reload pin to screen
         load(savedInstanceState);
         audioManager = (AudioManager)view.getContext().getSystemService(Context.AUDIO_SERVICE);
-        if(Type_PinView != SETUP) {
+        if(Type_PinView != PAIR) {
             androidx.appcompat.widget.Toolbar toolbar = view.findViewById(R.id.pin_toolbar);
             toolbar.setBackgroundColor(Chekrite.getParseColor());
         }
@@ -298,7 +304,7 @@ public class PinViewDialog extends DialogFragment {
     /*
      * create mPinWidth of TextView
      */
-    private void CreateTxtView(View view) {
+    private void CreateTxtView() {
         EditText editText;
         for (int i = 0; i < mPinWidth; i++) {
             editText = new EditText(mLinearLayout.getContext());
@@ -350,7 +356,7 @@ public class PinViewDialog extends DialogFragment {
                     CurrentPin.add(pin.charAt(i) + "");
                 }
             }
-            update_editviews();
+            updateEditviews();
         }
     }
 }

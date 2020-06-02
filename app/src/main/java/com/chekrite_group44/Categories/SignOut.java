@@ -22,7 +22,7 @@ import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.HttpRequest.APIs;
 import com.chekrite_group44.HttpRequest.APIsListener;
 import com.chekrite_group44.HttpRequest.APIsTask;
-import com.chekrite_group44.Login;
+import com.chekrite_group44.LoginActivity;
 import com.chekrite_group44.R;
 
 import org.json.JSONException;
@@ -38,7 +38,7 @@ public class SignOut extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_out);
+        setContentView(R.layout.activity_sign_out);
 
         Header = (TextView) findViewById(R.id.sign_out_header);
         Header.setBackgroundColor(Chekrite.getParseColor());
@@ -60,7 +60,7 @@ public class SignOut extends AppCompatActivity {
     public void logout(){
 
         new APIsTask(LogoutListener).execute("POST", APIs.LOGOUT,"","");
-        Intent intent = new Intent(this, Login.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     };
 

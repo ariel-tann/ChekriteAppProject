@@ -62,7 +62,7 @@ import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class Inspection_main extends AppCompatActivity
+public class InspectionActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks, NavigationView.OnNavigationItemSelectedListener{
     private static final String TAG = "Inspection";
     private Permission mPermission;
@@ -74,7 +74,6 @@ public class Inspection_main extends AppCompatActivity
     long start_inspection;
     ProgressDialog dialog;
     DrawerLayout drawer;
-    Button nav_discard_btn;
     Button close_discard_dialog_btn;
     Dialog discard_dialog;
     TickView tick;
@@ -145,8 +144,8 @@ public class Inspection_main extends AppCompatActivity
     private InspectionListener submitListener = new InspectionListener() {
 
         @Override
-        public void Completed(String type, int button_order, double button_value, String txt_value,
-                              long start_timestamp, long response_timestamp) {
+        public void onCompleted(String type, int button_order, double button_value, String txt_value,
+                                long start_timestamp, long response_timestamp) {
             //TODO submit
             long end = System.currentTimeMillis();
             try {
@@ -156,7 +155,7 @@ public class Inspection_main extends AppCompatActivity
                 dialog.setIndeterminate(true);
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
-                PlayloadSubmit payload = new PlayloadSubmit(mTest, start_inspection, end,
+                SubmitPlayload payload = new SubmitPlayload(mTest, start_inspection, end,
                         new MetaData_Asset(getApplicationContext()));
                 new APIsTask(SubmitAPI).execute("POST", APIs.SUBMIT, "", payload.getPayload().toString());
             } catch (JSONException e) {
@@ -167,14 +166,14 @@ public class Inspection_main extends AppCompatActivity
     private InspectionListener inspectionListener = new InspectionListener() {
 
         @Override
-        public void Completed(String type, int button_order, double value, String txt_value,
-                              long start_timestamp, long response_timestamp) {
+        public void onCompleted(String type, int button_order, double value, String txt_value,
+                                long start_timestamp, long response_timestamp) {
             if (mViewPager.getCurrentItem()<mItems.getChecklists().size()-1) {
                 // get which item is completed
                 Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
                 // get response payload
                 try {
-                    PayloadResponse payload = new PayloadResponse(item, mTest, type, button_order, txt_value, value,
+                    ResponsePayload payload = new ResponsePayload(item, mTest, type, button_order, txt_value, value,
                             start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
                     new APIsTask(ResponseAPI).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
@@ -187,7 +186,7 @@ public class Inspection_main extends AppCompatActivity
                 Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
                 // get response payload
                 try {
-                    PayloadResponse payload = new PayloadResponse(item, mTest, type, button_order, txt_value, value,
+                    ResponsePayload payload = new ResponsePayload(item, mTest, type, button_order, txt_value, value,
                             start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
                     new APIsTask(ResponseAPI).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
@@ -195,12 +194,12 @@ public class Inspection_main extends AppCompatActivity
                 }
                 // inflate submit dialog
 
-                DialogSubmit submit = new DialogSubmit(submitListener);
+                SubmitDialog submit = new SubmitDialog(submitListener);
                 submit.show(getSupportFragmentManager(),"submit");
             }
         }
     };
-    APIsListener StartListener = new APIsListener() {
+    private APIsListener StartListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {
             // GET Response from DB
@@ -311,7 +310,7 @@ public class Inspection_main extends AppCompatActivity
         mViewPager = findViewById(R.id.inspection_container);
         mViewPager.setAllowedSwipeDirection(SwipeDirection.left);
         // get payload
-        PlayloadStart api_payload = new PlayloadStart();
+        StartPlayload api_payload = new StartPlayload();
         String payload = api_payload.StartAPI_payload(getApplicationContext(), checklist_id,asset_id, asset_selection);
         // send payload to DB
         new APIsTask(StartListener).execute("POST", APIs.START,"",payload);
@@ -339,7 +338,7 @@ public class Inspection_main extends AppCompatActivity
                 break;
             case R.id.nav_discard:
 //                Toast.makeText(this, "Discard", Toast.LENGTH_SHORT).show();
-                ShowDiscardDialog();
+                showDiscardDialog();
                 break;
 
         }
@@ -383,7 +382,7 @@ public class Inspection_main extends AppCompatActivity
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
     }
 
-    public void ShowDiscardDialog() {
+    public void showDiscardDialog() {
         discard_dialog.setContentView(R.layout.dialog_discard);
         Window window = discard_dialog.getWindow();
         window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);

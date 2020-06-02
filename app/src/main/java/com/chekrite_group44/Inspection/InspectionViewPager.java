@@ -23,7 +23,7 @@ public class InspectionViewPager extends ViewPager {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (this.IsSwipeAllowed(event)) {
+        if (this.isSwipeAllowed(event)) {
             return super.onTouchEvent(event);
         }
 
@@ -32,14 +32,14 @@ public class InspectionViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        if (this.IsSwipeAllowed(event)) {
+        if (this.isSwipeAllowed(event)) {
             return super.onInterceptTouchEvent(event);
         }
 
         return false;
     }
 
-    private boolean IsSwipeAllowed(MotionEvent event) {
+    private boolean isSwipeAllowed(MotionEvent event) {
         if(this.direction == SwipeDirection.all) return true;
 
         if(direction == SwipeDirection.none )//disable any swipe

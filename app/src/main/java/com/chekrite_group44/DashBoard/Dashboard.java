@@ -14,21 +14,18 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chekrite_group44.ArielTest;
-import com.chekrite_group44.AssetProperties.Asset_Classes;
-import com.chekrite_group44.AssetProperties.Select_Asset_Classes;
 import com.chekrite_group44.Categories.StartInspection;
 import com.chekrite_group44.Chekrite;
-import com.chekrite_group44.Login;
+import com.chekrite_group44.LoginActivity;
+import com.chekrite_group44.NewCheck.NewCheckActivity;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
-import com.chekrite_group44.Inspection.Inspection_main;
+import com.chekrite_group44.Inspection.InspectionActivity;
 import com.chekrite_group44.HttpRequest.APIs;
 import com.chekrite_group44.HttpRequest.APIsListener;
 import com.chekrite_group44.HttpRequest.APIsTask;
@@ -44,32 +41,6 @@ public class Dashboard extends AppCompatActivity {
     ImageView check_button;
     ImageView profile_button_photo;
     String photo_url;
-    private ImageButton test_btns;
-    private ImageButton test_btns_ctgr;
-//    Drawable myDrawable = getResources().getDrawable(R.drawable.avatar);
-   // private ImageButton ariel_test_btn;
-
-
-    APIsListener AssetsListener = new APIsListener() {
-        @Override
-        public void API_Completed(JSONObject jsonObject) {
-            try {
-                String status = (String) jsonObject.get("status");
-                if(status.equals("success")){
-                    Log.d("KAI", "GET assets success");
-                    ArrayList<Asset_Classes> asset_classes = new Select_Asset_Classes(jsonObject).getAsset_classes();
-                    Log.d("KAI","number of asset classes: "+asset_classes.size());
-                    Log.d("KAI",""+asset_classes.get(0).getAssets().get(0).getUnit_number());
-                }else{
-
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-    };
 
     APIsListener LogoutListener = new APIsListener() {
         @Override
@@ -110,16 +81,11 @@ public class Dashboard extends AppCompatActivity {
 
         //get_btn_profile
         if(!photo_url.equals("null")) {
-//            profile_button_photo.setImageResource(R.drawable.avatar);
+
             Log.d("ariel", "onCreate: in ==null");
             Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_button_photo);
         }
-//        } else {
-//            profile_button_photo.setImageResource(R.drawable.avatar);
-//            Log.d("ariel", "onCreate: in else ");
-//
-////            Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_button_photo);
-//        }
+
 
         logout_button=findViewById(R.id.logout_button);
         check_button=findViewById(R.id.newCheck);
@@ -127,8 +93,7 @@ public class Dashboard extends AppCompatActivity {
         check_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startNewcheck(view);
-                open_ariel_test();
+                open_newCheck();
             }
         });
         logout_button.setOnClickListener(new View.OnClickListener() {
@@ -137,81 +102,22 @@ public class Dashboard extends AppCompatActivity {
                 logout();
             }
         });
-        // for testing
-//        test_btns = findViewById(R.id.imageButton2);
-//        test_btns.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openInspection();
-//            }
-//        });
-//        test_btns_ctgr =findViewById(R.id.imageButton1);
-//        test_btns_ctgr.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startInspection();
-//            }
-//        });
-
-        //ariel test
-//        profile_button_photo.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                open_ariel_test();
-//            }
-//        });
     }
-    private void openInspection() {
-        Intent intent = new Intent(this, Inspection_main.class);
-        intent.putExtra("checklist_id", "5057"); //5020
-        intent.putExtra("asset_id", 28436);
-        intent.putExtra("asset_selection", "search");
-        startActivity(intent);
-    }
-    public void startInspection() {
 
-        Intent intent = new Intent(this, StartInspection.class);
-        //asset info
-        intent.putExtra("asset_id", "28433");
-        intent.putExtra("make", "Haulotte");
-        intent.putExtra("unit_number", "AE-001");
-        intent.putExtra("model", "Compact 10 Scissor Lift");
-        intent.putExtra("photo", "https://chekrite-cdn.s3.ap-southeast-2.amazonaws.com/141/Make/DtYVyRGaCm.jpg");
-        //checklist info
-        intent.putExtra("checklist_id", "4919");
-        intent.putExtra("category", "Inspection");
-        intent.putExtra("name", "Daily Scissor Lift Inspection");
-
-
-
-
-
-        //    intent.putExtra("asset_id", "28436");
-     //   intent.putExtra("make", "Test");
-     //   intent.putExtra("unit_number", "UFO-01");
-     //   intent.putExtra("model", "Test");
-     //   intent.putExtra("photo", "https://chekrite-cdn.s3.ap-southeast-2.amazonaws.com/141/Make/xuM2F2l9Ye.png");
-
-        startActivity(intent);
-
-    }
     public void startNewcheck(View view){
         Log.d("startcheck","Inside start check");
         Intent intent = new Intent(this, SelectAssetScreen.class);
-       // new APIsTask(AssetsListener, getApplicationContext()).execute("GET", APIs.ASSETS,"","");
         startActivity(intent);
 
     }
     public void logout(){
-//        new APIsTask(AssetsListener).execute("GET", APIs.ASSETS,"","");
         new APIsTask(LogoutListener).execute("POST", APIs.LOGOUT,"","");
-        Intent intent = new Intent(this, Login.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
-    public void open_ariel_test() {
-        Intent intent = new Intent(this, ArielTest.class);
+    public void open_newCheck() {
+        Intent intent = new Intent(this, NewCheckActivity.class);
         startActivity(intent);
     }
 }

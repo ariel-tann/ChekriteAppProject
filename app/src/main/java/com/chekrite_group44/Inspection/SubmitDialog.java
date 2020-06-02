@@ -22,11 +22,11 @@ import com.chekrite_group44.AssetProperties.ControlType;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.R;
 
-public class DialogSubmit extends DialogFragment {
+public class SubmitDialog extends DialogFragment {
 
     InspectionListener mlistener;
     Long start;
-    public DialogSubmit(InspectionListener mlistener) {
+    public SubmitDialog(InspectionListener mlistener) {
         this.mlistener = mlistener;
     }
 
@@ -63,7 +63,7 @@ public class DialogSubmit extends DialogFragment {
             public void onClick(View v) {
                 dismiss();
                 Long end = System.currentTimeMillis();
-                mlistener.Completed(ControlType.BUTTONS,0,0, "",
+                mlistener.onCompleted(ControlType.BUTTONS,0,0, "",
                         start, end);
             }
         });
