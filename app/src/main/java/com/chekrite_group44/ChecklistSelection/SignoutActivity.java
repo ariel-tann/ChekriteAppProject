@@ -31,30 +31,30 @@ import org.json.JSONObject;
 
 public class SignoutActivity extends AppCompatActivity {
     //UI
-    Button log_out;
-    Button cancel;
-    TextView Header;
+    Button logoutBtn;
+    Button cancelBtn;
+    TextView headerText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_out);
 
-        Header = (TextView) findViewById(R.id.sign_out_header);
-        Header.setBackgroundColor(Chekrite.getParseColor());
+        headerText = (TextView) findViewById(R.id.sign_out_header);
+        headerText.setBackgroundColor(Chekrite.getParseColor());
 
-        log_out = (Button) findViewById(R.id.sign_out_btn);
-        log_out.setOnClickListener(new View.OnClickListener() {
+        logoutBtn = (Button) findViewById(R.id.sign_out_btn);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logout();
             }
         });
-        log_out.setBackgroundColor(Chekrite.getParseColor());
+        logoutBtn.setBackgroundColor(Chekrite.getParseColor());
 
 
-        cancel = (Button) findViewById(R.id.cancel_btn);
-        cancel.setOnClickListener(new View.OnClickListener() {
+        cancelBtn = (Button) findViewById(R.id.cancel_btn);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SignoutActivity.super.onBackPressed();

@@ -33,10 +33,10 @@ import org.json.JSONObject;
 
 
 public class DashboardActivity extends AppCompatActivity {
-    private Button logout_button;
-    ImageView check_button;
-    ImageView profile_button_photo;
-    String photo_url;
+    private Button logoutButton;
+    ImageView checkButton;
+    ImageView profileButtonPhoto;
+    String photoUrl;
 
     APIsListener LogoutListener = new APIsListener() {
         @Override
@@ -71,28 +71,28 @@ public class DashboardActivity extends AppCompatActivity {
         //Set background color
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(Chekrite.getParseColor());
-        photo_url = Chekrite.getString("profile_photo");
-        Log.d("ariel", "onCreate: " + photo_url);
-        profile_button_photo = findViewById(R.id.btn_profile);
+        photoUrl = Chekrite.getString("profile_photo");
+        Log.d("ariel", "onCreate: " + photoUrl);
+        profileButtonPhoto = findViewById(R.id.btn_profile);
 
         //get_btn_profile
-        if(!photo_url.equals("null")) {
+        if(!photoUrl.equals("null")) {
 
             Log.d("ariel", "onCreate: in ==null");
-            Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_button_photo);
+            Glide.with(getApplicationContext()).load(photoUrl).apply(RequestOptions.circleCropTransform()).into(profileButtonPhoto);
         }
 
 
-        logout_button=findViewById(R.id.logout_button);
-        check_button=findViewById(R.id.newCheck);
+        logoutButton =findViewById(R.id.logout_button);
+        checkButton =findViewById(R.id.newCheck);
 
-        check_button.setOnClickListener(new View.OnClickListener() {
+        checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 open_newCheck();
             }
         });
-        logout_button.setOnClickListener(new View.OnClickListener() {
+        logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logout();

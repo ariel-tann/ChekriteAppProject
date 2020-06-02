@@ -33,9 +33,9 @@ import com.chekrite_group44.R;
 
 public class WelcomeActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 2400;
-    ImageView profile_photo;
-    TextView username;
-    String photo_url,first_name,last_name, employee_id;
+    ImageView profilePhoto;
+    TextView userName;
+    String photoUrl, firstName, lastName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +46,21 @@ public class WelcomeActivity extends AppCompatActivity {
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar2);
         toolbar.setBackgroundColor(Chekrite.getParseColor());
 
-        photo_url=getIntent().getStringExtra("profile_photo");
-        first_name=getIntent().getStringExtra("first_name");
-        last_name=getIntent().getStringExtra("last_name");
-        profile_photo=findViewById(R.id.profile_photo);
-        username=findViewById(R.id.user_name);
-        username.setText(first_name+" "+last_name);
-        if(!photo_url.equals("null")) {
-            Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_photo);
+        photoUrl =getIntent().getStringExtra("profile_photo");
+        firstName =getIntent().getStringExtra("first_name");
+        lastName =getIntent().getStringExtra("last_name");
+        profilePhoto =findViewById(R.id.profile_photo);
+        userName =findViewById(R.id.user_name);
+        userName.setText(firstName +" "+ lastName);
+        if(!photoUrl.equals("null")) {
+            Glide.with(getApplicationContext()).load(photoUrl).apply(RequestOptions.circleCropTransform()).into(profilePhoto);
         }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
                 Intent dashboardIntent = new Intent(WelcomeActivity.this, DashboardActivity.class);
-                dashboardIntent.putExtra("profile_image", photo_url);
+                dashboardIntent.putExtra("profile_image", photoUrl);
                 startActivity(dashboardIntent);
                 finish();
 
