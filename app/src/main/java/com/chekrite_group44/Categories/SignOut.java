@@ -54,7 +54,12 @@ public class SignOut extends AppCompatActivity {
 
 
         cancel = (Button) findViewById(R.id.cancel_btn);
-
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SignOut.super.onBackPressed();
+            }
+        });
     }
 
     public void logout(){

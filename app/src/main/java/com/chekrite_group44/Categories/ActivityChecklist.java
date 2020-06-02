@@ -120,6 +120,15 @@ public class ActivityChecklist extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
         }
 
+
+        logout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSignout();
+                //for test
+                //       openChecklist();
+            }
+        });
         //if toolbar back button pressed, goes back to previous activity
         back_btn = findViewById(R.id.back_arrow);
         back_text = findViewById(R.id.back_text);
@@ -218,4 +227,9 @@ public class ActivityChecklist extends AppCompatActivity {
 
         }
     };
+    public void openSignout() {
+        Intent intent = new Intent(this, SignOut.class);
+        //    intent.putExtra("asset_id", 28436);
+        startActivity(intent);
+    }
 }
