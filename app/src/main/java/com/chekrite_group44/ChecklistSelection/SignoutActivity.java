@@ -39,7 +39,7 @@ public class SignoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_out);
-
+        // set view
         headerText = (TextView) findViewById(R.id.sign_out_header);
         headerText.setBackgroundColor(Chekrite.getParseColor());
 
@@ -68,7 +68,7 @@ public class SignoutActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     };
-
+    //call logout api
     APIsListener LogoutListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {

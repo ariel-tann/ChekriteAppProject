@@ -58,31 +58,23 @@ public class ChecklistActivity extends AppCompatActivity {
     String selected_asset_make;
     String selected_asset_model;
     String selected_asset_photo;
-    ArrayList<String> checkList = new ArrayList<>();
 
 
     ArrayList<String> nameList = new ArrayList<>();
     private static final String TAG = "checklist";
-    String categorytest;
-    String checklist_id;
-    ArrayList<String> checklist_names = new ArrayList<>();
-
     ArrayAdapter<String> nameListAdapter;
 
 
-    int countposition = 0;
+
 
     @Override
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
 
-//get sharedpreferences
+        //get sharedpreferences
         SharedPreferences pref = getSharedPreferences(Chekrite.SHARED_PREFS, Context.MODE_PRIVATE);
         // call apistask
-
 
         Bundle bundle = getIntent().getExtras();
 
@@ -90,18 +82,12 @@ public class ChecklistActivity extends AppCompatActivity {
         selected_category = bundle.getString("category");
         String FetchId = Integer.toString(selected_asset_id);
         new APIsTask(ChecklistListener).execute("GET", APIs.CHECKLIST, FetchId, "");
-        // category_test = getIntent().getStringExtra("model");
-        // if bundle != null {...  getstring("category ")}
         if (bundle != null) {
             Log.d(TAG, "get bundle extra  " + bundle);
-
-
             Log.d(TAG, "set category " + selected_category);
             category_test = (TextView) findViewById(R.id.selected_category);
             category_test.setText(selected_category);
 
-            //      checkList = bundle.getStringArrayList("data_array_list");
-            //      Log.d(TAG, "all checklist data " + checkList);
 
         } else {
             Log.d(TAG, " bundel = null ");
@@ -111,7 +97,6 @@ public class ChecklistActivity extends AppCompatActivity {
         toolbar_title = (TextView) findViewById(R.id.screen_title);
         toolbar_title.setText("Checklist");
         logout_btn = (ImageButton) findViewById(R.id.logout_img_btn);
-//        String highlight_colour = pref.getString("highlight_colour", "#65cb81");
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.categories_toolbar);
         toolbar.setBackgroundColor(Chekrite.getParseColor());
         category_test.setTextColor(Chekrite.getParseColor());
@@ -125,11 +110,11 @@ public class ChecklistActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openSignout();
-                //for test
-                //       openChecklist();
+
             }
         });
-        //if toolbar back button pressed, goes back to previous activity
+
+        //toolbar goback button
         back_btn = findViewById(R.id.back_arrow);
         back_text = findViewById(R.id.back_text);
         back_btn.setOnClickListener(new View.OnClickListener() {
@@ -162,11 +147,9 @@ public class ChecklistActivity extends AppCompatActivity {
 
 
         listView = (ListView) findViewById(R.id.checklist_category);
-        //    listView.setAdapter(checklistAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-           //     position = countposition;
 
                 Intent intent = new Intent(ChecklistActivity.this, StartInspectionActivity.class);
                 //pass asset info
@@ -176,7 +159,6 @@ public class ChecklistActivity extends AppCompatActivity {
                 intent.putExtra("make", selected_asset_make);
                 intent.putExtra("photo", selected_asset_photo);
 
-             //   intent.putExtra("checklist_id", parent.getItemAtPosition(position).);
                 String checkistID = Integer.toString(mChecklistArray.getChecklists().get(position).getId());
                 intent.putExtra("checklist_id",checkistID);
                 intent.putExtra("category", mChecklistArray.getChecklists().get(position).getCategory());
@@ -229,7 +211,6 @@ public class ChecklistActivity extends AppCompatActivity {
     };
     public void openSignout() {
         Intent intent = new Intent(this, SignoutActivity.class);
-        //    intent.putExtra("asset_id", 28436);
         startActivity(intent);
     }
 }

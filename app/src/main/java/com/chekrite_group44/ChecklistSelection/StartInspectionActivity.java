@@ -30,29 +30,29 @@ import com.chekrite_group44.Inspection.InspectionActivity;
 
 
 public class StartInspectionActivity extends AppCompatActivity {
-    ImageView asset_image;
-    TextView asset_unum;
-    TextView asset_make;
-    TextView asset_model;
-    ImageButton logout_btn;
-    TextView checklist_category;
-    TextView checklist_name;
-    Button start;
-    ImageButton back_btn;
-    TextView back_text;
+    ImageView assetImage;
+    TextView assetUnum;
+    TextView assetMake;
+    TextView assetModel;
+    ImageButton logoutBtn;
+    TextView checklistCategory;
+    TextView checklistName;
+    Button startBtn;
+    ImageButton backBtn;
+    TextView backText;
     private static final String TAG = "checklist";
 
     //asset data
-   private Integer selected_asset_id;
-   private String selected_asset_unumber;
-   private String selected_asset_make;
-   private String selected_asset_model;
-   private String selected_asset_photo;
+   private Integer selectedAssetId;
+   private String selectedAssetUnumber;
+   private String selectedAssetMake;
+   private String selectedAssetModel;
+   private String selectedAssetPhoto;
 
    //checklist data
-   private String selected_checklist_id;
-   private String selected_checklist_category;
-   private String selected_checklist_name;
+   private String selectedChecklistId;
+   private String selectedChecklistCategory;
+   private String selectedChecklistName;
 
 
     @Override
@@ -63,79 +63,84 @@ public class StartInspectionActivity extends AppCompatActivity {
         String highlight_colour = pref.getString("highlight_colour", "#65cb81");
 
 
-
-        logout_btn =(ImageButton) findViewById(R.id.logout_img_btn);
+        //toolbar
         Toolbar toolbar = findViewById(R.id.start_toolbar);
         toolbar.setBackgroundColor(Chekrite.getParseColor());
+        //back button
+        backBtn = findViewById(R.id.back_arrow);
+        backText = findViewById(R.id.back_text);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartInspectionActivity.super.onBackPressed();
+            }
+        });
+        backText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartInspectionActivity.super.onBackPressed();
+            }
+        });
         TextView title = (TextView) findViewById(R.id.screen_title);
         title.setText("Start");
-        start = (Button) findViewById(R.id.start_inspection);
+        logoutBtn =(ImageButton) findViewById(R.id.logout_img_btn);
+        String profile_link = pref.getString("profile_photo", "");
+        if(!profile_link.equals("null")) {
+            Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logoutBtn);
+        }
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSignout();
+            }
+        });
+
+
+
+
+
+        //get selected infromation
+        selectedAssetId = getIntent().getIntExtra("asset_id", 0);
+        selectedAssetUnumber = getIntent().getStringExtra("unit_number");
+        selectedAssetMake = getIntent().getStringExtra("make");
+        selectedAssetModel = getIntent().getStringExtra("model");
+        selectedAssetPhoto =getIntent().getStringExtra("photo");
+        selectedChecklistCategory =getIntent().getStringExtra("category");
+        selectedChecklistName =getIntent().getStringExtra("name");
+        selectedChecklistId = getIntent().getStringExtra("checklist_id");
+
+        //test getExtra
+        Log.d(TAG, "getExtra checklist id: " + selectedChecklistId);
+
+
+
+
+
+        assetImage =(ImageView) findViewById(R.id.asset_image);
+        Glide.with(getApplicationContext()).load(selectedAssetPhoto).apply(RequestOptions.circleCropTransform()).into(assetImage);
+        assetUnum = (TextView) findViewById(R.id.unit_number);
+        assetUnum.setText(selectedAssetUnumber);
+        assetMake = (TextView) findViewById(R.id.make);
+        assetMake.setText(selectedAssetMake);
+        assetModel = (TextView) findViewById(R.id.model);
+        assetModel.setText(selectedAssetModel);
+
+        checklistCategory = (TextView) findViewById(R.id.test_category);
+        checklistCategory.setText(selectedChecklistCategory);
+        checklistCategory.setTextColor(Chekrite.getParseColor());
+        checklistName = (TextView) findViewById(R.id.inspection);
+        checklistName.setText(selectedChecklistName);
+        checklistName.setTextColor(Chekrite.getParseColor());
+
+
+        //start inspection
+        startBtn = (Button) findViewById(R.id.start_inspection);
         // Button Radius
         GradientDrawable shape =  new GradientDrawable();
         shape.setCornerRadius(10);
         shape.setColor(Chekrite.getParseColor());
-        start.setBackground(shape);
-
-        selected_asset_id = getIntent().getIntExtra("asset_id", 0);
-        selected_asset_unumber = getIntent().getStringExtra("unit_number");
-        selected_asset_make = getIntent().getStringExtra("make");
-        selected_asset_model = getIntent().getStringExtra("model");
-        selected_asset_photo =getIntent().getStringExtra("photo");
-        selected_checklist_category =getIntent().getStringExtra("category");
-        selected_checklist_name =getIntent().getStringExtra("name");
-        selected_checklist_id = getIntent().getStringExtra("checklist_id");
-
-        //test getExtra
-        Log.d(TAG, "getExtra checklist id: " +  selected_checklist_id);
-
-        String profile_link = pref.getString("profile_photo", "");
-        if(!profile_link.equals("null")) {
-            Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
-        }
-
-        logout_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openSignout();
-                //for test
-                //       openChecklist();
-            }
-        });
-
-        asset_image =(ImageView) findViewById(R.id.asset_image);
-        Glide.with(getApplicationContext()).load(selected_asset_photo).apply(RequestOptions.circleCropTransform()).into(asset_image);
-        asset_unum = (TextView) findViewById(R.id.unit_number);
-        asset_unum.setText(selected_asset_unumber);
-        asset_make = (TextView) findViewById(R.id.make);
-        asset_make.setText(selected_asset_make);
-        asset_model = (TextView) findViewById(R.id.model);
-        asset_model.setText(selected_asset_model);
-
-        checklist_category = (TextView) findViewById(R.id.test_category);
-        checklist_category.setText(selected_checklist_category);
-        checklist_category.setTextColor(Chekrite.getParseColor());
-        checklist_name = (TextView) findViewById(R.id.inspection);
-        checklist_name.setText(selected_checklist_name);
-        checklist_name.setTextColor(Chekrite.getParseColor());
-
-
-        //if toolbar back button pressed, goes back to previous activity
-        back_btn = findViewById(R.id.back_arrow);
-        back_text = findViewById(R.id.back_text);
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StartInspectionActivity.super.onBackPressed();
-            }
-        });
-        back_text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StartInspectionActivity.super.onBackPressed();
-            }
-        });
-
-        start.setOnClickListener(new View.OnClickListener() {
+        startBtn.setBackground(shape);
+        startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openInspection();
@@ -152,8 +157,8 @@ public class StartInspectionActivity extends AppCompatActivity {
 
     private void openInspection() {
         Intent intent = new Intent(this, InspectionActivity.class);
-        intent.putExtra("checklist_id", selected_checklist_id);
-        intent.putExtra("asset_id", selected_asset_id);
+        intent.putExtra("checklist_id", selectedChecklistId);
+        intent.putExtra("asset_id", selectedAssetId);
         intent.putExtra("asset_selection", "search");
         startActivity(intent);
     }
