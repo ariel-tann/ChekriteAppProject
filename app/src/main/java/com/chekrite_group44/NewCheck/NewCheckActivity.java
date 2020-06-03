@@ -38,8 +38,8 @@ import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Keyboard.KeyboardFragment;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectTab;
-import com.chekrite_group44.DashBoard.Dashboard;
-import com.chekrite_group44.Categories.SignOut;
+import com.chekrite_group44.DashBoard.DashboardActivity;
+import com.chekrite_group44.ChecklistSelection.SignoutActivity;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -119,12 +119,12 @@ public class NewCheckActivity extends AppCompatActivity
     }
 
     public void openDashboardScreen() {
-        Intent intent = new Intent(this, Dashboard.class);
+        Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);
     }
 
     public void openSignoutScreen() {
-        Intent intent = new Intent(this, SignOut.class);
+        Intent intent = new Intent(this, SignoutActivity.class);
         startActivity(intent);
     }
 

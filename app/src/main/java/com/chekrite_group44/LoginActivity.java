@@ -34,7 +34,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.chekrite_group44.PinView.PinViewDialog;
 import com.chekrite_group44.PinView.PinListener;
-import com.chekrite_group44.DashBoard.WelcomeSplash;
+import com.chekrite_group44.DashBoard.WelcomeActivity;
 import com.chekrite_group44.HttpRequest.APIs;
 import com.chekrite_group44.HttpRequest.APIsListener;
 import com.chekrite_group44.HttpRequest.APIsTask;
@@ -212,7 +212,7 @@ public class LoginActivity extends AppCompatActivity
         return stringDate;
     }
     public void openWelcomeSplash(String profile_photo,String first_name,String last_name) {
-        Intent intent = new Intent(this, WelcomeSplash.class);
+        Intent intent = new Intent(this, WelcomeActivity.class);
         intent.putExtra("profile_photo",profile_photo);
         intent.putExtra("first_name",first_name);
         intent.putExtra("last_name",last_name);

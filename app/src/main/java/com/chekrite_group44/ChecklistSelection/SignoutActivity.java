@@ -4,7 +4,7 @@
  * Summary:
  */
 
-package com.chekrite_group44.Categories;
+package com.chekrite_group44.ChecklistSelection;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,32 +29,37 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class SignOut extends AppCompatActivity {
+public class SignoutActivity extends AppCompatActivity {
     //UI
-    Button log_out;
-    Button cancel;
-    TextView Header;
+    Button logoutBtn;
+    Button cancelBtn;
+    TextView headerText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_out);
+        // set view
+        headerText = (TextView) findViewById(R.id.sign_out_header);
+        headerText.setBackgroundColor(Chekrite.getParseColor());
 
-        Header = (TextView) findViewById(R.id.sign_out_header);
-        Header.setBackgroundColor(Chekrite.getParseColor());
-
-        log_out = (Button) findViewById(R.id.sign_out_btn);
-        log_out.setOnClickListener(new View.OnClickListener() {
+        logoutBtn = (Button) findViewById(R.id.sign_out_btn);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logout();
             }
         });
-        log_out.setBackgroundColor(Chekrite.getParseColor());
+        logoutBtn.setBackgroundColor(Chekrite.getParseColor());
 
 
-        cancel = (Button) findViewById(R.id.cancel_btn);
-
+        cancelBtn = (Button) findViewById(R.id.cancel_btn);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SignoutActivity.super.onBackPressed();
+            }
+        });
     }
 
     public void logout(){
@@ -63,7 +68,7 @@ public class SignOut extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     };
-
+    //call logout api
     APIsListener LogoutListener = new APIsListener() {
         @Override
         public void API_Completed(JSONObject jsonObject) {

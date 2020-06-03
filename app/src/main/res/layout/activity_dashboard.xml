@@ -10,7 +10,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashBoard.Dashboard">
+    tools:context=".DashBoard.DashboardActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -194,7 +194,7 @@
 
     <include
         android:id="@+id/copyright_group"
-        layout="@layout/copyright"
+        layout="@layout/layout_copyright"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_alignParentStart="true"

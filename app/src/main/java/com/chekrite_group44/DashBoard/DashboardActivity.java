@@ -19,13 +19,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chekrite_group44.Categories.StartInspection;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.LoginActivity;
 import com.chekrite_group44.NewCheck.NewCheckActivity;
 import com.chekrite_group44.R;
 import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
-import com.chekrite_group44.Inspection.InspectionActivity;
 import com.chekrite_group44.HttpRequest.APIs;
 import com.chekrite_group44.HttpRequest.APIsListener;
 import com.chekrite_group44.HttpRequest.APIsTask;
@@ -33,14 +31,12 @@ import com.chekrite_group44.HttpRequest.APIsTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 
-
-public class Dashboard extends AppCompatActivity {
-    private Button logout_button;
-    ImageView check_button;
-    ImageView profile_button_photo;
-    String photo_url;
+public class DashboardActivity extends AppCompatActivity {
+    private Button logoutButton;
+    ImageView checkButton;
+    ImageView profileButtonPhoto;
+    String photoUrl;
 
     APIsListener LogoutListener = new APIsListener() {
         @Override
@@ -75,28 +71,28 @@ public class Dashboard extends AppCompatActivity {
         //Set background color
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(Chekrite.getParseColor());
-        photo_url = Chekrite.getString("profile_photo");
-        Log.d("ariel", "onCreate: " + photo_url);
-        profile_button_photo = findViewById(R.id.btn_profile);
+        photoUrl = Chekrite.getString("profile_photo");
+        Log.d("ariel", "onCreate: " + photoUrl);
+        profileButtonPhoto = findViewById(R.id.btn_profile);
 
         //get_btn_profile
-        if(!photo_url.equals("null")) {
+        if(!photoUrl.equals("null")) {
 
             Log.d("ariel", "onCreate: in ==null");
-            Glide.with(getApplicationContext()).load(photo_url).apply(RequestOptions.circleCropTransform()).into(profile_button_photo);
+            Glide.with(getApplicationContext()).load(photoUrl).apply(RequestOptions.circleCropTransform()).into(profileButtonPhoto);
         }
 
 
-        logout_button=findViewById(R.id.logout_button);
-        check_button=findViewById(R.id.newCheck);
+        logoutButton =findViewById(R.id.logout_button);
+        checkButton =findViewById(R.id.newCheck);
 
-        check_button.setOnClickListener(new View.OnClickListener() {
+        checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 open_newCheck();
             }
         });
-        logout_button.setOnClickListener(new View.OnClickListener() {
+        logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logout();
