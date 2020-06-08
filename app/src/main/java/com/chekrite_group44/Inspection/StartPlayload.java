@@ -8,7 +8,7 @@ package com.chekrite_group44.Inspection;
 
 import android.content.Context;
 
-import com.chekrite_group44.MetaData.MetaData_Asset;
+import com.chekrite_group44.MetaData.MetaDataAsset;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +19,7 @@ public class StartPlayload {
     public String StartAPI_payload(Context context,
                                        String checklist_id, int asset_id, String asset_selection) {
 
-        MetaData_Asset metaData = new MetaData_Asset(context);
+        MetaDataAsset metaData = new MetaDataAsset(context);
         double lat = metaData.getDevice_lat();
         double lng = metaData.getDevice_lng();
         JSONObject jsonObject= metaData.getjObject();

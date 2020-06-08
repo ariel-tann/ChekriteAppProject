@@ -15,11 +15,11 @@ package com.chekrite_group44.AssetProperties;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Inspection_test {
+public class InspectionTest {
     int id;
     String guid;
 
-    public Inspection_test(JSONObject test) throws JSONException {
+    public InspectionTest(JSONObject test) throws JSONException {
         id = test.getInt("id");
         guid = test.getString("guid");
     }

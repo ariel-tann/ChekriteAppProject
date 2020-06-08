@@ -41,7 +41,7 @@ import static android.content.Context.BATTERY_SERVICE;
 //import com.google.android.gms.location.FusedLocationProviderClient;
 //import com.google.android.gms.location.LocationServices;
 
-public class MetaData_Asset {
+public class MetaDataAsset {
     // date of app build
     private static final String TAG = "MetaData_Asset";
     String app_build;
@@ -67,7 +67,7 @@ public class MetaData_Asset {
         return jObject;
     }
 
-    public MetaData_Asset(Context context) {
+    public MetaDataAsset(Context context) {
 
         String pattern = "yyyyMMdd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);

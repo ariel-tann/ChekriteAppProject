@@ -6,8 +6,8 @@
 
 package com.chekrite_group44.Inspection;
 
-import com.chekrite_group44.AssetProperties.Inspection_test;
-import com.chekrite_group44.MetaData.MetaData_Asset;
+import com.chekrite_group44.AssetProperties.InspectionTest;
+import com.chekrite_group44.MetaData.MetaDataAsset;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +21,7 @@ public class SubmitPlayload {
     int score = 0;
     boolean supervisor_approval = true;
     JSONObject payload;
-    public SubmitPlayload(Inspection_test test, long start, long end, MetaData_Asset metaData) throws JSONException {
+    public SubmitPlayload(InspectionTest test, long start, long end, MetaDataAsset metaData) throws JSONException {
         id = test.getId();
         duration = TimeUnit.MILLISECONDS.toSeconds(end - start);
         payload = new JSONObject();

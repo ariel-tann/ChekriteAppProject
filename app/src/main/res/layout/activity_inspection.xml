@@ -19,7 +19,7 @@
     android:orientation="vertical">
     <include
         android:id="@+id/inspection_toolbar"
-        layout="@layout/inspection_toolbar" />
+        layout="@layout/toolbar_inspection" />
     <com.chekrite_group44.Inspection.InspectionViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"

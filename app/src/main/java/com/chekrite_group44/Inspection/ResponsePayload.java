@@ -8,10 +8,10 @@ package com.chekrite_group44.Inspection;
 import android.util.Log;
 
 import com.chekrite_group44.AssetProperties.ControlType;
-import com.chekrite_group44.AssetProperties.Inspection_checklist_item;
-import com.chekrite_group44.AssetProperties.Inspection_gauge;
-import com.chekrite_group44.AssetProperties.Inspection_test;
-import com.chekrite_group44.MetaData.MetaData_Asset;
+import com.chekrite_group44.AssetProperties.InspectionChecklistItem;
+import com.chekrite_group44.AssetProperties.InspectionGauge;
+import com.chekrite_group44.AssetProperties.InspectionTest;
+import com.chekrite_group44.MetaData.MetaDataAsset;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ResponsePayload {
     private static final String TAG = "Payload_Response";
-    Inspection_checklist_item mItem;
+    InspectionChecklistItem mItem;
     // ChekRite response require variables
     int checklist_item_id;
     int control_button_id = 0;
@@ -54,8 +54,8 @@ public class ResponsePayload {
     JSONObject payload;
 
 
-    public ResponsePayload(Inspection_checklist_item item, Inspection_test test, String type, int btn_order, String txt_value,
-                           double gauge_value, long start, long end, MetaData_Asset metaData) throws JSONException {
+    public ResponsePayload(InspectionChecklistItem item, InspectionTest test, String type, int btn_order, String txt_value,
+                           double gauge_value, long start, long end, MetaDataAsset metaData) throws JSONException {
         this.gauge_value = gauge_value;
         this.mItem = item;
         this.text_value = txt_value;
@@ -68,7 +68,7 @@ public class ResponsePayload {
             case ControlType.GAUGE:
                 // get status using condition of upper bond and lower bond
                 control_gauge_band_id = item.getControl().getGauges().get(btn_order).getId();
-                Inspection_gauge gauge = mItem.getControl().getGauges().get(0);
+                InspectionGauge gauge = mItem.getControl().getGauges().get(0);
                 // search status in band using current value
                 long ratio = Math.round(gauge.getUpper()/gauge.getMarks_count());
                 int val = (int)gauge_value / (int)ratio;

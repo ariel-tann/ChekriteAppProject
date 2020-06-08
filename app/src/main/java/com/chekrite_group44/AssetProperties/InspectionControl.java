@@ -12,14 +12,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Inspection_control {
+public class InspectionControl {
     int id;
     String type;
     String name;
     String buttons_shape;
     ArrayList<InspectionButton> buttons = new ArrayList<>();
-    ArrayList<Inspection_gauge> gauges = new ArrayList<>();
-    public Inspection_control(JSONObject control) throws JSONException {
+    ArrayList<InspectionGauge> gauges = new ArrayList<>();
+    public InspectionControl(JSONObject control) throws JSONException {
 
         type = control.getString("type");
         name = control.getString("name");
@@ -40,7 +40,7 @@ public class Inspection_control {
                 // gauge question
                 JSONArray jgauge = control.getJSONArray(ControlType.GAUGE);
                 for(int i = 0; i<jgauge.length();i++) {
-                    Inspection_gauge gauge = new Inspection_gauge(jgauge.getJSONObject(i));
+                    InspectionGauge gauge = new InspectionGauge(jgauge.getJSONObject(i));
                     gauges.add(i, gauge);
                 }
                 break;
@@ -67,7 +67,7 @@ public class Inspection_control {
         return buttons;
     }
 
-    public ArrayList<Inspection_gauge> getGauges() {
+    public ArrayList<InspectionGauge> getGauges() {
         return gauges;
     }
 }

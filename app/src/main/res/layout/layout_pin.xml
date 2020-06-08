@@ -14,7 +14,7 @@
 
     <include
         android:id="@+id/pin_toolbar"
-        layout="@layout/pin_toolbar"
+        layout="@layout/toolbar_pin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

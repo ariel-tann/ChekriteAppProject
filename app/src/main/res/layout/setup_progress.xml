@@ -16,7 +16,7 @@
 
         <include
             android:id="@+id/setup_progress_toolbar"
-            layout="@layout/setup_toolbar"/>
+            layout="@layout/toolbar_setup"/>
         <ImageView
             android:src="@mipmap/ic_logo"
             android:layout_width="50dp"

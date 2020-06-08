@@ -218,13 +218,13 @@ public class PinViewDialog extends DialogFragment {
 
         switch (Type_PinView){
             case EMPLOY_ID:
-                return inflater.inflate(R.layout.pin_layout, container, false);
+                return inflater.inflate(R.layout.layout_pin, container, false);
             case EMPLOY_PIN:
-                return inflater.inflate(R.layout.pin_layout, container, false);
+                return inflater.inflate(R.layout.layout_pin, container, false);
             case PAIR:
-                return inflater.inflate(R.layout.setup_layout, container, false);
+                return inflater.inflate(R.layout.layout_setup, container, false);
             default:
-                return inflater.inflate(R.layout.setup_layout, container, false);
+                return inflater.inflate(R.layout.layout_setup, container, false);
         }
     }
 

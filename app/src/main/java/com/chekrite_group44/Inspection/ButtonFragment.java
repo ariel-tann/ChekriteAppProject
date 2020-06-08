@@ -24,14 +24,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.chekrite_group44.AssetProperties.ControlType;
-import com.chekrite_group44.AssetProperties.Inspection_checklist_item;
+import com.chekrite_group44.AssetProperties.InspectionChecklistItem;
 import com.chekrite_group44.R;
 
 import java.util.ArrayList;
 
 public class ButtonFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "fragment_button";
-    private Inspection_checklist_item mItem;
+    private InspectionChecklistItem mItem;
     TextView mDescription;
     TextView mTitle;
     ProgressBar mProgressBar;
@@ -41,7 +41,7 @@ public class ButtonFragment extends Fragment implements View.OnClickListener{
     InspectionListener mlistener;
     int col = 2; // define number of buttons should be in one row
 
-    public ButtonFragment(Inspection_checklist_item item, int total_items, int position, InspectionListener listener) {
+    public ButtonFragment(InspectionChecklistItem item, int total_items, int position, InspectionListener listener) {
         mItem = item;
         this.total_items = total_items;
         this.position = position;

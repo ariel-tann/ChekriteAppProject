@@ -40,12 +40,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chekrite_group44.AssetProperties.InspectionChecklist;
-import com.chekrite_group44.AssetProperties.Inspection_checklist_item;
-import com.chekrite_group44.AssetProperties.Inspection_checklist_items;
-import com.chekrite_group44.AssetProperties.Inspection_test;
+import com.chekrite_group44.AssetProperties.InspectionChecklistItem;
+import com.chekrite_group44.AssetProperties.InspectionChecklistItems;
+import com.chekrite_group44.AssetProperties.InspectionTest;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.DashBoard.DashboardActivity;
-import com.chekrite_group44.MetaData.MetaData_Asset;
+import com.chekrite_group44.MetaData.MetaDataAsset;
 import com.chekrite_group44.R;
 import com.chekrite_group44.HttpRequest.APIs;
 import com.chekrite_group44.HttpRequest.APIsListener;
@@ -69,8 +69,8 @@ public class InspectionActivity extends AppCompatActivity
     TextView txt_inspection;
     private InspectionPagerAdapter mPagerAdapter;
     private InspectionViewPager mViewPager;
-    Inspection_checklist_items mItems;
-    Inspection_test mTest;
+    InspectionChecklistItems mItems;
+    InspectionTest mTest;
     long start_inspection;
     ProgressDialog dialog;
     DrawerLayout drawer;
@@ -156,7 +156,7 @@ public class InspectionActivity extends AppCompatActivity
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
                 SubmitPlayload payload = new SubmitPlayload(mTest, start_inspection, end,
-                        new MetaData_Asset(getApplicationContext()));
+                        new MetaDataAsset(getApplicationContext()));
                 new APIsTask(SubmitAPI).execute("POST", APIs.SUBMIT, "", payload.getPayload().toString());
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -170,11 +170,11 @@ public class InspectionActivity extends AppCompatActivity
                                 long start_timestamp, long response_timestamp) {
             if (mViewPager.getCurrentItem()<mItems.getChecklists().size()-1) {
                 // get which item is completed
-                Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
+                InspectionChecklistItem item = mItems.getChecklists().get(mViewPager.getCurrentItem());
                 // get response payload
                 try {
                     ResponsePayload payload = new ResponsePayload(item, mTest, type, button_order, txt_value, value,
-                            start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
+                            start_timestamp,response_timestamp, new MetaDataAsset(getApplicationContext()));
                     new APIsTask(ResponseAPI).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -183,11 +183,11 @@ public class InspectionActivity extends AppCompatActivity
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
             }else{
                 // The last item
-                Inspection_checklist_item item = mItems.getChecklists().get(mViewPager.getCurrentItem());
+                InspectionChecklistItem item = mItems.getChecklists().get(mViewPager.getCurrentItem());
                 // get response payload
                 try {
                     ResponsePayload payload = new ResponsePayload(item, mTest, type, button_order, txt_value, value,
-                            start_timestamp,response_timestamp, new MetaData_Asset(getApplicationContext()));
+                            start_timestamp,response_timestamp, new MetaDataAsset(getApplicationContext()));
                     new APIsTask(ResponseAPI).execute("POST", APIs.RESPONSES, "", payload.getPayload().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -213,8 +213,8 @@ public class InspectionActivity extends AppCompatActivity
                     InspectionChecklist checklist = new InspectionChecklist(jchecklist);
                     txt_inspection.setText(checklist.getName());
                     JSONArray jchecklist_items = data.getJSONArray("checklist_items");
-                    mItems = new Inspection_checklist_items(jchecklist_items);
-                    mTest = new Inspection_test(data.getJSONObject("test"));
+                    mItems = new InspectionChecklistItems(jchecklist_items);
+                    mTest = new InspectionTest(data.getJSONObject("test"));
                     // Create Recycle View
                     mPagerAdapter = new InspectionPagerAdapter(getSupportFragmentManager(),
                             FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
@@ -242,13 +242,13 @@ public class InspectionActivity extends AppCompatActivity
         startActivity(dashboardIntent);
         finish();
     }
-    private void setupViewPager(ViewPager viewPager, Inspection_checklist_items items){
+    private void setupViewPager(ViewPager viewPager, InspectionChecklistItems items){
         // setup list of Fragments
         InspectionPagerAdapter adapter = new InspectionPagerAdapter(getSupportFragmentManager(),
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
         for (int i = 0; i< items.getChecklists().size(); i++){
             // get single item
-            Inspection_checklist_item item = items.getChecklists().get(i);
+            InspectionChecklistItem item = items.getChecklists().get(i);
             // get control type
             switch (item.getControl().getType()){
                 case ControlType.BUTTONS:

@@ -21,7 +21,7 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 
 import com.chekrite_group44.AssetProperties.InspectionBand;
-import com.chekrite_group44.AssetProperties.Inspection_gauge;
+import com.chekrite_group44.AssetProperties.InspectionGauge;
 import com.chekrite_group44.R;
 
 public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
@@ -37,7 +37,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
     int bitmap_width = 150;
     int bitmap_height = 120;
     //
-    Inspection_gauge mGauge;
+    InspectionGauge mGauge;
     int marks_count;
     int num_bands;
     float lower_step;
@@ -45,7 +45,7 @@ public class GuageView extends androidx.appcompat.widget.AppCompatSeekBar {
     String flag = "";
     //
     int y = 0;
-    public GuageView(Context context, Inspection_gauge gauge) {
+    public GuageView(Context context, InspectionGauge gauge) {
         super(context);
         mContext = context;
         Resources res = getResources();

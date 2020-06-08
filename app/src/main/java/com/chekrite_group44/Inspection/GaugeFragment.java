@@ -24,14 +24,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.chekrite_group44.AssetProperties.ControlType;
-import com.chekrite_group44.AssetProperties.Inspection_checklist_item;
-import com.chekrite_group44.AssetProperties.Inspection_gauge;
+import com.chekrite_group44.AssetProperties.InspectionChecklistItem;
+import com.chekrite_group44.AssetProperties.InspectionGauge;
 import com.chekrite_group44.R;
 
 public class GaugeFragment extends Fragment implements SeekBar.OnSeekBarChangeListener,
         View.OnClickListener{
     private static final String TAG = "fragment_gauge";
-    private Inspection_checklist_item mItem;
+    private InspectionChecklistItem mItem;
     TextView mDescription;
     TextView mTitle;
     ProgressBar mProgressBar;
@@ -45,7 +45,7 @@ public class GaugeFragment extends Fragment implements SeekBar.OnSeekBarChangeLi
     View mView;
     int current_value = 0;
 
-    public GaugeFragment(Inspection_checklist_item item, int total_items, int position, InspectionListener listener) {
+    public GaugeFragment(InspectionChecklistItem item, int total_items, int position, InspectionListener listener) {
         mItem = item;
         this.total_items = total_items;
         this.position = position;
@@ -89,7 +89,7 @@ public class GaugeFragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         return mView;
     }
     private void seekbarCreate(){
-        Inspection_gauge gauge = mItem.getControl().getGauges().get(0);
+        InspectionGauge gauge = mItem.getControl().getGauges().get(0);
         GuageView seekBar = new GuageView(mView.getContext(), gauge);
 
         seekBar.setLayoutParams(new LinearLayout.LayoutParams(l_width,l_height));
@@ -100,7 +100,7 @@ public class GaugeFragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        Inspection_gauge gauge = mItem.getControl().getGauges().get(0);
+        InspectionGauge gauge = mItem.getControl().getGauges().get(0);
         long ratio = Math.round(gauge.getUpper()/gauge.getMarks_count());
         current_value = progress * (int)ratio;
         Log.d(TAG, "current_value: "+current_value);

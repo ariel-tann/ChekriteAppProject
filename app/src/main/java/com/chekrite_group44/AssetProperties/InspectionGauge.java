@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Inspection_gauge {
+public class InspectionGauge {
     int id;
     int display_marks;
     int marks_count;
@@ -21,7 +21,7 @@ public class Inspection_gauge {
     String needle_labels;
     ArrayList<InspectionBand> bands = new ArrayList<>();
 
-    public Inspection_gauge(JSONObject jgauage) throws JSONException {
+    public InspectionGauge(JSONObject jgauage) throws JSONException {
         id = jgauage.getInt("id");
         display_marks = jgauage.getInt("display_marks");
         marks_count = jgauage.getInt("marks_count");

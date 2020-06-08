@@ -12,7 +12,7 @@
     android:orientation="vertical">
     <include
         android:id="@+id/submit_toolbar"
-        layout="@layout/inspection_submit_toolbar"/>
+        layout="@layout/toolbar_inspection_submit"/>
 
     <TextView
         android:id="@+id/txt_checkcomplete"
