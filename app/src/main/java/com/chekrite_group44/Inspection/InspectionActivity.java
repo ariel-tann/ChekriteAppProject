@@ -155,7 +155,7 @@ public class InspectionActivity extends AppCompatActivity
                 dialog.setIndeterminate(true);
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
-                SubmitPlayload payload = new SubmitPlayload(mTest, start_inspection, end,
+                SubmitPayload payload = new SubmitPayload(mTest, start_inspection, end,
                         new MetaDataAsset(getApplicationContext()));
                 new APIsTask(SubmitAPI).execute("POST", APIs.SUBMIT, "", payload.getPayload().toString());
             } catch (JSONException e) {
@@ -310,7 +310,7 @@ public class InspectionActivity extends AppCompatActivity
         mViewPager = findViewById(R.id.inspection_container);
         mViewPager.setAllowedSwipeDirection(SwipeDirection.left);
         // get payload
-        StartPlayload api_payload = new StartPlayload();
+        StartPayload api_payload = new StartPayload();
         String payload = api_payload.StartAPI_payload(getApplicationContext(), checklist_id,asset_id, asset_selection);
         // send payload to DB
         new APIsTask(StartListener).execute("POST", APIs.START,"",payload);

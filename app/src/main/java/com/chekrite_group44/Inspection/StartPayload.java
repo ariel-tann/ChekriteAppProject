@@ -13,7 +13,7 @@ import com.chekrite_group44.MetaData.MetaDataAsset;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class StartPlayload {
+public class StartPayload {
     JSONObject payload = new JSONObject();
 
     public String StartAPI_payload(Context context,
