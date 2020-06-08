@@ -188,7 +188,6 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
         mAdapter = new SearchAssetAdapter(searchAssetList, this.getContext(), this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
     //handles clicks on list item

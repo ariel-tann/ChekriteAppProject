@@ -23,7 +23,6 @@ import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.LoginActivity;
 import com.chekrite_group44.NewCheck.NewCheckActivity;
 import com.chekrite_group44.R;
-import com.chekrite_group44.SelectAssetScreen.SelectAssetScreen;
 import com.chekrite_group44.HttpRequest.APIs;
 import com.chekrite_group44.HttpRequest.APIsListener;
 import com.chekrite_group44.HttpRequest.APIsTask;

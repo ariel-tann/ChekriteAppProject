@@ -34,21 +34,27 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.chekrite_group44.AssetProperties.SelectAssetAssets;
+import com.chekrite_group44.AssetProperties.SelectAssetData;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Keyboard.KeyboardFragment;
 import com.chekrite_group44.R;
-import com.chekrite_group44.SelectAssetScreen.SelectTab;
 import com.chekrite_group44.DashBoard.DashboardActivity;
 import com.chekrite_group44.ChecklistSelection.SignoutActivity;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+
 
 public class NewCheckActivity extends AppCompatActivity
-        implements SearchAssetFragment.SearchAssetListener, KeyboardFragment.KeyboardFragmentListener {
+        implements SearchAssetFragment.SearchAssetListener, KeyboardFragment.KeyboardFragmentListener,
+        SelectAssetCategoryFragment.categoryListener, SelectAssetMakeFragment.makeListener, SelectAssetModelFragment.modelListener{
+
+    private static final String TAG = "New Check Activity";
 
     ImageButton back_btn;
     ImageButton logout_btn;
-    TextView back;
+    TextView back_txt;
     TextView toolbar_name;
 
     ConstraintLayout selectAssetLayout;
@@ -57,8 +63,9 @@ public class NewCheckActivity extends AppCompatActivity
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-    SearchAssetFragment saf = new SearchAssetFragment();
-    SelectTab st = new SelectTab();
+    SearchAssetFragment searchAssetFragment = new SearchAssetFragment();
+    SeeFragment seeFragment = new SeeFragment();
+    SelectAssetFragment selectAssetFragment = new SelectAssetFragment();
 
 
     @Override
@@ -76,19 +83,19 @@ public class NewCheckActivity extends AppCompatActivity
         toolbar_name = findViewById(R.id.toolbar_name);
         toolbar_name.setText(screenName);
 
-        //Back button press to go to Dashboard
+        //Back button & arrow press to go to Dashboard if no fragments are present
         back_btn = findViewById(R.id.back_arrow);
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDashboardScreen();
+                onBackPressed();
             }
         });
-        back = findViewById(R.id.back_text);
-        back.setOnClickListener(new View.OnClickListener() {
+        back_txt = findViewById(R.id.back_text);
+        back_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewCheckActivity.super.onBackPressed();
+                onBackPressed();
             }
         });
 
@@ -98,7 +105,7 @@ public class NewCheckActivity extends AppCompatActivity
         String profile_link = pref.getString("profile_photo", "");
         if (!profile_link.equals("null")) {
             Glide.with(getApplicationContext()).load(profile_link).apply(RequestOptions.circleCropTransform()).into(logout_btn);
-            Log.d("ArielTest", "onCreate: " + profile_link);
+            Log.d(TAG, "onCreate: " + profile_link);
         }
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,13 +121,8 @@ public class NewCheckActivity extends AppCompatActivity
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(mViewPager);
 
-        //Set text in tablayout to company's color
+        //Set search,see,select text in tablayout to company's color if selected, else set text color to white
         tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Chekrite.getParseColor());
-    }
-
-    public void openDashboardScreen() {
-        Intent intent = new Intent(this, DashboardActivity.class);
-        startActivity(intent);
     }
 
     public void openSignoutScreen() {
@@ -128,15 +130,52 @@ public class NewCheckActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    //handle keyboard pressed from keyboard fragmnent
+    //handle keyboard pressed from keyboard fragment
     @Override
     public void onInputKeyboardSent(CharSequence input) {
-        saf.updateEditText(input);
+        searchAssetFragment.updateEditText(input);
     }
 
     @Override
     public void onInputSearchAssetSent(CharSequence input) {
 
+    }
+
+    //changes current fragment to MakeFragment
+    @Override
+    public void goToMakeFrag() {
+        selectAssetFragment.test("make");
+    }
+
+    //changes current fragment to ModelFragment
+    @Override
+    public void goToModelFrag() {
+        selectAssetFragment.test("model");
+
+    }
+
+    //changes current fragment to UnitFragment
+    @Override
+    public void goToUnitFrag() {
+        selectAssetFragment.test("unit");
+
+    }
+
+    //if there's fragment in back stack, then back press will display fragment in
+    //back stack. If not, goes back to previous activity
+    @Override
+    public void onBackPressed() {
+        FragmentManager fm = getSupportFragmentManager();
+        for (Fragment frag : fm.getFragments()) {
+            if (frag.isVisible()) {
+                FragmentManager childFm = frag.getChildFragmentManager();
+                if (childFm.getBackStackEntryCount() > 0) {
+                    childFm.popBackStack();
+                    return;
+                }
+            }
+        }
+        super.onBackPressed();
     }
 
     public static class PlaceholderFragment extends Fragment {
@@ -174,14 +213,14 @@ public class NewCheckActivity extends AppCompatActivity
             Fragment fragment = null;
             switch (position) {
                 case 0:
-                    fragment = saf;
+                    fragment = searchAssetFragment;
 
                     break;
                 case 1:
-                    fragment = new SeeFragment();
+                    fragment = seeFragment;
                     break;
                 case 2:
-                    fragment = st;
+                    fragment = selectAssetFragment;
                     break;
             }
             return fragment;

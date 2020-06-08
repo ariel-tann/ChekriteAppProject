@@ -36,7 +36,7 @@
 
     <include
         android:id="@+id/selectScreenToolbar"
-        layout="@layout/categories_toolbar"
+        layout="@layout/toolbar_categories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
