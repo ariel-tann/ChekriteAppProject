@@ -121,7 +121,7 @@ public class SelectAssetCategoryFragment extends Fragment implements SelectAsset
     }
 
     //handles building the recycler view
-    public void recyclerBuild() {
+    private void recyclerBuild() {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this.getContext());
         mAdapter = new SelectAssetAdapter(dataCategoryList, assetsCategoryList, this.getContext(), this, 1);

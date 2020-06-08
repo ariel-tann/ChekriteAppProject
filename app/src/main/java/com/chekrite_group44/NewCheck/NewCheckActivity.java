@@ -34,16 +34,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chekrite_group44.AssetProperties.SelectAssetAssets;
-import com.chekrite_group44.AssetProperties.SelectAssetData;
 import com.chekrite_group44.Chekrite;
 import com.chekrite_group44.Keyboard.KeyboardFragment;
 import com.chekrite_group44.R;
-import com.chekrite_group44.DashBoard.DashboardActivity;
 import com.chekrite_group44.ChecklistSelection.SignoutActivity;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
 
 
 public class NewCheckActivity extends AppCompatActivity
@@ -144,20 +139,20 @@ public class NewCheckActivity extends AppCompatActivity
     //changes current fragment to MakeFragment
     @Override
     public void goToMakeFrag() {
-        selectAssetFragment.test("make");
+        selectAssetFragment.goToNextFragment("make");
     }
 
     //changes current fragment to ModelFragment
     @Override
     public void goToModelFrag() {
-        selectAssetFragment.test("model");
+        selectAssetFragment.goToNextFragment("model");
 
     }
 
     //changes current fragment to UnitFragment
     @Override
     public void goToUnitFrag() {
-        selectAssetFragment.test("unit");
+        selectAssetFragment.goToNextFragment("unit");
 
     }
 

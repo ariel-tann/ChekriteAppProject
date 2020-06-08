@@ -62,7 +62,6 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
 
     private SearchAssetFragment.SearchAssetListener listener;
     private RecyclerView mRecyclerView;
-//    private RecyclerView.Adapter mAdapter;
     private SearchAssetAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -182,7 +181,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
     }
 
     //handles building the recycler view
-    public void recyclerBuild() {
+    private void recyclerBuild() {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this.getContext());
         mAdapter = new SearchAssetAdapter(searchAssetList, this.getContext(), this);
@@ -209,7 +208,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
     }
 
     //edit the number of asset found text to the same as ios version
-    public SpannableString setFoundTextColor (String text) {
+    private SpannableString setFoundTextColor(String text) {
         SpannableString ss = new SpannableString(text);
         ForegroundColorSpan color = new ForegroundColorSpan(Chekrite.getParseColor());
         StyleSpan bold = new StyleSpan(Typeface.BOLD);
@@ -230,7 +229,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
     }
 
     //checks if edit text is empty, clears the array and set text to default text and color
-    public void checkEditTextIsEmpty() {
+    private void checkEditTextIsEmpty() {
         if (searchText.size() == 0) {
             editText.setText("type to search");
             editText.setTextColor(Color.parseColor("#dcdcdc"));
@@ -246,7 +245,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
     }
 
     //adds new text to array and displays
-    public void addNewText(String newText) {
+    private void addNewText(String newText) {
         searchText.add(newText.toString());
         displayText();
         checkEditTextIsEmpty();
@@ -256,14 +255,14 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
     }
 
     //handle deleting one character
-    public void deleteOneChar() {
+    private void deleteOneChar() {
         searchText.remove(searchText.size() - 1);
         displayText();
         checkEditTextIsEmpty();
     }
 
     //handle delete all button press
-    public void clearAllText() {
+    private void clearAllText() {
         searchText.clear();
         searchAssetList.clear();
         displayText();
@@ -273,7 +272,7 @@ public class SearchAssetFragment extends Fragment implements SearchAssetAdapter.
 
 
     //get string from arraylist and displays. Calls to API if text is >= 3
-    public void displayText() {
+    private void displayText() {
          joined = TextUtils.join("", searchText);
             searchAssetList.clear();
             mAdapter.notifyDataSetChanged();

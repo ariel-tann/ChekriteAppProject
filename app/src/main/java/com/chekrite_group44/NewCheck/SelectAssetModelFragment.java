@@ -57,7 +57,7 @@ public class SelectAssetModelFragment extends Fragment implements SelectAssetAda
     }
 
     //handles building the recycler view
-    public void recyclerBuild() {
+    private void recyclerBuild() {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this.getContext());
         mAdapter = new SelectAssetAdapter(dataModelList, assetsModelList, this.getContext(), this, 3);
